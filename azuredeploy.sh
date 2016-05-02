@@ -9,7 +9,7 @@ if [[ $(id -u) -ne 0 ]] ; then
 fi
 
 if [ $# != 8 ]; then
-    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <TemplateBaseUrl> <sharedFolder> <MUNGE_VER> <SLURM_VER>"
+    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <TemplateBaseUrl> <sharedFolder> <MUNGE_VER> <SLURM_VER> <numDataDisks>"
     exit 1
 fi
 
@@ -135,7 +135,91 @@ EOF
         mount /dev/md10
     fi
 }
+setup_dynamicdata_disks()
+{
+    mountPoint="$1"
+    createdPartitions=""
+    numberofDisks="$9"
 
+    # Loop through and partition disks until not found
+
+if [ $numberofDisks == "1" ]
+then
+   disking=( sdc )
+elseif [ $numberofDisks == "2" ]
+then
+   disking=( sdc sdd )
+elseif [ $numberofDisks == "3" ]
+then
+   disking=( sdc sdd sde )
+elseif [ $numberofDisks == "4" ]
+then
+   disking=( sdc sdd sde sdf )
+elseif [ $numberofDisks == "5" ]
+then
+   disking=( sdc sdd sde sdf sdg )
+elseif [ $numberofDisks == "6" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh )
+elseif [ $numberofDisks == "7" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi )
+elseif [ $numberofDisks == "8" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj )
+elseif [ $numberofDisks == "9" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk )
+elseif [ $numberofDisks == "10" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl )
+elseif [ $numberofDisks == "11" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm )
+elseif [ $numberofDisks == "12" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn )
+elseif [ $numberofDisks == "13" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo )
+elseif [ $numberofDisks == "14" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp )
+elseif [ $numberofDisks == "15" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq )
+elseif [ $numberofDisks == "16" ]
+then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr )
+fi
+
+printf "%s\n" "${disking[@]}"
+
+for disk in "${disking[@]}"
+do
+        fdisk -l /dev/$disk || break
+        fdisk /dev/$disk << EOF
+n
+p
+1
+
+
+t
+fd
+w
+EOF
+        createdPartitions="$createdPartitions /dev/${disk}1"
+done
+
+    # Create RAID-0 volume
+    if [ -n "$createdPartitions" ]; then
+        devices=`echo $createdPartitions | wc -w`
+        mdadm --create /dev/md10 --level 0 --raid-devices $devices $createdPartitions
+        mkfs -t ext4 /dev/md10
+        echo "/dev/md10 $mountPoint ext4 defaults,nofail 0 2" >> /etc/fstab
+        mount /dev/md10
+    fi
+}
 # Creates and exports two shares on the master nodes:
 #
 # /share/home (for HPC user)
@@ -149,7 +233,8 @@ setup_shares()
     mkdir -p $SHARE_DATA
 
     if is_master; then
-        setup_data_disks $SHARE_DATA
+        #setup_data_disks $SHARE_DATA
+	setup_dynamicdata_disks $SHARE_DATA
         echo "$SHARE_HOME    *(rw,async)" >> /etc/exports
         echo "$SHARE_DATA    *(rw,async)" >> /etc/exports
 
@@ -524,4 +609,3 @@ setup_env
 install_pkgs
 #install_easybuild
 #build_cross_cc
-
