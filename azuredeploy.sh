@@ -44,6 +44,7 @@ HPC_UID=7007
 HPC_GROUP=hpc
 HPC_GID=7007
 
+numberofDisks="$9"
 
 # Returns 0 if this node is the master node.
 #
@@ -139,42 +140,41 @@ setup_dynamicdata_disks()
 {
     mountPoint="$1"
     createdPartitions=""
-    numberofDisks="$9"
 
     # Loop through and partition disks until not found
 
-if [ $numberofDisks == "1" ]
+if [ "$numberofDisks" == "1" ]
 then
    disking=( sdc )
-elif [ $numberofDisks == "2" ]; then
+elif [ "$numberofDisks" == "2" ]; then
    disking=( sdc sdd )
-elif [ $numberofDisks == "3" ]; then
+elif [ "$numberofDisks" == "3" ]; then
    disking=( sdc sdd sde )
-elif [ $numberofDisks == "4" ]; then
+elif [ "$numberofDisks" == "4" ]; then
    disking=( sdc sdd sde sdf )
-elif [ $numberofDisks == "5" ]; then
+elif [ "$numberofDisks" == "5" ]; then
    disking=( sdc sdd sde sdf sdg )
-elif [ $numberofDisks == "6" ]; then
+elif [ "$numberofDisks" == "6" ]; then
    disking=( sdc sdd sde sdf sdg sdh )
-elif [ $numberofDisks == "7" ]; then
+elif [ "$numberofDisks" == "7" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi )
-elif [ $numberofDisks == "8" ]; then
+elif [ "$numberofDisks" == "8" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj )
-elif [ $numberofDisks == "9" ]; then
+elif [ "$numberofDisks" == "9" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk )
-elif [ $numberofDisks == "10" ]; then
+elif [ "$numberofDisks" == "10" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl )
-elif [ $numberofDisks == "11" ]; then
+elif [ "$numberofDisks" == "11" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm )
-elif [ $numberofDisks == "12" ]; then
+elif [ "$numberofDisks" == "12" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn )
-elif [ $numberofDisks == "13" ]; then
+elif [ "$numberofDisks" == "13" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo )
-elif [ $numberofDisks == "14" ]; then
+elif [ "$numberofDisks" == "14" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp )
-elif [ $numberofDisks == "15" ]; then
+elif [ "$numberofDisks" == "15" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq )
-elif [ $numberofDisks == "16" ]; then
+elif [ "$numberofDisks" == "16" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr )
 fi
 
