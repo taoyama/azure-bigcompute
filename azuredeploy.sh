@@ -99,7 +99,7 @@ install_pkgs()
     yum install -y infiniband-diags perftest qperf opensm
     chkconfig opensm on
     chkconfig rdma on
-    reboot
+    #reboot
 }
 
 # Partitions all data disks attached to the VM and creates
