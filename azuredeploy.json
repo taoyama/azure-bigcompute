@@ -212,7 +212,7 @@
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
     "templateBaseUrl": "https://raw.githubusercontent.com/dwaiba/centos-hpc/master/",
-    "installationCLI": "[concat('bash azuredeploy.sh ', variables('masterVMName'), ' ', variables('workerVMName'), ' ', parameters('workerNodeCount'), ' ', parameters('hpcUserName'), ' ', variables('templateBaseUrl'), ' ', parameters('sharedFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('SLURM_VER'))]",
+    "installationCLI": "[concat('bash azuredeploy.sh ', variables('masterVMName'), ' ', variables('workerVMName'), ' ', parameters('workerNodeCount'), ' ', parameters('hpcUserName'), ' ', variables('templateBaseUrl'), ' ', parameters('sharedFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('SLURM_VER'), ' ', parameters('numDataDisks'))]",
     "storageAccountType": "Standard_LRS",
     "diskSelectionTemplateFilePath": "https://raw.githubusercontent.com/dwaiba/centos-hpc/master/diskSelection.json"
   },
