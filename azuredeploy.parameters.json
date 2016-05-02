@@ -45,9 +45,9 @@
       }
     },
     "dataDiskSize": {
-      "value": 128
+      "value": 128,
         "metadata": {
-        "description": "The each Data Disk Size to be created"
+        "description": "The  Data Disk Size of each Disk to be created"
       }
     },
         "numDataDisks": {
