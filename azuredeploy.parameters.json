@@ -1,0 +1,39 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "dnsPrefix": {
+      "value": ""
+    },
+    "adminUserName": {
+      "value": "azureuser"
+    },
+    "adminPassword": {
+      "value": ""
+    },
+    "hpcUserName": {
+      "value": "hpc"
+    },
+    "sharedFolder": {
+      "value": "/data"
+    },
+    "MUNGE_VER": {
+      "value": "0.5.11"
+    },
+    "SLURM_VER": {
+      "value": "15-08-10-1"
+    },
+    "headNodeSize": {
+      "value": "Standard_A8"
+    },
+    "workerNodeSize": {
+      "value": "Standard_A9"
+    },
+    "workerNodeCount": {
+      "value": 2
+    },
+    "dataDiskSize": {
+      "value": 128
+    }
+  }
+}
