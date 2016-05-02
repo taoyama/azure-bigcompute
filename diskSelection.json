@@ -63,7 +63,7 @@
         "description": "Size of the data disks"
       }
     }
-  }
+  },
   "variables": {
     "_comment1": "disksArray is ugly :( but it gets the job done. If anyone can make it better, please do!",
     "disksArray": {
