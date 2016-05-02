@@ -27,7 +27,7 @@
       "defaultValue": "CentOS-HPC",
       "metadata": {
         "description": "New CentOS-HPC with pre-installed Intel MPI and mlx4 for Infiniband Available"
-      }
+      },
     "imageSku": {
       "type": "string",
       "defaultValue": "6.5",
