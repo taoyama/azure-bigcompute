@@ -6,7 +6,7 @@
       "value": ""
     },
     "adminUserName": {
-      "value": "azureuser"
+      "value": "azureuser",
         "metadata": {
         "description": "The admin user to Logon to the HPC master and workers"
       }
@@ -15,13 +15,13 @@
       "value": ""
     },
     "hpcUserName": {
-      "value": "hpc"
+      "value": "hpc",
         "metadata": {
         "description": "The Internal hpcUsername which is not allowed external access from outside the cluster"
       }
     },
     "sharedFolder": {
-      "value": "/data"
+      "value": "/data",
         "metadata": {
         "description": "The shared folder system mounted on the master and shared between the workers via the munge key."
       }
@@ -39,7 +39,7 @@
       "value": "Standard_A9"
     },
     "workerNodeCount": {
-      "value": 2
+      "value": 2,
         "metadata": {
         "description": "The number of worker nodes."
       }
