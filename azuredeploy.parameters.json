@@ -7,15 +7,24 @@
     },
     "adminUserName": {
       "value": "azureuser"
+        "metadata": {
+        "description": "The admin user to Logon to the HPC master and workers"
+      }
     },
     "adminPassword": {
       "value": ""
     },
     "hpcUserName": {
       "value": "hpc"
+        "metadata": {
+        "description": "The Internal hpcUsername which is not allowed external access from outside the cluster"
+      }
     },
     "sharedFolder": {
       "value": "/data"
+        "metadata": {
+        "description": "The shared folder system mounted on the master and shared between the workers via the munge key."
+      }
     },
     "MUNGE_VER": {
       "value": "0.5.11"
@@ -31,9 +40,39 @@
     },
     "workerNodeCount": {
       "value": 2
+        "metadata": {
+        "description": "The number of worker nodes."
+      }
     },
     "dataDiskSize": {
       "value": 128
+        "metadata": {
+        "description": "The each Data Disk Size to be created"
+      }
+    },
+        "numDataDisks": {
+      "type": "string",
+      "allowedValues": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "metadata": {
+        "description": "This parameter allows the user to select the number of disks you want"
+      }
     }
   }
 }
