@@ -220,8 +220,7 @@
     "templateBaseUrl": "https://raw.githubusercontent.com/dwaiba/centos-hpc/master/",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('masterVMName'), ' ', variables('workerVMName'), ' ', parameters('workerNodeCount'), ' ', parameters('hpcUserName'), ' ', variables('templateBaseUrl'), ' ', parameters('sharedFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('SLURM_VER'))]",
     "storageAccountType": "Standard_LRS",
-    "diskSelectionTemplateFilePath": "https://raw.githubusercontent.com/dwaiba/centos-hpc/master/diskSelection.json",
-    "diskSelectionTemplateParametersFilePath": "https://raw.githubusercontent.com/dwaiba/centos-hpc/master/diskSelection.parameters.json"
+    "diskSelectionTemplateFilePath": "https://raw.githubusercontent.com/dwaiba/centos-hpc/master/diskSelection.json"
   },
   "resources": [
     {
@@ -308,7 +307,8 @@
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', variables('newStorageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]",
-        "[concat('Microsoft.Compute/availabilitySets/', variables('avSetName'))]"
+        "[concat('Microsoft.Compute/availabilitySets/', variables('avSetName'))]",
+        "[concat('Microsoft.Resources/deployments/', 'diskSelection')]"
       ],
       "properties": {
         "availabilitySet": {
