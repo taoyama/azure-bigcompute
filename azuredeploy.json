@@ -151,12 +151,6 @@
         "description": "The size in GB of each data disk that is attached to the VM.  A RAID-0 volume is created with all data disks that is dataDiskSize * dataDiskCount in size."
       }
     },
-    "_artifactsLocation": {
-      "type": "string"
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring"
-    },
     "numDataDisks": {
       "type": "string",
       "allowedValues": [
