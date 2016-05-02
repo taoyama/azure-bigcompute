@@ -15,6 +15,19 @@
         "description": "User name for the Virtual Machine. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
+    "imagePublisher": {
+      "type": "string",
+      "defaultValue": "openlogic",
+      "metadata": {
+        "description": "openlogic is the  CentOS Distributor in Azure Market Place"
+      }
+    },
+    "imageOffer": {
+      "type": "string",
+      "defaultValue": "CentOS-HPC",
+      "metadata": {
+        "description": "New CentOS-HPC with pre-installed Intel MPI and mlx4 for Infiniband Available"
+      }
     "imageSku": {
       "type": "string",
       "defaultValue": "6.5",
