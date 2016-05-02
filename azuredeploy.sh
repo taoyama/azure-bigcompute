@@ -146,50 +146,35 @@ setup_dynamicdata_disks()
 if [ $numberofDisks == "1" ]
 then
    disking=( sdc )
-elseif [ $numberofDisks == "2" ]
-then
+elif [ $numberofDisks == "2" ]; then
    disking=( sdc sdd )
-elseif [ $numberofDisks == "3" ]
-then
+elif [ $numberofDisks == "3" ]; then
    disking=( sdc sdd sde )
-elseif [ $numberofDisks == "4" ]
-then
+elif [ $numberofDisks == "4" ]; then
    disking=( sdc sdd sde sdf )
-elseif [ $numberofDisks == "5" ]
-then
+elif [ $numberofDisks == "5" ]; then
    disking=( sdc sdd sde sdf sdg )
-elseif [ $numberofDisks == "6" ]
-then
+elif [ $numberofDisks == "6" ]; then
    disking=( sdc sdd sde sdf sdg sdh )
-elseif [ $numberofDisks == "7" ]
-then
+elif [ $numberofDisks == "7" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi )
-elseif [ $numberofDisks == "8" ]
-then
+elif [ $numberofDisks == "8" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj )
-elseif [ $numberofDisks == "9" ]
-then
+elif [ $numberofDisks == "9" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk )
-elseif [ $numberofDisks == "10" ]
-then
+elif [ $numberofDisks == "10" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl )
-elseif [ $numberofDisks == "11" ]
-then
+elif [ $numberofDisks == "11" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm )
-elseif [ $numberofDisks == "12" ]
-then
+elif [ $numberofDisks == "12" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn )
-elseif [ $numberofDisks == "13" ]
-then
+elif [ $numberofDisks == "13" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo )
-elseif [ $numberofDisks == "14" ]
-then
+elif [ $numberofDisks == "14" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp )
-elseif [ $numberofDisks == "15" ]
-then
+elif [ $numberofDisks == "15" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq )
-elseif [ $numberofDisks == "16" ]
-then
+elif [ $numberofDisks == "16" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr )
 fi
 
