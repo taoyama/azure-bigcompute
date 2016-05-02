@@ -472,7 +472,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(variables('artifactsLocation'), 'diskSelector', '.json')]",
+          "uri": "[concat(variables('artifactsLocation'), 'diskSelection', '.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
