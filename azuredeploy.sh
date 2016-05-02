@@ -8,7 +8,7 @@ if [[ $(id -u) -ne 0 ]] ; then
     exit 1
 fi
 
-if [ $# != 8 ]; then
+if [ $# != 9 ]; then
     echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <TemplateBaseUrl> <sharedFolder> <MUNGE_VER> <SLURM_VER> <numDataDisks>"
     exit 1
 fi
