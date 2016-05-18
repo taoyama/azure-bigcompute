@@ -181,8 +181,10 @@ system_update()
     updatedb
     yum clean all
     yum -y install epel-release
-    yum  -y update --exclude=WALinuxAgent
+    #yum  -y update --exclude=WALinuxAgent
     #yum  -y update
+    #yum -x 'intel-*' -x 'kernel*' -x '*microsoft-*' -x 'msft-*'  -y update --exclude=WALinuxAgent
+    yum -exclude WALinuxAgent,intel-*,kernel*,*microsoft-*,msft-* -y update 
 
     set_time
 }
