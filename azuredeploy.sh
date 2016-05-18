@@ -8,8 +8,8 @@ if [[ $(id -u) -ne 0 ]] ; then
     exit 1
 fi
 
-if [ $# != 9 ]; then
-    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <TemplateBaseUrl> <sharedFolder> <MUNGE_VER> <SLURM_VER> <numDataDisks>"
+if [ $# != 14 ]; then
+    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <sharedFolder> <MUNGE_VER> <MUNGE_USER_GROUP> <SLURM_USER_GROUP> <SLURM_VER> <numDataDisks> <dockerVer> <dockerComposeVer> <adminUserName> <imageSku>"
     exit 1
 fi
 
@@ -17,34 +17,38 @@ fi
 MASTER_HOSTNAME=$1
 WORKER_HOSTNAME_PREFIX=$2
 WORKER_COUNT=$3
-TEMPLATE_BASE_URL="$5"
 LAST_WORKER_INDEX=$(($WORKER_COUNT - 1))
 
 # Shares
-MNT_POINT="$6"
+MNT_POINT="$5"
 SHARE_HOME=$MNT_POINT/home
 SHARE_DATA=$MNT_POINT/data
 
 # Munged
-MUNGE_USER=munge
-MUNGE_GROUP=munge
-MUNGE_VERSION="$7"
+MUNGE_USER="$7"
+MUNGE_GROUP="$7"
+MUNGE_VERSION="$6"
 
 # SLURM
-SLURM_USER=slurm
+SLURM_USER="$8"
 SLURM_UID=6006
-SLURM_GROUP=slurm
+SLURM_GROUP="$8"
 SLURM_GID=6006
-SLURM_VERSION="$8"
+SLURM_VERSION="$9"
 SLURM_CONF_DIR=$SHARE_DATA/conf
 
 # Hpc User
-HPC_USER=$4
+HPC_USER="$4"
 HPC_UID=7007
-HPC_GROUP=hpc
+HPC_GROUP="$4"
 HPC_GID=7007
 
-numberofDisks="$9"
+numberofDisks="$10"
+dockerVer="$11"
+dockerComposeVer="$12"
+userName="$13"
+skuName="$14"
+
 
 # Returns 0 if this node is the master node.
 #
