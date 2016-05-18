@@ -9,10 +9,11 @@ if [[ $(id -u) -ne 0 ]] ; then
 fi
 
 if [ $# != 14 ]; then
-    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <sharedFolder> <MUNGE_VER> <MUNGE_USER_GROUP> <SLURM_USER_GROUP> <SLURM_VER> <numDataDisks> <dockerVer> <dockerComposeVer> <adminUserName> <imageSku>"
+    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <sharedFolder> <MUNGE_VER> <MUNGE_USER_GROUP> <SLURM_USER_GROUP> <SLURM_VER> <numDataDisks> <dockerVer> <dockerComposeVer> <adminUserName> <imageSku> <TEMPLATE_BASE_URL>"
     exit 1
 fi
 
+TEMPLATE_BASE_URL="$15"
 # Set user args
 MASTER_HOSTNAME=$1
 WORKER_HOSTNAME_PREFIX=$2
@@ -59,53 +60,7 @@ is_master()
 }
 
 
-# Installs all required packages.
-#
-install_pkgs()
-{
-    rpm --rebuilddb
-    updatedb
-    yum clean all
-    yum -y install epel-release
-    yum -x 'intel-*' -x 'kernel*' -y update --exclude=WALinuxAgent
-    yum -y install zlib zlib-devel bzip2 bzip2-devel bzip2-libs openssl openssl-devel openssl-libs gcc gcc-c++ nfs-utils rpcbind git libicu libicu-devel make wget zip unzip mdadm wget
-    wget -qO- "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e" 
-    rpm --import "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
-    yum install -y yum-utils
-    yum-config-manager --add-repo https://packages.docker.com/1.11/yum/repo/main/centos/7
-    yum install -y docker-engine 
-    systemctl stop firewalld
-    systemctl disable firewalld
-    service docker start
-    wget https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz
-    tar -C /usr/local -xzf go1.6.2.linux-amd64.tar.gz
-    export PATH=$PATH:/usr/local/go/bin
-    #yum install -y binutils.x86_64 compat-libcap1.x86_64 gcc.x86_64 gcc-c++.x86_64 glibc.i686 glibc.x86_64 \
-    #glibc-devel.i686 glibc-devel.x86_64 ksh compat-libstdc++-33 libaio.i686 libaio.x86_64 libaio-devel.i686 libaio-devel.x86_64 \
-    #libgcc.i686 libgcc.x86_64 libstdc++.i686 libstdc++.x86_64 libstdc++-devel.i686 libstdc++-devel.x86_64 libXi.i686 libXi.x86_64 \
-    #libXtst.i686 libXtst.x86_64 make.x86_64 sysstat.x86_64
-    curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-    curl -L https://github.com/docker/machine/releases/download/v0.7.0-rc1/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
-    chmod +x /usr/local/bin/docker-machine
-    chmod +x /usr/local/bin/docker-compose
-    export PATH=$PATH:/usr/local/bin/
-    mv /etc/localtime /etc/localtime.bak
-    ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
-    #yum -y install icu patch ruby ruby-devel rubygems python-pip
-    #yum install -y nodejs
-    #yum install -y npm
-    #npm install -g azure-cli
-    # Setting tomcat
-    #docker run -it -dp 80:8080 -p 8009:8009  rossbachp/apache-tomcat8
-    docker run -dti --name=azure-cli microsoft/azure-cli 
-    docker run -it -d --restart=always -p 8080:8080 rancher/server
-    systemctl enable rdma
-    yum groupinstall -y "Infiniband Support"
-    yum install -y infiniband-diags perftest qperf opensm
-    chkconfig opensm on
-    chkconfig rdma on
-    #reboot
-}
+
 
 # Partitions all data disks attached to the VM and creates
 # a RAID-0 volume with them.
@@ -209,6 +164,108 @@ done
         mount /dev/md10
     fi
 }
+
+
+set_time()
+{
+    mv /etc/localtime /etc/localtime.bak
+    ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+}
+
+
+# System Update.
+#
+system_update()
+{
+    rpm --rebuilddb
+    updatedb
+    yum clean all
+    yum -y install epel-release
+    yum  -y update --exclude=WALinuxAgent
+    #yum  -y update
+
+    set_time
+}
+
+install_docker()
+{
+
+    wget -qO- "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e" 
+    rpm --import "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
+    yum install -y yum-utils
+    yum-config-manager --add-repo https://packages.docker.com/$dockerVer/yum/repo/main/centos/7
+    yum install -y docker-engine 
+    systemctl stop firewalld
+    systemctl disable firewalld
+    #service docker start
+    gpasswd -a $userName docker
+    systemctl start docker
+    systemctl enable docker
+    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+    chmod +x /usr/local/bin/docker-machine
+    chmod +x /usr/local/bin/docker-compose
+    export PATH=$PATH:/usr/local/bin/
+    systemctl restart docker
+}
+
+
+install_azure_cli()
+{
+    yum install -y nodejs
+    yum install -y npm
+    npm install -g azure-cli
+}
+
+install_docker_apps()
+{
+
+    # Setting tomcat
+    #docker run -it -dp 80:8080 -p 8009:8009  rossbachp/apache-tomcat8
+    docker run -dti --restart=always --name=azure-cli microsoft/azure-cli 
+    docker run -it -d --restart=always -p 8080:8080 rancher/server
+}
+
+install_ib()
+{
+    yum groupinstall -y "Infiniband Support"
+    yum install -y infiniband-diags perftest qperf opensm
+    chkconfig opensm on
+    chkconfig rdma on
+    #reboot
+}
+# Installs individual packages of interest.
+#
+install_packages()
+{
+    yum -y install zlib zlib-devel bzip2 bzip2-devel bzip2-libs openssl openssl-devel openssl-libs gcc gcc-c++ nfs-utils rpcbind git libicu libicu-devel make zip unzip mdadm wget \
+    binutils.x86_64 compat-libcap1.x86_64 gcc.x86_64 gcc-c++.x86_64 glibc.i686 glibc.x86_64 \
+    glibc-devel.i686 glibc-devel.x86_64 ksh compat-libstdc++-33 libaio.i686 libaio.x86_64 libaio-devel.i686 libaio-devel.x86_64 \
+    libgcc.i686 libgcc.x86_64 libstdc++.i686 libstdc++.x86_64 libstdc++-devel.i686 libstdc++-devel.x86_64 libXi.i686 libXi.x86_64 \
+    libXtst.i686 libXtst.x86_64 make.x86_64 sysstat.x86_64
+    #yum -y install icu patch ruby ruby-devel rubygems python-pip
+}
+# Installs all required packages.
+#
+install_pkgs_all()
+{
+    system_update
+
+    install_packages
+
+	if [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] ; then
+    		install_azure_cli
+	elif [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+
+    		install_docker
+
+    		install_docker_apps
+	fi
+
+    install_ib
+}
+
+
 # Creates and exports two shares on the master nodes:
 #
 # /share/home (for HPC user)
@@ -240,106 +297,6 @@ setup_shares()
     fi
 }
 
-# Downloads/builds/installs munged on the node.
-# The munge key is generated on the master node and placed
-# in the data share.
-# Worker nodes copy the existing key from the data share.
-#
-install_munge()
-{
-    groupadd $MUNGE_GROUP
-
-    useradd -M -c "Munge service account" -g munge -s /usr/sbin/nologin munge
-
-    wget https://github.com/dun/munge/archive/munge-${MUNGE_VERSION}.tar.gz
-
-    tar xvfz munge-$MUNGE_VERSION.tar.gz
-
-    cd munge-munge-$MUNGE_VERSION
-
-    mkdir -m 700 /etc/munge
-    mkdir -m 711 /var/lib/munge
-    mkdir -m 700 /var/log/munge
-    mkdir -m 755 /var/run/munge
-
-    ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make && make install
-
-    chown -R munge:munge /etc/munge /var/lib/munge /var/log/munge /var/run/munge
-
-    if is_master; then
-        dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key
-    mkdir -p $SLURM_CONF_DIR
-        cp /etc/munge/munge.key $SLURM_CONF_DIR
-    else
-        cp $SLURM_CONF_DIR/munge.key /etc/munge/munge.key
-    fi
-
-    chown munge:munge /etc/munge/munge.key
-    chmod 0400 /etc/munge/munge.key
-
-    /etc/init.d/munge start
-
-    cd ..
-}
-
-# Installs and configures slurm.conf on the node.
-# This is generated on the master node and placed in the data
-# share.  All nodes create a sym link to the SLURM conf
-# as all SLURM nodes must share a common config file.
-#
-install_slurm_config()
-{
-    if is_master; then
-
-        mkdir -p $SLURM_CONF_DIR
-
-        if [ -e "$TEMPLATE_BASE_URL/slurm.template.conf" ]; then
-            cp "$TEMPLATE_BASE_URL/slurm.template.conf" .
-        else
-            wget "$TEMPLATE_BASE_URL/slurm.template.conf"
-        fi
-
-        cat slurm.template.conf |
-        sed 's/__MASTER__/'"$MASTER_HOSTNAME"'/g' |
-                sed 's/__WORKER_HOSTNAME_PREFIX__/'"$WORKER_HOSTNAME_PREFIX"'/g' |
-                sed 's/__LAST_WORKER_INDEX__/'"$LAST_WORKER_INDEX"'/g' > $SLURM_CONF_DIR/slurm.conf
-    fi
-
-    ln -s $SLURM_CONF_DIR/slurm.conf /etc/slurm/slurm.conf
-}
-
-# Downloads, builds and installs SLURM on the node.
-# Starts the SLURM control daemon on the master node and
-# the agent on worker nodes.
-#
-install_slurm()
-{
-    groupadd -g $SLURM_GID $SLURM_GROUP
-
-    useradd -M -u $SLURM_UID -c "SLURM service account" -g $SLURM_GROUP -s /usr/sbin/nologin $SLURM_USER
-
-    mkdir -p /etc/slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
-
-    chown -R slurm:slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
-
-    wget https://github.com/SchedMD/slurm/archive/slurm-$SLURM_VERSION.tar.gz
-
-    tar xvfz slurm-$SLURM_VERSION.tar.gz
-
-    cd slurm-slurm-$SLURM_VERSION
-
-    ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc/slurm && make && make install
-
-    install_slurm_config
-
-    if is_master; then
-        /usr/sbin/slurmctld -vvvv
-    else
-        /usr/sbin/slurmd -vvvv
-    fi
-
-    cd ..
-}
 
 # Adds a common HPC user to the node and configures public key SSh auth.
 # The HPC user has a shared home directory (NFS share on master) and access
@@ -406,10 +363,115 @@ setup_env()
     echo "export I_MPI_DYNAMIC_CONNECTION=0" >> /etc/profile.d/mpi.sh
 }
 
-install_easybuild()
+install_pypacks()
 {
     yum -y install Lmod python-devel python-pip gcc gcc-c++ patch unzip tcl tcl-devel libibverbs libibverbs-devel
     pip install vsc-base
+}
+
+# Downloads/builds/installs munged on the node.
+# The munge key is generated on the master node and placed
+# in the data share.
+# Worker nodes copy the existing key from the data share.
+#
+install_munge()
+{
+    groupadd $MUNGE_GROUP
+
+    useradd -M -c "Munge service account" -g $MUNGE_USER -s /usr/sbin/nologin munge
+
+    wget https://github.com/dun/munge/archive/munge-${MUNGE_VERSION}.tar.gz
+
+    tar xvfz munge-$MUNGE_VERSION.tar.gz
+
+    cd munge-munge-$MUNGE_VERSION
+
+    mkdir -m 700 /etc/munge
+    mkdir -m 711 /var/lib/munge
+    mkdir -m 700 /var/log/munge
+    mkdir -m 755 /var/run/munge
+
+    ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make && make install
+
+    chown -R $MUNGE_USER:$MUNGE_GROUP /etc/munge /var/lib/munge /var/log/munge /var/run/munge
+
+    if is_master; then
+        dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key
+    mkdir -p $SLURM_CONF_DIR
+        cp /etc/munge/munge.key $SLURM_CONF_DIR
+    else
+        cp $SLURM_CONF_DIR/munge.key /etc/munge/munge.key
+    fi
+
+    chown $MUNGE_USER:$MUNGE_GROUP /etc/munge/munge.key
+    chmod 0400 /etc/munge/munge.key
+
+    /etc/init.d/munge start
+
+    cd ..
+}
+
+# Installs and configures slurm.conf on the node.
+# This is generated on the master node and placed in the data
+# share.  All nodes create a sym link to the SLURM conf
+# as all SLURM nodes must share a common config file.
+#
+install_slurm_config()
+{
+    if is_master; then
+
+        mkdir -p $SLURM_CONF_DIR
+
+        if [ -e "$TEMPLATE_BASE_URL/slurm.template.conf" ]; then
+            cp "$TEMPLATE_BASE_URL/slurm.template.conf" .
+        else
+            wget "$TEMPLATE_BASE_URL/slurm.template.conf"
+        fi
+
+        cat slurm.template.conf |
+        sed 's/__MASTER__/'"$MASTER_HOSTNAME"'/g' |
+                sed 's/__WORKER_HOSTNAME_PREFIX__/'"$WORKER_HOSTNAME_PREFIX"'/g' |
+                sed 's/__LAST_WORKER_INDEX__/'"$LAST_WORKER_INDEX"'/g' > $SLURM_CONF_DIR/slurm.conf
+    fi
+
+    ln -s $SLURM_CONF_DIR/slurm.conf /etc/slurm/slurm.conf
+}
+
+# Downloads, builds and installs SLURM on the node.
+# Starts the SLURM control daemon on the master node and
+# the agent on worker nodes.
+#
+install_slurm()
+{
+    groupadd -g $SLURM_GID $SLURM_GROUP
+
+    useradd -M -u $SLURM_UID -c "SLURM service account" -g $SLURM_GROUP -s /usr/sbin/nologin $SLURM_USER
+
+    mkdir -p /etc/slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
+
+    chown -R $SLURM_USER:$SLURM_GROUP /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
+
+    wget https://github.com/SchedMD/slurm/archive/slurm-$SLURM_VERSION.tar.gz
+
+    tar xvfz slurm-$SLURM_VERSION.tar.gz
+
+    cd slurm-slurm-$SLURM_VERSION
+
+    ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc/slurm && make && make install
+
+    install_slurm_config
+
+    if is_master; then
+        /usr/sbin/slurmctld -vvvv
+    else
+        /usr/sbin/slurmd -vvvv
+    fi
+
+    cd ..
+}
+install_easybuild()
+{
+    install_pypacks
 
     EASYBUILD_HOME=$SHARE_HOME/$HPC_USER/EasyBuild
 
@@ -429,172 +491,20 @@ install_easybuild()
         echo "source /usr/share/lmod/6.0.15/init/bash" >> $SHARE_HOME/$HPC_USER/.bashrc
     fi
 }
-build_cross_cc()
+
+install_go()
 {
-    #! /bin/bash
-set -e
-trap 'previous_command=$this_command; this_command=$BASH_COMMAND' DEBUG
-trap 'echo FAILED COMMAND: $previous_command' EXIT
-
-#-------------------------------------------------------------------------------------------
-# This script will download packages for, configure, build and install a GCC cross-compiler.
-# Customize the variables (INSTALL_PATH, TARGET, etc.) to your liking before running.
-# If you get an error and need to resume the script from some point in the middle,
-# just delete/comment the preceding lines before running it again.
-#
-#-------------------------------------------------------------------------------------------
-
-INSTALL_PATH=/opt/cross
-TARGET=aarch64-linux
-USE_NEWLIB=0
-LINUX_ARCH=arm64
-CONFIGURATION_OPTIONS="--disable-multilib" # --disable-threads --disable-shared
-PARALLEL_MAKE=-j4
-BINUTILS_VERSION=binutils-2.24
-GCC_VERSION=gcc-4.9.2
-LINUX_KERNEL_VERSION=linux-3.17.2
-GLIBC_VERSION=glibc-2.20
-MPFR_VERSION=mpfr-3.1.2
-GMP_VERSION=gmp-6.0.0a
-MPC_VERSION=mpc-1.0.2
-ISL_VERSION=isl-0.12.2
-CLOOG_VERSION=cloog-0.18.1
-export PATH=$INSTALL_PATH/bin:$PATH
-
-# Download packages
-export http_proxy=$HTTP_PROXY https_proxy=$HTTP_PROXY ftp_proxy=$HTTP_PROXY
-wget -nc https://ftp.gnu.org/gnu/binutils/$BINUTILS_VERSION.tar.gz
-wget -nc https://ftp.gnu.org/gnu/gcc/$GCC_VERSION/$GCC_VERSION.tar.gz
-if [ $USE_NEWLIB -ne 0 ]; then
-    wget -nc -O newlib-master.zip https://github.com/bminor/newlib/archive/master.zip || true
-    unzip -qo newlib-master.zip
-else
-    wget -nc https://www.kernel.org/pub/linux/kernel/v3.x/$LINUX_KERNEL_VERSION.tar.xz
-    wget -nc https://ftp.gnu.org/gnu/glibc/$GLIBC_VERSION.tar.xz
-fi
-wget -nc https://ftp.gnu.org/gnu/mpfr/$MPFR_VERSION.tar.xz
-wget -nc https://ftp.gnu.org/gnu/gmp/$GMP_VERSION.tar.xz
-wget -nc https://ftp.gnu.org/gnu/mpc/$MPC_VERSION.tar.gz
-wget -nc ftp://gcc.gnu.org/pub/gcc/infrastructure/$ISL_VERSION.tar.bz2
-wget -nc ftp://gcc.gnu.org/pub/gcc/infrastructure/$CLOOG_VERSION.tar.gz
-
-# Extract everything
-for f in *.tar*; do tar xfk $f; done
-
-# Make symbolic links
-cd $GCC_VERSION
-ln -sf `ls -1d ../mpfr-*/` mpfr
-ln -sf `ls -1d ../gmp-*/` gmp
-ln -sf `ls -1d ../mpc-*/` mpc
-ln -sf `ls -1d ../isl-*/` isl
-ln -sf `ls -1d ../cloog-*/` cloog
-cd ..
-
-# Step 1. Binutils
-mkdir -p build-binutils
-cd build-binutils
-../$BINUTILS_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET $CONFIGURATION_OPTIONS
-make $PARALLEL_MAKE
-make install
-cd ..
-
-# Step 2. Linux Kernel Headers
-if [ $USE_NEWLIB -eq 0 ]; then
-    cd $LINUX_KERNEL_VERSION
-    make ARCH=$LINUX_ARCH INSTALL_HDR_PATH=$INSTALL_PATH/$TARGET headers_install
-    cd ..
-fi
-
-# Step 3. C/C++ Compilers
-mkdir -p build-gcc
-cd build-gcc
-if [ $USE_NEWLIB -ne 0 ]; then
-    NEWLIB_OPTION=--with-newlib
-fi
-../$GCC_VERSION/configure --prefix=$INSTALL_PATH --target=$TARGET --enable-languages=c,c++ $CONFIGURATION_OPTIONS $NEWLIB_OPTION
-make $PARALLEL_MAKE all-gcc
-make install-gcc
-cd ..
-
-if [ $USE_NEWLIB -ne 0 ]; then
-    # Steps 4-6: Newlib
-    mkdir -p build-newlib
-    cd build-newlib
-    ../newlib-master/configure --prefix=$INSTALL_PATH --target=$TARGET $CONFIGURATION_OPTIONS
-    make $PARALLEL_MAKE
-    make install
-    cd ..
-else
-    # Step 4. Standard C Library Headers and Startup Files
-    mkdir -p build-glibc
-    cd build-glibc
-    ../$GLIBC_VERSION/configure --prefix=$INSTALL_PATH/$TARGET --build=$MACHTYPE --host=$TARGET --target=$TARGET --with-headers=$INSTALL_PATH/$TARGET/include $CONFIGURATION_OPTIONS libc_cv_forced_unwind=yes
-    make install-bootstrap-headers=yes install-headers
-    make $PARALLEL_MAKE csu/subdir_lib
-    install csu/crt1.o csu/crti.o csu/crtn.o $INSTALL_PATH/$TARGET/lib
-    $TARGET-gcc -nostdlib -nostartfiles -shared -x c /dev/null -o $INSTALL_PATH/$TARGET/lib/libc.so
-    touch $INSTALL_PATH/$TARGET/include/gnu/stubs.h
-    cd ..
-
-    # Step 5. Compiler Support Library
-    cd build-gcc
-    make $PARALLEL_MAKE all-target-libgcc
-    make install-target-libgcc
-    cd ..
-
-    # Step 6. Standard C Library & the rest of Glibc
-    cd build-glibc
-    make $PARALLEL_MAKE
-    make install
-    cd ..
-fi
-
-# Step 7. Standard C++ Library & the rest of GCC
-cd build-gcc
-make $PARALLEL_MAKE all
-make install
-cd ..
-
-trap - EXIT
-echo 'Success!'
-
-echo "PATH=\"/usr/local/bin:$PATH\"" >> ~/.bash_profile
-ln -s /opt/cross/bin/aarch64-linux-gcc -> /usr/local/bin/gcc
-ln -s /opt/cross/bin/aarch64-linux-gcc-ranlib -> /usr/local/bin/gcc-ranlib
-ln -s /opt/cross/bin/aarch64-linux-objdump  /usr/local/bin/objdump
-ln -s /opt/cross/bin/aarch64-linux-aarch64-linux-nm-> /usr/local/bin/nm
-ln -s /opt/cross/bin/aarch64-linux-elfedit -> /usr/local/bin/elfedit
-ln -s /opt/cross/bin/aarch64-linux-as -> /usr/local/bin/as
-ln -s /opt/cross/bin/aarch64-linux-size -> /usr/local/bin/size
-ln -s /opt/cross/bin/aarch64-linux-ar -> /usr/local/bin/ar
-ln -s /opt/cross/bin/aarch64-linux-g++ -> /usr/local/bin/g++
-ln -s /opt/cross/bin/aarch64-linux-strings -> /usr/local/bin/strings
-ln -s /opt/cross/bin/aarch64-linux-readelf -> /usr/local/bin/readelf
-ln -s /opt/cross/bin/aarch64-linux-ranlib -> /usr/local/bin/ranlib
-ln -s /opt/cross/bin/aarch64-linux-c++ -> /usr/local/bin/c++
-ln -s /opt/cross/bin/aarch64-linux-addr2line -> /usr/local/bin/addr2line
-ln -s /opt/cross/bin/aarch64-linux-ld -> /usr/local/bin/ld
-ln -s /opt/cross/bin/aarch64-linux-gprof -> /usr/local/bin/gprof
-ln -s /opt/cross/bin/aarch64-linux-gcov -> /usr/local/bin/gcov
-ln -s /opt/cross/bin/aarch64-linux-objcopy -> /usr/local/bin/objcopy
-ln -s /opt/cross/bin/aarch64-linux-c++filt -> /usr/local/bin/c++filt
-ln -s /opt/cross/bin/aarch64-linux-gcc-ar -> /usr/local/bin/gcc-ar
-ln -s /opt/cross/bin/aarch64-linux-gcc-4.9.2 -> /usr/local/bin/gcc-4.9.2
-ln -s /opt/cross/bin/aarch64-linux-gcc-nm -> /usr/local/bin/gcc-nm
-ln -s /opt/cross/bin/aarch64-linux-cpp -> /usr/local/bin/cpp
-ln -s /opt/cross/bin/aarch64-linux-strip -> /usr/local/bin/strip
-export PATH=$PATH:/usr/local/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/cross/lib/gcc/aarch64-linux/4.9.2
-cd /opt/cross
-./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var --host=aarch64 --target=intel64  --disable-tests --disable-failing-tests --disable-gtktest && make && make install
-
-
+    wget https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go1.6.2.linux-amd64.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
 }
+
 setup_shares
 setup_hpc_user
-install_munge
-install_slurm
 setup_env
-install_pkgs
+install_pkgs_all
+#install_munge
+#install_slurm
 #install_easybuild
-#build_cross_cc
+#install_go()
+
