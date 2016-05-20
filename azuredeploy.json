@@ -198,43 +198,6 @@
       }
     }
   },
-  "variables": {
-    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
-    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
-    "vmStorageAccountContainerName": "vhd",
-    "diskCaching": "ReadWrite",
-    "OSDiskName": "osdisk",
-    "publicIPAddressType": "Dynamic",
-    "publicIPAddressName": "publicips",
-    "armApiVersion": "2015-06-15",
-    "avSetName": "avSet",
-    "nicName": "nic",
-    "networkSettings": {
-      "virtualNetworkName": "virtualnetwork",
-      "addressPrefix": "10.0.0.0/16",
-      "subnet": {
-        "dse": {
-          "name": "dse",
-          "prefix": "10.0.0.0/24",
-          "vnet": "virtualnetwork"
-        }
-      },
-      "statics": {
-        "workerRange": {
-          "base": "10.0.0.",
-          "start": 5
-        },
-        "master": "10.0.0.254"
-      }
-    },
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
-    "templateBaseUrl": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
-    "installationCLI": "[concat('bash azuredeploy.sh ', parameters('MasterVMName'), ' ', parameters('workerVMNamePrefix'), ' ', parameters('WorkerNodeCount'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('MUNGE_USER_GROUP'), ' ', parameters('SLURM_USER_GROUP'), ' ', parameters('SLURM_VER'), ' ', parameters('numDataDisks'), ' ',  parameters('dockerVer'), ' ', parameters('dockerComposeVer'), ' ', parameters('adminUserName'),  ' ', parameters('imageSku'), ' ', variables('templateBaseUrl'))]",
-    "storageAccountType": "parameters('storageType')",
-    "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]"
-    "diskSelectionTemplateFilePath": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/diskSelection.json"
-  },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
@@ -536,6 +499,41 @@
         }
       }
     }
-  ]
+  ],
+  "variables": {
+    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
+    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
+    "vmStorageAccountContainerName": "vhd",
+    "diskCaching": "ReadWrite",
+    "OSDiskName": "osdisk",
+    "publicIPAddressType": "Dynamic",
+    "publicIPAddressName": "publicips",
+    "armApiVersion": "2015-06-15",
+    "avSetName": "avSet",
+    "nicName": "nic",
+    "networkSettings": {
+      "virtualNetworkName": "virtualnetwork",
+      "addressPrefix": "10.0.0.0/16",
+      "subnet": {
+        "dse": {
+          "name": "dse",
+          "prefix": "10.0.0.0/24",
+          "vnet": "virtualnetwork"
+        }
+      },
+      "statics": {
+        "workerRange": {
+          "base": "10.0.0.",
+          "start": 5
+        },
+        "master": "10.0.0.254"
+      }
+    },
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
+    "templateBaseUrl": "variables('artifactsLocation')",
+    "installationCLI": "[concat('bash azuredeploy.sh ', parameters('MasterVMName'), ' ', parameters('workerVMNamePrefix'), ' ', parameters('WorkerNodeCount'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('MUNGE_USER_GROUP'), ' ', parameters('SLURM_USER_GROUP'), ' ', parameters('SLURM_VER'), ' ', parameters('numDataDisks'), ' ',  parameters('dockerVer'), ' ', parameters('dockerComposeVer'), ' ', parameters('adminUserName'),  ' ', parameters('imageSku'), ' ', variables('templateBaseUrl'))]",
+    "storageAccountType": "parameters('storageType')",
+    "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]"
+  }
 }
-
