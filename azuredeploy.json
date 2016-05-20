@@ -205,7 +205,7 @@
       "apiVersion": "[variables('armApiVersion')]",
       "location": "[resourceGroup().location]",
       "properties": {
-        "accountType": "[variables('storageAccountType')]"
+        "accountType": "[parameters('storageType')]"
       }
     },
     {
@@ -533,7 +533,6 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
     "templateBaseUrl": "variables('artifactsLocation')",
     "installationCLI": "[concat('bash azuredeploy.sh ', parameters('MasterVMName'), ' ', parameters('workerVMNamePrefix'), ' ', parameters('WorkerNodeCount'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('MUNGE_USER_GROUP'), ' ', parameters('SLURM_USER_GROUP'), ' ', parameters('SLURM_VER'), ' ', parameters('numDataDisks'), ' ',  parameters('dockerVer'), ' ', parameters('dockerComposeVer'), ' ', parameters('adminUserName'),  ' ', parameters('imageSku'), ' ', variables('templateBaseUrl'))]",
-    "storageAccountType": "parameters('storageType')",
     "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]"
   }
 }
