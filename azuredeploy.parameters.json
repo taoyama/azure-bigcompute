@@ -2,7 +2,7 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "dnsPrefix": {
+    "dnsLabelPrefix": {
       "value": ""
     },
     "adminUserName": {
@@ -11,8 +11,8 @@
         "description": "The admin user to Logon to the HPC master and workers"
       }
     },
-    "adminPassword": {
-      "value": ""
+    "sshPublicKey": {
+      "value": "GEN-SSH-PUB-KEY"
     },
     "hpcUserName": {
       "value": "hpc",
@@ -20,7 +20,7 @@
         "description": "The Internal hpcUsername which is not allowed external access from outside the cluster"
       }
     },
-    "sharedFolder": {
+    "mountFolder": {
       "value": "/data",
         "metadata": {
         "description": "The shared folder system mounted on the master and shared between the workers via the munge key."
@@ -31,6 +31,12 @@
     },
     "SLURM_VER": {
       "value": "15-08-10-1"
+    },
+    "MUNGE_USER_GROUP": {
+      "value": "munge"
+    },
+    "SLURM_USER_GROUP": {
+      "value": "slurm"
     },
     "headNodeSize": {
       "value": "Standard_A8"
@@ -43,6 +49,18 @@
         "metadata": {
         "description": "The number of worker nodes."
       }
+    },
+    "storageType": {
+      "value": "Standard_LRS"
+    },
+    "dockerVer": {
+      "value": "1.11"
+    },
+    "dockerComposeVer": {
+      "value": "1.7.1"
+    },
+    "dockerMachineVer": {
+      "value": "0.7.0"
     },
     "dataDiskSize": {
       "value": 128,
@@ -76,3 +94,4 @@
     }
   }
 }
+

@@ -9,7 +9,7 @@ if [[ $(id -u) -ne 0 ]] ; then
 fi
 
 if [ $# != 14 ]; then
-    echo "Usage: $0 <MasterHostname> <WorkerHostnamePrefix> <WorkerNodeCount> <HPCUserName> <sharedFolder> <MUNGE_VER> <MUNGE_USER_GROUP> <SLURM_USER_GROUP> <SLURM_VER> <numDataDisks> <dockerVer> <dockerComposeVer> <adminUserName> <imageSku> <TEMPLATE_BASE_URL>"
+    echo "Usage: $0 <MasterVMName> <workerVMNamePrefix> <WorkerNodeCount> <HPCUserName> <mountFolder> <MUNGE_VER> <MUNGE_USER_GROUP> <SLURM_USER_GROUP> <SLURM_VER> <numDataDisks> <dockerVer> <dockerComposeVer> <adminUserName> <imageSku> <templateBaseUrl>"
     exit 1
 fi
 
