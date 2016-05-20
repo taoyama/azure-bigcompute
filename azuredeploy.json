@@ -121,13 +121,14 @@
       "type": "string",
       "allowedValues": [
         "Standard_LRS",
+        "Premium_LRS",
         "Standard_GRS",
         "Standard_RAGRS",
         "Standard_ZRS"
       ],
       "defaultValue": "Standard_LRS",
       "metadata": {
-        "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS"
+        "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS"
       }
     },
     "dockerVer": {
@@ -500,16 +501,11 @@
     }
   ],
   "variables": {
-    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
-    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
-    "vmStorageAccountContainerName": "vhd",
-    "diskCaching": "ReadWrite",
-    "OSDiskName": "osdisk",
-    "publicIPAddressType": "Dynamic",
-    "publicIPAddressName": "publicips",
     "armApiVersion": "2015-06-15",
+    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
     "avSetName": "avSet",
-    "nicName": "nic",
+    "diskCaching": "ReadWrite",
+    "installationCLI": "[concat('bash azuredeploy.sh ', parameters('MasterVMName'), ' ', parameters('workerVMNamePrefix'), ' ', parameters('WorkerNodeCount'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('MUNGE_USER_GROUP'), ' ', parameters('SLURM_USER_GROUP'), ' ', parameters('SLURM_VER'), ' ', parameters('numDataDisks'), ' ',  parameters('dockerVer'), ' ', parameters('dockerComposeVer'), ' ', parameters('adminUserName'),  ' ', parameters('imageSku'), ' ', variables('templateBaseUrl'))]",
     "networkSettings": {
       "virtualNetworkName": "virtualnetwork",
       "addressPrefix": "10.0.0.0/16",
@@ -528,10 +524,15 @@
         "master": "10.0.0.254"
       }
     },
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]",
+    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
+    "nicName": "nic",
+    "OSDiskName": "osdisk",
+    "publicIPAddressName": "publicips",
+    "publicIPAddressType": "Dynamic",
+    "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
-    "templateBaseUrl": "variables('artifactsLocation')",
-    "installationCLI": "[concat('bash azuredeploy.sh ', parameters('MasterVMName'), ' ', parameters('workerVMNamePrefix'), ' ', parameters('WorkerNodeCount'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', parameters('MUNGE_VER'), ' ', parameters('MUNGE_USER_GROUP'), ' ', parameters('SLURM_USER_GROUP'), ' ', parameters('SLURM_VER'), ' ', parameters('numDataDisks'), ' ',  parameters('dockerVer'), ' ', parameters('dockerComposeVer'), ' ', parameters('adminUserName'),  ' ', parameters('imageSku'), ' ', variables('templateBaseUrl'))]",
-    "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]"
+    "templateBaseUrl": "[variables('artifactsLocation')]",
+    "vmStorageAccountContainerName": "vhd",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]"
   }
 }
