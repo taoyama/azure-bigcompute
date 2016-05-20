@@ -184,7 +184,7 @@ system_update()
     #yum  -y update --exclude=WALinuxAgent
     #yum  -y update
     #yum -x 'intel-*' -x 'kernel*' -x '*microsoft-*' -x 'msft-*'  -y update --exclude=WALinuxAgent
-    yum -exclude WALinuxAgent,intel-*,kernel*,*microsoft-*,msft-* -y update 
+    yum --exclude WALinuxAgent,intel-*,kernel*,*microsoft-*,msft-* -y update 
 
     set_time
 }
@@ -253,7 +253,7 @@ install_pkgs_all()
 {
     system_update
 
-    install_packages
+    #install_packages
 
 	if [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] ; then
     		install_azure_cli
