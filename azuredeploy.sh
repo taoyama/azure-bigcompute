@@ -8,7 +8,7 @@ if [[ $(id -u) -ne 0 ]] ; then
     exit 1
 fi
 
-if [ $# != 9 ]; then
+if [ $# != 16 ]; then
     echo "Usage: $0 <clusterdet> <HPCUserName> <mountFolder> <mungedet> <slurmdet> <numDataDisks> <dockerdet> <imagedet> <artifactsLocation>"
     exit 1
 fi
