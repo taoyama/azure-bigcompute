@@ -13,7 +13,7 @@ if [ $# != 15 ]; then
     exit 1
 fi
 
-TEMPLATE_BASE_URL="$15"
+
 # Set user args
 MASTER_HOSTNAME=$1
 WORKER_HOSTNAME_PREFIX=$2
@@ -44,12 +44,12 @@ HPC_UID=7007
 HPC_GROUP="$4"
 HPC_GID=7007
 
-numberofDisks="$10"
-dockerVer="$11"
-dockerComposeVer="$12"
-userName="$13"
-skuName="$14"
-
+numberofDisks=$10
+dockerVer=$11
+dockerComposeVer=$12
+userName=$13
+skuName=$14
+TEMPLATE_BASE_URL=$15
 
 # Returns 0 if this node is the master node.
 #
