@@ -415,7 +415,7 @@
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Storage/storageAccounts/', variables('newStorageAccountName'))]",
-        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), 'worker', copyindex())]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'), parameters('workerVMNamePrefix'), copyindex())]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('avSetName'))]"
       ],
       "copy": {
