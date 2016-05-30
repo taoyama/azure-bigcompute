@@ -10,8 +10,8 @@ Creates a Cluster with configurable number of worker nodes each with prebuilt In
 Head Node is defaulted to A8 and has striped configurable disks attached.
 * __These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA.__
 * __All Local program compiles are disabled in this template__
-* No icc or gcc presence.
-* GCC Cross compilation can be performed via docker as in <a href="https://hub.docker.com/_/gcc/" target="_blank>gcc docker for cross compiling on local fixed kernel</a>
+* __No icc or gcc presence.__
+* __GCC Cross compilation can be performed via docker as in <a href="https://hub.docker.com/_/gcc/" target="_blank>gcc docker for cross compiling on local fixed kernel</a>__
 * Latest Docker configurable each Head and compute Nodes. - default is 1.11 (Only for CentOS-HPC 7.1, kernel 3.10.x and above).
 * Latest docker-compose configurable each Head and compute Nodes. - default is 1.7.1 (Only for CentOS-HPC 7.1, kernel 3.10.x and above).
 * Latest docker-machine configurable  - default is the now latest v0.7.0 (Only for 7.1, kernel 3.10.x and above). [Docs](https://docs.docker.com/machine/drivers/azure/)
