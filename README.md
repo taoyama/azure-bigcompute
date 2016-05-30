@@ -9,7 +9,7 @@
 Creates a Cluster with configurable number of worker nodes each with prebuilt IntelMPI and Direct RDMA
 Head Node is defaulted to A8 and has striped configurable disks attached.
 
-** These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA**
+** These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA **
 
 ** Has latest configured, parameterized docker, docker-compose and docker-machine on each Head and compute Nodes. **
 
