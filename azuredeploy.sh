@@ -612,3 +612,4 @@ install_pkgs_all
 #install_slurm
 #install_easybuild
 #install_go()
+reboot
