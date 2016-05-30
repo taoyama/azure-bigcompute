@@ -25,3 +25,4 @@ Head Node is defaulted to A8 and has striped configurable disks attached.
 * Internal firewalld is off.
 * WALinuxAgent updates are disabled on first deployment.
 * Specific Logic in <code>install_packages_all()</code> to distinguish between sku for CentOS-HPC 6.5 and 7.1, primarily for docker usage.
+* First testing of using official gcc docker image on src in container with shared dir with node fs in <code>install_munge</code> experimental builds.. 
