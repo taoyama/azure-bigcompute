@@ -333,6 +333,8 @@ install_packages()
 install_pkgs_all()
 {
     system_update
+     
+    yum install -y expect
 
     #install_packages
 
@@ -444,6 +446,7 @@ setup_env()
     echo "export I_MPI_FABRICS=shm:dapl" >> /etc/profile.d/mpi.sh
     echo "export I_MPI_DAPL_PROVIDER=ofa-v2-ib0" >> /etc/profile.d/mpi.sh
     echo "export I_MPI_DYNAMIC_CONNECTION=0" >> /etc/profile.d/mpi.sh
+    source /opt/intel/compilers_and_libraries/linux/mpi/intel64/bin/mpivars.sh
 }
 
 install_pypacks()
