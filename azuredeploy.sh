@@ -312,7 +312,7 @@ install_docker_apps()
 install_ib()
 {
     yum groupinstall -y "Infiniband Support"
-    yum install -y infiniband-diags perftest qperf opensm
+    yum install -y infiniband-diags perftest qperf opensm  gsl bc rpm-build munge readline-devel openssl-devel  munge-devel pam-devel 
     chkconfig opensm on
     chkconfig rdma on
     #reboot
