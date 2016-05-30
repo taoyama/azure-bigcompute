@@ -5,8 +5,8 @@
 </a>
 
 * This creates configurable number of disks with configurable size for centos-hpc A8/A9 
-Creates a Cluster with configurable number of worker nodes each with prebuilt IntelMPI and Direct RDMA for each Head and corresponding compute Nodes.
-* Cluster Scheduler can be ignore for now only can work with gcc docker cross compilation
+Creates a Cluster with configurable number of worker nodes each with prebuilt Intel MPI and Direct RDMA for each Head and corresponding compute Nodes.
+* Cluster Scheduler can be ignored for now only can work with gcc docker cross compilation
 Head Node is defaulted to A8 and has striped configurable disks attached.
 * __These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA.__
 * __All Local program compiles are disabled in this template__
