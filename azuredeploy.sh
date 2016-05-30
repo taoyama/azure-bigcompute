@@ -478,6 +478,8 @@ install_munge()
     groupadd $MUNGE_GROUP
 
     useradd -M -c "Munge service account" -g $MUNGE_USER -s /usr/sbin/nologin munge
+    
+    cd $SHARE_DATA/
 
     wget https://github.com/dun/munge/archive/munge-${MUNGE_VERSION}.tar.gz
 
@@ -489,8 +491,11 @@ install_munge()
     mkdir -m 711 /var/lib/munge
     mkdir -m 700 /var/log/munge
     mkdir -m 755 /var/run/munge
+    mkdir -m 755 $SHARE_DATA/mungebuild
 
-    ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make && make install
+    #./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make && make install
+    
+ docker run --rm -it -v $SHARE_DATA/munge-munge-$MUNGE_VERSION:/usr/src/munge:rw -v $SHARE_DATA/mungebuild:/usr/src/mungebuild:rw -v /usr/lib64:/usr/src/lib64:rw -v     /usr/lib64:/usr/src/lib64:rw -v /etc:/etc:rw -v /var:/var:rw -v /usr:/opt:rw  gcc:5.1 bash -c "cd /usr/src/munge && ./configure -libdir=/opt/lib64 --prefix=/opt --sysconfdir=/etc --localstatedir=/var && make && make install"
 
     chown -R $MUNGE_USER:$MUNGE_GROUP /etc/munge /var/lib/munge /var/log/munge /var/run/munge
 
@@ -602,7 +607,7 @@ setup_shares
 setup_hpc_user
 setup_env
 install_pkgs_all
-#install_munge
+install_munge
 #install_slurm
 #install_easybuild
 #install_go()
