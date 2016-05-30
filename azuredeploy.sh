@@ -608,7 +608,7 @@ setup_shares
 setup_hpc_user
 setup_env
 install_pkgs_all
-install_munge
+#install_munge
 #install_slurm
 #install_easybuild
 #install_go()
