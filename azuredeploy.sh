@@ -428,6 +428,9 @@ setup_hpc_user()
         
         # Give hpc user access to data share
         chown $HPC_USER:$HPC_GROUP $SHARE_DATA
+        
+        set_env_docker_cc
+        
     else
         useradd -c "HPC User" -g $HPC_GROUP -d $SHARE_HOME/$HPC_USER -s /bin/bash -u $HPC_UID $HPC_USER
     fi
@@ -447,6 +450,16 @@ setup_env()
     echo "export I_MPI_DAPL_PROVIDER=ofa-v2-ib0" >> /etc/profile.d/mpi.sh
     echo "export I_MPI_DYNAMIC_CONNECTION=0" >> /etc/profile.d/mpi.sh
     source /opt/intel/compilers_and_libraries/linux/mpi/intel64/bin/mpivars.sh
+}
+
+set_env_docker_cc()
+{
+cd /data/data
+wget  http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.3.tar.gz
+tar xvzf osu-micro-benchmarks-5.3.tar.gz
+cd osu-micro-benchmarks-5.3
+source /opt/intel/compilers_and_libraries/linux/mpi/intel64/bin/mpivars.sh
+mkdir -p /data/data/osubuild	
 }
 
 install_pypacks()
