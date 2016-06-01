@@ -428,7 +428,7 @@ setup_hpc_user()
         # Give hpc user access to data share
         chown $HPC_USER:$HPC_GROUP $SHARE_DATA
         
-        set_env_docker_cc
+        #set_env_docker_cc
         
     else
         useradd -c "HPC User" -g $HPC_GROUP -d $SHARE_HOME/$HPC_USER -s /bin/bash -u $HPC_UID $HPC_USER
@@ -511,7 +511,8 @@ yum install -y munge-devel munge
     chown $MUNGE_USER:$MUNGE_GROUP /etc/munge/munge.key
     chmod 0400 /etc/munge/munge.key
 
-    /etc/init.d/munge start
+    systemctl enable munge.service
+    systemctl start munge.service
 
     cd ..
 }
