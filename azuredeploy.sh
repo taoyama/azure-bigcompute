@@ -373,11 +373,15 @@ setup_shares()
         systemctl start rpcbind || echo "Already enabled"
         systemctl start nfs-server || echo "Already enabled"
     else
-        echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
-        echo "$MASTER_HOSTNAME:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+        #echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+        #echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+        echo "master:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+        echo "master:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
         mount -a
-        mount | grep "^$MASTER_HOSTNAME:$SHARE_HOME"
-        mount | grep "^$MASTER_HOSTNAME:$SHARE_DATA"
+        mount | grep "^master:$SHARE_HOME"
+        mount | grep "^master:$SHARE_DATA"
+        #mount | grep "^$MASTER_HOSTNAME:$SHARE_HOME"
+        #mount | grep "^$MASTER_HOSTNAME:$SHARE_DATA"
     fi
 }
 
