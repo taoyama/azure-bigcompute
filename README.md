@@ -28,13 +28,16 @@ Head Node is defaulted to A8 and has striped configurable disks attached.
 * WALinuxAgent updates are disabled on first deployment.
 * Specific Logic in <code>install_packages_all()</code> to distinguish between sku for CentOS-HPC 6.5 and 7.1, primarily for docker usage.
 * First testing of using official gcc docker image on src in container with shared dir with node fs in <code>install_munge</code> experimental builds.. 
+
 ## mpirun
 <code>
 source /opt/intel/impi/5.1.3.181/bin64/mpivars.sh
 mpirun -ppn 1 -n 2 -hosts compn0,compn1 -env I_MPI_FABRICS=shm:dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 hostname  (Cluster Check)
 mpirun -hosts compn0,compn1 -ppn <<processes per node in number>> -n <<number of consequtive processes>> -env I_MPI_FABRICS=dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 IMB-MPI1 pingpong (Base Intel MPI Pinpong benchmarks)
 </code>
+
 ## Docker Cross Compiling (e.g:)
+
 <code>
 cd /data/data
 mkdir -m 755 /data/data/mungebuild
@@ -43,7 +46,9 @@ tar xvfz munge-0.5.12.tar.gz
 cd munge-munge-0.5.12
 docker run --rm -it -v /data/data/munge-munge-0.5.12:/usr/src/munge:rw -v /data/data/mungebuild:/usr/src/mungebuild:rw -v /usr/lib64:/usr/src/lib64:rw  -v /etc:/etc:rw -v /var:/var:rw -v /usr:/opt:rw  gcc:5.1 bash -c "cd /usr/src/munge && ./configure -libdir=/opt/lib64 --prefix=/opt --sysconfdir=/etc --localstatedir=/var && make && make install"
 </code>
+
 ## IB
+
 <code>
 ls /sys/class/infiniband
 cat /sys/class/infiniband/mlx4_0/ports/1/state
