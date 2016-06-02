@@ -521,6 +521,7 @@ yum install -y munge-devel munge
     cd ..
 }
 
+
 # Installs and configures slurm.conf on the node.
 # This is generated on the master node and placed in the data
 # share.  All nodes create a sym link to the SLURM conf
@@ -559,7 +560,7 @@ install_slurm()
 
     mkdir -p /etc/slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
 
-    chown -R $SLURM_USER:$SLURM_GROUP /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
+    chown -R slurm:slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
 
     wget https://github.com/SchedMD/slurm/archive/slurm-$SLURM_VERSION.tar.gz
 
@@ -572,9 +573,15 @@ install_slurm()
     install_slurm_config
 
     if is_master; then
-        /usr/sbin/slurmctld -vvvv
+        wget $TEMPLATE_BASE_URL/slurmctld.service
+        mv slurmctld.service /usr/lib/systemd/system
+        systemctl daemon-reload
+        systemctl enable slurmctld
     else
-        /usr/sbin/slurmd -vvvv
+        wget $TEMPLATE_BASE_URL/slurmd.service
+        mv slurmd.service /usr/lib/systemd/system
+        systemctl daemon-reload
+        systemctl enable slurmd
     fi
 
     cd ..
