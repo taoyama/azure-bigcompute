@@ -31,35 +31,23 @@ Head Node is defaulted to A8 and has striped configurable disks attached.
 
 ## mpirun
 
-<code>
-
-source /opt/intel/impi/5.1.3.181/bin64/mpivars.sh
-mpirun -ppn 1 -n 2 -hosts compn0,compn1 -env I_MPI_FABRICS=shm:dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 hostname  (Cluster Check)
-mpirun -hosts compn0,compn1 -ppn <<processes per node in number>> -n <<number of consequtive processes>> -env I_MPI_FABRICS=dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 IMB-MPI1 pingpong (Base Intel MPI Pinpong benchmarks)
-
-</code>
+<code>source /opt/intel/impi/5.1.3.181/bin64/mpivars.sh</code>
+<code>mpirun -ppn 1 -n 2 -hosts compn0,compn1 -env I_MPI_FABRICS=shm:dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 hostname</code>  (Cluster Check)
+<code>mpirun -hosts compn0,compn1 -ppn <<processes per node in number>> -n <<number of consequtive processes>> -env I_MPI_FABRICS=dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 IMB-MPI1 pingpong</code> (Base Intel MPI Pinpong benchmarks)
 
 ## Docker Cross Compiling (e.g:)
 
-<code>
-
-cd /data/data
-mkdir -m 755 /data/data/mungebuild
-wget https://github.com/dun/munge/archive/munge-0.5.12.tar.gz
-tar xvfz munge-0.5.12.tar.gz
-cd munge-munge-0.5.12
-docker run --rm -it -v /data/data/munge-munge-0.5.12:/usr/src/munge:rw -v /data/data/mungebuild:/usr/src/mungebuild:rw -v /usr/lib64:/usr/src/lib64:rw  -v /etc:/etc:rw -v /var:/var:rw -v /usr:/opt:rw  gcc:5.1 bash -c "cd /usr/src/munge && ./configure -libdir=/opt/lib64 --prefix=/opt --sysconfdir=/etc --localstatedir=/var && make && make install"
-
-</code>
+<code>cd /data/data</code>
+<code>mkdir -m 755 /data/data/mungebuild</code>
+<code>wget https://github.com/dun/munge/archive/munge-0.5.12.tar.gz</code>
+<code>tar xvfz munge-0.5.12.tar.gz</code>
+<code>cd munge-munge-0.5.12</code>
+<code>docker run --rm -it -v /data/data/munge-munge-0.5.12:/usr/src/munge:rw -v /data/data/mungebuild:/usr/src/mungebuild:rw -v /usr/lib64:/usr/src/lib64:rw  -v /etc:/etc:rw -v /var:/var:rw -v /usr:/opt:rw  gcc:5.1 bash -c "cd /usr/src/munge && ./configure -libdir=/opt/lib64 --prefix=/opt --sysconfdir=/etc --localstatedir=/var && make && make install"</code>
 
 ## IB
 
-<code>
-
-ls /sys/class/infiniband
-cat /sys/class/infiniband/mlx4_0/ports/1/state
-/etc/init.d/opensmd start (if required)
-cat /sys/class/infiniband/mlx4_0/ports/1/rate
-pdsh –a cat /sys/class/infiniband/mlx4_0/ports/1/rate (on comp nondes)
-
-</code>
+<code>ls /sys/class/infiniband</code>
+<code>cat /sys/class/infiniband/mlx4_0/ports/1/state</code>
+<code>/etc/init.d/opensmd start</code> (if required)
+<code>cat /sys/class/infiniband/mlx4_0/ports/1/rate</code>
+<code>pdsh –a cat /sys/class/infiniband/mlx4_0/ports/1/rate</code> (on comp nondes)
