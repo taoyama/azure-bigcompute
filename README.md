@@ -1,5 +1,5 @@
 # CentOS-HPC
-Mostly based on https://github.com/smith1511/hpc with additions of CentOS_HPC Image offers (fixed kernels), dynamic disk stripping ssh password, docker enabling, docker cross compiling.
+Based https://github.com/smith1511/hpc with additions of CentOS_HPC Image offers (fixed kernels), dynamic disk stripping ssh password, docker enabling, docker cross compiling.
 - __WIP__
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">
@@ -36,7 +36,7 @@ Head Node is defaulted to A8 and has striped configurable disks attached.
 <code>mpirun -ppn 1 -n 2 -hosts compn0,compn1 -env I_MPI_FABRICS=shm:dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 hostname</code>  (Cluster Check)
 
 <code>mpirun -hosts compn0,compn1 -ppn <<processes per node in number>> -n <<number of consequtive processes>> -env I_MPI_FABRICS=dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 IMB-MPI1 pingpong</code>
-(Base Intel MPI Pinpong benchmarks)
+(Base Pingpong stats)
 
 ## Docker Cross Compiling (e.g:)
 
