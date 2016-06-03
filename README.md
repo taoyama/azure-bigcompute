@@ -62,4 +62,4 @@ Head Node is defaulted to A8 and has striped configurable disks attached.
 
 <code>cat /sys/class/infiniband/mlx4_0/ports/1/rate</code>
 
-<code>pdsh –a cat /sys/class/infiniband/mlx4_0/ports/1/rate</code> (on comp nondes)
+<code>pdsh –a cat /sys/class/infiniband/mlx4_0/ports/1/rate</code> (on comp nodes)
