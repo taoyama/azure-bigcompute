@@ -1,5 +1,5 @@
 # CentOS-HPC
-Based https://github.com/smith1511/hpc with additions of CentOS_HPC Image offers (fixed kernels), dynamic disk stripping ssh password, docker enabling, docker cross compiling.
+Based https://github.com/smith1511/hpc with additions of CentOS_HPC Image offers (fixed kernels), dynamic disk stripping ssh password, docker enabling, docker cross compiling. Fixed Kernel Swiss Knife Pureplay Azure HPC Cluster with Direct RDMA and Intel MPI
 - __WIP__
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">
