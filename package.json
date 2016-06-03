@@ -1,5 +1,5 @@
 {
-  "name": "azure-quickstart-templates",
+  "name": "azure-bigcompute-hpcscripts",
   "version": "1.0.0",
   "description": "A package file for developer depenedencies when testing templates",
   "scripts": {
