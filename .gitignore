@@ -1,7 +1,7 @@
 # local Scheduler Parameters and service
-*.template.conf 
-*.service  
-*.service  
+# *.template.conf 
+# *.service  
+# *.service  
 
 # emacs autosaves
 auto-save-list
