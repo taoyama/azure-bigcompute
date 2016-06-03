@@ -1,6 +1,6 @@
 # CentOS-HPC
 Based on https://github.com/smith1511/hpc with additions of CentOS-HPC Image offers (fixed kernels), dynamic disk stripping ssh password, docker enabling, docker cross compiling. Fixed Kernel Swiss Knife Pureplay Azure HPC Cluster with Direct RDMA and Intel MPI
-- __WIP__
+- Status: __WIP__
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">
    <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
@@ -9,7 +9,7 @@ Based on https://github.com/smith1511/hpc with additions of CentOS-HPC Image off
 * This creates configurable number of disks with configurable size for centos-hpc A8/A9 
 Creates a Cluster with configurable number of worker nodes each with prebuilt Intel MPI and Direct RDMA for each Head and corresponding compute Nodes.
 * Cluster Scheduler can be ignored for now and Torque and SLURM options to be put in __WIP__
-Head Node is defaulted to A8 and has striped configurable disks attached.
+* Head Node is defaulted to A8 and has striped configurable disks attached.
 * __These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA.__
 * __All Local program compiles are disabled in this template__
 * __No icc or gcc presence.__
