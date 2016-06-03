@@ -1,4 +1,4 @@
-[![NPM version](https://badge.fury.io/js/azure-bigcompute-hpcscripts.png)](http://badge.fury.io/js/azure-bigcompute-hpcscripts) [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
+ [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
 
 # CentOS-HPC
 Based on https://github.com/smith1511/hpc with additions of CentOS-HPC Image offers (fixed kernels), dynamic disk stripping ssh password, docker enabling, docker cross compiling. Fixed Kernel Swiss Knife Pureplay Azure HPC Cluster with Direct RDMA and Intel MPI
