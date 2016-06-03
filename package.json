@@ -28,6 +28,13 @@
     "rsvp": "^3.1.0",
     "skeemas": "^1.2.1",
     "unirest": "^0.4.2"
-  }
+  },
+  "main": "Gruntfile.js",
+  "keywords": [
+    "Azure",
+    "HPC",
+    "Direct",
+    "RDMA",
+    "CentOS-HPC"
+  ]
 }
-
