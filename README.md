@@ -8,7 +8,7 @@ Based on https://github.com/smith1511/hpc with additions of CentOS-HPC Image off
 
 * This creates configurable number of disks with configurable size for centos-hpc A8/A9 
 Creates a Cluster with configurable number of worker nodes each with prebuilt Intel MPI and Direct RDMA for each Head and corresponding compute Nodes.
-* Cluster Scheduler can be ignored for now and only can work with gcc docker cross compilation. 
+* Cluster Scheduler can be ignored for now and Torque and SLURM options to be put in __WIP__
 Head Node is defaulted to A8 and has striped configurable disks attached.
 * __These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA.__
 * __All Local program compiles are disabled in this template__
@@ -22,8 +22,10 @@ Head Node is defaulted to A8 and has striped configurable disks attached.
 * Disk auto mounting is at /'parameter'/data.
 * NFS4 is on on the above.
 * Strict ssh public key enabled.
-* Nodes that share public RSA key shared can be used as direct jump boxes as azureuser@DNS.
-* NSG is required.
+* Nodes that share public RSA key shared can be used as direct jump boxes as <code>azureuser@DNS</code>.
+* Head and comp nodes work via <code>sudo su - <<hpc user>></code> and then direct ssh.
+* NSG is required . __WIP__
+* msft drivers check via rpm -qa msft* or rpm -qa microsoft*
 * Internal firewalld is off.
 * WALinuxAgent updates are disabled on first deployment.
 * Specific Logic in <code>install_packages_all()</code> to distinguish between sku for CentOS-HPC 6.5 and 7.1, primarily for docker usage.
