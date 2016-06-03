@@ -26,7 +26,7 @@
       "type": "string",
       "defaultValue": "CentOS-HPC",
       "metadata": {
-        "description": "New CentOS-HPC with pre-installed Intel MPI and mlx4 for Infiniband Available"
+        "description": "New CentOS-HPC with pre-installed Intel MPI and mlx4 drivers on Infiniband Available"
       }
     },
     "imageSku": {
@@ -37,7 +37,7 @@
         "7.1"
       ],
       "metadata": {
-        "description": "OpenLogic CentOS-HPC version to use"
+        "description": "OpenLogic CentOS-HPC Sku to use"
       }
     },
     "sshPublicKey": {
@@ -62,16 +62,16 @@
     },
     "MUNGE_VER": {
       "type": "string",
-      "defaultValue": "0.5.12",
+      "defaultValue": "0.5.11",
       "metadata": {
-        "description": "The MUNGE Version ."
+        "description": "The MUNGE Version - This is a yum install."
       }
     },
     "SLURM_VER": {
       "type": "string",
       "defaultValue": "15-08-10-1",
       "metadata": {
-        "description": "The SLURM version ."
+        "description": "The SLURM version - WIP Please Ignore for now."
       }
     },
     "MUNGE_USER_GROUP": {
@@ -128,47 +128,47 @@
       ],
       "defaultValue": "Standard_LRS",
       "metadata": {
-        "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS"
+        "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS - Striping rules Apply"
       }
     },
     "dockerVer": {
       "type": "string",
       "defaultValue": "1.11",
       "metadata": {
-        "description": "The docker version **Only for 7.1/7.2 kernels 3.10 and above **"
+        "description": "The docker version **Only for CentOS-HPC 7.1 - kernels 3.10 and above **"
       }
     },
     "dockerComposeVer": {
       "type": "string",
       "defaultValue": "1.7.1",
       "metadata": {
-        "description": "The Docker Compose Version **Only for 7.1/7.2 kernels 3.10 and above **"
+        "description": "The Docker Compose Version **Only for CentOS-HPC 7.1-  kernels 3.10 and above **"
       }
     },
     "dockerMachineVer": {
       "type": "string",
       "defaultValue": "0.7.0",
       "metadata": {
-        "description": "The docker-machine version **Only for 7.1/7.2 kernels 3.10 and above **"
+        "description": "The docker-machine version **Only for CentOS-HPC 7.1- kernels 3.10 and above **"
       }
     },
     "dataDiskSize": {
       "type": "int",
       "defaultValue": 10,
       "metadata": {
-        "description": "The size in GB of each data disk that is attached to the VM.  A MDADM RAID0  is created with all data disks auto-mounted,  that is dataDiskSize * dataDiskCount in size n the Storage ."
+        "description": "The size in GB of each data disk that is attached to the VM.  A MDADM RAID0  is created with all data disks auto-mounted,  that is dataDiskSize * dataDiskCount in size n the Storage."
       }
     },
     "masterVMName": {
       "type": "string",
-      "defaultValue": "master",
+      "defaultValue": "headN",
       "metadata": {
         "description": "The Name of the VM."
       }
     },
     "workerVMNamePrefix": {
       "type": "string",
-      "defaultValue": "worker",
+      "defaultValue": "compN",
       "metadata": {
         "description": "The Name Prefix of the worker(s) VM Nodes which whould be suffixed by the worker number."
       }
