@@ -3,6 +3,7 @@
 # CentOS-HPC
 Based on https://github.com/smith1511/hpc with additions of CentOS-HPC Image offers (fixed kernels), dynamic disk stripping ssh password, docker enabling, docker cross compiling. Fixed Kernel Swiss Knife Pureplay Azure HPC Cluster with Direct RDMA and Intel MPI
 * Status: __WIP__
+
    *  General Cleanup
    *  Intel Lustre Client with options of Lustre PFS Creation on Azure.
    *  Scheduler Choce: SLURM or Torque
