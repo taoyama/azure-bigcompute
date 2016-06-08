@@ -5,6 +5,7 @@ Based on https://github.com/smith1511/hpc with additions of CentOS-HPC Image off
 * Status: __WIP__
 
    *  General Cleanup
+   *  More cleanup
    *  Intel Lustre Client with options of Lustre PFS Creation on Azure.
    *  Scheduler Choce: SLURM or Torque
    *  Proper Docker Cross Compile Entry Point for target Intel
