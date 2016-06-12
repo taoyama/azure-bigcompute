@@ -641,7 +641,7 @@ setup_shares
 setup_hpc_user
 install_munge
 setup_env
-install_slurm
-install_easybuild
-install_go()
+#install_slurm
+#install_easybuild
+#install_go()
 #reboot
