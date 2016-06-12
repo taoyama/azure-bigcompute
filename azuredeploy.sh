@@ -141,7 +141,17 @@ is_master()
 }
 
 
+enable_kernel_update()
+{
+cd /etc && sed -i.bak -e '28d' yum.conf
+cd /etc && sed -i '28i#exclude=kernel*' yum.conf
+}
 
+disable_kernel_update()
+{
+cd /etc && sed -i.bak -e '28d' yum.conf
+cd /etc && sed -i '28iexclude=kernel*' yum.conf
+}
 
 # Partitions all data disks attached to the VM and creates
 # a RAID-0 volume with them.
@@ -329,6 +339,14 @@ install_packages()
 }
 # Installs all required packages.
 #
+install_packages_kernel_headers()
+{
+	enable_kernel_update
+	
+	yum -y install icu patch ruby ruby-devel rubygems  gcc gcc-c++ gcc.x86_64 gcc-c++.x86_64 glibc-devel.i686 glibc-devel.x86_64
+	
+	disable_kernel_update
+}
 install_pkgs_all()
 {
     system_update
@@ -336,6 +354,8 @@ install_pkgs_all()
     yum install -y expect
 
     install_packages
+    
+    install_packages_kernel_headers
 
 	if [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] ; then
     		install_azure_cli
@@ -621,7 +641,7 @@ setup_shares
 setup_hpc_user
 install_munge
 setup_env
-#install_slurm
-#install_easybuild
-#install_go()
+install_slurm
+install_easybuild
+install_go()
 #reboot
