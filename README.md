@@ -25,8 +25,8 @@ Creates a Cluster with configurable number of worker nodes each with prebuilt In
    * Head Node is defaulted to A8 and has striped configurable disks attached.
    * Specific Logic in <code>install_packages_all()</code> to distinguish between sku for CentOS-HPC 6.5 and 7.1, primarily for docker usage.
 * __These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA.__
-* __All Local mpiicc or icc  presence  in this template though gcc can be used__
-* __No icc (BYOL)  but dynamic modification of a user's environment via modulefiles is recommended (for using both Intel compilers and gcc).__
+* __No Local mpiicc or icc or ifort presence  in this template ( (BYOL from Intel Dev) though gcc can be used__
+* __Dynamic modification of a user's environment via modulefiles is recommended (for using both Intel compilers and gcc).__
 * __Only Intel MPI__.
    * Optional GCC Cross compilation can be performed via docker as in <a href="https://hub.docker.com/_/gcc/" target="_blank> gcc docker for cross compiling on local fixed kernel </a>
    * Latest Docker configurable each Head and compute Nodes. - default is 1.11 (Only for CentOS-HPC 7.1, kernel 3.10.x and above).
