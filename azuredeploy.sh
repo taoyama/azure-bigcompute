@@ -697,9 +697,6 @@ env "PATH=$PATH" pbs_sched >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 
 # Restart pbs_server
 service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
-else
-    
-fi
 }
 
 install_pkgs_all
