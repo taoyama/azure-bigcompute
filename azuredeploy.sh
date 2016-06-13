@@ -450,7 +450,7 @@ setup_hpc_user()
         chmod 644 $SHARE_HOME/$HPC_USER/.ssh/id_rsa.pub
         
         # Give hpc user access to data share
-        chown $HPC_USER:$HPC_GROUP $SHARE_DATA
+        chown -R $HPC_USER:$HPC_GROUP $SHARE_DATA
         
         #set_env_docker_cc
         
@@ -500,7 +500,7 @@ install_munge()
 {
     groupadd $MUNGE_GROUP
 
-    useradd -M -c "Munge service account" -g $MUNGE_USER -s /usr/sbin/nologin munge
+    useradd -M -c "Munge service account" -g $MUNGE_GROUP -s /usr/sbin/nologin $MUNGE_USER
     
     cd $SHARE_DATA/
 ## compile options on non-fixed and fixed kernels
@@ -516,23 +516,28 @@ install_munge()
     mkdir -m 755 /var/run/munge
  #   mkdir -m 755 $SHARE_DATA/mungebuild
 
-    #./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make && make install
+  ./configure -libdir=/usr/lib64 --prefix=/usr --sysconfdir=/etc --localstatedir=/var && make && make install
   #interactive tty 
  #docker run --rm -it -v $SHARE_DATA/munge-munge-$MUNGE_VERSION:/usr/src/munge:rw -v $SHARE_DATA/mungebuild:/usr/src/mungebuild:rw -v /usr/lib64:/usr/src/lib64:rw -v     /usr/lib64:/usr/src/lib64:rw -v /etc:/etc:rw -v /var:/var:rw -v /usr:/opt:rw  gcc:5.1 bash -c "cd /usr/src/munge && ./configure -libdir=/opt/lib64 --prefix=/opt --sysconfdir=/etc --localstatedir=/var && make && make install"
 #interactive non-tty 
 #docker run --rm -i -v $SHARE_DATA/munge-munge-$MUNGE_VERSION:/usr/src/munge:rw -v $SHARE_DATA/mungebuild:/usr/src/mungebuild:rw -v /usr/lib64:/usr/src/lib64:rw -v     /usr/lib64:/usr/src/lib64:rw -v /etc:/etc:rw -v /var:/var:rw -v /usr:/opt:rw  gcc:5.1 bash -c "cd /usr/src/munge && ./configure -libdir=/opt/lib64 --prefix=/opt --sysconfdir=/etc --localstatedir=/var && make && make install"
-yum install -y munge-devel munge
+#yum install -y munge-devel munge
     chown -R $MUNGE_USER:$MUNGE_GROUP /etc/munge /var/lib/munge /var/log/munge /var/run/munge
 
     if is_master; then
         dd if=/dev/urandom bs=1 count=1024 > /etc/munge/munge.key
     mkdir -p $SLURM_CONF_DIR
+    
         cp /etc/munge/munge.key $SLURM_CONF_DIR
+       chown -R $HPC_USER:$HPC_GROUP $SHARE_DATA
     else
         cp $SLURM_CONF_DIR/munge.key /etc/munge/munge.key
+        chown -R $HPC_USER:$HPC_GROUP $SHARE_DATA
+        chown -R $MUNGE_USER:$MUNGE_GROUP /etc/munge /var/lib/munge /var/log/munge /var/run/munge
     fi
 
     chown $MUNGE_USER:$MUNGE_GROUP /etc/munge/munge.key
+    chown -R $MUNGE_USER:$MUNGE_GROUP /etc/munge /var/lib/munge /var/log/munge /var/run/munge
     chmod 0400 /etc/munge/munge.key
 
     systemctl enable munge.service
@@ -552,6 +557,7 @@ install_slurm_config()
     if is_master; then
 
         mkdir -p $SLURM_CONF_DIR
+       
 
         if [ -e "$TEMPLATE_BASE_URL/slurm.template.conf" ]; then
             cp "$TEMPLATE_BASE_URL/slurm.template.conf" .
@@ -563,9 +569,11 @@ install_slurm_config()
         sed s/master/"$MASTER_HOSTNAME"/g |
                 sed s/__WORKER_HOSTNAME_PREFIX__/"$WORKER_HOSTNAME_PREFIX"/g |
                 sed s/__LAST_WORKER_INDEX__/"$LAST_WORKER_INDEX"/g > $SLURM_CONF_DIR/slurm.conf
+                chown -R $HPC_USER:$HPC_GROUP $SHARE_DATA
     fi
-
+    chown -R $HPC_USER:$HPC_GROUP $SHARE_DATA
     ln -s $SLURM_CONF_DIR/slurm.conf /etc/slurm/slurm.conf
+    chown -R $SLURM_GROUP:$SLURM_USER /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
 }
 
 # Downloads, builds and installs SLURM on the node.
@@ -580,7 +588,7 @@ install_slurm()
 
     mkdir -p /etc/slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
 
-    chown -R slurm:slurm /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
+    chown -R $SLURM_GROUP:$SLURM_USER /var/spool/slurmd /var/run/slurmd /var/run/slurmctld /var/log/slurmd /var/log/slurmctld
 
     wget https://github.com/SchedMD/slurm/archive/slurm-$SLURM_VERSION.tar.gz
 
