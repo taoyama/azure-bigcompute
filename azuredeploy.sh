@@ -560,9 +560,9 @@ install_slurm_config()
         fi
 
         cat slurm.template.conf |
-        sed 's/__MASTER__/'"$MASTER_HOSTNAME"'/g' |
-                sed 's/__WORKER_HOSTNAME_PREFIX__/'"$WORKER_HOSTNAME_PREFIX"'/g' |
-                sed 's/__LAST_WORKER_INDEX__/'"$LAST_WORKER_INDEX"'/g' > $SLURM_CONF_DIR/slurm.conf
+        sed s/master/"$MASTER_HOSTNAME"/g |
+                sed s/__WORKER_HOSTNAME_PREFIX__/"$WORKER_HOSTNAME_PREFIX"/g |
+                sed s/__LAST_WORKER_INDEX__/"$LAST_WORKER_INDEX"/g > $SLURM_CONF_DIR/slurm.conf
     fi
 
     ln -s $SLURM_CONF_DIR/slurm.conf /etc/slurm/slurm.conf
@@ -697,6 +697,8 @@ env "PATH=$PATH" pbs_sched >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 
 # Restart pbs_server
 service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+else
+    
 fi
 }
 
@@ -706,7 +708,7 @@ setup_hpc_user
 install_munge
 setup_env
 install_torque
-#install_slurm
+install_slurm
 #install_easybuild
 #install_go
 #reboot
