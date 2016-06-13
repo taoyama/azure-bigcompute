@@ -343,7 +343,7 @@ install_packages_kernel_headers()
 {
 	enable_kernel_update
 	
-	yum -y install icu patch ruby ruby-devel rubygems  gcc gcc-c++ gcc.x86_64 gcc-c++.x86_64 glibc-devel.i686 glibc-devel.x86_64
+	yum -y install icu patch ruby ruby-devel rubygems  gcc gcc-c++ gcc.x86_64 gcc-c++.x86_64 glibc-devel.i686 glibc-devel.x86_64  libtool openssl-devel libxml2-devel boost-devel
 	
 	disable_kernel_update
 }
@@ -636,12 +636,78 @@ install_go()
     export PATH=$PATH:/usr/local/go/bin
 }
 
+install_torque()
+{
+if is_master; then
+# Prep packages
+# Download the source package
+cd /tmp >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+wget http://www.adaptivecomputing.com/index.php?wpfb_dl=2936 -O torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+tar xzvf torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+cd torque-5.1.1* >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+# Build
+./configure >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+make >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+make packages >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+make install >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+export PATH=/usr/local/bin/:/usr/local/sbin/:$PATH
+
+# Create and start trqauthd
+cp contrib/init.d/trqauthd /etc/init.d/ >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+chkconfig --add trqauthd >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+sh -c "echo /usr/local/lib > /etc/ld.so.conf.d/torque.conf" >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+ldconfig >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+service trqauthd start >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+# Update config
+sh -c "echo $MASTER_HOSTNAME > /var/spool/torque/server_name" >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+env "PATH=$PATH" sh -c "echo 'y' | ./torque.setup root" >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+sh -c "echo $MASTER_HOSTNAME > /var/spool/torque/server_priv/nodes" >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+# Start pbs_server
+cp contrib/init.d/pbs_server /etc/init.d >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+chkconfig --add pbs_server >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+# Start pbs_mom
+cp contrib/init.d/pbs_mom /etc/init.d >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+chkconfig --add pbs_mom >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+service pbs_mom start >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+# Start pbs_sched
+env "PATH=$PATH" pbs_sched >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+# Push packages to compute nodes
+## i=0
+## while [ $i -lt $NUM_OF_VM ]
+## do
+##  worker=$WORKER_NAME$i
+##  sudo -u $ADMIN_USERNAME scp /tmp/hosts.$$ $ADMIN_USERNAME@$worker:/tmp/hosts >> /tmp/azuredeploy.log.$$ 2>&1
+##  sudo -u $ADMIN_USERNAME scp torque-package-mom-linux-x86_64.sh $ADMIN_USERNAME@$worker:/tmp/. >> /tmp/azuredeploy.log.$$ 2>&1
+##  sudo -u $ADMIN_USERNAME ssh -tt $worker "echo '$ADMIN_PASSWORD' | sudo -kS sh -c 'cat /tmp/hosts>>/etc/hosts'"
+##  sudo -u $ADMIN_USERNAME ssh -tt $worker "echo '$ADMIN_PASSWORD' | sudo -kS /tmp/torque-package-mom-linux-x86_64.sh --install"
+##  sudo -u $ADMIN_USERNAME ssh -tt $worker "echo '$ADMIN_PASSWORD' | sudo -kS /usr/local/sbin/pbs_mom"
+##  echo $worker >> /var/spool/torque/server_priv/nodes
+##  i=`expr $i + 1`
+##done
+
+# Restart pbs_server
+service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+fi
+}
+
 install_pkgs_all
 setup_shares
 setup_hpc_user
 install_munge
 setup_env
+install_torque
 #install_slurm
 #install_easybuild
-#install_go()
+#install_go
 #reboot
+
