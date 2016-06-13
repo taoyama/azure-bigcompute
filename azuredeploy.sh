@@ -642,7 +642,7 @@ if is_master; then
 # Prep packages
 # Download the source package
 cd /tmp >> /tmp/azure_pbsdeploy.log.$$ 2>&1
-wget http://www.adaptivecomputing.com/index.php?wpfb_dl=2936 -O torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+wget http://www.adaptivecomputing.com/index.php?wpfb_dl=3032 -O torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 tar xzvf torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 cd torque-5.1.1* >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 
