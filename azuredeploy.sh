@@ -343,7 +343,7 @@ install_packages_kernel_headers()
 {
 	enable_kernel_update
 	
-	yum -y install icu patch ruby ruby-devel rubygems  gcc gcc-c++ gcc.x86_64 gcc-c++.x86_64 glibc-devel.i686 glibc-devel.x86_64  libtool openssl-devel libxml2-devel boost-devel
+	yum -y install icu patch ruby ruby-devel rubygems  gcc gcc-c++ gcc.x86_64 gcc-c++.x86_64 glibc-devel.i686 glibc-devel.x86_64  libtool  libxml2-devel boost-devel openldap-clients nss-pam-ldapd
 	
 	disable_kernel_update
 }
