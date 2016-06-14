@@ -78,14 +78,14 @@
       "type": "string",
       "defaultValue": "munge",
       "metadata": {
-        "description": "The MUNGE group and user ."
+        "description": "The MUNGE user ."
       }
     },
     "SLURM_USER_GROUP": {
       "type": "string",
       "defaultValue": "slurm",
       "metadata": {
-        "description": "The SLURM group and user ."
+        "description": "The SLURM user ."
       }
     },
     "headNodeSize": {
