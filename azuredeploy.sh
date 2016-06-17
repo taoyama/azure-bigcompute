@@ -688,6 +688,25 @@ service pbs_mom start >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 
 # Start pbs_sched
 env "PATH=$PATH" pbs_sched >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+# Push packages to compute nodes
+c=0
+rm -rf /tmp/hosts
+echo "$MASTER_HOSTNAME" > /tmp/host
+while [ $c -lt $WORKER_COUNT ]
+do
+        printf "\n$WORKER_HOSTNAME_PREFIX$c">> /tmp/host
+        workerhost=$WORKER_HOSTNAME_PREFIX$c
+        sudo -u $HPC_USER ssh -tt $workerhost| sudo -kS /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh --install
+        service pbs_mom stop
+        sudo -u $HPC_USER ssh -tt $workerhost| sudo -kS /usr/local/sbin/pbs_mom
+        service pbs_mom start
+        echo $workerhost >> /var/spool/torque/server_priv/nodes
+         echo $workerhost
+        (( c++ ))
+done
+sed '2d' /tmp/host > /tmp/hosts
+rm -rf /tmp/host
+
 
 # Push packages to compute nodes
 ## i=0
