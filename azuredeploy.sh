@@ -744,15 +744,22 @@ export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 export PATH=${CUDA_HOME}/bin:${PATH}
 disable_kernel_update
 }
+install_vnc_head()
+{
+    if is_master; then
+yum -y groupinstall 'Server with GUI' 'GNOME Desktop' && systemctl enable graphical.target && yum install -y vnc-server
+    fi
+}
 
 install_pkgs_all
 setup_shares
 setup_hpc_user
 setup_env
-#install_torque
 install_cuda75
 install_munge
 install_slurm
+install_vnc_head
+#install_torque
 #install_easybuild
 #install_go
 #reboot
