@@ -726,7 +726,22 @@ rm -rf /tmp/host
 service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 fi
 }
-
+install_cuda75()
+{
+enable_kernel_update
+yum-config-manager --add-repo http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64
+NVIDIA_GPGKEY_SUM=bd841d59a27a406e513db7d405550894188a4c1cd96bf8aa4f82f1b39e0b5c1c
+curl -fsSL http://developer.download.nvidia.com/compute/cuda/repos/GPGKEY \
+ | sed '/^Version/d' > /etc/pki/rpm-gpg/RPM-GPG-KEY-NVIDIA
+echo "$NVIDIA_GPGKEY_SUM /etc/pki/rpm-gpg/RPM-GPG-KEY-NVIDIA" | sha256sum -c --strict -
+yum clean all
+rpm --import http://developer.download.nvidia.com/compute/cuda/repos/GPGKEY
+yum install -y cuda nvcc
+export CUDA_HOME=/usr/local/cuda-7.5
+export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
+export PATH=${CUDA_HOME}/bin:${PATH}
+disable_kernel_update
+}
 install_pkgs_all
 setup_shares
 setup_hpc_user
@@ -734,6 +749,7 @@ install_munge
 setup_env
 install_torque
 install_slurm
+install_cuda75
 #install_easybuild
 #install_go
 #reboot
