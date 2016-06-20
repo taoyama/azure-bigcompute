@@ -605,11 +605,13 @@ install_slurm()
         mv slurmctld.service /usr/lib/systemd/system
         systemctl daemon-reload
         systemctl enable slurmctld
+        systemctl start slurmctld
     else
         wget $TEMPLATE_BASE_URL/slurmd.service
         mv slurmd.service /usr/lib/systemd/system
         systemctl daemon-reload
         systemctl enable slurmd
+        systemctl start slurmd
     fi
 
     cd ..
@@ -742,14 +744,15 @@ export LD_LIBRARY_PATH=${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}
 export PATH=${CUDA_HOME}/bin:${PATH}
 disable_kernel_update
 }
+
 install_pkgs_all
 setup_shares
 setup_hpc_user
-install_munge
 setup_env
-install_torque
-install_slurm
+#install_torque
 install_cuda75
+install_munge
+install_slurm
 #install_easybuild
 #install_go
 #reboot
