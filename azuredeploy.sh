@@ -14,7 +14,6 @@ if [ $# != 9 ]; then
 fi
 
 
-# Set user args
 #MASTER_HOSTNAME=$1
 
 #WORKER_HOSTNAME_PREFIX=$2
