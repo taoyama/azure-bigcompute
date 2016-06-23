@@ -314,8 +314,12 @@ install_docker_apps()
 
     # Setting tomcat
     #docker run -it -dp 80:8080 -p 8009:8009  rossbachp/apache-tomcat8
-    docker run -dti --restart=always --name=azure-cli microsoft/azure-cli 
+    
+    docker run -dti --restart=always --name=azure-cli microsoft/azure-cli
+    if is_master; then
     docker run -it -d --restart=always -p 8080:8080 rancher/server
+    fi
+    # Ansible automation for Rancher to be put in
 }
 
 install_ib()
