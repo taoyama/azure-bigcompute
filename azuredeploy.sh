@@ -753,6 +753,17 @@ install_vnc_head()
 yum -y groupinstall 'Server with GUI' 'GNOME Desktop' && systemctl enable graphical.target && yum install -y vnc-server
     fi
 }
+ 
+install_modules
+{
+yum install -y tcl tcl-devel
+# /usr/local/Modules/3.2.10/init/.modulespath needs to change
+wget http://sourceforge.net/projects/modules/files/latest/download?source=files -O modules-3.2.10.tar.gz
+tar -zxvf modules-3.2.10.tar.gz
+cd modules-3.2.10 
+./configure --with-module-path=/usr/local/Modules/contents && make && make install
+
+}
 
 install_pkgs_all
 setup_shares
@@ -761,7 +772,7 @@ setup_env
 install_cuda75
 install_munge
 install_slurm
-install_vnc_head
+#install_vnc_head
 #install_torque
 #install_easybuild
 #install_go
