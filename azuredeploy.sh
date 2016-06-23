@@ -763,6 +763,32 @@ tar -zxvf modules-3.2.10.tar.gz
 cd modules-3.2.10 
 ./configure --with-module-path=/usr/local/Modules/contents && make && make install
 
+cat >> /etc/sysctl.conf <<EOF
+kernel.shmmni = 4096
+kernel.sem = 250 32000 100 128
+fs.file-max = 65536
+net.ipv4.ip_local_port_range = 1024 65000
+net.core.rmem_default=4194304
+net.core.wmem_default=262144
+net.core.rmem_max=4194304
+net.core.wmem_max=262144
+EOF
+/sbin/sysctl -p
+
+cat >> /etc/profile.d/modules.sh <<EOF
+# system-wide profile.modules                                          #
+# Initialize modules for all sh-derivative shells                      #
+#----------------------------------------------------------------------#
+trap "" 1 2 3
+
+case "$0" in
+-bash|bash|*/bash) . /usr/local/Modules/3.2.10/init/bash ;;
+-ksh|ksh|*/ksh) . /usr/local/Modules/3.2.10/init/ksh ;;
+-zsh|zsh|*/zsh) . /usr/local/Modules/3.2.10/init/zsh ;;
+*) . /usr/local/Modules/3.2.10/init/sh ;; # sh and default for scripts esac
+esac
+trap - 1 2 3
+EOF
 }
 
 install_pkgs_all
@@ -770,6 +796,7 @@ setup_shares
 setup_hpc_user
 setup_env
 install_cuda75
+install_modules
 install_munge
 install_slurm
 #install_vnc_head
