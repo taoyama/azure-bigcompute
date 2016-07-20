@@ -1,7 +1,18 @@
  [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
+Please see the LICENSE file for licensing information.
+
+This project has adopted the [Microsoft Open Source Code of
+Conduct](https://opensource.microsoft.com/codeofconduct/). For more information
+see the [Code of Conduct
+FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
+[opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional
+questions or comments.
+
+This is inspired by Christian Smith's repo https://github.com/smith1511/hpc
+
 
 # CentOS-HPC
-Based on https://github.com/smith1511/hpc with additions of CentOS-HPC Image offers (fixed kernels ), dynamic disk stripping ssh password, docker enabling, docker cross compiling. Fixed Kernel Swiss Knife Pureplay Azure HPC Cluster with Direct RDMA and Intel MPI
+ with additions of CentOS-HPC Image offers (fixed kernels ), dynamic disk stripping ssh password, docker enabling, docker cross compiling. Fixed Kernel Swiss Knife Pureplay Azure HPC Cluster with Direct RDMA and Intel MPI
 * Status: __WIP__
 
    *  General Cleanup
