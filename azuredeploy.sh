@@ -796,7 +796,7 @@ setup_shares
 setup_hpc_user
 setup_env
 install_cuda75
-install_modules
+#install_modules
 install_munge
 install_slurm
 #install_vnc_head
