@@ -23,14 +23,25 @@
         "openlogic"
       ],
       "metadata": {
-        "description": "openlogic is the CentOS Distributor in Azure Market Place"
+        "description": "openlogic/Canonical is the CentOS/Ubuntu Distributor in Azure Market Place"
       }
     },
     "imageOffer": {
       "type": "string",
-      "defaultValue": "CentOS-HPC",
+      "defaultValue": "UbuntuServer",
+      "allowedValues": [
+        "CentOS-HPC",
+        "UbuntuServer"
+      ],
       "metadata": {
-        "description": "New CentOS-HPC with pre-installed Intel MPI and mlx4 drivers on Infiniband Available"
+        "description": "New CentOS-HPC/UbuntuServer with pre-installed Intel MPI and mlx4 drivers on Infiniband Available"
+      }
+    },
+    "frontEndNSGName": {
+      "type": "string",
+      "defaultValue": "defaultnsg",
+      "metadata": {
+        "description": "Default NSG with only port 22 open and default rules on."
       }
     },
     "imageSku": {
@@ -228,17 +239,50 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[variables('networkSettings').addressPrefix]"
+            "[variables('networkSettings').addressPrefix]",
+            "networkSecurityGroup",
+            :
+            {
+              "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndNSGName'))]"
+            }
+          ]
+        },
+        "apiVersion": "2015-06-15",
+        "location": "[resourceGroup().location]",
+        "name": "[parameters('frontEndNSGName')]",
+        "properties": {
+          "securityRules": [
+            {
+              "name": "web-rule",
+              "properties": {
+                "description": "Allow ssh",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "22",
+                "sourceAddressPrefix": "Internet",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 100,
+                "direction": "Inbound"
+              }
+            }
           ]
         },
         "subnets": [
           {
             "name": "[variables('networkSettings').subnet.dse.name]",
             "properties": {
-              "addressPrefix": "[variables('networkSettings').subnet.dse.prefix]"
+              "addressPrefix": "[variables('networkSettings').subnet.dse.prefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndNSGName'))]"
+              }
             }
           }
-        ]
+        ],
+        "tags": {
+          "displayName": "NSG - Front End"
+        },
+        "type": "Microsoft.Network/networkSecurityGroups"
       }
     },
     {
