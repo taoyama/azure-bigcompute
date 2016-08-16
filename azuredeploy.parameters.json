@@ -11,6 +11,12 @@
         "description": "The admin user to Logon to the HPC master and workers"
       }
     },
+    "frontEndNSGName": {
+      "value": "defaultnsg",
+      "metadata": {
+        "description": "Default NSG with only port 22 open and default rules on."
+      }
+    },
     "sshPublicKey": {
       "value": "GEN-SSH-PUB-KEY"
     },
