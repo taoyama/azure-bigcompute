@@ -241,46 +241,17 @@
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[variables('networkSettings').addressPrefix]",
-            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndNSGName'))]"
-          ]
-        },
-        "apiVersion": "2015-06-15",
-        "location": "[resourceGroup().location]",
-        "name": "[parameters('frontEndNSGName')]",
-        "properties": {
-          "securityRules": [
-            {
-              "name": "ssh-rule",
-              "properties": {
-                "description": "Allow ssh",
-                "protocol": "Tcp",
-                "sourcePortRange": "*",
-                "destinationPortRange": "22",
-                "sourceAddressPrefix": "*",
-                "destinationAddressPrefix": "*",
-                "access": "Allow",
-                "priority": 100,
-                "direction": "Inbound"
-              }
-            }
+            "[variables('networkSettings').addressPrefix]"
           ]
         },
         "subnets": [
           {
             "name": "[variables('networkSettings').subnet.dse.name]",
             "properties": {
-              "addressPrefix": "[variables('networkSettings').subnet.dse.prefix]",
-              "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndNSGName'))]"
-              }
+              "addressPrefix": "[variables('networkSettings').subnet.dse.prefix]"
             }
           }
-        ],
-        "tags": {
-          "displayName": "NSG - Front End"
-        },
-        "type": "Microsoft.Network/networkSecurityGroups"
+        ]
       }
     },
     {
