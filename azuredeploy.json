@@ -17,7 +17,11 @@
     },
     "imagePublisher": {
       "type": "string",
-      "defaultValue": "openlogic",
+      "defaultValue": "Canonical",
+      "allowedValues": [
+        "Canonical",
+        "openlogic"
+      ],
       "metadata": {
         "description": "openlogic is the CentOS Distributor in Azure Market Place"
       }
@@ -31,10 +35,11 @@
     },
     "imageSku": {
       "type": "string",
-      "defaultValue": "7.1",
+      "defaultValue": "16.04.0-LTS",
       "allowedValues": [
         "6.5",
-        "7.1"
+        "7.1",
+        "16.04.0-LTS"
       ],
       "metadata": {
         "description": "OpenLogic CentOS-HPC Sku to use"
