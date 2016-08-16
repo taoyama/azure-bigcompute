@@ -45,10 +45,10 @@
       "value": "slurm"
     },
     "headNodeSize": {
-      "value": "Standard_A8"
+      "value": "Standard_NC12"
     },
     "workerNodeSize": {
-      "value": "Standard_A9"
+      "value": "Standard_NC24"
     },
     "workerNodeCount": {
       "value": 2,
