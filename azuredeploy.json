@@ -242,11 +242,7 @@
         "addressSpace": {
           "addressPrefixes": [
             "[variables('networkSettings').addressPrefix]",
-            "networkSecurityGroup",
-            :
-            {
-              "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndNSGName'))]"
-            }
+            "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('frontEndNSGName'))]"
           ]
         },
         "apiVersion": "2015-06-15",
