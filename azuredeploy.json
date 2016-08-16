@@ -251,13 +251,13 @@
         "properties": {
           "securityRules": [
             {
-              "name": "web-rule",
+              "name": "ssh-rule",
               "properties": {
                 "description": "Allow ssh",
                 "protocol": "Tcp",
                 "sourcePortRange": "*",
                 "destinationPortRange": "22",
-                "sourceAddressPrefix": "Internet",
+                "sourceAddressPrefix": "*",
                 "destinationAddressPrefix": "*",
                 "access": "Allow",
                 "priority": 100,
