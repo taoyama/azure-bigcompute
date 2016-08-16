@@ -106,8 +106,9 @@
     },
     "headNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_A8",
+      "defaultValue": "Standard_NC12",
       "allowedValues": [
+        "Standard_NC12",
         "Standard_A8",
         "Standard_A9"
       ],
@@ -117,8 +118,9 @@
     },
     "workerNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_A9",
+      "defaultValue": "Standard_NC24",
       "allowedValues": [
+        "Standard_NC24",
         "Standard_A8",
         "Standard_A9"
       ],
