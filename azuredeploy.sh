@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#should work for all skus
 set -x
 #set -xeuo pipefail
 
