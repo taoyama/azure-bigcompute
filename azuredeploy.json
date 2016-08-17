@@ -37,13 +37,6 @@
         "description": "New CentOS-HPC/UbuntuServer with pre-installed Intel MPI and mlx4 drivers on Infiniband Available"
       }
     },
-    "frontEndNSGName": {
-      "type": "string",
-      "defaultValue": "defaultnsg",
-      "metadata": {
-        "description": "Default NSG with only port 22 open and default rules on."
-      }
-    },
     "imageSku": {
       "type": "string",
       "defaultValue": "16.04.0-LTS",
