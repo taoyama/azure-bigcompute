@@ -14,44 +14,6 @@ if [ $# != 9 ]; then
 fi
 
 
-#MASTER_HOSTNAME=$1
-
-#WORKER_HOSTNAME_PREFIX=$2
-#WORKER_COUNT=$3
-#LAST_WORKER_INDEX=$(($WORKER_COUNT - 1))
-
-# Shares
-#MNT_POINT="$5"
-#SHARE_HOME=$MNT_POINT/home
-#SHARE_DATA=$MNT_POINT/data
-
-# Munged
-#MUNGE_VERSION="$6"
-#MUNGE_USER="$7"
-#MUNGE_GROUP=$MUNGE_USER
-
-
-# SLURM
-#SLURM_USER="$8"
-#SLURM_UID=6006
-#SLURM_GROUP=$SLURM_USER
-#SLURM_GID=6006
-#SLURM_VERSION="$9"
-#SLURM_CONF_DIR=$SHARE_DATA/conf
-
-# Hpc User
-#HPC_USER="$4"
-#HPC_UID=7007
-#HPC_GROUP=$HPC_USER
-#HPC_GID=7007
-
-#numberofDisks=$10
-#dockerVer=$11
-#dockerComposeVer=$12
-#userName=$13
-#skuName=$14
-#TEMPLATE_BASE_URL=$15
-
 # Set user args
 MASTER_HOSTNAME=$( echo "$1" |cut -d\: -f1 )
 WORKER_HOSTNAME_PREFIX=$( echo "$1" |cut -d\: -f2 )
@@ -90,46 +52,6 @@ userName=$( echo "$8" |cut -d\: -f2 )
 skuName=$( echo "$8" |cut -d\: -f1 )
 TEMPLATE_BASE_URL=$9
 
-
-
-# Set user args
-#MASTER_HOSTNAME=$1
-#WORKER_HOSTNAME_PREFIX=$2
-#WORKER_COUNT=$3
-#LAST_WORKER_INDEX=$(($WORKER_COUNT - 1))
-
-# Shares
-#MNT_POINT="$5"
-#SHARE_HOME=$MNT_POINT/home
-#SHARE_DATA=$MNT_POINT/data
-
-# Munged
-#MUNGE_VERSION=$6
-#MUNGE_USER=$7
-#MUNGE_GROUP=$MUNGE_USER
-
-
-# SLURM
-#SLURM_USER=$9
-#SLURM_UID=6006
-#SLURM_GROUP=$SLURM_USER
-#SLURM_GID=6006
-#SLURM_VERSION=$8
-#SLURM_CONF_DIR=$SHARE_DATA/conf
-
-# Hpc User
-#HPC_USER="$4"
-#HPC_UID=7007
-#HPC_GROUP=$HPC_USER
-#HPC_GID=7007
-
-#numberofDisks=$10
-#dockerVer=$11
-#dockerComposeVer=$12
-#dockerMachineVer=$13
-#userName=$14
-#skuName=$15
-#TEMPLATE_BASE_URL=$16
 
 # Returns 0 if this node is the master node.
 #
@@ -415,9 +337,17 @@ setup_shares()
 #
 setup_hpc_user()
 {
-    # disable selinux
-    sed -i 's/enforcing/disabled/g' /etc/selinux/config
-    setenforce permissive
+
+	if [ "$skuName" == "16.04.0-LTS" ] ; then
+		apt-get install -y selinux-utils
+
+	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+		    # disable selinux
+		    sed -i 's/enforcing/disabled/g' /etc/selinux/config
+		    setenforce permissive
+
+	fi
+
     
     groupadd -g $HPC_GID $HPC_GROUP
 
@@ -790,18 +720,23 @@ esac
 trap - 1 2 3
 EOF
 }
+	if [ "$skuName" == "16.04.0-LTS" ] ; then
+		setup_shares
+		setup_hpc_user
 
-install_pkgs_all
-setup_shares
-setup_hpc_user
-setup_env
-install_cuda75
-#install_modules
-install_munge
-install_slurm
-#install_vnc_head
-#install_torque
-#install_easybuild
-#install_go
-#reboot
+	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+		install_pkgs_all
+		setup_shares
+		setup_hpc_user
+		setup_env
+		install_cuda75
+		#install_modules
+		install_munge
+		install_slurm
+		#install_vnc_head
+		#install_torque
+		#install_easybuild
+		#install_go
+		#reboot
 
+	fi
