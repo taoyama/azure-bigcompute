@@ -684,7 +684,7 @@ yum -y groupinstall 'Server with GUI' 'GNOME Desktop' && systemctl enable graphi
     fi
 }
  
-install_modules
+install_modules()
 {
 yum install -y tcl tcl-devel
 # /usr/local/Modules/3.2.10/init/.modulespath needs to change
