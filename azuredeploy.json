@@ -186,7 +186,7 @@
     },
     "numDataDisks": {
       "type": "string",
-     "defaultValue": "16",
+      "defaultValue": "16",
       "allowedValues": [
         "1",
         "2",
