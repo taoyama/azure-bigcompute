@@ -230,7 +230,7 @@ install_docker_ubuntu()
 	echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list	
 	apt-get update -y
 	apt-cache -y policy docker-engine
-	apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+	#apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 	apt-get update -y 
 	apt-get install -y --allow-unauthenticated docker-engine
 	groupadd docker
