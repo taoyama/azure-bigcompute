@@ -63,7 +63,7 @@
       "value": "0.7.0"
     },
     "dataDiskSize": {
-      "value": 3125,
+      "value": 1022,
         "metadata": {
         "description": "The  Data Disk Size of each Disk to be created"
       }
