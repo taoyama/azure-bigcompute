@@ -223,7 +223,24 @@ install_docker()
     export PATH=$PATH:/usr/local/bin/
     systemctl restart docker
 }
-
+install_docker_ubuntu()
+{
+	apt-get install -y apt-transport-https ca-certificates
+	apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+	echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list	
+	apt-get update -y
+	apt-cache -y policy docker-engine
+	apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+	apt-get update -y 
+	apt-get install -y --allow-unauthenticated docker-engine
+	groupadd docker
+	usermod -aG docker azureuser
+	service docker restart
+	/etc/init.d/apparmor stop 
+	/etc/init.d/apparmor teardown 
+	update-rc.d -f apparmor remove
+	apt-get -y remove apparmor
+}
 
 install_azure_cli()
 {
@@ -239,9 +256,9 @@ install_docker_apps()
     #docker run -it -dp 80:8080 -p 8009:8009  rossbachp/apache-tomcat8
     
     docker run -dti --restart=always --name=azure-cli microsoft/azure-cli
-    if is_master; then
-    docker run -it -d --restart=always -p 8080:8080 rancher/server
-    fi
+    #if is_master; then
+    #docker run -it -d --restart=always -p 8080:8080 rancher/server
+    #fi
     # Ansible automation for Rancher to be put in
 }
 
@@ -262,6 +279,12 @@ install_packages()
     ksh compat-libstdc++-33 libaio.i686 libaio.x86_64 libaio-devel.i686 libaio-devel.x86_64 \
     libgcc.i686 libgcc.x86_64 libstdc++.i686 libstdc++.x86_64 libstdc++-devel.i686 libstdc++-devel.x86_64 libXi.i686 libXi.x86_64
     #yum -y install icu patch ruby ruby-devel rubygems  gcc gcc-c++ gcc.x86_64 gcc-c++.x86_64 glibc-devel.i686 glibc-devel.x86_64
+}
+
+install_packages_ubuntu()
+{
+	apt-get upgrade -y 
+	apt-get install -y zlib1g zlib1g-dev  bzip2 libbz2-dev libssl1.0.0  libssl-doc libssl1.0.0-dbg libsslcommon2 libsslcommon2-dev libssl-dev  nfs-common rpcbind git zip libicu55 libicu-dev icu-devtools unzip mdadm wget gsl-bin libgsl2  bc ruby-dev gcc make autoconf bison build-essential libyaml-dev libreadline6-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libpam0g-dev libxtst6 libxtst6-* libxtst-* libxext6 libxext6-* libxext-*
 }
 # Installs all required packages.
 #
@@ -313,11 +336,19 @@ setup_shares()
 	setup_dynamicdata_disks $SHARE_DATA
         echo "$SHARE_HOME    *(rw,async)" >> /etc/exports
         echo "$SHARE_DATA    *(rw,async)" >> /etc/exports
-
-        systemctl enable rpcbind || echo "Already enabled"
-        systemctl enable nfs-server || echo "Already enabled"
-        systemctl start rpcbind || echo "Already enabled"
-        systemctl start nfs-server || echo "Already enabled"
+	if [ "$skuName" == "16.04.0-LTS" ] ; then
+	         apt-get install -y nfs-kernel-server
+		/etc/init.d/apparmor stop 
+		/etc/init.d/apparmor teardown 
+		update-rc.d -f apparmor remove
+		apt-get -y remove apparmor
+                systemctl start rpcbind || echo "Already enabled"
+                systemctl start nfs-server || echo "Already enabled"
+                systemctl start nfs-kernel-server.service
+        else
+                systemctl start rpcbind || echo "Already enabled"
+                systemctl start nfs-server || echo "Already enabled
+         fi
     else
         echo "$MASTER_HOSTNAME:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
         echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
@@ -725,9 +756,10 @@ trap - 1 2 3
 EOF
 }
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
+		install_packages_ubuntu
 		setup_shares
 		setup_hpc_user
-
+                install_docker_ubuntu
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		install_pkgs_all
 		setup_shares
