@@ -45,7 +45,7 @@
       "value": "Standard_NC24"
     },
     "workerNodeCount": {
-      "value": 2,
+      "value": 8,
         "metadata": {
         "description": "The number of worker nodes."
       }
@@ -63,13 +63,13 @@
       "value": "0.7.0"
     },
     "dataDiskSize": {
-      "value": 128,
+      "value": 3125,
         "metadata": {
         "description": "The  Data Disk Size of each Disk to be created"
       }
     },
         "numDataDisks": {
-      "type": "string",
+      "value": "16",
       "allowedValues": [
         "1",
         "2",
