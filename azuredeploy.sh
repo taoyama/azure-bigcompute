@@ -234,8 +234,7 @@ install_docker_ubuntu()
 	apt-get update -y 
 	apt-get install -y --allow-unauthenticated docker-engine
 	groupadd docker
-	usermod -aG docker azureuser
-	service docker restart
+	usermod -aG docker $userName
 	/etc/init.d/apparmor stop 
 	/etc/init.d/apparmor teardown 
 	update-rc.d -f apparmor remove
