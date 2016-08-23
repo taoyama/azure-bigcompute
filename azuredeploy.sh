@@ -230,9 +230,9 @@ install_docker_ubuntu()
 	echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list	
 	apt-get update -y
 	apt-cache -y policy docker-engine
-	#apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+	apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 	apt-get update -y 
-	apt-get install -y --allow-unauthenticated docker-engine
+	DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated docker-engine
 	groupadd docker
 	usermod -aG docker $userName
 	/etc/init.d/apparmor stop 
@@ -240,7 +240,10 @@ install_docker_ubuntu()
 	update-rc.d -f apparmor remove
 	apt-get -y remove apparmor
 }
-
+install_cuda_ubuntu()
+{
+	DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-361
+}
 install_azure_cli()
 {
     yum install -y nodejs
@@ -332,11 +335,13 @@ setup_shares()
 
     if is_master; then
         #setup_data_disks $SHARE_DATA
-	setup_dynamicdata_disks $SHARE_DATA
         echo "$SHARE_HOME    *(rw,async)" >> /etc/exports
         echo "$SHARE_DATA    *(rw,async)" >> /etc/exports
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
-	         #apt-get install -y nfs-kernel-server
+	         DEBIAN_FRONTEND=noninteractive apt-get -y \
+		  -o DPkg::Options::=--force-confdef \
+		 -o DPkg::Options::=--force-confold \
+    		install nfs-kernel-server
 		/etc/init.d/apparmor stop 
 		/etc/init.d/apparmor teardown 
 		update-rc.d -f apparmor remove
@@ -348,6 +353,7 @@ setup_shares()
                 systemctl start rpcbind || echo "Already enabled"
                 systemctl start nfs-server || echo "Already enabled"
          fi
+        setup_dynamicdata_disks $SHARE_DATA
     else
         echo "$MASTER_HOSTNAME:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
         echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
@@ -759,6 +765,8 @@ EOF
 		setup_shares
 		setup_hpc_user
                 install_docker_ubuntu
+                install_docker_apps
+                install_cuda_ubuntu
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		install_pkgs_all
 		setup_shares
