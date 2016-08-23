@@ -240,7 +240,7 @@ install_docker_ubuntu()
 	update-rc.d -f apparmor remove
 	apt-get -y remove apparmor
 }
-install_cuda_ubuntu()
+install_nvdia_ubuntu()
 {
 	DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-361
 }
@@ -766,7 +766,7 @@ EOF
 		setup_hpc_user
                 install_docker_ubuntu
                 install_docker_apps
-                install_cuda_ubuntu
+                install_nvdia_ubuntu
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		install_pkgs_all
 		setup_shares
