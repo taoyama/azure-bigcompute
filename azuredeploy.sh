@@ -181,7 +181,8 @@ done
 set_time()
 {
     mv /etc/localtime /etc/localtime.bak
-    ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+    #ln -s /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+    /usr/share/zoneinfo/US/Central /etc/localtime
 }
 
 
