@@ -165,7 +165,7 @@
     },
     "dataDiskSize": {
       "type": "int",
-      "defaultValue": 3125,
+      "defaultValue": 1022,
       "metadata": {
         "description": "The size in GB of each data disk that is attached to the VM.  A MDADM RAID0  is created with all data disks auto-mounted,  that is dataDiskSize * dataDiskCount in size n the Storage."
       }
