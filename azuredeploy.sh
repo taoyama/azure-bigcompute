@@ -386,7 +386,7 @@ setup_hpc_user()
     groupadd -g $HPC_GID $HPC_GROUP
 
     # Don't require password for HPC user sudo
-    echo "$HPC_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    echo '$HPC_USER ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
     
     # Disable tty requirement for sudo
     sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
