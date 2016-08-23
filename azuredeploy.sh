@@ -346,7 +346,7 @@ setup_shares()
                 systemctl start nfs-kernel-server.service
         else
                 systemctl start rpcbind || echo "Already enabled"
-                systemctl start nfs-server || echo "Already enabled
+                systemctl start nfs-server || echo "Already enabled"
          fi
     else
         echo "$MASTER_HOSTNAME:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
