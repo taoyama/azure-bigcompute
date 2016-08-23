@@ -336,7 +336,7 @@ setup_shares()
         echo "$SHARE_HOME    *(rw,async)" >> /etc/exports
         echo "$SHARE_DATA    *(rw,async)" >> /etc/exports
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
-	         apt-get install -y nfs-kernel-server
+	         #apt-get install -y nfs-kernel-server
 		/etc/init.d/apparmor stop 
 		/etc/init.d/apparmor teardown 
 		update-rc.d -f apparmor remove
