@@ -339,7 +339,10 @@ setup_hpc_user()
 {
 
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
-		apt-get install -y selinux-utils
+		/etc/init.d/apparmor stop 
+		/etc/init.d/apparmor teardown 
+		update-rc.d -f apparmor remove
+		apt-get -y remove apparmor
 
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		    # disable selinux
