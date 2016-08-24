@@ -4,6 +4,7 @@
   "parameters": {
     "dnsLabelPrefix": {
       "type": "string",
+      "defaultValue": "shellazure",
       "metadata": {
         "description": "Unique public dns prefix where the  node will be exposed"
       }
