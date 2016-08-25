@@ -230,8 +230,8 @@ install_docker_ubuntu()
 	echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list	
 	apt-get update -y
 	apt-cache -y policy docker-engine
-	apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
-	apt-get update -y 
+	DEBIAN_FRONTEND=noninteractiv apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+	DEBIAN_FRONTEND=noninteractiv apt-get update -y 
 	DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated docker-engine
 	groupadd docker
 	usermod -aG docker $userName
@@ -242,7 +242,11 @@ install_docker_ubuntu()
 }
 install_nvdia_ubuntu()
 {
-	DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-361
+	#DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-361
+service lightdm stop 
+wget https://azuregpu.blob.core.windows.net/nv-drivers/NVIDIA-Linux-x86_64-361.45.09-grid.run
+chmod +x NVIDIA-Linux-x86_64-361.45.09-grid.run
+DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-361.45.09-grid.run  --silent
 }
 install_azure_cli()
 {
@@ -285,8 +289,14 @@ install_packages()
 
 install_packages_ubuntu()
 {
-	apt-get upgrade -y 
-	DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g zlib1g-dev  bzip2 libbz2-dev libssl1.0.0  libssl-doc libssl1.0.0-dbg libsslcommon2 libsslcommon2-dev libssl-dev  nfs-common rpcbind git zip libicu55 libicu-dev icu-devtools unzip mdadm wget gsl-bin libgsl2  bc ruby-dev gcc make autoconf bison build-essential libyaml-dev libreadline6-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libpam0g-dev libxtst6 libxtst6-* libxtst-* libxext6 libxext6-* libxext-*
+
+DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g zlib1g-dev  bzip2 libbz2-dev libssl1.0.0  libssl-doc libssl1.0.0-dbg libsslcommon2 libsslcommon2-dev libssl-dev  nfs-common rpcbind git zip libicu55 libicu-dev icu-devtools unzip mdadm wget gsl-bin libgsl2  bc ruby-dev gcc make autoconf bison build-essential libyaml-dev libreadline6-dev libncurses5 libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libpam0g-dev libxtst6 libxtst6-* libxtst-* libxext6 libxext6-* libxext-* git-core libelf-dev asciidoc binutils-dev fakeroot crash kexec-tools makedumpfile kernel-wedge
+
+DEBIAN_FRONTEND=noninteractive apt-get -y build-dep linux
+
+DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+DEBIAN_FRONTEND=noninteractive update-initramfs -u
 }
 # Installs all required packages.
 #
@@ -392,7 +402,7 @@ setup_hpc_user()
     groupadd -g $HPC_GID $HPC_GROUP
 
     # Don't require password for HPC user sudo
-    echo '$HPC_USER ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+    echo "$HPC_USER ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
     
     # Disable tty requirement for sudo
     sed -i 's/^Defaults[ ]*requiretty/# Defaults requiretty/g' /etc/sudoers
