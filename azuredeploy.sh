@@ -247,6 +247,7 @@ service lightdm stop
 wget https://azuregpu.blob.core.windows.net/nv-drivers/NVIDIA-Linux-x86_64-361.45.09-grid.run
 chmod +x NVIDIA-Linux-x86_64-361.45.09-grid.run
 DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-361.45.09-grid.run  --silent
+DEBIAN_FRONTEND=noninteractive update-initramfs -u
 }
 install_azure_cli()
 {
