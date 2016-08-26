@@ -14,8 +14,10 @@ This is inspired by Christian Smith's repo https://github.com/smith1511/hpc
 ## [GPU](http://gpu.azure.com/)
 Entry point is valid for the stated sku poresently only for a specific region. 
 gpu enablement is possible only on approval of the sku usage in the stated subscription (Private Preview)
-##	Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all 
+##	Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all
+
 ###	From azure-cli (dockerized) or single install azure-cli - Topology example 1
+
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
 -----------------------
 Then hit code in to https://aka.ms/devicelogin
