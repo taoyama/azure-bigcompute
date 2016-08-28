@@ -21,11 +21,10 @@ gpu enablement is possible only on approval of the sku usage in the stated subsc
 
 ###	From azure-cli (dockerized) or single install azure-cli - Topology example 1
 
-
+From azure-cli
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
------------------------
 Then hit code in to https://aka.ms/devicelogin
------------------------
+<code>azure config mode arm</code>
 
 Then hit 
 <code>
