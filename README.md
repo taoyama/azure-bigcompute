@@ -1,7 +1,6 @@
  [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
 #[Azure Big Compute: HPC](https://azure.microsoft.com/en-us/solutions/big-compute/)
 
-:toc:
 
 Please see the LICENSE file for licensing information.
 
