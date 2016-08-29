@@ -360,9 +360,14 @@ setup_shares()
                 systemctl start rpcbind || echo "Already enabled"
                 systemctl start nfs-server || echo "Already enabled"
                 systemctl start nfs-kernel-server.service
+                systemctl enable rpcbind || echo "Already enabled"
+                systemctl enable nfs-server || echo "Already enabled"
+                systemctl enable nfs-kernel-server.service
         else
                 systemctl start rpcbind || echo "Already enabled"
                 systemctl start nfs-server || echo "Already enabled"
+                systemctl enable rpcbind || echo "Already enabled"
+                systemctl enable nfs-server || echo "Already enabled"
          fi
         setup_dynamicdata_disks $SHARE_DATA
     else
