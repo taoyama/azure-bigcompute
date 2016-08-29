@@ -24,7 +24,7 @@ This is inspired by Christian Smith's repo https://github.com/smith1511/hpc
 
 ## [GPU](http://gpu.azure.com/)
 
-Entry point is valid for the stated sku poresently only for a specific region. 
+Entry point is valid for the stated sku presently only for a specific region. 
 gpu enablement is possible only on approval of the sku usage in the stated subscription (Private Preview)
 
 ##	Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all
