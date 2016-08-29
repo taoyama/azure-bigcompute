@@ -12,6 +12,14 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 questions or comments.
 
 This is inspired by Christian Smith's repo https://github.com/smith1511/hpc
+
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">
+   <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
+</a>
+
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">  
+<img src="http://armviz.io/visualizebutton.png"/> </a> 
+
 # Ubuntu 16.04.0-LTS - GPU N-Series 
 
 ## [GPU](http://gpu.azure.com/)
@@ -81,9 +89,7 @@ https://aka.ms/azurebigcompute
    *  dynamic modification of a user's environment via modulefiles (for using both Intel compilers and gcc)
    *  <a href="http://github.com/Microsoft/cntk" target="_blank">CNTK</a> 
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">
-   <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
-</a>
+
 
 * This creates configurable number of disks with configurable size for centos-hpc A8/A9 
 Creates a Cluster with configurable number of worker nodes each with prebuilt Intel MPI and Direct RDMA for each Head and corresponding compute Nodes.
