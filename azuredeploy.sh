@@ -102,8 +102,13 @@ EOF
     if [ -n "$createdPartitions" ]; then
         devices=`echo $createdPartitions | wc -w`
         mdadm --create /dev/md10 --level 0 --raid-devices $devices $createdPartitions
+        
         mkfs -t ext4 /dev/md10
+        if [ "$skuName" == "16.04.0-LTS" ] ; then
+        echo "/dev/md127 $mountPoint ext4 defaults,nofail 0 2" >> /etc/fstab
+        else
         echo "/dev/md10 $mountPoint ext4 defaults,nofail 0 2" >> /etc/fstab
+        fi
         mount /dev/md10
     fi
 }
@@ -291,7 +296,7 @@ install_packages()
 install_packages_ubuntu()
 {
 
-DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g zlib1g-dev  bzip2 libbz2-dev libssl1.0.0  libssl-doc libssl1.0.0-dbg libsslcommon2 libsslcommon2-dev libssl-dev  nfs-common rpcbind git zip libicu55 libicu-dev icu-devtools unzip mdadm wget gsl-bin libgsl2  bc ruby-dev gcc make autoconf bison build-essential libyaml-dev libreadline6-dev libncurses5 libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libpam0g-dev libxtst6 libxtst6-* libxtst-* libxext6 libxext6-* libxext-* git-core libelf-dev asciidoc binutils-dev fakeroot crash kexec-tools makedumpfile kernel-wedge
+DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g zlib1g-dev  bzip2 libbz2-dev libssl1.0.0  libssl-doc libssl1.0.0-dbg libsslcommon2 libsslcommon2-dev libssl-dev  nfs-common rpcbind git zip libicu55 libicu-dev icu-devtools unzip mdadm wget gsl-bin libgsl2  bc ruby-dev gcc make autoconf bison build-essential libyaml-dev libreadline6-dev libncurses5 libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libpam0g-dev libxtst6 libxtst6-* libxtst-* libxext6 libxext6-* libxext-* git-core libelf-dev asciidoc binutils-dev fakeroot crash kexec-tools makedumpfile kernel-wedge portmap
 
 DEBIAN_FRONTEND=noninteractive apt-get -y build-dep linux
 
@@ -371,15 +376,17 @@ setup_shares()
          fi
         setup_dynamicdata_disks $SHARE_DATA
     else
-        echo "$MASTER_HOSTNAME:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
-        echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
-        #echo "master:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
-        #echo "master:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
-        mount -a
-        #mount | grep "^master:$SHARE_HOME"
-        #mount | grep "^master:$SHARE_DATA"
-        mount | grep "^$MASTER_HOSTNAME:$SHARE_HOME"
-        mount | grep "^$MASTER_HOSTNAME:$SHARE_DATA"
+
+	        echo "$MASTER_HOSTNAME:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+	        echo "$MASTER_HOSTNAME:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+	        #echo "master:$SHARE_DATA $SHARE_DATA    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+	        #echo "master:$SHARE_HOME $SHARE_HOME    nfs4    rw,auto,_netdev 0 0" >> /etc/fstab
+	        mount -a
+	        #mount | grep "^master:$SHARE_HOME"
+	        #mount | grep "^master:$SHARE_DATA"
+	        mount | grep "^$MASTER_HOSTNAME:$SHARE_HOME"
+	        mount | grep "^$MASTER_HOSTNAME:$SHARE_DATA"
+
     fi
 }
 
