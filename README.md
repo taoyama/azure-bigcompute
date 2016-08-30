@@ -47,6 +47,8 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 Entry point is valid for the stated sku presently only for a specific region. 
 gpu enablement is possible only on approval of the sku usage in the stated subscription (Private Preview)
 
+NVDIA drivers are loaded from azuredeploy.sh for Ubuntu 16.04-LTS
+
 ##	Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all
 
 ###	From azure-cli (dockerized) or single install azure-cli - Topology example 1
@@ -55,7 +57,6 @@ From azure-cli
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
 
 Then hit code in to https://aka.ms/devicelogin
-<code>azure config mode arm</code>
 
 Then hit 
 <code>
@@ -77,6 +78,7 @@ From azure-cli
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
 
 Then hit code in to https://aka.ms/devicelogin
+
 <code>azure config mode arm</code>
 
 <code>azure group create tstgpupvtprev  "southcentralus" && azure group deployment create tstgpupvtprev tstgpupvtprev --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json -p "{\"dnsLabelPrefix\":{\"value\":\"tstgpupvtprev\"},\"adminUserName\":{\"value\":\"azuregpuuser\"},\"sshPublicKey\":{\"value\":\"<RSA Public key>\"},\"imagePublisher\":{\"value\":\"Canonical\"},\"imageOffer\":{\"value\":\"UbuntuServer\"},\"imageSku\":{\"value\":\"16.04.0-LTS\"},\"headNodeSize\":{\"value\":\"Standard_A8\"},\"workerNodeSize\":{\"value\":\"Standard_NC24\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"4\"}}"</code>
@@ -85,12 +87,15 @@ This provisions 1 A8 and 1 NC24
 
 ### Full customizable cluster from Portal via template (GPU and/or CentOS-HPC)
 
-https://aka.ms/azurebigcompute
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">
+   <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
+</a>
 
 ### Create a Jumpbox
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
 
 Then hit code in to https://aka.ms/devicelogin
+
 <code>azure config mode arm</code>
 
 <code>azure group create <my-resource-group> --location "<<location of jumpbox RG like southcentralus>>" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-vm-linux-dynamic-data-disks/azuredeploy.json</code>
