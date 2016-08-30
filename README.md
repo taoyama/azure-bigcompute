@@ -20,6 +20,26 @@ This is inspired by Christian Smith's repo https://github.com/smith1511/hpc
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">  
 <img src="http://armviz.io/visualizebutton.png"/> </a> 
 
+This project is hosted at:
+
+  * https://github.com/Azure/azure-bigcompute-hpcscripts
+
+For the latest version, to contribute, and for more information, please go through the README.md.
+
+To clone the current master (development) branch run:
+
+```
+git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
+```
+## Reporting bugs
+
+Please report bugs  by opening an issue in the [GitHub Issue Tracker][5]
+
+## Patches and pull requests
+
+Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the `git rebase` command to update your branch to the current master if necessary.
+
+
 # Ubuntu 16.04.0-LTS - GPU N-Series 
 
 ## [GPU](http://gpu.azure.com/)
