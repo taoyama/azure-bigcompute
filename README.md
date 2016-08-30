@@ -53,6 +53,7 @@ gpu enablement is possible only on approval of the sku usage in the stated subsc
 
 From azure-cli
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
+
 Then hit code in to https://aka.ms/devicelogin
 <code>azure config mode arm</code>
 
@@ -74,6 +75,7 @@ azure group create <my-resource-group like “ubuntunseriesrg”>  "southcentral
 
 From azure-cli
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
+
 Then hit code in to https://aka.ms/devicelogin
 <code>azure config mode arm</code>
 
@@ -86,8 +88,9 @@ This provisions 1 A8 and 1 NC24
 https://aka.ms/azurebigcompute
 
 ### Create a Jumpbox
-•	<code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
-•	Then hit code in to https://aka.ms/devicelogin
+<code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
+
+Then hit code in to https://aka.ms/devicelogin
 <code>azure config mode arm</code>
 
 <code>azure group create <my-resource-group> --location "<<location of jumpbox RG like southcentralus>>" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-vm-linux-dynamic-data-disks/azuredeploy.json</code>
