@@ -33,7 +33,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 ```
 ## Reporting bugs
 
-Please report bugs  by opening an issue in the [GitHub Issue Tracker][5]
+Please report bugs  by opening an issue in the [GitHub Issue Tracker](https://github.com/Azure/azure-bigcompute-hpcscripts/issues)
 
 ## Patches and pull requests
 
