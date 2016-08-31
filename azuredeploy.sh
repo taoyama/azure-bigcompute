@@ -783,6 +783,42 @@ esac
 trap - 1 2 3
 EOF
 }
+install_cuda8_ubuntu1604()
+{
+# workaround: CUDA 8.0 RC doesn't support gcc 5.4 without the following patch at the end
+export CUDA_DOWNLOAD_SUM=24278d78afed380b4328c1e2f917b31d70c3f4c8f297b642200e003311944c22 && export CUDA_PKG_VERSION=8.0.27-1 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/8.0/direct/cuda-repo-ubuntu1604-8-0-rc_8.0.27-1_amd64.deb && \
+    echo "$CUDA_DOWNLOAD_SUM  cuda-repo.deb" | sha256sum -c --strict - && \
+    dpkg -i cuda-repo.deb && \
+    rm cuda-repo.deb && \
+    apt-get update && apt-get install -y --no-install-recommends \
+        cuda-core-$CUDA_PKG_VERSION \
+        cuda-misc-headers-$CUDA_PKG_VERSION \
+        cuda-command-line-tools-$CUDA_PKG_VERSION \
+        cuda-nvrtc-dev-$CUDA_PKG_VERSION \
+        cuda-nvml-dev-$CUDA_PKG_VERSION \
+        cuda-nvgraph-dev-$CUDA_PKG_VERSION \
+        cuda-cusolver-dev-$CUDA_PKG_VERSION \
+        cuda-cublas-dev-$CUDA_PKG_VERSION \
+        cuda-cufft-dev-$CUDA_PKG_VERSION \
+        cuda-curand-dev-$CUDA_PKG_VERSION \
+        cuda-cusparse-dev-$CUDA_PKG_VERSION \
+        cuda-npp-dev-$CUDA_PKG_VERSION \
+        cuda-cudart-dev-$CUDA_PKG_VERSION \
+        cuda-driver-dev-$CUDA_PKG_VERSION && \
+    apt-get remove --purge -y cuda-repo-ubuntu1604-8-0-rc && \
+    rm -rf /var/lib/apt/lists/* && export PATCH_DOWNLOAD_SUM=05c465d509f92b41b8a0022abdbcbaeaa8f6a9d98dc03db1e0d8d2506e056efd && curl -o patch.deb -fsSL http://developer.download.nvidia.com/compute/cuda/8.0/direct/cuda-misc-headers-8-0_8.0.27.1-1_amd64.deb && \
+    echo "$PATCH_DOWNLOAD_SUM  patch.deb" | sha256sum -c --strict - && \
+    dpkg -i patch.deb && \
+    rm patch.deb && export LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LIBRARY_PATH}	
+}
+install_cudann5_ubuntu1604()
+{
+    export CUDNN_DOWNLOAD_SUM=a87cb2df2e5e7cc0a05e266734e679ee1a2fadad6f06af82a76ed81a23b102c8 && curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/cudnn-8.0-linux-x64-v5.1.tgz -O && \
+    echo "$CUDNN_DOWNLOAD_SUM  cudnn-8.0-linux-x64-v5.1.tgz" | sha256sum -c --strict - && \
+    tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local && \
+    rm cudnn-8.0-linux-x64-v5.1.tgz && \
+    ldconfig
+}
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
 		install_packages_ubuntu
 		setup_shares
@@ -790,6 +826,8 @@ EOF
                 install_docker_ubuntu
                 install_docker_apps
                 install_nvdia_ubuntu
+                install_cudann5_ubuntu1604
+                install_cuda8_ubuntu1604
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		install_pkgs_all
 		setup_shares
