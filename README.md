@@ -11,7 +11,7 @@ FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
 [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional
 questions or comments.
 
-This is inspired by Christian Smith's repo https://github.com/smith1511/hpc
+** This is inspired by [Christian Smith](https://github.com/smith1511)'s repo https://github.com/smith1511/hpc **
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">
    <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
@@ -61,15 +61,24 @@ Then hit code in to https://aka.ms/devicelogin
 Then hit 
 <code>
 azure config mode arm
+
 azure group create <my-resource-group>  "southcentralus" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json</code>
+
 (Template Defaults to 1 NC12 and 8  NC24 as workers and headnode has by default 16 TB of mounted 16 disks each of size 1022 GB. The whole 16TB is available to computes via default hpc user “hpc”. Nvdia driver is pre-installed)
 
 ###	From azure-cli (dockerized) or single install azure-cli - Topology example 1 (variation)
 
 From azure-cli if you shoot the following just changing values italicized, underlined and in bold. It will take all default values and create 1 NC12 and 8 NC24 with 16TB Headnode and default user “azureuser” and hpc user name of “hpc”. The DNS Name and ssh key are put in explicitly to-p parameters in cli. If the -p is not there you will be prompted for the DNS Name, SSH Key
 
+From azure-cli
+<code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
+
+Then hit code in to https://aka.ms/devicelogin
+
+Then hit 
 <code>
 azure config mode arm
+
 azure group create <my-resource-group like “ubuntunseriesrg”>  "southcentralus" && azure group deployment create <my-resource-group like “ubuntunseriesrg”>  < deployment name like “ubuntunseriesdep” > --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json -p "{\"dnsLabelPrefix\":{\"value\":\"<dns name like tstgpupvtprev>\"},\"sshPublicKey\":{\"value\":\"<ssh-rsa key>\"}}" </code>
 
 ###	From azure-cli (dockerized) or single install azure-cli - Topology example 2
@@ -79,9 +88,11 @@ From azure-cli
 
 Then hit code in to https://aka.ms/devicelogin
 
-<code>azure config mode arm</code>
+Then hit 
+<code>
+azure config mode arm
 
-<code>azure group create tstgpupvtprev  "southcentralus" && azure group deployment create tstgpupvtprev tstgpupvtprev --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json -p "{\"dnsLabelPrefix\":{\"value\":\"tstgpupvtprev\"},\"adminUserName\":{\"value\":\"azuregpuuser\"},\"sshPublicKey\":{\"value\":\"<RSA Public key>\"},\"imagePublisher\":{\"value\":\"Canonical\"},\"imageOffer\":{\"value\":\"UbuntuServer\"},\"imageSku\":{\"value\":\"16.04.0-LTS\"},\"headNodeSize\":{\"value\":\"Standard_A8\"},\"workerNodeSize\":{\"value\":\"Standard_NC24\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"4\"}}"</code>
+azure group create tstgpupvtprev  "southcentralus" && azure group deployment create tstgpupvtprev tstgpupvtprev --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json -p "{\"dnsLabelPrefix\":{\"value\":\"tstgpupvtprev\"},\"adminUserName\":{\"value\":\"azuregpuuser\"},\"sshPublicKey\":{\"value\":\"<RSA Public key>\"},\"imagePublisher\":{\"value\":\"Canonical\"},\"imageOffer\":{\"value\":\"UbuntuServer\"},\"imageSku\":{\"value\":\"16.04.0-LTS\"},\"headNodeSize\":{\"value\":\"Standard_A8\"},\"workerNodeSize\":{\"value\":\"Standard_NC24\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"4\"}}"</code>
 
 This provisions 1 A8 and 1 NC24
 
@@ -92,13 +103,16 @@ This provisions 1 A8 and 1 NC24
 </a>
 
 ### Create a Jumpbox
+From azure-cli
 <code>docker exec -ti azure-cli  bash -c "azure login && bash"</code>
 
 Then hit code in to https://aka.ms/devicelogin
 
-<code>azure config mode arm</code>
+Then hit 
+<code>
+azure config mode arm
 
-<code>azure group create <my-resource-group> --location "<<location of jumpbox RG like southcentralus>>" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-vm-linux-dynamic-data-disks/azuredeploy.json</code>
+azure group create <my-resource-group> --location "<<location of jumpbox RG like southcentralus>>" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-vm-linux-dynamic-data-disks/azuredeploy.json</code>
 
 
 # CentOS-HPC
