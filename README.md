@@ -2,7 +2,7 @@
 #[Azure Big Compute](https://azure.microsoft.com/en-us/solutions/big-compute/)
 
 
-Please see the LICENSE file for licensing information.
+Please see the [LICENSE file](https://github.com/Azure/azure-bigcompute-hpcscripts/blob/master/LICENSE) for licensing information.
 
 This project has adopted the [Microsoft Open Source Code of
 Conduct](https://opensource.microsoft.com/codeofconduct/). For more information
@@ -24,7 +24,7 @@ This project is hosted at:
 
   * https://github.com/Azure/azure-bigcompute-hpcscripts
 
-For the latest version, to contribute, and for more information, please go through the README.md.
+For the latest version, to contribute, and for more information, please go through [this README.md](https://github.com/Azure/azure-bigcompute-hpcscripts/blob/master/README.md).
 
 To clone the current master (development) branch run:
 
