@@ -47,7 +47,18 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 Entry point is valid for the stated sku presently only for a specific region. 
 gpu enablement is possible only on approval of the sku usage in the stated subscription (Private Preview)
 
-NVDIA drivers are loaded from azuredeploy.sh for Ubuntu 16.04-LTS
+NVDIA drivers are loaded from azuredeploy.sh for Ubuntu 16.04-LTS via the following
+<code>
+install_nvdia_ubuntu()
+{
+	#DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-361
+service lightdm stop 
+wget https://azuregpu.blob.core.windows.net/nv-drivers/NVIDIA-Linux-x86_64-361.45.09-grid.run
+chmod +x NVIDIA-Linux-x86_64-361.45.09-grid.run
+DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-361.45.09-grid.run  --silent
+DEBIAN_FRONTEND=noninteractive update-initramfs -u
+}
+</code>
 
 ##	Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all
 
