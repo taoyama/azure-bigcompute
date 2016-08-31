@@ -47,7 +47,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 Entry point is valid for the stated sku presently only for a specific region. 
 gpu enablement is possible only on approval of the sku usage in the stated subscription (Private Preview)
 
-NVDIA drivers are loaded from azuredeploy.sh for Ubuntu 16.04-LTS via the following
+NVDIA drivers are loaded from [azuredeploy.sh](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.sh) for Ubuntu 16.04-LTS via the following
 <code>
 install_nvdia_ubuntu()
 {
