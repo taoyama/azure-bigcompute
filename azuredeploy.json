@@ -145,21 +145,21 @@
     },
     "dockerVer": {
       "type": "string",
-      "defaultValue": "1.11",
+      "defaultValue": "1.12.1-1",
       "metadata": {
         "description": "The docker version **Only for CentOS-HPC 7.1 - kernels 3.10 and above **"
       }
     },
     "dockerComposeVer": {
       "type": "string",
-      "defaultValue": "1.7.1",
+      "defaultValue": "1.8.0",
       "metadata": {
         "description": "The Docker Compose Version **Only for CentOS-HPC 7.1-  kernels 3.10 and above **"
       }
     },
     "dockerMachineVer": {
       "type": "string",
-      "defaultValue": "0.7.0",
+      "defaultValue": "0.8.1",
       "metadata": {
         "description": "The docker-machine version **Only for CentOS-HPC 7.1- kernels 3.10 and above **"
       }
