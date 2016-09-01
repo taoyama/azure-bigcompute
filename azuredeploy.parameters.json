@@ -54,13 +54,13 @@
       "value": "Standard_LRS"
     },
     "dockerVer": {
-      "value": "1.11"
+      "value": "1.12.1-1"
     },
     "dockerComposeVer": {
-      "value": "1.7.1"
+      "value": "1.8.0"
     },
     "dockerMachineVer": {
-      "value": "0.7.0"
+      "value": "0.8.1"
     },
     "dataDiskSize": {
       "value": 1022,
