@@ -843,9 +843,9 @@ install_cudann5_ubuntu1604()
 		install_cuda75
 		#install_modules
 		install_munge
-		install_slurm
+		#install_slurm
 		#install_vnc_head
-		#install_torque
+		install_torque
 		#install_easybuild
 		#install_go
 		#reboot
