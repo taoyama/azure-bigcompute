@@ -840,7 +840,7 @@ install_cudann5_ubuntu1604()
 		setup_shares
 		setup_hpc_user
 		setup_env
-		install_cuda75
+		#install_cuda75
 		#install_modules
 		install_munge
 		#install_slurm
