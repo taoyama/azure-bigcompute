@@ -741,6 +741,7 @@ else
         su -c "scp $HPC_USER@$MASTER_HOSTNAME:/tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh /tmp" $HPC_USER	
 	su -c "sudo /tmp/torque-package-mom-linux-x86_64.sh --install" $HPC_USER	
         su -c "sudo /usr/local/sbin/pbs_mom" $HPC_USER
+        su -c "ssh $MASTER_HOSTNAME 'sudo service pbs_server restart'" $HPC_USER
 fi
 }
 install_cuda75()
