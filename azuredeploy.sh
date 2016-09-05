@@ -708,8 +708,8 @@ do
         #su -c "ssh compnode0 'sudo /usr/local/sbin/pbs_mom'" hpcuser      
         service pbs_mom stop
         su -c  "scp /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh $HPC_USER@$workerhost:/tmp" $HPC_USER	
-	su -c "ssh @$workerhost 'sudo /tmp/torque-package-mom-linux-x86_64.sh --install'" $HPC_USER	
-        su -c "ssh @$workerhost 'sudo /usr/local/sbin/pbs_mom'" $HPC_USER
+	su -c "ssh $workerhost 'sudo /tmp/torque-package-mom-linux-x86_64.sh --install'" $HPC_USER	
+        su -c "ssh $workerhost 'sudo /usr/local/sbin/pbs_mom'" $HPC_USER
         service pbs_mom start
         echo $workerhost >> /var/spool/torque/server_priv/nodes
          echo $workerhost
