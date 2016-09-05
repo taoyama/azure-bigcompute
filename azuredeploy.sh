@@ -701,9 +701,15 @@ while [ $c -lt $WORKER_COUNT ]
 do
         printf "\n$WORKER_HOSTNAME_PREFIX$c">> /tmp/host
         workerhost=$WORKER_HOSTNAME_PREFIX$c
-        sudo -u $HPC_USER ssh -tt $workerhost| sudo -kS /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh --install
+        #su -c  "scp /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh $HPC_USER@$workerhost:/tmp" $HPC_USER
+        #sudo -u $HPC_USER ssh -tt $workerhost| sudo -kS /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh --install
+        #su -c "ssh compnode0 'sudo /tmp/torque-package-mom-linux-x86_64.sh --install'" hpcuser
+        #sudo -u $HPC_USER ssh -tt $workerhost| sudo -kS /usr/local/sbin/pbs_mom
+        #su -c "ssh compnode0 'sudo /usr/local/sbin/pbs_mom'" hpcuser      
         service pbs_mom stop
-        sudo -u $HPC_USER ssh -tt $workerhost| sudo -kS /usr/local/sbin/pbs_mom
+        su -c  "scp /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh $HPC_USER@$workerhost:/tmp" $HPC_USER	
+	su -c "ssh @$workerhost 'sudo /tmp/torque-package-mom-linux-x86_64.sh --install'" $HPC_USER	
+        su -c "ssh @$workerhost 'sudo /usr/local/sbin/pbs_mom'" $HPC_USER
         service pbs_mom start
         echo $workerhost >> /var/spool/torque/server_priv/nodes
          echo $workerhost
