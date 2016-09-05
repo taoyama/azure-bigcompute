@@ -707,9 +707,10 @@ do
         #sudo -u $HPC_USER ssh -tt $workerhost| sudo -kS /usr/local/sbin/pbs_mom
         #su -c "ssh compnode0 'sudo /usr/local/sbin/pbs_mom'" hpcuser      
         service pbs_mom stop
-        su -c  "scp /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh $HPC_USER@$workerhost:/tmp" $HPC_USER	
-	su -c "ssh $workerhost 'sudo /tmp/torque-package-mom-linux-x86_64.sh --install'" $HPC_USER	
-        su -c "ssh $workerhost 'sudo /usr/local/sbin/pbs_mom'" $HPC_USER
+        ####Keeping the following three lines for computenode remote ssh script execution but this won't work as compnodes are not created yet####
+        #su -c  "scp /tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh $HPC_USER@$workerhost:/tmp" $HPC_USER	
+	#su -c "ssh $workerhost 'sudo /tmp/torque-package-mom-linux-x86_64.sh --install'" $HPC_USER	
+        #su -c "ssh $workerhost 'sudo /usr/local/sbin/pbs_mom'" $HPC_USER
         service pbs_mom start
         echo $workerhost >> /var/spool/torque/server_priv/nodes
          echo $workerhost
@@ -735,6 +736,11 @@ rm -rf /tmp/host
 
 # Restart pbs_server
 service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+else
+
+        su -c "scp $HPC_USER@$MASTER_HOSTNAME:/tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh /tmp" $HPC_USER	
+	su -c "sudo /tmp/torque-package-mom-linux-x86_64.sh --install" $HPC_USER	
+        su -c "sudo /usr/local/sbin/pbs_mom" $HPC_USER
 fi
 }
 install_cuda75()
