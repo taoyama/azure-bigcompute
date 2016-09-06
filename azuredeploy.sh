@@ -839,6 +839,23 @@ install_cudann5_ubuntu1604()
     rm cudnn-8.0-linux-x64-v5.1.tgz && \
     ldconfig
 }
+#########################
+### Place holder for common GPU/HPC Sku operations on both master and computes ###
+
+cat <<EOT >> /etc/profile
+if [ $USER = "$HPC_USER" ]; then
+    if [ $SHELL = "/bin/ksh" ]; then
+        ulimit -p 16384
+        ulimit -n 65536
+    else
+        ulimit -s unlimited
+    fi
+fi
+EOT
+
+echo "$HPC_USER               hard    memlock         unlimited" `>`> /etc/security/limits.conf
+echo "$HPC_USER               soft    memlock         unlimited" `>`> /etc/security/limits.conf
+#########################
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
 		install_packages_ubuntu
 		setup_shares
@@ -848,6 +865,7 @@ install_cudann5_ubuntu1604()
                 install_nvdia_ubuntu
                 install_cudann5_ubuntu1604
                 install_cuda8_ubuntu1604
+                
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		install_pkgs_all
 		setup_shares
