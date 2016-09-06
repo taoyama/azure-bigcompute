@@ -880,5 +880,7 @@ echo "$HPC_USER               soft    memlock         unlimited" `>`> /etc/secur
 		#install_easybuild
 		#install_go
 		#reboot
+		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
 
 	fi
