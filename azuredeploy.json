@@ -103,6 +103,8 @@
       "defaultValue": "Standard_NC12",
       "allowedValues": [
         "Standard_NC12",
+        "Standard_NC24",
+        "Standard_NC24r",
         "Standard_A8",
         "Standard_A9"
       ],
@@ -114,7 +116,9 @@
       "type": "string",
       "defaultValue": "Standard_NC24",
       "allowedValues": [
+        "Standard_NC12",
         "Standard_NC24",
+        "Standard_NC24r",
         "Standard_A8",
         "Standard_A9"
       ],
