@@ -232,7 +232,7 @@ install_docker()
     curl -L https://github.com/docker/machine/releases/download/v0.8.1/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
     chmod +x /usr/local/bin/docker-machine
     chmod +x /usr/local/bin/docker-compose
-    export PATH=$PATH:/usr/local/bin/
+    echo 'export PATH=/usr/local/bin:$PATH' >>~/.bash_profile
     systemctl restart docker
 }
 install_docker_ubuntu()
