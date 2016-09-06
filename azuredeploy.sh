@@ -853,8 +853,8 @@ if [ $USER = "$HPC_USER" ]; then
 fi
 EOT
 
-echo "$HPC_USER               hard    memlock         unlimited" `>`> /etc/security/limits.conf
-echo "$HPC_USER               soft    memlock         unlimited" `>`> /etc/security/limits.conf
+echo "$HPC_USER               hard    memlock         unlimited" >> /etc/security/limits.conf
+echo "$HPC_USER               soft    memlock         unlimited" >> /etc/security/limits.conf
 #########################
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
 		install_packages_ubuntu
