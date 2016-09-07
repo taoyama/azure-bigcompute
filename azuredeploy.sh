@@ -843,7 +843,7 @@ install_cudann5_ubuntu1604()
 ### Place holder for common GPU/HPC Sku operations on both master and computes ###
 
 cat <<EOT >> /etc/profile
-if [ $USER = "$HPC_USER" ]; then
+if [ "\$USER" = "$HPC_USER" ]; then
     if [ $SHELL = "/bin/ksh" ]; then
         ulimit -p 16384
         ulimit -n 65536
