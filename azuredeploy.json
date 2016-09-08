@@ -50,12 +50,6 @@
         "description": "OpenLogic CentOS-HPC Sku to use"
       }
     },
-    "Settings": {
-      "type": "string",
-      "metadata": {
-        "description": "Choice of Torque Scheduler"
-      }
-    },
     "sshPublicKey": {
       "type": "securestring",
       "metadata": {
@@ -100,20 +94,6 @@
     "SLURM_USER_GROUP": {
       "type": "string",
       "defaultValue": "slurm",
-      "metadata": {
-        "description": "The SLURM user ."
-      }
-    },
-    "torquewpbs_schedule": {
-      "type": "string",
-      "defaultValue": "torque_schedule",
-      "metadata": {
-        "description": "The SLURM user ."
-      }
-    },
-    "torquewmaui": {
-      "type": "string",
-      "defaultValue": "torque_maui",
       "metadata": {
         "description": "The SLURM user ."
       }
@@ -233,7 +213,6 @@
       }
     }
   },
-
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
@@ -542,18 +521,13 @@
     "armApiVersion": "2015-06-15",
     "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
     "avSetName": "avSet",
-    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'))]",
-    "configHash": {
-      "torquewpbs_schedule": "[parameters('torquewpbs_schedule')]",
-      "existing": "[concat(parameters('torquewmaui'))]"
-    },
-    "configTemplate": "[variables('configHash')[parameters('Settings').newOrExisting]]",
-
     "diskCaching": "ReadWrite",
+    "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'))]",
+    "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
     "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
     "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
+    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'))]",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
-    "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'))]",
     "networkSettings": {
       "virtualNetworkName": "virtualnetwork",
       "addressPrefix": "10.0.0.0/16",
@@ -572,13 +546,11 @@
         "master": "10.0.0.254"
       }
     },
-    "newOrExisting": "torquedefault",
     "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
     "nicName": "nic",
     "OSDiskName": "osdisk",
     "publicIPAddressName": "publicips",
     "publicIPAddressType": "Dynamic",
-    "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
     "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
     "vmStorageAccountContainerName": "vhd",
