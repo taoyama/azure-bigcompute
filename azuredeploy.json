@@ -211,92 +211,6 @@
       "metadata": {
         "description": "This parameter allows the user to select the number of disks they want"
       }
-    },
-    "omsRecoveryVaultName": {
-      "type": "string",
-      "defaultValue": "OMSRecovery",
-      "metadata": {
-        "description": "Assign a name for the ASR Recovery Vault"
-      }
-    },
-    "omsRecoveryVaultRegion": {
-      "type": "string",
-      "defaultValue": "West Europe",
-      "allowedValues": [
-        "West US",
-        "East US",
-        "North Europe",
-        "West Europe",
-        "Brazil South",
-        "East Asia",
-        "Southeast Asia",
-        "North Central US",
-        "South Central US",
-        "Japan East",
-        "Japan West",
-        "Australia East",
-        "Australia Southeast",
-        "Central US",
-        "East US 2",
-        "Central India",
-        "South India"
-      ],
-      "metadata": {
-        "description": "Specify the region for your Recovery Vault"
-      }
-    },
-    "omsWorkspaceName": {
-      "type": "string",
-      "defaultValue": "OMSLA",
-      "metadata": {
-        "description": "Assign a name for the Log Analytic Workspace Name"
-      }
-    },
-    "omsWorkspaceRegion": {
-      "type": "string",
-      "defaultValue": "West Europe",
-      "allowedValues": [
-        "East US",
-        "West Europe",
-        "Southeast Asia",
-        "Australia Southeast"
-      ],
-      "metadata": {
-        "description": "Specify the region for your Workspace"
-      }
-    },
-    "omsAutomationAccountName": {
-      "type": "string",
-      "defaultValue": "OMSAutomation",
-      "metadata": {
-        "description": "Assign a name for the Automation account"
-      }
-    },
-    "omsAutomationRegion": {
-      "type": "string",
-      "defaultValue": "West Europe",
-      "allowedValues": [
-        "Japan East",
-        "East US 2",
-        "West Europe",
-        "Southeast Asia",
-        "South Central US",
-        "North Europe",
-        "Canada Central",
-        "Australia Southeast",
-        "Central India",
-        "Japan East"
-      ],
-      "metadata": {
-        "description": "Specify the region for your Automation account"
-      }
-    },
-    "_artifactsLocationSasToken": {
-      "type": "securestring",
-      "defaultValue": "",
-      "metadata": {
-        "description": "The sasToken required to access _artifactsLocation.  When the template is deployed using the accompanying scripts, a sasToken will be automatically generated"
-      }
     }
   },
   "resources": [
@@ -385,10 +299,7 @@
         "[concat('Microsoft.Storage/storageAccounts/', variables('newStorageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]",
         "[concat('Microsoft.Compute/availabilitySets/', variables('avSetName'))]",
-        "[concat('Microsoft.Resources/deployments/', 'diskSelection')]",
-        "[concat('Microsoft.Resources/deployments/', 'omsRecoveryServices')]",
-        "[concat('Microsoft.Resources/deployments/', 'omsAutomation')]",
-        "[concat('Microsoft.Resources/deployments/', 'omsWorkspace')]"
+        "[concat('Microsoft.Resources/deployments/', 'diskSelection')]"
       ],
       "properties": {
         "availabilitySet": {
@@ -604,126 +515,45 @@
           }
         }
       }
-    },
-    {
-      "apiVersion": "2016-02-01",
-      "name": "omsWorkspace",
-      "type": "Microsoft.Resources/deployments",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('artifactsLocation'), 'omsRecoveryServices', '.json')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "omsWorkspaceName": {
-            "value": "[parameters('omsWorkspaceName')]"
-          },
-          "omsWorkspaceRegion": {
-            "value": "[parameters('omsWorkspaceRegion')]"
-          }
-        }
-      }
-    },
-    {
-      "apiVersion": "2016-02-01",
-      "name": "omsRecoveryServices",
-      "type": "Microsoft.Resources/deployments",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('artifactsLocation'), 'omsRecoveryServices', '.json')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "omsRecoveryVaultName": {
-            "value": "[parameters('omsRecoveryVaultName')]"
-          },
-          "omsRecoveryVaultRegion": {
-            "value": "[parameters('omsRecoveryVaultRegion')]"
-          }
-        }
-      }
-    },
-    {
-      "apiVersion": "2016-02-01",
-      "name": "omsAutomation",
-      "type": "Microsoft.Resources/deployments",
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(variables('artifactsLocation'), 'omsAutomation', '.json')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "omsAutomationAccountName": {
-            "value": "[parameters('omsAutomationAccountName')]"
-          },
-          "omsAutomationRegion": {
-            "value": "[parameters('omsAutomationRegion')]"
-          },
-          "omsRecoveryVaultName": {
-            "value": "[parameters('omsRecoveryVaultName')]"
-          },
-          "omsWorkspaceName": {
-            "value": "[parameters('omsWorkspaceName')]"
-          },
-          "azureAdmin": {
-            "value": "[parameters('azureAdmin')]"
-          },
-          "azureAdminPwd": {
-            "value": "[parameters('azureAdminPwd')]"
-          },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
-          },
-          "_artifactsLocationSasToken": {
-            "value": "[parameters('_artifactsLocationSasToken')]"
-          }
-        },
-
-
-
-        "variables": {
-          "armApiVersion": "2015-06-15",
-          "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
-          "avSetName": "avSet",
-          "diskCaching": "ReadWrite",
-          "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'))]",
-          "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
-          "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
-          "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
-          "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'))]",
-          "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
-          "networkSettings": {
-            "virtualNetworkName": "virtualnetwork",
-            "addressPrefix": "10.0.0.0/16",
-            "subnet": {
-              "dse": {
-                "name": "dse",
-                "prefix": "10.0.0.0/24",
-                "vnet": "virtualnetwork"
-              }
-            },
-            "statics": {
-              "workerRange": {
-                "base": "10.0.0.",
-                "start": 5
-              },
-              "master": "10.0.0.254"
-            }
-          },
-          "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
-          "nicName": "nic",
-          "OSDiskName": "osdisk",
-          "publicIPAddressName": "publicips",
-          "publicIPAddressType": "Dynamic",
-          "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
-          "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
-          "vmStorageAccountContainerName": "vhd",
-          "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]"
-        }
-      }
     }
-  ]
+  ],
+  "variables": {
+    "armApiVersion": "2015-06-15",
+    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
+    "avSetName": "avSet",
+    "diskCaching": "ReadWrite",
+    "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'))]",
+    "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
+    "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
+    "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
+    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'))]",
+    "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
+    "networkSettings": {
+      "virtualNetworkName": "virtualnetwork",
+      "addressPrefix": "10.0.0.0/16",
+      "subnet": {
+        "dse": {
+          "name": "dse",
+          "prefix": "10.0.0.0/24",
+          "vnet": "virtualnetwork"
+        }
+      },
+      "statics": {
+        "workerRange": {
+          "base": "10.0.0.",
+          "start": 5
+        },
+        "master": "10.0.0.254"
+      }
+    },
+    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
+    "nicName": "nic",
+    "OSDiskName": "osdisk",
+    "publicIPAddressName": "publicips",
+    "publicIPAddressType": "Dynamic",
+    "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
+    "vmStorageAccountContainerName": "vhd",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]"
+  }
 }
