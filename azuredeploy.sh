@@ -736,6 +736,10 @@ rm -rf /tmp/host
 
 # Restart pbs_server
 service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+
+pbsnodes -a|sed -n -e '/=Linux/ s/.*\=Linux *//p'|cut -d ' ' -f1> $SHARE_HOME/$HPC_USER/machines.LINUX
+
+chown $HPC_USER:$HPC_USER $SHARE_HOME/$HPC_USER/machines.LINUX
 else
 
         su -c "scp $HPC_USER@$MASTER_HOSTNAME:/tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh /tmp" $HPC_USER	
@@ -853,9 +857,6 @@ if [ "\$USER" = "$HPC_USER" ]; then
 fi
 EOT
 
-pbsnodes -a|sed -n -e '/=Linux/ s/.*\=Linux *//p'|cut -d ' ' -f1> $SHARE_HOME/$HPC_USER/machines.LINUX
-
-chown $HPC_USER:$HPC_USER $SHARE_HOME/$HPC_USER/machines.LINUX
 
 echo "$HPC_USER               hard    memlock         unlimited" >> /etc/security/limits.conf
 echo "$HPC_USER               soft    memlock         unlimited" >> /etc/security/limits.conf
