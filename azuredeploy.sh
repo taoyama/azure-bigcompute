@@ -853,7 +853,9 @@ if [ "\$USER" = "$HPC_USER" ]; then
 fi
 EOT
 
-pbsnodes -a|sed -n -e '/=Linux/ s/.*\=Linux *//p'|cut -d ' ' -f1>/root/hosts.txt
+pbsnodes -a|sed -n -e '/=Linux/ s/.*\=Linux *//p'|cut -d ' ' -f1> $SHARE_HOME/$HPC_USER/machines.LINUX
+
+chown $HPC_USER:$HPC_USER $SHARE_HOME/$HPC_USER/machines.LINUX
 
 echo "$HPC_USER               hard    memlock         unlimited" >> /etc/security/limits.conf
 echo "$HPC_USER               soft    memlock         unlimited" >> /etc/security/limits.conf
