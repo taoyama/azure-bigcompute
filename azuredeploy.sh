@@ -853,6 +853,8 @@ if [ "\$USER" = "$HPC_USER" ]; then
 fi
 EOT
 
+pbsnodes -a|sed -n -e '/=Linux/ s/.*\=Linux *//p'|cut -d ' ' -f1>/root/hosts.txt
+
 echo "$HPC_USER               hard    memlock         unlimited" >> /etc/security/limits.conf
 echo "$HPC_USER               soft    memlock         unlimited" >> /etc/security/limits.conf
 #########################
