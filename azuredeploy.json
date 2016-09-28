@@ -117,8 +117,16 @@
       "allowedValues": [
         "Standard_NC12",
         "Standard_NC24",
+        "Standard_NC24R",
         "Standard_A8",
-        "Standard_A9"
+        "Standard_A9",
+         "Standard_H8",
+         "Standard_H8M",
+         "Standard_H16M",
+         "Standard_H16MR",
+         "Standard_H16R",
+         "Standard_H16"
+        
       ],
       "metadata": {
         "description": "Size of the worker nodes."
