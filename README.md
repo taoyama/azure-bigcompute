@@ -40,7 +40,7 @@ Please report bugs  by opening an issue in the [GitHub Issue Tracker](https://gi
 Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the `git rebase` command to update your branch to the current master if necessary.
 
 
-# Ubuntu 16.04.0-LTS - GPU N-Series 
+# Ubuntu 16.04.0-LTS - GPU N-Series (SSD pending - IB/RDMA SKUs pending)
 
 ## [GPU](http://gpu.azure.com/)
 
@@ -124,6 +124,10 @@ azure config mode arm
 
 azure group create <my-resource-group> --location "<<location of jumpbox RG like southcentralus>>" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-vm-linux-dynamic-data-disks/azuredeploy.json</code>
 
+# CentOS 7.2 / Ubuntu 16.04-LTS (SSD pending - IB/RDMA SKUs pending)
+## [Simulations with Azure Big Compute](https://simulation.azure.com/)
+
+* H-Series Skus added
 
 # CentOS-HPC
 ## [Simulations with Azure Big Compute](https://simulation.azure.com/)
@@ -146,7 +150,7 @@ azure group create <my-resource-group> --location "<<location of jumpbox RG like
 * This creates configurable number of disks with configurable size for centos-hpc A8/A9 
 Creates a Cluster with configurable number of worker nodes each with prebuilt Intel MPI and Direct RDMA for each Head and corresponding compute Nodes.
    * For CentOS-HPC imageOffer for skuName(s) 6.5 and 7.1
-   * Cluster Scheduler can be ignored for now and Torque and SLURM options to be put in  (Slurm is in Torque is __WIP__)
+   * Cluster Scheduler can be ignored for now and Torque and SLURM options to be put in  (Torque is in SLURM is __WIP__)
    * Head Node is defaulted to A8 and has striped configurable disks attached.
    * Specific Logic in <code>install_packages_all()</code> to distinguish between sku for CentOS-HPC 6.5 and 7.1, primarily for docker usage.
 * __These are not for DEV but with fixed kernels for Intel MPI and Direct RDMA.__
