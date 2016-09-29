@@ -32,10 +32,11 @@
       "defaultValue": "UbuntuServer",
       "allowedValues": [
         "CentOS-HPC",
-        "UbuntuServer"
+        "UbuntuServer",
+        "CentOS"
       ],
       "metadata": {
-        "description": "New CentOS-HPC/UbuntuServer with pre-installed Intel MPI and mlx4 drivers on Infiniband Available"
+        "description": "New CentOS-HPC (A8/A9) with pre-installed Intel MPI and mlx4 drivers on Infiniband Available, UbuntuServer for GPU and CentOS for the new H-Series"
       }
     },
     "imageSku": {
@@ -44,7 +45,8 @@
       "allowedValues": [
         "6.5",
         "7.1",
-        "16.04.0-LTS"
+        "16.04.0-LTS",
+        "7.2"
       ],
       "metadata": {
         "description": "OpenLogic CentOS-HPC Sku to use"
@@ -66,6 +68,13 @@
     "hpcUserName": {
       "type": "string",
       "defaultValue": "hpc",
+      "metadata": {
+        "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
+      }
+    },
+    "networkSecurityGroupName": {
+      "type": "string",
+      "defaultValue": "bigcomputensg",
       "metadata": {
         "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
       }
@@ -112,7 +121,7 @@
         "Standard_H16MR",
         "Standard_H16R",
         "Standard_H16",
-                "Standard_DS1",
+        "Standard_DS1",
         "Basic_A0",
         "Basic_A1",
         "Basic_A2",
@@ -191,13 +200,13 @@
         "Standard_NC24R",
         "Standard_A8",
         "Standard_A9",
-         "Standard_H8",
-         "Standard_H8M",
-         "Standard_H16M",
-         "Standard_H16MR",
-         "Standard_H16R",
-         "Standard_H16"
-        
+        "Standard_H8",
+        "Standard_H8M",
+        "Standard_H16M",
+        "Standard_H16MR",
+        "Standard_H16R",
+        "Standard_H16"
+
       ],
       "metadata": {
         "description": "Size of the worker nodes."
@@ -289,6 +298,18 @@
       ],
       "metadata": {
         "description": "This parameter allows the user to select the number of disks they want"
+      }
+    },
+    "workspaceId": {
+      "type": "string",
+      "metadata": {
+        "description": "The Workspace ID is the Operations Management Suite Workspace ID found in the OMS Console under Settings and Connected Sources"
+      }
+    },
+    "workspaceKey": {
+      "type": "string",
+      "metadata": {
+        "description": "The Workspace Key is the Operations Management Suite Workspace Key found in the OMS Console under Settings and Connected Sources"
       }
     }
   },
@@ -426,7 +447,33 @@
             }
           ]
         }
-      }
+      },
+      "resources": [
+        {
+          "name": "Microsoft.EnterpriseCloud.Monitoring",
+          "type": "extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2015-06-15",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', parameters('masterVMName'))]"
+          ],
+          "tags": {
+            "displayName": "masterAgent"
+          },
+          "properties": {
+            "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+            "type": "MicrosoftMonitoringAgent",
+            "typeHandlerVersion": "1.0",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "workspaceId": "[parameters('workspaceId')]"
+            },
+            "protectedSettings": {
+              "workspaceKey": "[parameters('workspaceKey')]"
+            }
+          }
+        }
+      ]
     },
     {
       "apiVersion": "[variables('armApiVersion')]",
@@ -561,7 +608,33 @@
             }
           ]
         }
-      }
+      },
+      "resources": [
+        {
+          "name": "Microsoft.EnterpriseCloud.Monitoring",
+          "type": "extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2015-06-15",
+          "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('workerVMNamePrefix'), copyindex()))]"
+          ],
+          "tags": {
+            "displayName": "computeAgent"
+          },
+          "properties": {
+            "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+            "type": "MicrosoftMonitoringAgent",
+            "typeHandlerVersion": "1.0",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "workspaceId": "[parameters('workspaceId')]"
+            },
+            "protectedSettings": {
+              "workspaceKey": "[parameters('workspaceKey')]"
+            }
+          }
+        }
+      ]
     },
     {
       "apiVersion": "2015-01-01",
@@ -593,6 +666,29 @@
             "value": "[parameters('masterVMName')]"
           }
         }
+      }
+    },
+    {
+      "name": "[parameters('networkSecurityGroupName')]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2015-06-15",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "securityRules": [
+          {
+            "name": "default-allow-ssh",
+            "properties": {
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "protocol": "TCP",
+              "destinationPortRange": "22-8080",
+              "access": "Allow",
+              "direction": "Inbound",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "*"
+            }
+          }
+        ]
       }
     }
   ],
