@@ -681,7 +681,7 @@
               "priority": 1000,
               "sourceAddressPrefix": "*",
               "protocol": "TCP",
-              "destinationPortRange": "22-8080",
+              "destinationPortRange": "*",
               "access": "Allow",
               "direction": "Inbound",
               "sourcePortRange": "*",
