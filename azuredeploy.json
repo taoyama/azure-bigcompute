@@ -72,13 +72,6 @@
         "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
-    "networkSecurityGroupName": {
-      "type": "string",
-      "defaultValue": "bigcomputensg",
-      "metadata": {
-        "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
-      }
-    },
     "MUNGE_VER": {
       "type": "string",
       "defaultValue": "0.5.11",
@@ -666,29 +659,6 @@
             "value": "[parameters('masterVMName')]"
           }
         }
-      }
-    },
-    {
-      "name": "[parameters('networkSecurityGroupName')]",
-      "type": "Microsoft.Network/networkSecurityGroups",
-      "apiVersion": "2015-06-15",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "securityRules": [
-          {
-            "name": "default-allow-ssh",
-            "properties": {
-              "priority": 1000,
-              "sourceAddressPrefix": "*",
-              "protocol": "TCP",
-              "destinationPortRange": "*",
-              "access": "Allow",
-              "direction": "Inbound",
-              "sourcePortRange": "*",
-              "destinationAddressPrefix": "*"
-            }
-          }
-        ]
       }
     }
   ],
