@@ -39,6 +39,8 @@ Please report bugs  by opening an issue in the [GitHub Issue Tracker](https://gi
 
 Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the `git rebase` command to update your branch to the current master if necessary.
 
+## MSFT Ignite 2016 Azure HPC/GPU Skus
+[MSFT Ignite 2016 Keynote Announcements](https://www.youtube.com/v/FNxfsTa8sJ0?start=1945&end=2146&autoplay)
 
 # Ubuntu 16.04.0-LTS - GPU N-Series (SSD pending - IB/RDMA SKUs pending)
 
@@ -124,7 +126,7 @@ azure config mode arm
 
 azure group create <my-resource-group> --location "<<location of jumpbox RG like southcentralus>>" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-vm-linux-dynamic-data-disks/azuredeploy.json</code>
 
-# CentOS 7.2 / Ubuntu 16.04-LTS (SSD pending - IB/RDMA SKUs pending)
+# H-Series CentOS 7.2 / Ubuntu 16.04-LTS (SSD pending - IB/RDMA SKUs pending)
 ## [Simulations with Azure Big Compute](https://simulation.azure.com/)
 
 * H-Series Skus added
