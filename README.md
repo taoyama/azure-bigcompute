@@ -40,7 +40,7 @@ Please report bugs  by opening an issue in the [GitHub Issue Tracker](https://gi
 Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the `git rebase` command to update your branch to the current master if necessary.
 
 ## MSFT Ignite 2016 Azure HPC/GPU Skus
-** [MSFT Ignite 2016 Keynote Announcements](https://www.youtube.com/v/FNxfsTa8sJ0?start=1945&end=2146&autoplay=1) **
+**[MSFT Ignite 2016 Keynote Announcements](https://www.youtube.com/v/FNxfsTa8sJ0?start=1945&end=2146&autoplay=1)**
 
 # Ubuntu 16.04.0-LTS - GPU N-Series (SSD pending - IB/RDMA SKUs pending)
 
