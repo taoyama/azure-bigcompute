@@ -129,10 +129,11 @@ azure config mode arm
 
 azure group create <my-resource-group> --location "<<location of jumpbox RG like southcentralus>>" && azure group deployment create <my-resource-group> <my-deployment-name> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-vm-linux-dynamic-data-disks/azuredeploy.json</code>
 
-# H-Series CentOS 7.2 / Ubuntu 16.04-LTS (SSD pending - IB/RDMA SKUs pending)
+# H-Series CentOS 7.2 / Ubuntu 16.04-LTS (IB/RDMA for CentOS-HPC v7.1)
 ## [Simulations with Azure Big Compute](https://simulation.azure.com/)
 
 * H-Series Skus added
+* **[H-Series Blog](https://azure.microsoft.com/en-us/blog/availability-of-h-series-vms-in-microsoft-azure/)**
 
 # CentOS-HPC
 ## [Simulations with Azure Big Compute](https://simulation.azure.com/)
