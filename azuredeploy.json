@@ -463,7 +463,7 @@
           "properties": {
             "publisher": "Microsoft.EnterpriseCloud.Monitoring",
             "type": "MicrosoftMonitoringAgent",
-            "typeHandlerVersion": "1.0",
+            "typeHandlerVersion": "1.2",
             "autoUpgradeMinorVersion": true,
             "settings": {
               "workspaceId": "[parameters('workspaceId')]"
@@ -624,7 +624,7 @@
           "properties": {
             "publisher": "Microsoft.EnterpriseCloud.Monitoring",
             "type": "MicrosoftMonitoringAgent",
-            "typeHandlerVersion": "1.0",
+            "typeHandlerVersion": "1.2",
             "autoUpgradeMinorVersion": true,
             "settings": {
               "workspaceId": "[parameters('workspaceId')]"
