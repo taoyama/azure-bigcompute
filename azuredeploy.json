@@ -292,18 +292,6 @@
       "metadata": {
         "description": "This parameter allows the user to select the number of disks they want"
       }
-    },
-    "workspaceId": {
-      "type": "string",
-      "metadata": {
-        "description": "The Workspace ID is the Operations Management Suite Workspace ID found in the OMS Console under Settings and Connected Sources"
-      }
-    },
-    "workspaceKey": {
-      "type": "string",
-      "metadata": {
-        "description": "The Workspace Key is the Operations Management Suite Workspace Key found in the OMS Console under Settings and Connected Sources"
-      }
     }
   },
   "resources": [
@@ -442,30 +430,7 @@
         }
       },
       "resources": [
-        {
-          "name": "Microsoft.EnterpriseCloud.Monitoring",
-          "type": "extensions",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-06-15",
-          "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', parameters('masterVMName'))]"
-          ],
-          "tags": {
-            "displayName": "masterAgent"
-          },
-          "properties": {
-            "publisher": "Microsoft.EnterpriseCloud.Monitoring",
-            "type": "MicrosoftMonitoringAgent",
-            "typeHandlerVersion": "1.2",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "workspaceId": "[parameters('workspaceId')]"
-            },
-            "protectedSettings": {
-              "workspaceKey": "[parameters('workspaceKey')]"
-            }
-          }
-        }
+        
       ]
     },
     {
@@ -603,30 +568,7 @@
         }
       },
       "resources": [
-        {
-          "name": "Microsoft.EnterpriseCloud.Monitoring",
-          "type": "extensions",
-          "location": "[resourceGroup().location]",
-          "apiVersion": "2015-06-15",
-          "dependsOn": [
-            "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('workerVMNamePrefix'), copyindex()))]"
-          ],
-          "tags": {
-            "displayName": "computeAgent"
-          },
-          "properties": {
-            "publisher": "Microsoft.EnterpriseCloud.Monitoring",
-            "type": "MicrosoftMonitoringAgent",
-            "typeHandlerVersion": "1.2",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "workspaceId": "[parameters('workspaceId')]"
-            },
-            "protectedSettings": {
-              "workspaceKey": "[parameters('workspaceKey')]"
-            }
-          }
-        }
+        
       ]
     },
     {
