@@ -226,6 +226,20 @@
         "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS - Striping rules Apply"
       }
     },
+    "dataDiskStorageType": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Standard_ZRS"
+      ],
+      "defaultValue": "Standard_LRS",
+      "metadata": {
+        "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS - Striping rules Apply"
+      }
+    },
     "dockerVer": {
       "type": "string",
       "defaultValue": "1.12.1-1",
@@ -305,11 +319,20 @@
       }
     },
     {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('newStorageAccountName1')]",
+      "apiVersion": "[variables('armApiVersion')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "accountType": "[parameters('dataDiskStorageType')]"
+      }
+    },
+    {
       "type": "Microsoft.Compute/availabilitySets",
       "name": "[variables('avSetName')]",
       "apiVersion": "[variables('armApiVersion')]",
       "location": "[resourceGroup().location]",
-      "properties": { }
+      "properties": {}
     },
     {
       "apiVersion": "[variables('armApiVersion')]",
@@ -430,7 +453,7 @@
         }
       },
       "resources": [
-        
+
       ]
     },
     {
@@ -568,7 +591,7 @@
         }
       },
       "resources": [
-        
+
       ]
     },
     {
@@ -586,7 +609,7 @@
             "value": "[parameters('numDataDisks')]"
           },
           "diskStorageAccountName": {
-            "value": "[variables('newStorageAccountName')]"
+            "value": "[variables('newStorageAccountName1')]"
           },
           "diskCaching": {
             "value": "[variables('diskCaching')]"
@@ -595,7 +618,7 @@
             "value": "[parameters('dataDiskSize')]"
           },
           "vmStAccountContainerName": {
-            "value": "[variables('vmStorageAccountContainerName')]"
+            "value": "[variables('vmStorageAccountContainerName1')]"
           },
           "masterName": {
             "value": "[parameters('masterVMName')]"
@@ -634,6 +657,7 @@
       }
     },
     "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
+    "newStorageAccountName1": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
     "nicName": "nic",
     "OSDiskName": "osdisk",
     "publicIPAddressName": "publicips",
@@ -641,6 +665,7 @@
     "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
     "vmStorageAccountContainerName": "vhd",
+    "vmStorageAccountContainerName1": "vhd1",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]"
   }
 }
