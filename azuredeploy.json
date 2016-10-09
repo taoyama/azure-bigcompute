@@ -312,20 +312,15 @@
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('newStorageAccountName')]",
-      "apiVersion": "[variables('armApiVersion')]",
-      "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[parameters('storageType')]"
-      }
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts",
+      },
       "name": "[variables('newStorageAccountName1')]",
-      "apiVersion": "[variables('armApiVersion')]",
-      "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[parameters('dataDiskStorageType')]"
-      }
+      },
+      "apiVersion": "[variables('armApiVersion')]",
+      "location": "[resourceGroup().location]"
     },
     {
       "type": "Microsoft.Compute/availabilitySets",
@@ -656,8 +651,8 @@
         "master": "10.0.0.254"
       }
     },
-    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
-    "newStorageAccountName1": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
+    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'osdiskssa')]",
+    "newStorageAccountName1": "[concat(uniqueString(resourceGroup().id), 'nfssa','dynamicdisk')]",
     "nicName": "nic",
     "OSDiskName": "osdisk",
     "publicIPAddressName": "publicips",
