@@ -338,7 +338,7 @@
       }
     },
     "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'osdiskssa')]",
-    "newStorageAccountName1": "[concat(uniqueString(resourceGroup().id), 'nfs','dynamicdisk')]",
+    "newStorageAccountName1": "[concat(uniqueString(resourceGroup().id),'dynamicdisk')]",
     "nicName": "nic",
     "OSDiskName": "osdisk",
     "publicIPAddressName": "publicips",
