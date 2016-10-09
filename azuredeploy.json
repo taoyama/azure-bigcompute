@@ -470,19 +470,19 @@
         },
         "storageProfile": {
           "dataDisks": "[reference('diskSelection').outputs.dataDiskArray.value]",
-          "imageReference": {
-            "publisher": "[parameters('imagePublisher')]",
-            "offer": "[parameters('imageOffer')]",
-            "sku": "[parameters('imageSku')]",
-            "version": "latest"
-          },
           "osDisk": {
+            "caching": "ReadWrite",
+            "createOption": "FromImage",
+            "imageReference": {
+              "publisher": "[parameters('imagePublisher')]",
+              "offer": "[parameters('imageOffer')]",
+              "sku": "[parameters('imageSku')]",
+              "version": "latest"
+            },
             "name": "osdisk",
             "vhd": {
               "uri": "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),parameters('masterVMName'),'.vhd')]"
-            },
-            "caching": "ReadWrite",
-            "createOption": "FromImage"
+            }
           }
         },
         "networkProfile": {
@@ -492,10 +492,7 @@
             }
           ]
         }
-      },
-      "resources": [
-
-      ]
+      }
     },
     {
       "apiVersion": "[variables('armApiVersion')]",
