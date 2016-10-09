@@ -315,6 +315,11 @@
       "properties": {
         "accountType": "[parameters('storageType')]"
       },
+      "apiVersion": "[variables('armApiVersion')]",
+      "location": "[resourceGroup().location]"
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('newStorageAccountName1')]",
       "properties": {
         "accountType": "[parameters('dataDiskStorageType')]"
