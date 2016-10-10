@@ -52,6 +52,42 @@
         "description": "OpenLogic CentOS-HPC Sku to use"
       }
     },
+    "headImagePublisher": {
+      "type": "string",
+      "defaultValue": "Canonical",
+      "allowedValues": [
+        "Canonical",
+        "openlogic"
+      ],
+      "metadata": {
+        "description": "openlogic/Canonical is the CentOS/Ubuntu Distributor in Azure Market Place"
+      }
+    },
+    "headImageOffer": {
+      "type": "string",
+      "defaultValue": "UbuntuServer",
+      "allowedValues": [
+        "CentOS-HPC",
+        "UbuntuServer",
+        "CentOS"
+      ],
+      "metadata": {
+        "description": "New CentOS-HPC (A8/A9) with pre-installed Intel MPI and mlx4 drivers on Infiniband Available, UbuntuServer for GPU and CentOS for the new H-Series"
+      }
+    },
+    "headImageSku": {
+      "type": "string",
+      "defaultValue": "16.04.0-LTS",
+      "allowedValues": [
+        "6.5",
+        "7.1",
+        "16.04.0-LTS",
+        "7.2"
+      ],
+      "metadata": {
+        "description": "OpenLogic CentOS-HPC Sku to use"
+      }
+    },
     "sshPublicKey": {
       "type": "securestring",
       "metadata": {
@@ -316,7 +352,7 @@
     "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'))]",
     "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
     "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
-    "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
+    "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'), ':', parameters('headImageSku'))]",
     "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'))]",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
     "networkSettings": {
