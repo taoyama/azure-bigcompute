@@ -510,9 +510,9 @@
             "caching": "ReadWrite",
             "createOption": "FromImage",
             "imageReference": {
-              "publisher": "[parameters('imagePublisher')]",
-              "offer": "[parameters('imageOffer')]",
-              "sku": "[parameters('imageSku')]",
+              "publisher": "[parameters('headImagePublisher')]",
+              "offer": "[parameters('headImageOffer')]",
+              "sku": "[parameters('headImageSku')]",
               "version": "latest"
             },
             "name": "osdisk",
