@@ -50,6 +50,7 @@ dockerVer=$( echo "$7" |cut -d\: -f1 )
 dockerComposeVer=$( echo "$7" |cut -d\: -f2 )
 userName=$( echo "$8" |cut -d\: -f2 )
 skuName=$( echo "$8" |cut -d\: -f1 )
+headSkuName=$( echo "$8" |cut -d\: -f3 )
 TEMPLATE_BASE_URL=$9
 
 
@@ -64,14 +65,28 @@ is_master()
 
 enable_kernel_update()
 {
-cd /etc && sed -i.bak -e '28d' yum.conf
-cd /etc && sed -i '28i#exclude=kernel*' yum.conf
+	if [ "$skuName" == "6.5" ] || [ "$skuName" == "7.1" ]; then
+		cd /etc && sed -i.bak -e '28d' yum.conf
+		cd /etc && sed -i '28i#exclude=kernel*' yum.conf
+
+	elif [ "$headSkuName" == "6.6" ] || [ "$headSkuName" == "7.2" ] ; then
+                echo "kernel update is enabled";
+
+	fi
+
 }
 
 disable_kernel_update()
 {
-cd /etc && sed -i.bak -e '28d' yum.conf
-cd /etc && sed -i '28iexclude=kernel*' yum.conf
+	if [ "$skuName" == "6.5" ] || [ "$skuName" == "7.1" ]; then
+		cd /etc && sed -i.bak -e '28d' yum.conf
+		cd /etc && sed -i '28iexclude=kernel*' yum.conf
+
+	elif [ "$headSkuName" == "6.6" ] || [ "$headSkuName" == "7.2" ] ; then
+                echo "Nothing is to be disabled";
+
+	fi
+
 }
 
 # Partitions all data disks attached to the VM and creates
@@ -333,7 +348,7 @@ install_pkgs_all()
 
 	if [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] ; then
     		install_azure_cli
-	elif [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+	elif [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$headSkuName" == "7.2" ] ; then
 
     		install_docker
 
@@ -411,7 +426,7 @@ setup_hpc_user()
 		update-rc.d -f apparmor remove
 		apt-get -y remove apparmor
 
-	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$headSkuName" == "7.2" ] ; then
 		    # disable selinux
 		    sed -i 's/enforcing/disabled/g' /etc/selinux/config
 		    setenforce permissive
@@ -862,6 +877,7 @@ echo "$HPC_USER               hard    memlock         unlimited" >> /etc/securit
 echo "$HPC_USER               soft    memlock         unlimited" >> /etc/security/limits.conf
 #########################
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
+	
 		install_packages_ubuntu
 		setup_shares
 		setup_hpc_user
@@ -871,7 +887,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
                 install_cudann5_ubuntu1604
                 install_cuda8_ubuntu1604
                 
-	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$headSkuName" == "7.2" ] ; then
 		install_pkgs_all
 		setup_shares
 		setup_hpc_user
