@@ -226,20 +226,6 @@
         "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS - Striping rules Apply"
       }
     },
-    "dataDiskStorageType": {
-      "type": "string",
-      "allowedValues": [
-        "Standard_LRS",
-        "Premium_LRS",
-        "Standard_GRS",
-        "Standard_RAGRS",
-        "Standard_ZRS"
-      ],
-      "defaultValue": "Standard_LRS",
-      "metadata": {
-        "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS - Striping rules Apply"
-      }
-    },
     "dockerVer": {
       "type": "string",
       "defaultValue": "1.12.1-1",
@@ -308,65 +294,15 @@
       }
     }
   },
-  "variables": {
-    "armApiVersion": "2015-06-15",
-    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
-    "avSetName": "avSet",
-    "diskCaching": "ReadWrite",
-    "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'))]",
-    "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
-    "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
-    "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
-    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'))]",
-    "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
-    "networkSettings": {
-      "virtualNetworkName": "virtualnetwork",
-      "addressPrefix": "10.0.0.0/16",
-      "subnet": {
-        "dse": {
-          "name": "dse",
-          "prefix": "10.0.0.0/24",
-          "vnet": "virtualnetwork"
-        }
-      },
-      "statics": {
-        "workerRange": {
-          "base": "10.0.0.",
-          "start": 5
-        },
-        "master": "10.0.0.254"
-      }
-    },
-    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'osdiskssa')]",
-    "newStorageAccountName1": "[concat(uniqueString(resourceGroup().id),'dynamicdisk')]",
-    "nicName": "nic",
-    "OSDiskName": "osdisk",
-    "publicIPAddressName": "publicips",
-    "publicIPAddressType": "Dynamic",
-    "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
-    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
-    "vmStorageAccountContainerName": "vhd",
-    "vmStorageAccountContainerName1": "vhd1",
-    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]"
-  },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('newStorageAccountName')]",
+      "apiVersion": "[variables('armApiVersion')]",
+      "location": "[resourceGroup().location]",
       "properties": {
         "accountType": "[parameters('storageType')]"
-      },
-      "apiVersion": "[variables('armApiVersion')]",
-      "location": "[resourceGroup().location]"
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('newStorageAccountName1')]",
-      "properties": {
-        "accountType": "[parameters('dataDiskStorageType')]"
-      },
-      "apiVersion": "[variables('armApiVersion')]",
-      "location": "[resourceGroup().location]"
+      }
     },
     {
       "type": "Microsoft.Compute/availabilitySets",
@@ -469,28 +405,20 @@
           }
         },
         "storageProfile": {
-          "dataDisks": {
-            "[reference('diskSelection').outputs.dataDiskArray.value]",
-            "imageReference": {
-              "publisher": "[parameters('imagePublisher')]",
-              "offer": "[parameters('imageOffer')]",
-              "sku": "[parameters('imageSku')]",
-              "version": "latest"
-            }
+          "dataDisks": "[reference('diskSelection').outputs.dataDiskArray.value]",
+          "imageReference": {
+            "publisher": "[parameters('imagePublisher')]",
+            "offer": "[parameters('imageOffer')]",
+            "sku": "[parameters('imageSku')]",
+            "version": "latest"
           },
           "osDisk": {
-            "caching": "ReadWrite",
-            "createOption": "FromImage",
-            "imageReference": {
-              "publisher": "[parameters('imagePublisher')]",
-              "offer": "[parameters('imageOffer')]",
-              "sku": "[parameters('imageSku')]",
-              "version": "latest"
-            },
             "name": "osdisk",
             "vhd": {
               "uri": "[concat('http://',variables('newStorageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),parameters('masterVMName'),'.vhd')]"
-            }
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
           }
         },
         "networkProfile": {
@@ -500,7 +428,10 @@
             }
           ]
         }
-      }
+      },
+      "resources": [
+
+      ]
     },
     {
       "apiVersion": "[variables('armApiVersion')]",
@@ -655,7 +586,7 @@
             "value": "[parameters('numDataDisks')]"
           },
           "diskStorageAccountName": {
-            "value": "[variables('newStorageAccountName1')]"
+            "value": "[variables('newStorageAccountName')]"
           },
           "diskCaching": {
             "value": "[variables('diskCaching')]"
@@ -664,7 +595,7 @@
             "value": "[parameters('dataDiskSize')]"
           },
           "vmStAccountContainerName": {
-            "value": "[variables('vmStorageAccountContainerName1')]"
+            "value": "[variables('vmStorageAccountContainerName')]"
           },
           "masterName": {
             "value": "[parameters('masterVMName')]"
@@ -672,5 +603,44 @@
         }
       }
     }
-  ]
+  ],
+  "variables": {
+    "armApiVersion": "2015-06-15",
+    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
+    "avSetName": "avSet",
+    "diskCaching": "ReadWrite",
+    "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'))]",
+    "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
+    "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
+    "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
+    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'))]",
+    "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
+    "networkSettings": {
+      "virtualNetworkName": "virtualnetwork",
+      "addressPrefix": "10.0.0.0/16",
+      "subnet": {
+        "dse": {
+          "name": "dse",
+          "prefix": "10.0.0.0/24",
+          "vnet": "virtualnetwork"
+        }
+      },
+      "statics": {
+        "workerRange": {
+          "base": "10.0.0.",
+          "start": 5
+        },
+        "master": "10.0.0.254"
+      }
+    },
+    "newStorageAccountName": "[concat(uniqueString(resourceGroup().id), 'dynamicdisk')]",
+    "nicName": "nic",
+    "OSDiskName": "osdisk",
+    "publicIPAddressName": "publicips",
+    "publicIPAddressType": "Dynamic",
+    "sshKeyPath": "[concat('/home/',parameters('adminUserName'),'/.ssh/authorized_keys')]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('networkSettings').subnet.dse.name)]",
+    "vmStorageAccountContainerName": "vhd",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('networkSettings').virtualNetworkName)]"
+  }
 }
