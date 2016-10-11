@@ -472,9 +472,9 @@
           "dataDisks": {
             "[reference('diskSelection').outputs.dataDiskArray.value]",
             "imageReference": {
-              "publisher": "[parameters('headImagePublisher')]",
-              "offer": "[parameters('headImageOffer')]",
-              "sku": "[parameters('headImageSku')]",
+              "publisher": "[parameters('imagePublisher')]",
+              "offer": "[parameters('imageOffer')]",
+              "sku": "[parameters('imageSku')]",
               "version": "latest"
             }
           },
@@ -482,9 +482,9 @@
             "caching": "ReadWrite",
             "createOption": "FromImage",
             "imageReference": {
-              "publisher": "[parameters('headImagePublisher')]",
-              "offer": "[parameters('headImageOffer')]",
-              "sku": "[parameters('headImageSku')]",
+              "publisher": "[parameters('imagePublisher')]",
+              "offer": "[parameters('imageOffer')]",
+              "sku": "[parameters('imageSku')]",
               "version": "latest"
             },
             "name": "osdisk",
