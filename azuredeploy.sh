@@ -860,11 +860,13 @@ md5sum ./omsagent-${omslnxagentver}.universal.x64.sh
 sudo sh ./omsagent-${omslnxagentver}.universal.x64.sh --upgrade -w $omsworkspaceid -s $omsworkspacekey
 }
 
-instrumentfluentd_docker()
+instrumentfluentd_docker_centos72()
 {
-cd /etc/systemd/system/multi-user.target.wants/ && sed -i.bak -e '12d' docker.service
-cd /etc/systemd/system/multi-user.target.wants/ && sed -i '12iEnvironment="DOCKER_OPTS=--log-driver=fluentd --log-opt fluentd-address=localhost:25225"' docker.service
-cd /etc/systemd/system/multi-user.target.wants/ && sed -i '13iExecStart=/usr/bin/dockerd -H fd:// $DOCKER_OPTS' docker.service
+cd /usr/lib/systemd/system/ && sed -i.bak -e '11d' docker.service
+cd /usr/lib/systemd/system/ && sed -i '11iEnvironment="DOCKER_OPTS=--log-driver=fluentd --log-opt fluentd-address=localhost:25225"' docker.service
+cd /usr/lib/systemd/system/ && sed -i '12iExecStart=/usr/bin/dockerd -H fd:// $DOCKER_OPTS' docker.service
+service docker restart
+systemctl daemon-reload
 service docker restart
 }
 #########################
@@ -911,7 +913,12 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		#reboot
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-
+                if [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+		sleep 45;
+		instrumentfluentd_docker_centos72;
+		else
+		echo "Fluentd injection omitted";
+		fi
 	fi
 if [ ! -z "$omsworkspaceid" ]; then
 #sleep 45;
