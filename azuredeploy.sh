@@ -747,12 +747,13 @@ rm -rf /tmp/host
 service pbs_server restart >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 
 cp /var/spool/torque/server_priv/nodes > $SHARE_HOME/$HPC_USER/machines.LINUX
-pbsnodes -a|sed -n -e '/=Linux/ s/.*\=Linux *//p'|cut -d ' ' -f1> $SHARE_HOME/$HPC_USER/machines.LINUX
+#pbsnodes -a|sed -n -e '/=Linux/ s/.*\=Linux *//p'|cut -d ' ' -f1> $SHARE_HOME/$HPC_USER/machines.LINUX
+#cp /var/spool/torque/server_priv/nodes $SHARE_HOME/$HPC_USER/machines.LINUX
 
 chown $HPC_USER:$HPC_USER $SHARE_HOME/$HPC_USER/machines.LINUX
 else
 
-        su -c "scp $HPC_USER@$MASTER_HOSTNAME:/tmp/torque-6.0.1*/torque-package-mom-linux-x86_64.sh /tmp" $HPC_USER	
+        su -c "scp $HPC_USER@$MASTER_HOSTNAME:/tmp/torque-6.0.2*/torque-package-mom-linux-x86_64.sh /tmp" $HPC_USER	
 	su -c "sudo /tmp/torque-package-mom-linux-x86_64.sh --install" $HPC_USER	
         su -c "sudo /usr/local/sbin/pbs_mom" $HPC_USER
         su -c "ssh $MASTER_HOSTNAME 'sudo service pbs_server restart'" $HPC_USER
