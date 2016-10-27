@@ -18,6 +18,9 @@ fi
 MASTER_HOSTNAME=$( echo "$1" |cut -d\: -f1 )
 WORKER_HOSTNAME_PREFIX=$( echo "$1" |cut -d\: -f2 )
 WORKER_COUNT=$( echo "$1" |cut -d\: -f3 )
+omsworkspaceid=$( echo "$1" |cut -d\: -f4 )
+omsworkspacekey=$( echo "$1" |cut -d\: -f5 )
+omslnxagentver=$( echo "$1" |cut -d\: -f6 )
 LAST_WORKER_INDEX=$(($WORKER_COUNT - 1))
 
 # Shares
@@ -849,6 +852,21 @@ install_cudann5_ubuntu1604()
     rm cudnn-8.0-linux-x64-v5.1.tgz && \
     ldconfig
 }
+installomsagent()
+{
+wget https://github.com/Microsoft/OMS-Agent-for-Linux/releases/download/OMSAgent_Ignite2016_v$omslnxagentver/omsagent-${omslnxagentver}.universal.x64.sh
+chmod +x ./omsagent-${omslnxagentver}.universal.x64.sh
+md5sum ./omsagent-${omslnxagentver}.universal.x64.sh
+sudo sh ./omsagent-${omslnxagentver}.universal.x64.sh --upgrade -w $omsworkspaceid -s $omsworkspacekey
+}
+
+instrumentfluentd_docker()
+{
+cd /etc/systemd/system/multi-user.target.wants/ && sed -i.bak -e '12d' docker.service
+cd /etc/systemd/system/multi-user.target.wants/ && sed -i '12iEnvironment="DOCKER_OPTS=--log-driver=fluentd --log-opt fluentd-address=localhost:25225"' docker.service
+cd /etc/systemd/system/multi-user.target.wants/ && sed -i '13iExecStart=/usr/bin/dockerd -H fd:// $DOCKER_OPTS' docker.service
+service docker restart
+}
 #########################
 ### Place holder for common GPU/HPC Sku operations on both master and computes ###
 
@@ -895,3 +913,9 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
 
 	fi
+if [ ! -z "$omsworkspaceid" ]; then
+#sleep 45;
+#instrumentfluentd_docker;
+sleep 30;
+installomsagent;
+fi
