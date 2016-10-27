@@ -913,16 +913,14 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		#reboot
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-                if [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
-		sleep 45;
-		instrumentfluentd_docker_centos72;
-		else
-		echo "Fluentd injection omitted";
-		fi
+                #if [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+		#sleep 45;
+		#instrumentfluentd_docker_centos72;
+		#else
+		#echo "Fluentd injection omitted";
+		#fi
 	fi
 if [ ! -z "$omsworkspaceid" ]; then
-#sleep 45;
-#instrumentfluentd_docker;
 sleep 30;
 installomsagent;
 fi
