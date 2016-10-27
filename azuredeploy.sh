@@ -48,6 +48,7 @@ HPC_GID=7007
 numberofDisks=$6
 dockerVer=$( echo "$7" |cut -d\: -f1 )
 dockerComposeVer=$( echo "$7" |cut -d\: -f2 )
+dockMVer=$( echo "$7" |cut -d\: -f3 )
 userName=$( echo "$8" |cut -d\: -f2 )
 skuName=$( echo "$8" |cut -d\: -f1 )
 TEMPLATE_BASE_URL=$9
