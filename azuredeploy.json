@@ -292,7 +292,28 @@
       "metadata": {
         "description": "This parameter allows the user to select the number of disks they want"
       }
-    }
+    },
+	"OMSWorkSpaceId": {
+		    "type": "string",
+		    "defaultValue": "",
+		    "metadata": {
+			"description": "(Optional- Keep Blank if not used)The Workspace ID for the OMS Portal Workspace."
+		    }
+		},
+	"OMSWorkSpaceKey": {
+		    "type": "securestring",
+		    "defaultValue": "",
+		    "metadata": {
+			"description": "(Optional- Keep Blank if not used) The OMS Portal Workspace key"
+		    }
+		},
+	"OMSLinuxAgentFullVersion": {
+			    "type": "string",
+			    "defaultValue": "1.2.0-75",
+			    "metadata": {
+				"description": "The OMS Agent 64 bit version will update and register with OMS Workspace for DDC"
+			    }
+        	}
   },
   "resources": [
     {
