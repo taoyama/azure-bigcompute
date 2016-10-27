@@ -54,7 +54,7 @@
       "value": "Standard_LRS"
     },
     "dockerVer": {
-      "value": "1.12.1-1"
+      "value": "1.12"
     },
     "dockerComposeVer": {
       "value": "1.9.0-rc1"
