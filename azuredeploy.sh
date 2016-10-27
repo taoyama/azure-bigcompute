@@ -224,30 +224,21 @@ system_update()
 
 install_docker()
 {
-
     wget -qO- "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e" 
     rpm --import "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
     yum install -y yum-utils
-    	if [ "$dockerVer" == "1.12.1-1" ] ; then
-           mkdir -p /opt/docker  &&  curl -L https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-1.12.1-1.el7.centos.x86_64.rpm > /opt/docker/docker-engine-1.12.1-1.el7.centos.x86_64.rpm && curl -L https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-selinux-1.12.1-1.el7.centos.noarch.rpm > /opt/docker/docker-engine-selinux-1.12.1-1.el7.centos.noarch.rpm && curl -L https://yum.dockerproject.org/repo/main/centos/7/Packages/docker-engine-debuginfo-1.12.1-1.el7.centos.x86_64.rpm > /opt/docker/docker-engine-debuginfo-1.12.1-1.el7.centos.x86_64.rpm 
-           chmod -R 755 /opt/docker/*
-           yum install -y /opt/docker/*.rpm
-           rm -rf /opt/docker/
-	elif [ "$dockerVer" == "1.11" ] ; then
-           yum-config-manager --add-repo https://packages.docker.com/$dockerVer/yum/repo/main/centos/7
-           yum install -y docker-engine 
-	fi
+    yum-config-manager --add-repo https://packages.docker.com/$dockerVer/yum/repo/main/centos/7
+    yum install -y docker-engine
     systemctl stop firewalld
     systemctl disable firewalld
-    #service docker start
     gpasswd -a $userName docker
     systemctl start docker
     systemctl enable docker
-    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-    curl -L https://github.com/docker/machine/releases/download/v0.8.1/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
+    curl -L "https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/machine/releases/download/v$dockMVer/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine
     chmod +x /usr/local/bin/docker-machine
     chmod +x /usr/local/bin/docker-compose
-    echo 'export PATH=/usr/local/bin:$PATH' >>~/.bash_profile
+    export PATH=$PATH:/usr/local/bin/
     systemctl restart docker
 }
 install_docker_ubuntu()
