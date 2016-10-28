@@ -1,6 +1,6 @@
  [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
  
-    * Azure Big Compute(#azure-big-compute)
+    * [Azure Big Compute](#azure-big-compute)
       * [Reporting bugs](#reporting-bugs)
       * [Patches and pull requests](#patches-and-pull-requests)
       * [MSFT Ignite 2016 Azure HPC/GPU Skus](#msft-ignite-2016-azure-hpcgpu-skus)
