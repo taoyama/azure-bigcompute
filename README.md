@@ -1,10 +1,9 @@
  [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
  
-    * [Azure Big Compute](#azure-big-compute)
+   * [Azure Big Compute](#azure-big-compute)
       * [Reporting bugs](#reporting-bugs)
       * [Patches and pull requests](#patches-and-pull-requests)
-      * [MSFT Ignite 2016 Azure HPC/GPU Skus](#msft-ignite-2016-azure-hpcgpu-skus)
-      
+      * [MSFT Ignite 2016 Azure HPC/GPU Skus](#msft-ignite-2016-azure-hpcgpu-skus)     
    * [Ubuntu 16.04.0-LTS - GPU N-Series (SSD pending - IB/RDMA SKUs pending)](#ubuntu-16040-lts---gpu-n-series-ssd-pending---ibrdma-skus-pending)
       * [<a href="http://gpu.azure.com/">GPU</a>](#gpu)
       * [Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all](#customizable-gpu-clusters-with-nvdia-drivers-and-docker-112-with-swarm-mode-in-all)
