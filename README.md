@@ -1,5 +1,7 @@
  [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
- 
+Table of Contents
+=================
+
    * [Azure Big Compute](#azure-big-compute)
       * [Reporting bugs](#reporting-bugs)
       * [Patches and pull requests](#patches-and-pull-requests)
