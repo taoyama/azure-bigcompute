@@ -232,9 +232,9 @@ docker run --rm -it -v /data/data/munge-munge-0.5.12:/usr/src/munge:rw -v /data/
 * Then one can login to https://OMSWorkspaceName.portal.mms.microsoft.com and check all containers running for Docker DataCenter and use Log Analytics and if Required perform automated backups using the corresponding Solutions for OMS.
  * Or if the OMS Workspace and the Machines are in the same subscription, one can just connect the Linux Node sources manually to the OMS Workspace as Data Sources.
  The Cluster would be automatically hooked to Activity Logs Solution as the picture below.
- ![OMS Activity](https://raw.githubusercontent.com/Azure/azure-dockerdatacenter/master/AzureActivity.png)
+ ![OMS Activity](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/AzureActivity.png)
  * New nodes to be added to the cluster as worker needs to follow the [Docker Instructions for OMS](https://github.com/Microsoft/OMS-Agent-for-Linux/blob/master/docs/Docker-Instructions.md) manually.
 
 * ~~All Docker Engines in this Azure DDC autocluster(s) are automatically instrumented via ExecStart and Specific DOCKER_OPTIONS to share metric with the OMS Workspace during deployment as in the picture below.~~
 
-![OMS Container](https://raw.githubusercontent.com/Azure/azure-dockerdatacenter/master/Container.png)
+![OMS Container](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/Container.png)
