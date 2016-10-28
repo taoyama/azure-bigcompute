@@ -237,4 +237,13 @@ docker run --rm -it -v /data/data/munge-munge-0.5.12:/usr/src/munge:rw -v /data/
 
 * ~~All Docker Engines in this Azure DDC autocluster(s) are automatically instrumented via ExecStart and Specific DOCKER_OPTIONS to share metric with the OMS Workspace during deployment as in the picture below.~~
 
-![OMS Container](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/Container.png)
+![OMS Container](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/Containers.png)
+
+## Torque for CentOS-HPC Skus
+**All computes would have automatic pbs_mom and head the pbs_mom and pbs_server for Torque 6.0.2.**
+**Cluster is auto-configured for Torque and for pbs-config  pbs_demux   pbsdsh  pbs_mom  pbsnodes pbs_sched  pbs_server pbs_track**
+
+All path are set automatically for key 'default' users like azureuser/hpc/root
+for root specific <code>su - root</code> is required.
+
+![Torque](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/pbsnodes.png)
