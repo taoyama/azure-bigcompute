@@ -1,4 +1,28 @@
  [![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
+ 
+    * [<a href="https://azure.microsoft.com/en-us/solutions/big-compute/">Azure Big Compute</a>](#azure-big-compute)
+      * [Reporting bugs](#reporting-bugs)
+      * [Patches and pull requests](#patches-and-pull-requests)
+      * [MSFT Ignite 2016 Azure HPC/GPU Skus](#msft-ignite-2016-azure-hpcgpu-skus)
+   * [Ubuntu 16.04.0-LTS - GPU N-Series (SSD pending - IB/RDMA SKUs pending)](#ubuntu-16040-lts---gpu-n-series-ssd-pending---ibrdma-skus-pending)
+      * [<a href="http://gpu.azure.com/">GPU</a>](#gpu)
+      * [Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all](#customizable-gpu-clusters-with-nvdia-drivers-and-docker-112-with-swarm-mode-in-all)
+         * [From azure-cli (dockerized) or single install azure-cli - Topology example 1](#from-azure-cli-dockerized-or-single-install-azure-cli---topology-example-1)
+         * [From azure-cli (dockerized) or single install azure-cli - Topology example 1 (variation)](#from-azure-cli-dockerized-or-single-install-azure-cli---topology-example-1-variation)
+         * [From azure-cli (dockerized) or single install azure-cli - Topology example 2](#from-azure-cli-dockerized-or-single-install-azure-cli---topology-example-2)
+         * [Full customizable cluster from Portal via template (GPU and/or CentOS-HPC)](#full-customizable-cluster-from-portal-via-template-gpu-andor-centos-hpc)
+         * [Create a Jumpbox](#create-a-jumpbox)
+   * [H-Series CentOS 7.2 / Ubuntu 16.04-LTS (IB/RDMA for CentOS-HPC v7.1)](#h-series-centos-72--ubuntu-1604-lts-ibrdma-for-centos-hpc-v71)
+      * [<a href="https://simulation.azure.com/">Simulations with Azure Big Compute</a>](#simulations-with-azure-big-compute)
+   * [CentOS-HPC](#centos-hpc)
+      * [<a href="https://simulation.azure.com/">Simulations with Azure Big Compute</a>](#simulations-with-azure-big-compute-1)
+      * [mpirun](#mpirun)
+      * [Docker Cross Compiling (e.g:)](#docker-cross-compiling-eg)
+      * [IB](#ib)
+      * [<del>Pre-Req and or</del> Optional for CentOS-HPC Skus](#pre-req-and-or-optional-for-centos-hpc-skus)
+      * [Torque for CentOS-HPC Skus](#torque-for-centos-hpc-skus)
+
+
 #[Azure Big Compute](https://azure.microsoft.com/en-us/solutions/big-compute/)
 
 
