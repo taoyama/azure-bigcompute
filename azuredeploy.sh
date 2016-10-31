@@ -234,10 +234,12 @@ install_docker()
     yum install -y docker-engine
     systemctl stop firewalld
     systemctl disable firewalld
+    #service docker start
     gpasswd -a $userName docker
     systemctl start docker
     systemctl enable docker
-    curl -L "https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
+    #curl -L https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+     curl -L "https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
     curl -L https://github.com/docker/machine/releases/download/v$dockMVer/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine
     chmod +x /usr/local/bin/docker-machine
     chmod +x /usr/local/bin/docker-compose
@@ -246,20 +248,33 @@ install_docker()
 }
 install_docker_ubuntu()
 {
-	apt-get install -y apt-transport-https ca-certificates
-	apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-	echo 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' >> /etc/apt/sources.list.d/docker.list	
-	apt-get update -y
-	apt-cache -y policy docker-engine
-	DEBIAN_FRONTEND=noninteractiv apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
-	DEBIAN_FRONTEND=noninteractiv apt-get update -y 
-	DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated docker-engine
-	groupadd docker
-	usermod -aG docker $userName
-	/etc/init.d/apparmor stop 
-	/etc/init.d/apparmor teardown 
-	update-rc.d -f apparmor remove
-	apt-get -y remove apparmor
+	
+        # System Update and docker version update
+         DEBIAN_FRONTEND=noninteractive apt-get -y update
+         apt-get install -y apt-transport-https ca-certificates
+        #curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | apt-key add --import
+        #echo "deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list
+         apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+	 echo "deb https://packages.docker.com/${dockerVer}/apt/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
+         #echo 'deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-xenial main' > /etc/apt/sources.list.d/docker.list
+	 DEBIAN_FRONTEND=noninteractive apt-get -y update
+         DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+         apt-cache policy docker-engine
+	 groupadd docker
+	 usermod -aG docker $userName
+         #apt-get install -y docker-engine
+	 apt-get install -y --allow-unauthenticated docker-engine
+	 /etc/init.d/apparmor stop 
+	 /etc/init.d/apparmor teardown 
+	 update-rc.d -f apparmor remove
+	 apt-get -y remove apparmor
+         #DEBIAN_FRONTEND=noninteractive apt-get install -y --allow-unauthenticated docker-engine
+    curl -L https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/machine/releases/download/v$dockMVer/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine
+    chmod +x /usr/local/bin/docker-machine
+    chmod +x /usr/local/bin/docker-compose
+    export PATH=$PATH:/usr/local/bin/
+    systemctl restart docker
 }
 install_nvdia_ubuntu()
 {
