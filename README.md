@@ -5,6 +5,7 @@ Table of Contents
    * [Azure Big Compute](#azure-big-compute)
       * [Reporting bugs](#reporting-bugs)
       * [Patches and pull requests](#patches-and-pull-requests)
+      * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-Skus)
       * [MSFT Ignite 2016 Azure HPC/GPU Skus](#msft-ignite-2016-azure-hpcgpu-skus)     
    * [Ubuntu 16.04.0-LTS - GPU N-Series (SSD pending - IB/RDMA SKUs pending)](#ubuntu-16040-lts---gpu-n-series-ssd-pending---ibrdma-skus-pending)
       * [<a href="http://gpu.azure.com/">GPU</a>](#gpu)
@@ -64,6 +65,11 @@ Please report bugs  by opening an issue in the [GitHub Issue Tracker](https://gi
 ## Patches and pull requests
 
 Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the `git rebase` command to update your branch to the current master if necessary.
+
+## Region availability and Quotas for MS Azure Skus
+* Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
+* Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase.
+* For more information on Azure subscription and service limits, quota, and constraints, please see [here](https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/).
 
 ~~## Pre-Req~~
 
