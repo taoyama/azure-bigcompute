@@ -681,9 +681,9 @@ if is_master; then
 # Prep packages
 # Download the source package
 cd /tmp >> /tmp/azure_pbsdeploy.log.$$ 2>&1
-wget http://www.adaptivecomputing.com/index.php?wpfb_dl=3124 -O torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+wget http://www.adaptivecomputing.com/index.php?wpfb_dl=3158 -O torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 tar xzvf torque.tar.gz >> /tmp/azure_pbsdeploy.log.$$ 2>&1
-cd torque-6.0.2* >> /tmp/azure_pbsdeploy.log.$$ 2>&1
+cd torque-6.1.0* >> /tmp/azure_pbsdeploy.log.$$ 2>&1
 
 # Build
 ./configure >> /tmp/azure_pbsdeploy.log.$$ 2>&1
@@ -770,7 +770,7 @@ chown $HPC_USER:$HPC_USER $SHARE_HOME/$HPC_USER/machines.LINUX
 service pbs_mom start
 else
 
-        su -c "scp $HPC_USER@$MASTER_HOSTNAME:/tmp/torque-6.0.2*/torque-package-mom-linux-x86_64.sh /tmp" $HPC_USER	
+        su -c "scp $HPC_USER@$MASTER_HOSTNAME:/tmp/torque-6.1.0*/torque-package-mom-linux-x86_64.sh /tmp" $HPC_USER	
 	su -c "sudo /tmp/torque-package-mom-linux-x86_64.sh --install" $HPC_USER	
         su -c "sudo /usr/local/sbin/pbs_mom" $HPC_USER
         su -c "ssh $MASTER_HOSTNAME 'sudo service pbs_server restart'" $HPC_USER
