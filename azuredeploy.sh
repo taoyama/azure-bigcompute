@@ -911,8 +911,8 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		install_packages_ubuntu
 		setup_shares
 		setup_hpc_user
-                install_docker_ubuntu
-                install_docker_apps
+                #install_docker_ubuntu
+                #install_docker_apps
                 install_nvdia_ubuntu
                 install_cudann5_ubuntu1604
                 install_cuda8_ubuntu1604
