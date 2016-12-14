@@ -255,15 +255,16 @@ install_docker_ubuntu()
         #curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | apt-key add --import
         #echo "deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list
          apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-	 echo "deb https://packages.docker.com/${dockerVer}/apt/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
+	 apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+	 #echo "deb https://packages.docker.com/${dockerVer}/apt/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
          #echo 'deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-xenial main' > /etc/apt/sources.list.d/docker.list
 	 DEBIAN_FRONTEND=noninteractive apt-get -y update
          DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
          apt-cache policy docker-engine
 	 groupadd docker
 	 usermod -aG docker $userName
-         #apt-get install -y docker-engine
-	 apt-get install -y --allow-unauthenticated docker-engine
+         apt-get install -y docker-engine
+	 #apt-get install -y --allow-unauthenticated docker-engine
 	 /etc/init.d/apparmor stop 
 	 /etc/init.d/apparmor teardown 
 	 update-rc.d -f apparmor remove
@@ -301,6 +302,7 @@ install_docker_apps()
     #docker run -it -dp 80:8080 -p 8009:8009  rossbachp/apache-tomcat8
     
     docker run -dti --restart=always --name=azure-cli microsoft/azure-cli
+    docker run -dti --restart=always --name=azure-cli-python azuresdk/azure-cli-python
     #if is_master; then
     #docker run -it -d --restart=always -p 8080:8080 rancher/server
     #fi
