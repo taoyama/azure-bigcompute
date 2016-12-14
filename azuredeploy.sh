@@ -893,6 +893,13 @@ service docker restart
 systemctl daemon-reload
 service docker restart
 }
+install_cuda8centos()
+{
+wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-8.0.44-1.x86_64.rpm
+rpm -i cuda-repo-rhel7-8.0.44-1.x86_64.rpm
+yum clean all
+yum install -y cuda
+}
 #########################
 ### Place holder for common GPU/HPC Sku operations on both master and computes ###
 
@@ -935,6 +942,8 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		#install_easybuild
 		#install_go
 		#reboot
+		install_cuda8centos
+		install_cudann5_ubuntu1604
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
                 #if [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
