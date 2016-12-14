@@ -250,7 +250,8 @@ install_docker_ubuntu()
 {
 	
         # System Update and docker version update
-         DEBIAN_FRONTEND=noninteractive apt-get -y update
+	DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
+        DEBIAN_FRONTEND=noninteractive apt-get -y update
          apt-get install -y apt-transport-https ca-certificates
         #curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | apt-key add --import
         #echo "deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list
@@ -283,6 +284,7 @@ install_nvdia_ubuntu()
 service lightdm stop 
 wget https://azuregpu.blob.core.windows.net/nv-drivers/NVIDIA-Linux-x86_64-361.45.09-grid.run
 chmod +x NVIDIA-Linux-x86_64-361.45.09-grid.run
+DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc g++ make binutils linux-headers-`uname -r`
 DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-361.45.09-grid.run  --silent
@@ -330,9 +332,8 @@ install_packages()
 
 install_packages_ubuntu()
 {
-
+DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get install -y zlib1g zlib1g-dev  bzip2 libbz2-dev libssl1.0.0  libssl-doc libssl1.0.0-dbg libsslcommon2 libsslcommon2-dev libssl-dev  nfs-common rpcbind git zip libicu55 libicu-dev icu-devtools unzip mdadm wget gsl-bin libgsl2  bc ruby-dev gcc make autoconf bison build-essential libyaml-dev libreadline6-dev libncurses5 libncurses5-dev libffi-dev libgdbm3 libgdbm-dev libpam0g-dev libxtst6 libxtst6-* libxtst-* libxext6 libxext6-* libxext-* git-core libelf-dev asciidoc binutils-dev fakeroot crash kexec-tools makedumpfile kernel-wedge portmap
-
 DEBIAN_FRONTEND=noninteractive apt-get -y build-dep linux
 DEBIAN_FRONTEND=noninteractive apt-get -y update
 DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
@@ -841,6 +842,7 @@ EOF
 }
 install_cuda8_ubuntu1604()
 {
+DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 # workaround: CUDA 8.0 RC doesn't support gcc 5.4 without the following patch at the end
 export CUDA_DOWNLOAD_SUM=24278d78afed380b4328c1e2f917b31d70c3f4c8f297b642200e003311944c22 && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/8.0/direct/cuda-repo-ubuntu1604-8-0-rc_8.0.27-1_amd64.deb && \
     echo "$CUDA_DOWNLOAD_SUM  cuda-repo.deb" | sha256sum -c --strict - && \
