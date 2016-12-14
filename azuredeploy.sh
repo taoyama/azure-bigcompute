@@ -405,6 +405,7 @@ setup_shares()
                 systemctl enable nfs-server || echo "Already enabled"
                 systemctl enable nfs-kernel-server.service
         else
+	        
                 systemctl start rpcbind || echo "Already enabled"
                 systemctl start nfs-server || echo "Already enabled"
                 systemctl enable rpcbind || echo "Already enabled"
@@ -922,6 +923,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 #########################
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
 		install_packages_ubuntu
+		DEBIAN_FRONTEND=noninteractive apt-get install -y nfs-common
 		setup_shares
 		setup_hpc_user
                 install_docker_ubuntu
