@@ -932,7 +932,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
                 install_cudann5_ubuntu1604
                 install_cuda8_ubuntu1604
                 
-	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
+	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] ; then
 		install_pkgs_all
 		setup_shares
 		setup_hpc_user
