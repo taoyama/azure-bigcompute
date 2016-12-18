@@ -870,6 +870,20 @@ export CUDA_DOWNLOAD_SUM=24278d78afed380b4328c1e2f917b31d70c3f4c8f297b642200e003
     dpkg -i patch.deb && \
     rm patch.deb && export LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LIBRARY_PATH}	
 }
+
+}
+install_cuda8044_ubuntu1604()
+{
+DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
+# workaround: CUDA 8.0 RC doesn't support gcc 5.4 without the following patch at the end
+export CUDA_DOWNLOAD_SUM=24278d78afed380b4328c1e2f917b31d70c3f4c8f297b642200e003311944c22 && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb && \
+    echo "$CUDA_DOWNLOAD_SUM  cuda-repo.deb" | sha256sum -c --strict - && \
+    dpkg -i cuda-repo.deb && \
+    rm cuda-repo.deb && \
+    apt-get update -y && apt-get install -y cuda \
+export LIBRARY_PATH=/usr/local/cuda/lib64/:${LIBRARY_PATH}  && export LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LIBRARY_PATH}\
+export PATH=/usr/local/cuda-8.0/bin:${PATH}
+}
 install_cudann5_ubuntu1604()
 {
     export CUDNN_DOWNLOAD_SUM=a87cb2df2e5e7cc0a05e266734e679ee1a2fadad6f06af82a76ed81a23b102c8 && curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/cudnn-8.0-linux-x64-v5.1.tgz -O && \
@@ -930,7 +944,8 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
                 install_docker_apps
                 install_nvdia_ubuntu
                 install_cudann5_ubuntu1604
-                install_cuda8_ubuntu1604
+                #install_cuda8_ubuntu1604
+		install_cuda8044_ubuntu1604
                 
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] ; then
 		install_pkgs_all
