@@ -870,8 +870,6 @@ export CUDA_DOWNLOAD_SUM=24278d78afed380b4328c1e2f917b31d70c3f4c8f297b642200e003
     dpkg -i patch.deb && \
     rm patch.deb && export LIBRARY_PATH=/usr/local/cuda/lib64/stubs:${LIBRARY_PATH}	
 }
-
-}
 install_cuda8044_ubuntu1604()
 {
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
