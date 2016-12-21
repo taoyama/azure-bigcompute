@@ -874,8 +874,8 @@ install_cuda8044_ubuntu1604()
 {
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 # workaround: CUDA 8.0 RC doesn't support gcc 5.4 without the following patch at the end
-export CUDA_DOWNLOAD_SUM=24278d78afed380b4328c1e2f917b31d70c3f4c8f297b642200e003311944c22 && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb && \
-    echo "$CUDA_DOWNLOAD_SUM  cuda-repo.deb" | sha256sum -c --strict - && \
+export CUDA_DOWNLOAD_SUM=16b0946a3c99ca692c817fb7df57520c && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb && \
+    echo "$CUDA_DOWNLOAD_SUM  cuda-repo.deb" | md5sum -c --strict - && \
     dpkg -i cuda-repo.deb && \
     rm cuda-repo.deb && \
     apt-get update -y && apt-get install -y cuda \
