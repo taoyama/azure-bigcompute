@@ -878,7 +878,7 @@ export CUDA_DOWNLOAD_SUM=16b0946a3c99ca692c817fb7df57520c && export CUDA_PKG_VER
     dpkg -i cuda-repo.deb && \
     rm cuda-repo.deb && \
     apt-get update -y && apt-get install -y cuda && \
-export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/:${LIBRARY_PATH}  && export LIBRARY_PATH=/usr/local/cudacuda-8.0/lib64/stubs:${LIBRARY_PATH} && \
+export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/:${LIBRARY_PATH}  && export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/stubs:${LIBRARY_PATH} && \
 export PATH=/usr/local/cuda-8.0/bin:${PATH}
 }
 install_cudann5_ubuntu1604()
