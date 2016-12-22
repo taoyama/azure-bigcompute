@@ -96,7 +96,7 @@ DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-361.45.09-grid.run  --silen
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 }
 </code>
-
+## One can run all [CUDA Samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html#convolutionFFT2D) across the cluster and test with CUDA 8.044.1 
 ##	Customizable GPU Clusters with NVDIA Drivers and docker 1.12 (with Swarm Mode) in all
 
 ###	From azure-cli (dockerized) or single install azure-cli - Topology example 1
