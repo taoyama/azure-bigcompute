@@ -46,7 +46,8 @@
         "6.5",
         "7.1",
         "16.04.0-LTS",
-        "7.2"
+        "7.2",
+	"7.3"
       ],
       "metadata": {
         "description": "OpenLogic CentOS-HPC Sku to use"
