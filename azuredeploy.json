@@ -107,6 +107,8 @@
       "allowedValues": [
         "Standard_NC12",
         "Standard_NC24",
+	"Standard_NC24R",
+	"Standard_NC12R",
         "Standard_A8",
         "Standard_A9",
         "Standard_H8",
@@ -192,6 +194,7 @@
         "Standard_NC12",
         "Standard_NC24",
         "Standard_NC24R",
+	"Standard_NC12R",
         "Standard_A8",
         "Standard_A9",
         "Standard_H8",
