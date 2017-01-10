@@ -985,10 +985,12 @@ service docker restart
 }
 install_cuda8centos()
 {
+enable_kernel_update
 wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-8.0.44-1.x86_64.rpm
 rpm -i cuda-repo-rhel7-8.0.44-1.x86_64.rpm
 yum clean all
 yum install -y cuda
+disable_kernel_update
 }
 #########################
 ### Place holder for common GPU/HPC Sku operations on both master and computes ###
