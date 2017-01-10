@@ -845,15 +845,23 @@ cp /var/spool/pbs/server_priv/nodes  $SHARE_HOME/$HPC_USER/machines.LINUX
 chown $HPC_USER:$HPC_USER $SHARE_HOME/$HPC_USER/machines.LINUX
 /etc/init.d/pbs start
 else
-
         su -c "scp -r $HPC_USER@$MASTER_HOSTNAME:/tmp/pbspro-master/ /tmp" $HPC_USER	
-	su -c "sudo /tmp/pbspro-master/./autogen.sh" $HPC_USER	
-        su -c "sudo /tmp/pbspro-master/./configure --prefix=/opt/pbs" $HPC_USER
-        su -c "sudo /tmp/pbspro-master/make" $HPC_USER
-        su -c "sudo /tmp/pbspro-master/make install" $HPC_USER
+	su -c "cd /tmp/pbspro-master/ && sudo ./autogen.sh" $HPC_USER	
+        su -c "cd /tmp/pbspro-master/ && sudo ./configure --prefix=/opt/pbs" $HPC_USER
+        su -c "cd /tmp/pbspro-master/ && sudo make" $HPC_USER
+        su -c "cd /tmp/pbspro-master/ && sudo make install" $HPC_USER
         su -c "sudo /opt/pbs/libexec/pbs_postinstall" $HPC_USER
         su -c "sudo chmod 4755 /opt/pbs/sbin/pbs_iff /opt/pbs/sbin/pbs_rcp" $HPC_USER
         su -c "sudo /etc/init.d/pbs start" $HPC_USER
+        su -c "cd /etc && sudo sed -i.bak -e '5d' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i '5iPBS_START_MOM=1' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i.bak -e '2d' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i '2iPBS_START_SERVER=0' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i.bak -e '3d' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i '3iPBS_START_SCHED=0' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i.bak -e '4d' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i '4iPBS_START_COMM=0' pbs.conf" $HPC_USER
+	su -c "sudo /etc/init.d/pbs restart" $HPC_USER
         su -c "ssh $MASTER_HOSTNAME 'sudo /etc/init.d/pbs restart'" $HPC_USER
 fi
 }
