@@ -782,6 +782,76 @@ else
         su -c "ssh $MASTER_HOSTNAME 'sudo service pbs_server restart'" $HPC_USER
 fi
 }
+install_pbspro()
+{
+yum install -y gcc make rpm-build libtool hwloc-devel \
+      libX11-devel libXt-devel libedit-devel libical-devel \
+      ncurses-devel perl postgresql-devel python-devel tcl-devel \
+      tk-devel swig expat-devel openssl-devel libXext libXft \
+      autoconf automake \
+      expat libedit postgresql-server python \
+      sendmail sudo tcl tk libical --setopt=protected_multilib=false
+      
+if is_master; then
+# Prep packages
+# Download the source package
+cd /tmp >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+wget -qO- -O tmp.zip https://github.com/PBSPro/pbspro/archive/master.zip >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+unzip tmp.zip >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+rm -rf tmp.zip >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+
+# Build
+cd pbspro-master >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+./autogen.sh >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+./configure --prefix=/opt/pbs >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+make  >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+make install >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+
+/opt/pbs/libexec/pbs_postinstall >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+
+chmod 4755 /opt/pbs/sbin/pbs_iff /opt/pbs/sbin/pbs_rcp >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+
+ . /etc/profile.d/pbs.sh >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+ 
+ /etc/init.d/pbs start >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+
+# Push packages to compute nodes
+c=0
+rm -rf /tmp/hosts
+echo "$MASTER_HOSTNAME" > /tmp/host
+while [ $c -lt $WORKER_COUNT ]
+do
+        printf "\n$WORKER_HOSTNAME_PREFIX$c">> /tmp/host
+        workerhost=$WORKER_HOSTNAME_PREFIX$c     
+        echo "$workerhost np=1" >> /var/spool/pbs/server_priv/nodes
+        echo $workerhost
+        qmgr -c "create node $workerhost"
+        (( c++ ))
+done
+sed '2d' /tmp/host > /tmp/hosts
+rm -rf /tmp/host
+
+
+# restart pbs_server
+/etc/init.d/pbs restart >> /tmp/azure_pbsprodeploy.log.$$ 2>&1
+
+cp /var/spool/pbs/server_priv/nodes  $SHARE_HOME/$HPC_USER/machines.LINUX
+
+chown $HPC_USER:$HPC_USER $SHARE_HOME/$HPC_USER/machines.LINUX
+/etc/init.d/pbs start
+else
+
+        su -c "scp -r $HPC_USER@$MASTER_HOSTNAME:/tmp/pbspro-master/ /tmp" $HPC_USER	
+	su -c "sudo /tmp/pbspro-master/./autogen.sh" $HPC_USER	
+        su -c "sudo /tmp/pbspro-master/./configure --prefix=/opt/pbs" $HPC_USER
+        su -c "sudo /tmp/pbspro-master/make" $HPC_USER
+        su -c "sudo /tmp/pbspro-master/make install" $HPC_USER
+        su -c "sudo /opt/pbs/libexec/pbs_postinstall" $HPC_USER
+        su -c "sudo chmod 4755 /opt/pbs/sbin/pbs_iff /opt/pbs/sbin/pbs_rcp" $HPC_USER
+        su -c "sudo /etc/init.d/pbs start" $HPC_USER
+        su -c "ssh $MASTER_HOSTNAME 'sudo /etc/init.d/pbs restart'" $HPC_USER
+fi
+}
 install_cuda75()
 {
 enable_kernel_update
