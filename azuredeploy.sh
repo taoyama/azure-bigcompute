@@ -31,6 +31,7 @@ SHARE_DATA=$MNT_POINT/data
 # Munged
 MUNGE_VERSION=$( echo "$4" |cut -d\: -f1 )
 MUNGE_USER=$( echo "$4" |cut -d\: -f2 )
+TORQUEORPBS=$( echo "$4" |cut -d\: -f3 )
 MUNGE_GROUP=$MUNGE_USER
 
 
@@ -784,6 +785,8 @@ fi
 }
 install_pbspro()
 {
+enable_kernel_update
+
 yum install -y gcc make rpm-build libtool hwloc-devel \
       libX11-devel libXt-devel libedit-devel libical-devel \
       ncurses-devel perl postgresql-devel python-devel tcl-devel \
@@ -791,7 +794,9 @@ yum install -y gcc make rpm-build libtool hwloc-devel \
       autoconf automake \
       expat libedit postgresql-server python \
       sendmail sudo tcl tk libical --setopt=protected_multilib=false
-      
+
+disable_kernel_update
+
 if is_master; then
 # Prep packages
 # Download the source package
@@ -1025,7 +1030,11 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		install_munge
 		#install_slurm
 		#install_vnc_head
+		if [ "$TORQUEORPBS" == "Torque" ] ; then
 		install_torque
+		else
+		install_pbspro
+		fi
 		#install_easybuild
 		#install_go
 		#reboot
