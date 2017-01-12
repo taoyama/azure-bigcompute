@@ -853,8 +853,8 @@ else
         su -c "sudo /opt/pbs/libexec/pbs_postinstall" $HPC_USER
         su -c "sudo chmod 4755 /opt/pbs/sbin/pbs_iff /opt/pbs/sbin/pbs_rcp" $HPC_USER
         su -c "sudo /etc/init.d/pbs start" $HPC_USER	
-	su -c "rm -rf /etc/pbs.conf" hpc
-	su -c "scp -r $HPC_USER@$MASTER_HOSTNAME:/etc/pbs.conf /etc" $HPC_USER
+	#su -c "rm -rf /etc/pbs.conf" hpc
+	#su -c "scp -r $HPC_USER@$MASTER_HOSTNAME:/etc/pbs.conf /etc" $HPC_USER
         su -c "cd /etc && sudo sed -i.bak -e '5d' pbs.conf" $HPC_USER
 	su -c "cd /etc && sudo sed -i '5iPBS_START_MOM=1' pbs.conf" $HPC_USER
 	su -c "cd /etc && sudo sed -i.bak -e '2d' pbs.conf" $HPC_USER
@@ -863,6 +863,8 @@ else
 	su -c "cd /etc && sudo sed -i '3iPBS_START_SCHED=0' pbs.conf" $HPC_USER
 	su -c "cd /etc && sudo sed -i.bak -e '4d' pbs.conf" $HPC_USER
 	su -c "cd /etc && sudo sed -i '4iPBS_START_COMM=0' pbs.conf" $HPC_USER
+	su -c "cd /etc && sudo sed -i.bak -e '1d' pbs.conf" $HPC_USER
+        su -c "cd /etc && sudo sed -i "1iPBS_SERVER=$MASTER_HOSTNAME" pbs.conf" $HPC_USER
 	su -c "sudo /etc/init.d/pbs restart" $HPC_USER
         su -c "ssh $MASTER_HOSTNAME 'sudo /etc/init.d/pbs restart'" $HPC_USER
 fi
