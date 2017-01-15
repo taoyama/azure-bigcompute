@@ -73,7 +73,7 @@ enable_kernel_update()
 		cd /etc && sed -i.bak -e '28d' yum.conf
 		cd /etc && sed -i '28i#exclude=kernel*' yum.conf
 
-	elif [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] ; then
+	elif [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.3" ]  ; then
                 echo "kernel update is enabled";
 
 	fi
@@ -86,7 +86,7 @@ disable_kernel_update()
 		cd /etc && sed -i.bak -e '28d' yum.conf
 		cd /etc && sed -i '28iexclude=kernel*' yum.conf
 
-	elif [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] ; then
+	elif [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.3" ]  ; then
                 echo "No kernel to update";
 
 	fi
@@ -363,7 +363,7 @@ install_pkgs_all()
 
 	if [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] ; then
     		install_azure_cli
-	elif [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.2" ] ; then
+	elif [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] ; then
 
     		install_docker
 
@@ -444,7 +444,7 @@ setup_hpc_user()
 		update-rc.d -f apparmor remove
 		apt-get -y remove apparmor
 
-	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.2" ] ; then
+	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] ; then
 		    # disable selinux
 		    sed -i 's/enforcing/disabled/g' /etc/selinux/config
 		    setenforce permissive
@@ -1041,7 +1041,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		setup_env
 		#install_cuda75
 		#install_modules
-		install_munge
+		#install_munge
 		#install_slurm
 		#install_vnc_head
 		if [ "$TORQUEORPBS" == "Torque" ] ; then
