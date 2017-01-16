@@ -971,7 +971,11 @@ export CUDA_DOWNLOAD_SUM=16b0946a3c99ca692c817fb7df57520c && export CUDA_PKG_VER
     apt-get install -y nvidia-cuda-toolkit && \
 export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/:${LIBRARY_PATH}  && export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/stubs:${LIBRARY_PATH} && \
 export PATH=/usr/local/cuda-8.0/bin:${PATH}
+ if is_master; then
 /usr/local/cuda-8.0/bin/./cuda-install-samples-8.0.sh $SHARE_DATA
+else
+echo "already installed on share"
+fi
 }
 install_cudann5_ubuntu1604()
 {
