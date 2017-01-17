@@ -1052,18 +1052,23 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		#install_munge
 		#install_slurm
 		#install_vnc_head
-		if [ "$TORQUEORPBS" == "Torque" ] ; then
+		#install_easybuild
+		#install_go
+		#reboot	
+		if [ "$skuName" == "7.3" ] ; then
+		install_cuda8centos
+		install_cudann5_ubuntu1604
+		echo "GPU Skus"
+		else
+	        if [ "$TORQUEORPBS" == "Torque" ] ; then
 		install_torque
 		else
 		install_pbspro
 		fi
-		#install_easybuild
-		#install_go
-		#reboot
-		install_cuda8centos
-		install_cudann5_ubuntu1604
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		echo "HPC Skus"
+		fi
                 #if [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		#sleep 45;
 		#instrumentfluentd_docker_centos72;
