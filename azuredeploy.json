@@ -333,7 +333,7 @@
     },
     "dockerMachineVer": {
       "type": "string",
-      "defaultValue": "0.9.0-rc2",
+      "defaultValue": "0.9.0",
       "metadata": {
         "description": "The docker-machine version **Only for CentOS-HPC 7.1- kernels 3.10 and above **"
       }
