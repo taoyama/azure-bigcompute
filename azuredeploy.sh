@@ -1012,6 +1012,35 @@ yum clean all
 yum install -y cuda
 disable_kernel_update
 }
+postinstall_centos73nc24rgpu()
+{
+yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers 
+yum update -y kernel\* selinux-policy\*
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+cd /etc/default && sed -i.bak -e '6d' grub
+cd /etc/default && sed -i '6iGRUB_CMDLINE_LINUX="console=tty1 console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300 net.ifnames=0 rdblacklist=nouveau"' grub
+
+echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf
+
+yum install -y  xorg-x11-drv*
+
+yum erase -y xorg-x11-drv-nouveau
+
+wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/lis-rpms-4.1.3.tar.gz
+
+tar -zxvf lis-rpms-4.1.3.tar.gz
+
+cd LISISO/CentOS73/
+
+wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
+chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
+./NVIDIA-Linux-x86_64-367.64-grid.run --silent
+
+ # mv /usr/lib64/xorg/modules/extensions/libglx.so /usr/lib64/xorg/modules/extensions/libglx.so.xorg
+ # ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so.xorg
+ reboot
+}
 #########################
 ### Place holder for common GPU/HPC Sku operations on both master and computes ###
 
@@ -1059,6 +1088,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		install_cuda8centos
 		install_cudann5_ubuntu1604
 		echo "GPU Skus"
+		postinstall_centos73nc24rgpu
 		else
 	        if [ "$TORQUEORPBS" == "Torque" ] ; then
 		install_torque
