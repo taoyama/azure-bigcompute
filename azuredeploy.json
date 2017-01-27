@@ -206,7 +206,7 @@
     },
     "workerNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_NC24",
+      "defaultValue": "Standard_NC12",
       "allowedValues": [
         "Standard_A0",
         "Standard_A1",
@@ -298,7 +298,7 @@
     },
     "workerNodeCount": {
       "type": "int",
-      "defaultValue": 8,
+      "defaultValue": 1,
       "metadata": {
         "description": "This template creates N worker node. Use workerNodeCount to specify that N."
       }
