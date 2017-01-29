@@ -1019,7 +1019,7 @@ yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers
 yum update -y kernel\* selinux-policy\*
 grub2-mkconfig -o /boot/grub2/grub.cfg
 cd /etc/default && sed -i.bak -e '6d' grub
-cd /etc/default && sed -i '6iGRUB_CMDLINE_LINUX="console=tty1 console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300 net.ifnames=0 rdblacklist=nouveau"' grub
+cd /etc/default && sed -i '6iGRUB_CMDLINE_LINUX="console=tty1 console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300 net.ifnames=0 rdblacklist=nouveau nouveau.modeset=0"' grub
 echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf
 yum install -y  xorg-x11-drv*
 yum erase -y xorg-x11-drv-nouveau
