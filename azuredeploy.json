@@ -198,7 +198,8 @@
         "Standard_A8",
         "Standard_A9",
         "Standard_A10",
-        "Standard_A11"
+        "Standard_A11",
+        "Standard_A55"
       ],
       "metadata": {
         "description": "Size of the head node."
@@ -290,7 +291,8 @@
         "Standard_A8",
         "Standard_A9",
         "Standard_A10",
-        "Standard_A11"
+        "Standard_A11",
+        "Standard_A55"
       ],
       "metadata": {
         "description": "Size of the worker nodes."
