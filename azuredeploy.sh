@@ -1193,8 +1193,8 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    sleep 30;
 		    installomsagent;
 		    fi
-                    postinstall_centos73kde
-		    postinstall_centos73nc24rgpu
+                    postinstall_centos73kde;
+		    postinstall_centos73nc24rgpu;
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
 		        echo "this is a NC"
@@ -1202,9 +1202,9 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    sleep 30;
 		    installomsagent;
 		    fi	
-		    install_cuda8centos
-		    install_cudann5_ubuntu1604
-		    postinstall_centos73nc24rgpu
+		    install_cuda8centos;
+		    install_cudann5_ubuntu1604;
+		    postinstall_centos73nc24rgpu;
 		    ( sleep 15 ; reboot ) &
 		fi
                 		
