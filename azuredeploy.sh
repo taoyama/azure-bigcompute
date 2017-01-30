@@ -1027,15 +1027,41 @@ yum install -y  xorg-x11-drv*
 yum erase -y xorg-x11-drv-nouveau
 wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/lis-rpms-4.1.3.tar.gz
 tar -zxvf lis-rpms-4.1.3.tar.gz
-cd LISISO/CentOS73/
 wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
 chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
 ./NVIDIA-Linux-x86_64-367.64-grid.run --silent
+echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
+echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 
  # mv /usr/lib64/xorg/modules/extensions/libglx.so /usr/lib64/xorg/modules/extensions/libglx.so.xorg
+ #ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so
  # ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so.xorg
  #reboot
 }
+
+postinstall_centos73kde()
+{
+yum install -y vnc*
+systemctl enable vncserver@:1.service
+#echo "[Service]">/etc/systemd/system/vncserver@:1.service
+#echo "Type=forking">>/etc/systemd/system/vncserver@:1.service
+#echo "ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
+#echo "ExecStart=/sbin/runuser -l root -c "/usr/bin/vncserver %i"">>/etc/systemd/system/vncserver@:1.service
+#echo "PIDFile=/root/.vnc/%H%i.pid">>/etc/systemd/system/vncserver@:1.service
+#echo "ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
+cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@.service
+systemctl daemon-reload
+#echo "#!/bin/sh">~/.vnc/xstartup
+#echo "unset SESSION_MANAGER">>~/.vnc/xstartup
+#echo "unset DBUS_SESSION_BUS_ADDRESS">>~/.vnc/xstartup
+#echo "startkde &">>~/.vnc/xstartup
+yum groupinstall -y 'KDE' 'X Window System' 'Fonts'
+yum install -y xinetd vnc-ltsp-config kde-workspace gdm
+ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
+systemctl isolate graphical.target
+}
+
+
 #########################
 ### Place holder for common GPU/HPC Sku operations on both master and computes ###
 
@@ -1053,6 +1079,9 @@ EOT
 
 echo "$HPC_USER               hard    memlock         unlimited" >> /etc/security/limits.conf
 echo "$HPC_USER               soft    memlock         unlimited" >> /etc/security/limits.conf
+
+
+
 #########################
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
 		install_packages_ubuntu
@@ -1061,10 +1090,46 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		setup_hpc_user
                 install_docker_ubuntu
                 install_docker_apps
+		if [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
+		    echo "this is a NC with RDMA"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi
                 install_nvdia_ubuntu
                 install_cudann5_ubuntu1604
                 #install_cuda8_ubuntu1604
 		install_cuda8044_ubuntu1604
+		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
+		    echo "this is a H with RDMA"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi		    
+		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]];then
+		        echo "this is a H"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi		        
+		elif [[ "${HEADNODE_SIZE}" =~ "NV" ]] && [[ "${WORKERNODE_SIZE}" =~ "NV" ]];then
+		        echo "this is a NV"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi
+                install_nvdia_ubuntu		        
+		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
+		        echo "this is a NC"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi	
+                install_nvdia_ubuntu
+                install_cudann5_ubuntu1604
+                #install_cuda8_ubuntu1604
+		install_cuda8044_ubuntu1604	        
+		fi
                 
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] ; then
 		install_pkgs_all
@@ -1079,21 +1144,70 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		#install_easybuild
 		#install_go
 		#reboot	
-		if [ "$skuName" == "7.3" ] ; then
-		install_cuda8centos
-		install_cudann5_ubuntu1604
-		echo "GPU Skus"
-		postinstall_centos73nc24rgpu
-		else
-	        if [ "$TORQUEORPBS" == "Torque" ] ; then
-		install_torque
-		else
-		install_pbspro
+		if [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
+		    echo "this is a NC with RDMA"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi
+		    
+		    install_cuda8centos
+		    install_cudann5_ubuntu1604
+		    postinstall_centos73nc24rgpu
+		    ( sleep 15 ; reboot ) &
+		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
+		    echo "this is a H with RDMA"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi
+		    
+	            if [ "$TORQUEORPBS" == "Torque" ] ; then
+		    install_torque
+		    else
+		    install_pbspro
+		    fi
+		    
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		    
+		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]];then
+		        echo "this is a H"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi
+		    
+	            if [ "$TORQUEORPBS" == "Torque" ] ; then
+		    install_torque
+		    else
+		    install_pbspro
+		    fi
+		    
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		    
+		elif [[ "${HEADNODE_SIZE}" =~ "NV" ]] && [[ "${WORKERNODE_SIZE}" =~ "NV" ]];then
+		        echo "this is a NV"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi
+                    postinstall_centos73kde
+		    postinstall_centos73nc24rgpu
+		    ( sleep 15 ; reboot ) &
+		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
+		        echo "this is a NC"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi	
+		    install_cuda8centos
+		    install_cudann5_ubuntu1604
+		    postinstall_centos73nc24rgpu
+		    ( sleep 15 ; reboot ) &
 		fi
-		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
-		echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-		echo "HPC Skus"
-		fi
+                		
                 #if [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
 		#sleep 45;
 		#instrumentfluentd_docker_centos72;
@@ -1101,7 +1215,3 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		#echo "Fluentd injection omitted";
 		#fi
 	fi
-if [ ! -z "$omsworkspaceid" ]; then
-sleep 30;
-installomsagent;
-fi
