@@ -1015,6 +1015,36 @@ yum clean all
 yum install -y cuda
 disable_kernel_update
 }
+
+postinstall_centos73kde()
+{
+#Keep VNC Off for now
+#yum install -y vnc*
+#systemctl enable vncserver@:1.service
+#cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@.service
+#systemctl daemon-reload
+
+# Switch off service
+#echo "[Service]">/etc/systemd/system/vncserver@:1.service
+#echo "Type=forking">>/etc/systemd/system/vncserver@:1.service
+#echo "ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
+#echo "ExecStart=/sbin/runuser -l root -c "/usr/bin/vncserver %i"">>/etc/systemd/system/vncserver@:1.service
+#echo "PIDFile=/root/.vnc/%H%i.pid">>/etc/systemd/system/vncserver@:1.service
+#echo "ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
+
+# Quit playing with xstartup
+#echo "#!/bin/sh">~/.vnc/xstartup
+#echo "unset SESSION_MANAGER">>~/.vnc/xstartup
+#echo "unset DBUS_SESSION_BUS_ADDRESS">>~/.vnc/xstartup
+#echo "startkde &">>~/.vnc/xstartup
+
+#Install KDE and make graphical default target
+yum groupinstall -y 'KDE' 'X Window System' 'Fonts'
+yum install -y xinetd vnc-ltsp-config kde-workspace gdm
+ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
+systemctl isolate graphical.target
+}
+
 postinstall_centos73nc24rgpu()
 {
 yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers 
@@ -1039,27 +1069,7 @@ echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
  #reboot
 }
 
-postinstall_centos73kde()
-{
-yum install -y vnc*
-systemctl enable vncserver@:1.service
-#echo "[Service]">/etc/systemd/system/vncserver@:1.service
-#echo "Type=forking">>/etc/systemd/system/vncserver@:1.service
-#echo "ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
-#echo "ExecStart=/sbin/runuser -l root -c "/usr/bin/vncserver %i"">>/etc/systemd/system/vncserver@:1.service
-#echo "PIDFile=/root/.vnc/%H%i.pid">>/etc/systemd/system/vncserver@:1.service
-#echo "ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
-cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@.service
-systemctl daemon-reload
-#echo "#!/bin/sh">~/.vnc/xstartup
-#echo "unset SESSION_MANAGER">>~/.vnc/xstartup
-#echo "unset DBUS_SESSION_BUS_ADDRESS">>~/.vnc/xstartup
-#echo "startkde &">>~/.vnc/xstartup
-yum groupinstall -y 'KDE' 'X Window System' 'Fonts'
-yum install -y xinetd vnc-ltsp-config kde-workspace gdm
-ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
-systemctl isolate graphical.target
-}
+
 
 
 #########################
