@@ -1196,6 +1196,22 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		
+		elif [[ "${HEADNODE_SIZE}" =~ "A" ]] && [[ "${WORKERNODE_SIZE}" =~ "A" ]] && [[ "${HEADNODE_SIZE}" =~ "9" ]] && [[ "${WORKERNODE_SIZE}" =~ "9" ]];then
+		    echo "this is a A9 with RDMA"
+		    if [ ! -z "$omsworkspaceid" ]; then
+		    sleep 30;
+		    installomsagent;
+		    fi
+		    
+	            if [ "$TORQUEORPBS" == "Torque" ] ; then
+		    install_torque
+		    else
+		    install_pbspro
+		    fi
+		    
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile    
 		    
 		elif [[ "${HEADNODE_SIZE}" =~ "NV" ]] && [[ "${WORKERNODE_SIZE}" =~ "NV" ]];then
 		        echo "this is a NV"
