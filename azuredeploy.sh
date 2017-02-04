@@ -1069,7 +1069,32 @@ echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
  #reboot
 }
 
+ubuntunvidiadesktop()
+{
+echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
+echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 
+grub-mkconfig -o /boot/grub/grub.cfg
+
+cd /etc/default && sed -i.bak -e '11d' grub
+cd /etc/default && sed -i '11iGRUB_CMDLINE_LINUX_DEFAULT="console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300 rdblacklist=nouveau nouveau.modeset=0"' grub
+
+update-grub
+
+echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf
+
+DEBIAN_FRONTEND=noninteractive update-initramfs -u
+service lightdm stop 
+wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
+chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
+DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
+DEBIAN_FRONTEND=noninteractive apt-get update -y
+DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r`
+DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.64-grid.run  --dkms -s
+DEBIAN_FRONTEND=noninteractive update-initramfs -u
+apt-get update -y
+apt-get install -y ubuntu-desktop
+}
 
 
 #########################
@@ -1128,7 +1153,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    sleep 30;
 		    installomsagent;
 		    fi
-                install_nvdia_ubuntu		        
+                ubuntunvidiadesktop		        
 		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
 		        echo "this is a NC"
 		    if [ ! -z "$omsworkspaceid" ]; then
