@@ -7,7 +7,7 @@
     },
     "adminUserName": {
       "value": "azureuser",
-        "metadata": {
+      "metadata": {
         "description": "The admin user to Logon to the HPC master and workers"
       }
     },
@@ -16,13 +16,13 @@
     },
     "hpcUserName": {
       "value": "hpc",
-        "metadata": {
+      "metadata": {
         "description": "The Internal hpcUsername which is not allowed external access from outside the cluster"
       }
     },
     "mountFolder": {
       "value": "/data",
-        "metadata": {
+      "metadata": {
         "description": "The shared folder system mounted on the master and shared between the workers via the munge key."
       }
     },
@@ -46,7 +46,7 @@
     },
     "workerNodeCount": {
       "value": 8,
-        "metadata": {
+      "metadata": {
         "description": "The number of worker nodes."
       }
     },
@@ -64,11 +64,11 @@
     },
     "dataDiskSize": {
       "value": 1022,
-        "metadata": {
+      "metadata": {
         "description": "The  Data Disk Size of each Disk to be created"
       }
     },
-        "numDataDisks": {
+    "numDataDisks": {
       "value": "16",
       "allowedValues": [
         "1",
@@ -87,57 +87,56 @@
         "14",
         "15",
         "16",
-	      "17",
-	      "18",
-	      "19",
-	      "20",
-	      "21",
-	      "22",
-	      "23",
-	      "24",
-	      "25",
-	      "26",
-	      "27",
-	      "28",
-	      "29",
-	      "30",
-	      "31",
-	      "32",
-	      "33",
-	      "35",
-	      "36",
-	      "37",
-	      "38",
-	      "39",
-	      "40",
-	      "41",
-	      "42",
-	      "43",
-	      "44",
-	      "45",
-	      "46",
-	      "47",
-	      "48",
-	      "49",
-	      "50"
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50"
       ],
       "metadata": {
         "description": "This parameter allows the user to select the number of disks you want"
       }
     },
-         "OMSWorkSpaceId": {
-	   "value": "Optional-OMS WS Id",
-	   "required": "false"
-	 },
-	 "OMSWorkSpaceKey": {
-	   "value": "Optional-OMS WS key",
-	   "required": "false"
-	 },
-	 "OMSLinuxAgentFullVersion": {
-	   "value": "1.2.0-75",
-	   "required": "false"
-         }
-       }
+    "OMSWorkSpaceId": {
+      "value": "Optional-OMS WS Id",
+      "required": "false"
+    },
+    "OMSWorkSpaceKey": {
+      "value": "Optional-OMS WS key",
+      "required": "false"
+    },
+    "OMSLinuxAgentFullVersion": {
+      "value": "1.2.0-75",
+      "required": "false"
+    }
   }
+} 
 }
-
