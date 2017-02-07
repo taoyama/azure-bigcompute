@@ -1264,7 +1264,9 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 	            if [ "$TORQUEORPBS" == "Torque" ] ; then
 		    install_torque
 		    else
+		    enable_kernel_update
 		    install_pbspro
+		    disable_kernel_update
 		    fi
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
@@ -1280,7 +1282,9 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 	            if [ "$TORQUEORPBS" == "Torque" ] ; then
 		    install_torque
 		    else
+		    enable_kernel_update
 		    install_pbspro
+		    disable_kernel_update
 		    fi
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
@@ -1296,7 +1300,9 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 	            if [ "$TORQUEORPBS" == "Torque" ] ; then
 		    install_torque
 		    else
+		    enable_kernel_update
 		    install_pbspro
+		    disable_kernel_update
 		    fi
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
