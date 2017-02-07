@@ -104,7 +104,7 @@ setup_data_disks()
     createdPartitions=""
 
     # Loop through and partition disks until not found
-    for disk in sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge; do
+    for disk in sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf sgg ; do
         fdisk -l /dev/$disk || break
         fdisk /dev/$disk << EOF
 n
@@ -241,6 +241,11 @@ elif [ "$numberofDisks" == "49" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd)
 elif [ "$numberofDisks" == "50" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge)
+elif [ "$numberofDisks" == "51" ]; then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf)
+elif [ "$numberofDisks" == "52" ]; then
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf sgg)
+   
 fi
 
 printf "%s\n" "${disking[@]}"
