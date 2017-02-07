@@ -858,8 +858,6 @@ fi
 }
 install_pbspro()
 {
-enable_kernel_update
-
 yum install -y gcc make rpm-build libtool hwloc-devel \
       libX11-devel libXt-devel libedit-devel libical-devel \
       ncurses-devel perl postgresql-devel python-devel tcl-devel \
@@ -867,8 +865,6 @@ yum install -y gcc make rpm-build libtool hwloc-devel \
       autoconf automake \
       expat libedit postgresql-server python \
       sendmail sudo tcl tk libical --setopt=protected_multilib=false
-
-disable_kernel_update
 
 if is_master; then
 # Prep packages
