@@ -114,7 +114,7 @@
     },
     "headNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_NC12",
+      "defaultValue": "Standard_NC24",
       "allowedValues": [
         "Basic_A0",
         "Basic_A1",
@@ -216,7 +216,7 @@
     },
     "workerNodeSize": {
       "type": "string",
-      "defaultValue": "Standard_NC12",
+      "defaultValue": "Standard_NC24",
       "allowedValues": [
         "Basic_A0",
         "Basic_A1",
