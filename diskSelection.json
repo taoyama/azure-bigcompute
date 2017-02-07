@@ -20,7 +20,42 @@
         "13",
         "14",
         "15",
-        "16"
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50",
+        "51",
+        "52"
       ],
       "metadata": {
         "description": "This parameter allows the user to select the number of disks they want"
@@ -75,6 +110,42 @@
       "14": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('dataDisks')['13'], variables('dataDisks')['14'])]",
       "15": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('dataDisks')['13'], variables('dataDisks')['14'], variables('dataDisks')['15'])]",
       "16": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'])]",
+      "17": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('dataDisks')['17'])]",
+      "18": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('dataDisks')['17'], variables('dataDisks')['18'])]",
+      "19": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('dataDisks')['17'], variables('dataDisks')['18'], variables('dataDisks')['19'])]",
+      "20": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'])]",
+      "21": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('dataDisks')['21'])]",
+      "22": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('dataDisks')['21'], variables('dataDisks')['22'])]",
+      "23": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('dataDisks')['21'], variables('dataDisks')['22'], variables('dataDisks')['23'])]",
+      "24": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'])]",
+      "25": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('dataDisks')['25'])]",
+      "26": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('dataDisks')['25'], variables('dataDisks')['26'])]",
+      "27": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('dataDisks')['25'], variables('dataDisks')['26'], variables('dataDisks')['27'])]",
+      "28": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'])]",
+      "29": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('dataDisks')['29'])]",
+      "30": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('dataDisks')['29'],variables('dataDisks')['30'])]",
+      "31": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('dataDisks')['29'],variables('dataDisks')['30'],variables('dataDisks')['31'])]",
+      "32": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'])]",
+      "33": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('dataDisks')['33'])]",
+      "34": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('dataDisks')['33'], variables('dataDisks')['34'])]",
+      "35": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('dataDisks')['33'], variables('dataDisks')['34'], variables('dataDisks')['35'])]",
+      "36": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'])]",
+      "37": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('dataDisks')['37'])]",
+      "38": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('dataDisks')['37'], variables('dataDisks')['38'])]",
+      "39": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('dataDisks')['37'], variables('dataDisks')['38'], variables('dataDisks')['39'])]",
+      "40": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'])]",
+      "41": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('dataDisks')['41'])]",
+      "42": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('dataDisks')['41'], variables('dataDisks')['42'])]",
+      "43": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('dataDisks')['41'], variables('dataDisks')['42'], variables('dataDisks')['43'])]",
+      "44": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'])]",
+      "45": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('dataDisks')['45'])]",
+      "46": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('dataDisks')['45'], variables('dataDisks')['46'])]",
+      "47": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('dataDisks')['45'], variables('dataDisks')['46'], variables('dataDisks')['47'])]",
+      "48": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('diskDeltas')['48delta'])]",
+      "49": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('diskDeltas')['48delta'], variables('dataDisks')['49'])]",
+      "50": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('diskDeltas')['48delta'], variables('dataDisks')['49'], variables('dataDisks')['50'])]",
+      "51": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('diskDeltas')['48delta'], variables('dataDisks')['49'], variables('dataDisks')['50'], variables('dataDisks')['51'])]",
+      "52": "[concat(variables('diskDeltas')['4delta'], variables('diskDeltas')['8delta'], variables('diskDeltas')['12delta'], variables('diskDeltas')['16delta'], variables('diskDeltas')['20delta'], variables('diskDeltas')['24delta'], variables('diskDeltas')['28delta'], variables('diskDeltas')['32delta'], variables('diskDeltas')['36delta'], variables('diskDeltas')['40delta'], variables('diskDeltas')['44delta'], variables('diskDeltas')['48delta'], variables('diskDeltas')['52delta'] )]",
       "2": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'])]",
       "3": "[concat(variables('dataDisks')['1'], variables('dataDisks')['2'], variables('dataDisks')['3'])]",
       "4": "[variables('diskDeltas')['4delta']]",
@@ -276,7 +347,440 @@
             "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk15.vhd')]"
           }
         }
+      ],
+      "17": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 16,
+          "name": "datadisk16",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk16.vhd')]"
+          }
+        }
+      ],
+      "18": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 17,
+          "name": "datadisk17",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk17.vhd')]"
+          }
+        }
+      ],
+      "19": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 18,
+          "name": "datadisk18",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk18.vhd')]"
+          }
+        }
+      ],
+      "20": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 19,
+          "name": "datadisk19",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk19.vhd')]"
+          }
+        }
+      ],
+      "21": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 20,
+          "name": "datadisk20",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk20.vhd')]"
+          }
+        }
+      ],
+      "22": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 21,
+          "name": "datadisk21",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk21.vhd')]"
+          }
+        }
+      ],
+      "23": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 22,
+          "name": "datadisk22",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk22.vhd')]"
+          }
+        }
+      ],
+      "24": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 23,
+          "name": "datadisk23",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk23.vhd')]"
+          }
+        }
+      ],
+      "25": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 24,
+          "name": "datadisk24",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk24.vhd')]"
+          }
+        }
+      ],
+      "26": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 25,
+          "name": "datadisk25",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk25.vhd')]"
+          }
+        }
+      ],
+      "27": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 26,
+          "name": "datadisk26",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk26.vhd')]"
+          }
+        }
+      ],
+      "28": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 27,
+          "name": "datadisk27",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk27.vhd')]"
+          }
+        }
+      ],
+      "29": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 28,
+          "name": "datadisk28",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk28.vhd')]"
+          }
+        }
+      ],
+      "30": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 29,
+          "name": "datadisk29",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk29.vhd')]"
+          }
+        }
+      ],
+      "31": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 30,
+          "name": "datadisk30",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk30.vhd')]"
+          }
+        }
+      ],
+      "32": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 31,
+          "name": "datadisk31",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk31.vhd')]"
+          }
+        }
+      ],
+      "33": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 32,
+          "name": "datadisk32",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk32.vhd')]"
+          }
+        }
+      ],
+      "34": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 33,
+          "name": "datadisk33",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk33.vhd')]"
+          }
+        }
+      ],
+      "35": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 34,
+          "name": "datadisk34",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk34.vhd')]"
+          }
+        }
+      ],
+      "36": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 35,
+          "name": "datadisk35",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk35.vhd')]"
+          }
+        }
+      ],
+      "37": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 36,
+          "name": "datadisk36",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk36.vhd')]"
+          }
+        }
+      ],
+      "38": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 37,
+          "name": "datadisk37",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk37.vhd')]"
+          }
+        }
+      ],
+      "39": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 38,
+          "name": "datadisk38",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk38.vhd')]"
+          }
+        }
+      ],
+      "40": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 39,
+          "name": "datadisk39",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk39.vhd')]"
+          }
+        }
+      ],
+      "41": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 40,
+          "name": "datadisk40",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk40.vhd')]"
+          }
+        }
+      ],
+      "42": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 41,
+          "name": "datadisk41",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk41.vhd')]"
+          }
+        }
+      ],
+      "43": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 42,
+          "name": "datadisk42",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk42.vhd')]"
+          }
+        }
+      ],
+      "44": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 43,
+          "name": "datadisk43",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk43.vhd')]"
+          }
+        }
+      ],
+      "45": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 44,
+          "name": "datadisk44",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk44.vhd')]"
+          }
+        }
+      ],
+      "46": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 45,
+          "name": "datadisk45",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk45.vhd')]"
+          }
+        }
+      ],
+      "47": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 46,
+          "name": "datadisk46",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk46.vhd')]"
+          }
+        }
+      ],
+      "48": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 47,
+          "name": "datadisk47",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk47.vhd')]"
+          }
+        }
+      ],
+      "49": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 48,
+          "name": "datadisk48",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk48.vhd')]"
+          }
+        }
+      ],
+      "50": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 49,
+          "name": "datadisk49",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk49.vhd')]"
+          }
+        }
+      ],
+      "51": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 50,
+          "name": "datadisk50",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk50.vhd')]"
+          }
+        }
+      ],
+      "52": [
+        {
+          "caching": "None",
+          "createOption": "Empty",
+          "diskSizeGB": "[parameters('diskSizeGB')]",
+          "lun": 51,
+          "name": "datadisk51",
+          "vhd": {
+            "Uri": "[concat('http://',parameters('diskStorageAccountName'),'.blob.core.windows.net/',parameters('vmStAccountContainerName'),'/',parameters('masterName'),'-datadisk51.vhd')]"
+          }
+        }
       ]
+
     },
     "_comment2": "The delta arrays below build the difference from 0 to 4, 4 to 8, 8 to 12 disks and so on",
     "diskDeltas": {
@@ -303,10 +807,64 @@
         "[variables('dataDisks')['14'][0]]",
         "[variables('dataDisks')['15'][0]]",
         "[variables('dataDisks')['16'][0]]"
+      ],
+      "20delta": [
+        "[variables('dataDisks')['17'][0]]",
+        "[variables('dataDisks')['18'][0]]",
+        "[variables('dataDisks')['19'][0]]",
+        "[variables('dataDisks')['20'][0]]"
+      ],
+      "24delta": [
+        "[variables('dataDisks')['21'][0]]",
+        "[variables('dataDisks')['22'][0]]",
+        "[variables('dataDisks')['23'][0]]",
+        "[variables('dataDisks')['24'][0]]"
+      ],
+      "28delta": [
+        "[variables('dataDisks')['25'][0]]",
+        "[variables('dataDisks')['26'][0]]",
+        "[variables('dataDisks')['27'][0]]",
+        "[variables('dataDisks')['28'][0]]"
+      ],
+      "32delta": [
+        "[variables('dataDisks')['29'][0]]",
+        "[variables('dataDisks')['30'][0]]",
+        "[variables('dataDisks')['31'][0]]",
+        "[variables('dataDisks')['32'][0]]"
+      ],
+      "36delta": [
+        "[variables('dataDisks')['33'][0]]",
+        "[variables('dataDisks')['34'][0]]",
+        "[variables('dataDisks')['35'][0]]",
+        "[variables('dataDisks')['36'][0]]"
+      ],
+      "40delta": [
+        "[variables('dataDisks')['37'][0]]",
+        "[variables('dataDisks')['38'][0]]",
+        "[variables('dataDisks')['39'][0]]",
+        "[variables('dataDisks')['40'][0]]"
+      ],
+      "44delta": [
+        "[variables('dataDisks')['41'][0]]",
+        "[variables('dataDisks')['42'][0]]",
+        "[variables('dataDisks')['43'][0]]",
+        "[variables('dataDisks')['44'][0]]"
+      ],
+      "48delta": [
+        "[variables('dataDisks')['45'][0]]",
+        "[variables('dataDisks')['46'][0]]",
+        "[variables('dataDisks')['47'][0]]",
+        "[variables('dataDisks')['48'][0]]"
+      ],
+      "52delta": [
+        "[variables('dataDisks')['49'][0]]",
+        "[variables('dataDisks')['50'][0]]",
+        "[variables('dataDisks')['51'][0]]",
+        "[variables('dataDisks')['52'][0]]"
       ]
     }
   },
-  "resources": [ ],
+  "resources": [],
   "outputs": {
     "dataDiskArray": {
       "type": "array",
