@@ -104,7 +104,7 @@ setup_data_disks()
     createdPartitions=""
 
     # Loop through and partition disks until not found
-    for disk in sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf sgg ; do
+    for disk in sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf ; do
         fdisk -l /dev/$disk || break
         fdisk /dev/$disk << EOF
 n
@@ -186,65 +186,65 @@ elif [ "$numberofDisks" == "21" ]; then
 elif [ "$numberofDisks" == "22" ]; then
    disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx )
 elif [ "$numberofDisks" == "23" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy )
 elif [ "$numberofDisks" == "24" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz )
 elif [ "$numberofDisks" == "25" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc )
 elif [ "$numberofDisks" == "26" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd )
 elif [ "$numberofDisks" == "27" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe )
 elif [ "$numberofDisks" == "28" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff )
 elif [ "$numberofDisks" == "29" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg )
 elif [ "$numberofDisks" == "30" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh )
 elif [ "$numberofDisks" == "31" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi )
 elif [ "$numberofDisks" == "32" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj )
 elif [ "$numberofDisks" == "33" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk )
 elif [ "$numberofDisks" == "34" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl )
 elif [ "$numberofDisks" == "35" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm )
 elif [ "$numberofDisks" == "36" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo )
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn )
 elif [ "$numberofDisks" == "37" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo)
 elif [ "$numberofDisks" == "38" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp)
 elif [ "$numberofDisks" == "39" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq)
 elif [ "$numberofDisks" == "40" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr)
 elif [ "$numberofDisks" == "41" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs)
 elif [ "$numberofDisks" == "42" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft)
 elif [ "$numberofDisks" == "43" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu)
 elif [ "$numberofDisks" == "44" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv)
 elif [ "$numberofDisks" == "45" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw)
 elif [ "$numberofDisks" == "46" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx)
 elif [ "$numberofDisks" == "47" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy)
 elif [ "$numberofDisks" == "48" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz)
 elif [ "$numberofDisks" == "49" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc)
 elif [ "$numberofDisks" == "50" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd)
 elif [ "$numberofDisks" == "51" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge)
 elif [ "$numberofDisks" == "52" ]; then
-   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf sgg)
+   disking=( sdc sdd sde sdf sdg sdh sdi sdj sdk sdl sdm sdn sdo sdp sdq sdr sds sdt sdu sdv sdw sdx sdy sdz sfc sfd sfe sff sfg sfh sfi sfj sfk sfl sfm sfn sfo sfp sfq sfr sfs sft sfu sfv sfw sfx sfy sfz sgc sgd sge sgf)
    
 fi
 
