@@ -1255,10 +1255,11 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    sleep 30;
 		    installomsagent;
 		    fi
-		    
+		    enable_kernel_update
 		    install_cuda8centos
 		    install_cudann5_ubuntu1604
 		    postinstall_centos73nc24rgpu
+		    disable_kernel_update
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a H with RDMA"
