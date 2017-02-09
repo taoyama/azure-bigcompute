@@ -329,14 +329,15 @@ install_docker_ubuntu()
 	DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
         DEBIAN_FRONTEND=noninteractive apt-get -y update
          apt-get install -y apt-transport-https ca-certificates
-        #curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | apt-key add --import
-        #echo "deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list
-         apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-	 apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+        curl -s 'https://sks-keyservers.net/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e' | apt-key add --import
+        echo "deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-trusty main" >> /etc/apt/sources.list.d/docker.list
+         #apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+	 #apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
 	 #echo "deb https://packages.docker.com/${dockerVer}/apt/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
          #echo 'deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-xenial main' > /etc/apt/sources.list.d/docker.list
 	 DEBIAN_FRONTEND=noninteractive apt-get -y update
          DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+	 apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
          apt-cache policy docker-engine
 	 groupadd docker
 	 usermod -aG docker $userName
