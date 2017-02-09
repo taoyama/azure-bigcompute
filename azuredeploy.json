@@ -339,7 +339,11 @@
     },
     "dockerVer": {
       "type": "string",
-      "defaultValue": "1.12",
+      "defaultValue": "1.13",
+        "allowedValues": [
+        "1.12",
+        "1.13"
+      ],
       "metadata": {
         "description": "The docker version **Only for CentOS-HPC 7.1 - kernels 3.10 and above **"
       }
