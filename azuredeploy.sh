@@ -1110,7 +1110,8 @@ postinstall_centos73kde()
 
 #Install KDE and make graphical default target
 yum groupinstall -y 'KDE' 'X Window System' 'Fonts'
-yum install -y xinetd vnc-ltsp-config kde-workspace gdm
+#yum install -y xinetd vnc-ltsp-config kde-workspace gdm
+yum install -y vnc-ltsp-config kde-workspace gdm
 ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
 systemctl isolate graphical.target
 }
