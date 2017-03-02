@@ -84,34 +84,6 @@
         "description": "**Only for CentOS-HPC 7.1 Skus H-Series or A9s**"
       }
     },
-    "MUNGE_VER": {
-      "type": "string",
-      "defaultValue": "0.5.11",
-      "metadata": {
-        "description": "The MUNGE Version - This is a yum install."
-      }
-    },
-    "SLURM_VER": {
-      "type": "string",
-      "defaultValue": "15-08-10-1",
-      "metadata": {
-        "description": "The SLURM version - WIP Please Ignore for now."
-      }
-    },
-    "MUNGE_USER_GROUP": {
-      "type": "string",
-      "defaultValue": "munge",
-      "metadata": {
-        "description": "The MUNGE user ."
-      }
-    },
-    "SLURM_USER_GROUP": {
-      "type": "string",
-      "defaultValue": "slurm",
-      "metadata": {
-        "description": "The SLURM user ."
-      }
-    },
     "headNodeSize": {
       "type": "string",
       "defaultValue": "Standard_NC24",
@@ -340,7 +312,7 @@
     "dockerVer": {
       "type": "string",
       "defaultValue": "1.13",
-        "allowedValues": [
+      "allowedValues": [
         "1.12",
         "1.13"
       ],
@@ -410,34 +382,34 @@
         "21",
         "22",
         "23",
-	"24",
-	"25",
-	"26",
-	"27",
-	"28",
-	"29",
-	"30",
-	"31",
-	"32",
-	"33",
-	"35",
-	"36",
-	"37",
-	"38",
-	"39",
-	"40",
-	"41",
-	"42",
-	"43",
-	"44",
-	"45",
-	"46",
-	"47",
-	"48",
-	"49",
-	"50",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50",
         "51",
-        "52"	      
+        "52"
       ],
       "metadata": {
         "description": "This parameter allows the user to select the number of disks wanted"
@@ -780,8 +752,12 @@
     "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
     "avSetName": "avSet",
     "diskCaching": "ReadWrite",
-    "mungedet": "[concat(parameters('MUNGE_VER'), ':', parameters('MUNGE_USER_GROUP'), ':', parameters('pbsORTorque'))]",
-    "slurmdet": "[concat(parameters('SLURM_VER'), ':', parameters('SLURM_USER_GROUP'))]",
+    "MUNGE_VER": "0.5.11",
+    "MUNGE_USER_GROUP": "munge",
+    "mungedet": "[concat(variables('MUNGE_VER'), ':', variables('MUNGE_USER_GROUP'), ':', parameters('pbsORTorque'))]",
+    "SLURM_VER": "15-08-10-1",
+    "SLURM_USER_GROUP": "slurm",
+    "slurmdet": "[concat(variables('SLURM_VER'), ':', variables('SLURM_USER_GROUP'))]",
     "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
     "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
     "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'), ':', parameters('OMSWorkSpaceId'), ':', parameters('OMSWorkSpaceKey'), ':', parameters('OMSLinuxAgentFullVersion'), ':', parameters('headNodeSize'), ':', parameters('workerNodeSize'))]",
