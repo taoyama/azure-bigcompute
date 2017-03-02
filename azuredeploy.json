@@ -73,13 +73,14 @@
         "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
-    "pbsORTorque": {
+    "schedulerpbsORTorque": {
       "type": "string",
       "allowedValues": [
+        "None",
         "Torque",
         "pbspro"
       ],
-      "defaultValue": "Torque",
+      "defaultValue": "None",
       "metadata": {
         "description": "**Only for CentOS-HPC 7.1 Skus H-Series or A9s**"
       }
@@ -754,7 +755,7 @@
     "diskCaching": "ReadWrite",
     "MUNGE_VER": "0.5.11",
     "MUNGE_USER_GROUP": "munge",
-    "mungedet": "[concat(variables('MUNGE_VER'), ':', variables('MUNGE_USER_GROUP'), ':', parameters('pbsORTorque'))]",
+    "mungedet": "[concat(variables('MUNGE_VER'), ':', variables('MUNGE_USER_GROUP'), ':', parameters('schedulerpbsORTorque'))]",
     "SLURM_VER": "15-08-10-1",
     "SLURM_USER_GROUP": "slurm",
     "slurmdet": "[concat(variables('SLURM_VER'), ':', variables('SLURM_USER_GROUP'))]",
