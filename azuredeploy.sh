@@ -1124,6 +1124,7 @@ systemctl isolate graphical.target
 
 postinstall_centos73nc24rgpu()
 { 
+yum clean all
 yum update -y kernel\* selinux-policy\* dkms
 yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers
 grub2-mkconfig -o /boot/grub2/grub.cfg
