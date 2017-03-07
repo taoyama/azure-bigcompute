@@ -1137,12 +1137,18 @@ yum erase -y xorg-x11-drv-nouveau
 echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
 echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 dracut --force
-wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/lis-rpms-4.1.3.tar.gz
-tar -zxvf lis-rpms-4.1.3.tar.gz
-wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
+#wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/lis-rpms-4.1.3.tar.gz
+#tar -zxvf lis-rpms-4.1.3.tar.gz
+#wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
 chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
 ./NVIDIA-Linux-x86_64-367.64-grid.run --silent --dkms --install-libglvnd
 dracut --force
+git clone https://github.com/LIS/lis-next.git && cd lis-next/hv-rhel7.x/hv/
+./rhel7-hv-driver-install
+systemctl stop waagent
+systemctl disable waagent
+chmod +x /etc/rc.d/rc.local
+echo "sleep 240" >> /etc/rc.d/rc.local && echo "systemctl enable waagent" >> /etc/rc.d/rc.local && echo "systemctl start waagent" >> /etc/rc.d/rc.local
  # mv /usr/lib64/xorg/modules/extensions/libglx.so /usr/lib64/xorg/modules/extensions/libglx.so.xorg
  #ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so
  # ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so.xorg
