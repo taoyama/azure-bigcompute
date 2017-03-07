@@ -312,13 +312,12 @@
     },
     "dockerVer": {
       "type": "string",
-      "defaultValue": "1.13",
+      "defaultValue": "docker-ce",
       "allowedValues": [
-        "1.12",
-        "1.13"
+        "docker-ce"
       ],
       "metadata": {
-        "description": "The docker version **Only for CentOS-HPC 7.1 - kernels 3.10 and above **"
+        "description": "The docker version **Only for CentOS 7.3, CentOS-HPC 7.1 - kernels 3.10 and above **"
       }
     },
     "dockerComposeVer": {
