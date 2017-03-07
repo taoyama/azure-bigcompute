@@ -296,18 +296,27 @@ system_update()
     #yum  -y update --exclude=WALinuxAgent
     #yum  -y update
     #yum -x 'intel-*' -x 'kernel*' -x '*microsoft-*' -x 'msft-*'  -y update --exclude=WALinuxAgent
-    yum --exclude WALinuxAgent,intel-*,kernel*,*microsoft-*,msft-* -y update 
+    yum --exclude WALinuxAgent,intel-*,kernel*,kernel-headers*,*microsoft-*,msft-* -y update 
 
     set_time
 }
 
 install_docker()
 {
+if false
+then
     wget -qO- "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e" 
     rpm --import "https://pgp.mit.edu/pks/lookup?op=get&search=0xee6d536cf7dc86e2d7d56f59a178ac6c6238f52e"
     yum install -y yum-utils
     yum-config-manager --add-repo https://packages.docker.com/$dockerVer/yum/repo/main/centos/7
     yum install -y docker-engine
+ fi
+  yum install -y yum-utils
+  yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/$dockerVer.repo
+  yum makecache fast
+  yum -y install docker-ce
     systemctl stop firewalld
     systemctl disable firewalld
     #service docker start
@@ -321,6 +330,7 @@ install_docker()
     chmod +x /usr/local/bin/docker-compose
     export PATH=$PATH:/usr/local/bin/
     systemctl restart docker
+ 
 }
 install_docker_ubuntu()
 {
