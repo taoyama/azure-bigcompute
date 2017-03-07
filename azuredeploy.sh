@@ -1139,7 +1139,7 @@ wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls1
 tar -zxvf lis-rpms-4.1.3.tar.gz
 wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
 chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
-./NVIDIA-Linux-x86_64-367.64-grid.run --silent --dkms
+./NVIDIA-Linux-x86_64-367.64-grid.run --silent --dkms --install-libglvnd
 dracut --force
  # mv /usr/lib64/xorg/modules/extensions/libglx.so /usr/lib64/xorg/modules/extensions/libglx.so.xorg
  #ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so
