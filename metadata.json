@@ -1,7 +1,0 @@
-{
-  "itemDisplayName": "Create a SLURM cluster on the new CentOS-HPC offer SKU with direct RDMA Capabilities ",
-  "description": "Creates a SLURM HPC cluster running CentOS-HPC .  This cluster is ready to run Intel MPI workloads when used with A8 or A9 VMs.",
-  "githubUsername": "dwaiba",
-  "summary": "SLURM HPC cluster",
-  "dateUpdated": "2016-05-02"
-}
