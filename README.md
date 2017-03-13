@@ -18,7 +18,7 @@ Table of Contents
 
 # Azure Big Compute
 
-**[Azure Big Compute](https://azure.microsoft.com/en-us/solutions/big-compute/)
+**[Azure Big Compute](https://azure.microsoft.com/en-us/solutions/big-compute/)**
 
 **[MSFT Ignite 2016 Keynote Announcements](https://www.youtube.com/v/FNxfsTa8sJ0?start=1945&end=2146&autoplay=1)**
 
@@ -91,8 +91,9 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 **New Azure CLI 2.0**
 ------------------
 <code>docker run -dti --restart=always --name=azure-cli-python azuresdk/azure-cli-python && docker exec -ti azure-cli-python bash -c "az login && bash"</code>
-To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.
-----------------------------------------------------------------------------------------------------------------------
+
+<code>To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.</code>
+
 
 * GPU Cluster (each NC24) with no scheduler and no OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
@@ -124,8 +125,9 @@ To sign in, use a web browser to open the page https://aka.ms/devicelogin and en
 **Old Azure CLI**
 ------------------
 <code>docker run -dti --restart=always --name=azure-cli microsoft/azure-cli && docker exec -ti azure-cli bash -c "azure login && bash"</code>
-To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.
-----------------------------------------------------------------------------------------------------------------------
+
+
+<code>To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.</code>
 
 * GPU Cluster (each NC24) with no scheduler and no OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
