@@ -8,14 +8,14 @@ Table of Contents
       * [Reporting bugs](#reporting-bugs)
       * [Patches and pull requests](#patches-and-pull-requests)
       * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-skus)
-      * [Topology Examples with Azure CLI](#topology-examples-with-azure-cli)
-       * [New Azure CLI](#new-azure-cli)
-       * [Old Azure CLI](#old-azure-cli)
-      * [GPUs for Compute](#gpus-for-compute)
-      * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
-        * [mpirun](#mpirun)
-        * [IB](#ib)
-        * [Torque and pbspro for CentOS-HPC Skus](#torque-and-pbspro-for-centos-hpc-skus)
+   * [Topology Examples with Azure CLI](#topology-examples-with-azure-cli)
+      * [New Azure CLI](#new-azure-cli)
+      * [Old Azure CLI](#old-azure-cli)
+   * [GPUs for Compute](#gpus-for-compute)
+   * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
+      * [mpirun](#mpirun)
+      * [IB](#ib)
+      * [Torque and pbspro for CentOS-HPC Skus](#torque-and-pbspro-for-centos-hpc-skus)
 
 
 # Azure Big Compute
