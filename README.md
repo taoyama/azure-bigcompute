@@ -47,6 +47,11 @@ questions or comments.
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute-hpcscripts%2Fmaster%2Fazuredeploy.json" target="_blank">  
 <img src="http://armviz.io/visualizebutton.png"/> </a> 
 
+For portal Deployment, the following pic might assist.
+
+![azureportaldeploy](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azurebigcompute.png)
+
+
 This project is hosted at:
 
   * https://github.com/Azure/azure-bigcompute-hpcscripts
