@@ -9,7 +9,7 @@ Table of Contents
       * [Patches and pull requests](#patches-and-pull-requests)
       * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-skus)
       * [Topology Examples with Azure CLI](#topology-examples-with-azure-cli)
-       * [New Azure CLI 2.0](#new-azure-cli-2.0)
+       * [New Azure CLI](#new-azure-cli)
        * [Old Azure CLI](#old-azure-cli)
       * [GPUs for Compute](#gpus-for-compute)
       * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
@@ -90,7 +90,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 ## Topology Examples with Azure CLI
 
 
-### New Azure CLI 2.0
+### New Azure CLI
 
 
 <code>docker run -dti --restart=always --name=azure-cli-python azuresdk/azure-cli-python && docker exec -ti azure-cli-python bash -c "az login && bash"</code>
