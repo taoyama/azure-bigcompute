@@ -159,7 +159,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 ## GPUs for Compute
 
-[GPU Site]((http://gpu.azure.com/)
+[Azure GPUs](http://gpu.azure.com/)
 
 * Entry point is valid for the stated sku presently only for a specific region. 
 * gpu enablement is possible only on approval of quota for sku usage in the stated subscription.
@@ -176,6 +176,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 * Nodes that share public RSA key shared can be used as direct jump boxes as <code>azureuser@DNS</code>.
 * Head and comp nodes work via <code>sudo su - --hpc user-- </code> and then direct ssh.
 * Internal firewall is off.
+* For M60 usage for visualizations, please visit [aka.ms/accessgpu](https://aka.ms/accessgpu)
 
 
 ## H-Series and A9 with schedulers 
