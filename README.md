@@ -236,7 +236,7 @@ for root specific <code>su - root</code> is required.
 
 ### Torque and pbspro for CentOS-HPC Skus
 
-**All computes would have automatic pbs_mom and head the pbs_mom and pbs_server for latest Torque or Pbspro from their respective master repos made from source during cluster provision time**. Nos post installation tasks are required post successful cluster deployment except if np is to be increased from 1.
+**All computes would have automatic pbs_mom and head the pbs_mom and pbs_server for latest Torque or Pbspro from their respective master repos made from source during cluster provision time**. No post installation tasks are required post successful cluster deployment except if np is to be increased from 1.
 
 check for Torque or PBSPro via
 <code>pbsnodes -a</code>
