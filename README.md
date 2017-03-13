@@ -240,6 +240,8 @@ for root specific <code>su - root</code> is required.
 
 check for Torque or PBSPro via
 <code>pbsnodes -a</code>
+* [Torque 6.1.0](http://www.adaptivecomputing.com/support/download-center/torque-download/)
+* [PBSPro Master](https://github.com/PBSPro/pbspro/)
 
 All path are set automatically for key 'default' users like azureuser/hpc/root
 for root specific <code>su - root</code> is required.
