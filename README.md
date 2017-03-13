@@ -9,6 +9,8 @@ Table of Contents
       * [Patches and pull requests](#patches-and-pull-requests)
       * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-skus)
       * [Topology Examples with Azure CLI](#topology-examples-with-azure-cli)
+       * [New Azure CLI 2.0](#new-azure-cli-2.0)
+       * [Old Azure CLI](#old-azure-cli)
       * [GPUs for Compute](#gpus-for-compute)
       * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
         * [mpirun](#mpirun)
@@ -88,8 +90,9 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 ## Topology Examples with Azure CLI
 
 
-**New Azure CLI 2.0**
-------------------
+### New Azure CLI 2.0
+
+
 <code>docker run -dti --restart=always --name=azure-cli-python azuresdk/azure-cli-python && docker exec -ti azure-cli-python bash -c "az login && bash"</code>
 
 <code>To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.</code>
@@ -122,8 +125,8 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 <code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"Torque\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"32\"},\"OMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"OMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}"</code>
 
 
-**Old Azure CLI**
-------------------
+### Old Azure CLI
+
 <code>docker run -dti --restart=always --name=azure-cli microsoft/azure-cli && docker exec -ti azure-cli bash -c "azure login && bash"</code>
 
 
