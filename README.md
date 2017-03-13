@@ -180,7 +180,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 * [Simulations with Azure Big Compute](https://simulation.azure.com/)
 
 * H-Series Skus added
- * [H-Series Blog](https://azure.microsoft.com/en-us/blog/availability-of-h-series-vms-in-microsoft-azure/)**
+ * **[H-Series Blog](https://azure.microsoft.com/en-us/blog/availability-of-h-series-vms-in-microsoft-azure/)**
 
 **Details**
 
@@ -230,7 +230,10 @@ for root specific <code>su - root</code> is required.
 
 ### Torque and pbspro for CentOS-HPC Skus
 
-**All computes would have automatic pbs_mom and head the pbs_mom and pbs_server for latest Torque or Pbspro on their respective master made from source**
+**All computes would have automatic pbs_mom and head the pbs_mom and pbs_server for latest Torque or Pbspro on their respective master made from source**. Nos post installation tasks are required for setup except is np is to be increased from 1.
+
+check for Torque or PBSPro via
+<code>pbsnodes -a</code>
 
 All path are set automatically for key 'default' users like azureuser/hpc/root
 for root specific <code>su - root</code> is required.
