@@ -380,7 +380,8 @@ install_nvdia_ubuntu()
 service lightdm stop 
 #wget https://azuregpu.blob.core.windows.net/nv-drivers/NVIDIA-Linux-x86_64-361.45.09-grid.run
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
-wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-375.39.run
+#wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-375.39.run
+wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 #chmod +x NVIDIA-Linux-x86_64-361.45.09-grid.run
 chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
@@ -1194,7 +1195,8 @@ echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf
 
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 service lightdm stop 
-wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
+#wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
