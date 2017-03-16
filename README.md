@@ -163,8 +163,8 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 [Azure GPUs](http://gpu.azure.com/)
 
-* Entry point is valid for the stated sku presently only for a specific region. 
-* gpu enablement is possible only on approval of quota for sku usage in the stated subscription.
+* Entry point is valid for the stated sku presently only for  specific regions of "East-US" or "Southcentral-US". Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
+* gpu enablement is possible only on approval of quota for sku usage in the stated subscription. Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase. 
 * NVDIA drivers are auto-loaded for Ubuntu 16.04-LTS.
 * Latest Secure Install of CUDA available and on RAID0 (/data/data default).
 * One can run all [CUDA Samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) across the cluster and test with latest CUDA and CUDAnn.
@@ -189,7 +189,8 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
  * **[H-Series Blog](https://azure.microsoft.com/en-us/blog/availability-of-h-series-vms-in-microsoft-azure/)**
 
 **Details**
-
+* Entry point is valid for the stated sku presently for specific regions. Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
+* Default quota is always 8 cores per region and it is possible to request quotas for the stated subscription. Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase. 
 * This creates configurable number of disks with configurable size for centos-hpc A9/H16R/H16MR
 Creates a Cluster with configurable number of worker nodes each with prebuilt Intel MPI and Direct RDMA for each Head and corresponding compute Nodes.
    * For CentOS-HPC imageOffer for skuName(s) are 7.1
