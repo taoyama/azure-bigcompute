@@ -77,8 +77,8 @@
       "type": "string",
       "allowedValues": [
         "None",
-        "Torque",
-        "pbspro"
+        "pbspro",
+        "Torque"
       ],
       "defaultValue": "None",
       "metadata": {
