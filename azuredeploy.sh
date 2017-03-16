@@ -927,6 +927,9 @@ do
         echo "$workerhost np=1" >> /var/spool/pbs/server_priv/nodes
         echo $workerhost
         qmgr -c "create node $workerhost"
+        qmgr -c "s s job_history_enable = true"
+        qmgr -c "s s job_history_duration = 336:0:0"
+        qmgr -c "s s managers = $HPC_USER@*"
         (( c++ ))
 done
 # MASTER also has pbs_mom started
