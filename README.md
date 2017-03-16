@@ -24,7 +24,6 @@ Table of Contents
 
 **[Azure Big Compute](https://azure.microsoft.com/en-us/solutions/big-compute/)**
 
-**[MSFT Ignite 2016 Keynote Announcements](https://www.youtube.com/v/FNxfsTa8sJ0?start=1945&end=2146&autoplay=1)**
 
 Please see the [LICENSE file](https://github.com/Azure/azure-bigcompute-hpcscripts/blob/master/LICENSE) for licensing information.
 
