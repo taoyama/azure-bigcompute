@@ -241,7 +241,8 @@ for root specific <code>su - root</code> is required.
 check for Torque or PBSPro via
 <code>pbsnodes -a</code>
 * [Torque 6.1.0](http://www.adaptivecomputing.com/support/download-center/torque-download/)
-* [PBSPro Master](https://github.com/PBSPro/pbspro/)
+* [PBS Pro Master 4.0.1](https://github.com/PBSPro/pbspro/) [AGPL](https://www.gnu.org/licenses/agpl-3.0.en.html)
+  * [PBS Pro Open Source License Information](https://github.com/PBSPro/pbspro/blob/6733daa7c24ca65c2975908d930d43b18f21caec/src/cmds/scripts/pbs_server#L8-L35)
 
 All path are set automatically for key 'default' users like azureuser/hpc/root
 for root specific <code>su - root</code> is required.
