@@ -210,6 +210,7 @@ Creates a Cluster with configurable number of worker nodes each with prebuilt In
    * msft drivers check via rpm -qa msft* or rpm -qa microsoft*
    * Internal firewalld is off.
    * WALinuxAgent disabling and manual workrounds required **ONLY for NC24R- CentOS 7.3**, presently.
+     * https://github.com/LIS/lis-next/
 
 ### mpirun
 
