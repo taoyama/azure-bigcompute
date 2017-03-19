@@ -47,7 +47,7 @@ questions or comments.
 
 For portal Deployment, the following pic might assist.
 
-![azureportaldeploy](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/portaloptions1.jpg)
+![azureportaldeploy](https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/icrrny.jpg)
 
 This project is hosted at:
 
