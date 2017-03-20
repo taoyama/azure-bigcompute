@@ -85,6 +85,17 @@
         "description": "**Only for CentOS-HPC 7.1 Skus H-Series or A9s**"
       }
     },
+    "saltStackInstall": {
+      "type": "string",
+      "allowedValues": [
+        "No",
+        "Yes"
+      ],
+      "defaultValue": "None",
+      "metadata": {
+        "description": "**Install SaltStack master on head and minions on computes**"
+      }
+    },
     "headandWorkerNodeSize": {
       "type": "string",
       "defaultValue": "Standard_NC24",
@@ -652,7 +663,7 @@
     "diskCaching": "ReadWrite",
     "MUNGE_VER": "0.5.11",
     "MUNGE_USER_GROUP": "munge",
-    "mungedet": "[concat(variables('MUNGE_VER'), ':', variables('MUNGE_USER_GROUP'), ':', parameters('schedulerpbsORTorque'))]",
+    "mungedet": "[concat(variables('MUNGE_VER'), ':', variables('MUNGE_USER_GROUP'), ':', parameters('schedulerpbsORTorque'), ':', parameters('saltStackInstall'))]",
     "SLURM_VER": "15-08-10-1",
     "SLURM_USER_GROUP": "slurm",
     "slurmdet": "[concat(variables('SLURM_VER'), ':', variables('SLURM_USER_GROUP'))]",
