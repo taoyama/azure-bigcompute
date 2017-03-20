@@ -1252,7 +1252,7 @@ else
 	su -c "sudo systemctl enable salt-minion.service" $HPC_USER
 	su -c "sudo systemctl start salt-minion.service" $HPC_USER	
         ffminions=0
-	while [ $c -lt $WORKER_COUNT ]
+	while [ $ffminions -lt $WORKER_COUNT ]
 	do
 	        #workerhost=$WORKER_HOSTNAME_PREFIX$c     
 	        #echo $workerhost
@@ -1290,7 +1290,7 @@ else
 	su -c "sudo systemctl enable salt-minion.service" $HPC_USER
 	su -c "sudo systemctl start salt-minion.service" $HPC_USER	
         ffminions=0
-	while [ $c -lt $WORKER_COUNT ]
+	while [ $ffminions -lt $WORKER_COUNT ]
 	do
 	        #workerhost=$WORKER_HOSTNAME_PREFIX$c     
 	        #echo $workerhost
