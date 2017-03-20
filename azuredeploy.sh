@@ -1247,21 +1247,12 @@ else
         enable_kernel_update
         su -c "sudo yum --enablerepo=epel-testing install -y salt-minion && yum --enablerepo=epel-testing install -y salt-ssh" $HPC_USER
         disable_kernel_update
-	#su -c "cd /etc/salt/ && sudo sed -i.bak -e '16d' minion" $HPC_USER
-        #su -c "cd /etc/salt/ && sudo sed -i "16imaster: $MASTER_HOSTNAME" minion" $HPC_USER
 	sed -i "s/#master: salt/master: $MASTER_HOSTNAME/" /etc/salt/minion
 	su -c "sudo systemctl enable salt-minion.service" $HPC_USER
 	su -c "sudo systemctl start salt-minion.service" $HPC_USER	
-        ffminions=0
-	while [ $ffminions -lt $WORKER_COUNT ]
-	do
-	        #workerhost=$WORKER_HOSTNAME_PREFIX$c     
-	        #echo $workerhost
-		workerhostintip="$(hostname --fqdn)"
-	        su -c "ssh $MASTER_HOSTNAME "sudo salt-key -a $workerhostintip -y"" $HPC_USER
-	        su -c "sudo systemctl restart salt-minion.service" $HPC_USER
-	        (( ffminions++ ))
-        done
+	workerhostintip="$(hostname --fqdn)"
+	su -c "ssh $MASTER_HOSTNAME 'sudo salt-key -a $workerhostintip -y'" $HPC_USER
+	su -c "sudo systemctl restart salt-minion.service" $HPC_USER
 fi
 }
 
@@ -1286,21 +1277,12 @@ systemctl start salt-master.service
 else
 
         su -c "sudo apt-get install -y salt-minion && apt-get install -y salt-ssh" $HPC_USER
-	#su -c "cd /etc/salt/ && sudo sed -i.bak -e '16d' minion" $HPC_USER
-        #su -c "cd /etc/salt/ && sudo sed -i "16imaster: $MASTER_HOSTNAME" minion" $HPC_USER
 	sed -i "s/#master: salt/master: $MASTER_HOSTNAME/" /etc/salt/minion
 	su -c "sudo systemctl enable salt-minion.service" $HPC_USER
 	su -c "sudo systemctl start salt-minion.service" $HPC_USER	
-        ffminions=0
-	while [ $ffminions -lt $WORKER_COUNT ]
-	do
-	        #workerhost=$WORKER_HOSTNAME_PREFIX$c     
-	        #echo $workerhost
-		workerhostintip="$(hostname --fqdn)"
-	        su -c "ssh $MASTER_HOSTNAME "sudo salt-key -a $workerhostintip -y"" $HPC_USER
-	        su -c "sudo systemctl restart salt-minion.service" $HPC_USER
-	        (( ffminions++ ))
-        done
+	workerhostintip="$(hostname --fqdn)"
+	su -c "ssh $MASTER_HOSTNAME 'sudo salt-key -a $workerhostintip -y'" $HPC_USER
+	su -c "sudo systemctl restart salt-minion.service" $HPC_USER
 fi
 }
 
