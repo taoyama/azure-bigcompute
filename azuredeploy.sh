@@ -1264,6 +1264,44 @@ else
 fi
 }
 
+install_saltsaltstack_ubuntu()
+{
+
+if is_master; then
+# Install full stack
+wget -O - https://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+echo "deb http://repo.saltstack.com/apt/ubuntu/16.04/amd64/latest xenial main" | sudo tee /etc/apt/sources.list.d/saltstack.list
+DEBIAN_FRONTEND=noninteractive apt-get update -y
+apt-get install -y salt-master
+apt-get install -y  salt-minion
+apt-get install -y salt-ssh
+apt-get install -y salt-syndic
+apt-get install -y  salt-cloud
+apt-get install -y salt-api
+systemctl enable salt-master.service
+systemctl start salt-master.service
+
+# Now for the minions
+else
+
+        su -c "sudo apt-get install -y salt-minion && apt-get install -y salt-ssh" $HPC_USER
+	su -c "cd /etc/salt/ && sudo sed -i.bak -e '16d' minion" $HPC_USER
+        su -c "cd /etc/salt/ && sudo sed -i "16imaster: $MASTER_HOSTNAME" minion" $HPC_USER
+	su -c "sudo systemctl enable salt-minion.service" $HPC_USER
+	su -c "sudo systemctl start salt-minion.service" $HPC_USER	
+        ffminions=0
+	while [ $c -lt $WORKER_COUNT ]
+	do
+	        #workerhost=$WORKER_HOSTNAME_PREFIX$c     
+	        #echo $workerhost
+		workerhostintip="$(hostname --fqdn)"
+	        su -c "ssh $MASTER_HOSTNAME "sudo salt-key -a $workerhostintip -y"" $HPC_USER
+	        su -c "sudo systemctl restart salt-minion.service" $HPC_USER
+	        (( ffminions++ ))
+        done
+fi
+}
+
 #########################
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
 		install_packages_ubuntu
@@ -1272,6 +1310,9 @@ fi
 		setup_hpc_user
                 install_docker_ubuntu
                 install_docker_apps
+		 if [ "$SALTSTACKBOOLEAN" == "Yes" ] ; then
+		    install_saltsaltstack_ubuntu
+		 fi
 		if [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a NC with RDMA"
 		    if [ ! -z "$omsworkspaceid" ]; then
