@@ -1253,9 +1253,10 @@ else
         ffminions=0
 	while [ $c -lt $WORKER_COUNT ]
 	do
-	        workerhost=$WORKER_HOSTNAME_PREFIX$c     
-	        echo $workerhost
-	        su -c "ssh $MASTER_HOSTNAME "sudo salt-key -a $workerhost -y"" $HPC_USER
+	        #workerhost=$WORKER_HOSTNAME_PREFIX$c     
+	        #echo $workerhost
+		workerhostintip="$(hostname --fqdn)"
+	        su -c "ssh $MASTER_HOSTNAME "sudo salt-key -a $workerhostintip -y"" $HPC_USER
 	        su -c "sudo systemctl restart salt-minion.service" $HPC_USER
 	        (( ffminions++ ))
         done
