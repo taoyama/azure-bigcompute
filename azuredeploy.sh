@@ -34,6 +34,7 @@ SHARE_DATA=$MNT_POINT/data
 MUNGE_VERSION=$( echo "$4" |cut -d\: -f1 )
 MUNGE_USER=$( echo "$4" |cut -d\: -f2 )
 TORQUEORPBS=$( echo "$4" |cut -d\: -f3 )
+SALTSTACKBOOLEAN=$( echo "$4" |cut -d\: -f4 )
 MUNGE_GROUP=$MUNGE_USER
 
 
@@ -1324,7 +1325,10 @@ fi
 		#install_vnc_head
 		#install_easybuild
 		#install_go
-		#reboot	
+		#reboot
+		    if [ "$SALTSTACKBOOLEAN" == "Yes" ] ; then
+		    install_saltsaltstack_centos
+		    fi
 		if [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a NC with RDMA"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1336,7 +1340,6 @@ fi
 		    install_cudann5_ubuntu1604
 		    postinstall_centos73nc24rgpu
 		    disable_kernel_update
-		    install_saltsaltstack_centos
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a H with RDMA"
@@ -1355,7 +1358,7 @@ fi
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-		    install_saltsaltstack_centos
+
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]];then
 		        echo "this is a H"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1373,7 +1376,6 @@ fi
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-		    install_saltsaltstack_centos
 		elif [[ "${HEADNODE_SIZE}" =~ "A" ]] && [[ "${WORKERNODE_SIZE}" =~ "A" ]] && [[ "${HEADNODE_SIZE}" =~ "9" ]] && [[ "${WORKERNODE_SIZE}" =~ "9" ]];then
 		    echo "this is a A9 with RDMA"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1391,7 +1393,6 @@ fi
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile    
-		    install_saltsaltstack_centos
 		elif [[ "${HEADNODE_SIZE}" =~ "NV" ]] && [[ "${WORKERNODE_SIZE}" =~ "NV" ]];then
 		        echo "this is a NV"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1400,7 +1401,6 @@ fi
 		    fi
                     postinstall_centos73nc24rgpu;
                     postinstall_centos73kde;
-		    install_saltsaltstack_centos
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
 		        echo "this is a NC"
@@ -1411,7 +1411,6 @@ fi
 		    install_cuda8centos;
                     install_cudann5_ubuntu1604;
 		    postinstall_centos73nc24rgpu;
-		    install_saltsaltstack_centos
 		    ( sleep 15 ; reboot ) &
 		fi
                 		
