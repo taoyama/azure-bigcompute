@@ -348,7 +348,7 @@ install_docker_ubuntu()
          #echo 'deb https://packages.docker.com/$dockerVer/apt/repo ubuntu-xenial main' > /etc/apt/sources.list.d/docker.list
 	 DEBIAN_FRONTEND=noninteractive apt-get -y update
          DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
-	 apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtua
+	 apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
 
          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
        add-apt-repository \
