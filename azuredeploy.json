@@ -91,7 +91,7 @@
         "No",
         "Yes"
       ],
-      "defaultValue": "None",
+      "defaultValue": "No",
       "metadata": {
         "description": "**Install SaltStack master on head and minions on computes**"
       }
