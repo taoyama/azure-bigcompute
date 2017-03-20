@@ -1230,7 +1230,37 @@ EOT
 echo "$HPC_USER               hard    memlock         unlimited" >> /etc/security/limits.conf
 echo "$HPC_USER               soft    memlock         unlimited" >> /etc/security/limits.conf
 
+install_saltsaltstack_centos()
+{
 
+if is_master; then
+# Install full stack
+enable_kernel_update
+yum --enablerepo=epel-testing install -y salt-master && yum --enablerepo=epel-testing install -y salt-minion && yum --enablerepo=epel-testing install -y salt-ssh && yum --enablerepo=epel-testing install -y salt-syndic && yum --enablerepo=epel-testing install -y salt-cloud
+disable_kernel_update
+systemctl enable salt-master.service
+systemctl start salt-master.service
+
+# Now for the minions
+else
+        enable_kernel_update
+        su -c "sudo yum --enablerepo=epel-testing install -y salt-minion && yum --enablerepo=epel-testing install -y salt-ssh" $HPC_USER
+        disable_kernel_update
+	su -c "cd /etc/salt/ && sudo sed -i.bak -e '16d' minion" $HPC_USER
+        su -c "cd /etc/salt/ && sudo sed -i "16imaster: $MASTER_HOSTNAME" minion" $HPC_USER
+	su -c "sudo systemctl enable salt-minion.service" $HPC_USER
+	su -c "sudo systemctl start salt-minion.service" $HPC_USER	
+        ffminions=0
+	while [ $c -lt $WORKER_COUNT ]
+	do
+	        workerhost=$WORKER_HOSTNAME_PREFIX$c     
+	        echo $workerhost
+	        su -c "ssh $MASTER_HOSTNAME "sudo salt-key -a $workerhost -y"" $HPC_USER
+	        su -c "sudo systemctl restart salt-minion.service" $HPC_USER
+	        (( ffminions++ ))
+        done
+fi
+}
 
 #########################
 	if [ "$skuName" == "16.04.0-LTS" ] ; then
@@ -1305,6 +1335,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    install_cudann5_ubuntu1604
 		    postinstall_centos73nc24rgpu
 		    disable_kernel_update
+		    install_saltsaltstack_centos
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a H with RDMA"
@@ -1323,7 +1354,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-		    
+		    install_saltsaltstack_centos
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]];then
 		        echo "this is a H"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1341,7 +1372,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-		
+		    install_saltsaltstack_centos
 		elif [[ "${HEADNODE_SIZE}" =~ "A" ]] && [[ "${WORKERNODE_SIZE}" =~ "A" ]] && [[ "${HEADNODE_SIZE}" =~ "9" ]] && [[ "${WORKERNODE_SIZE}" =~ "9" ]];then
 		    echo "this is a A9 with RDMA"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1359,7 +1390,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile    
-		    
+		    install_saltsaltstack_centos
 		elif [[ "${HEADNODE_SIZE}" =~ "NV" ]] && [[ "${WORKERNODE_SIZE}" =~ "NV" ]];then
 		        echo "this is a NV"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1368,6 +1399,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    fi
                     postinstall_centos73nc24rgpu;
                     postinstall_centos73kde;
+		    install_saltsaltstack_centos
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
 		        echo "this is a NC"
@@ -1378,6 +1410,7 @@ echo "$HPC_USER               soft    memlock         unlimited" >> /etc/securit
 		    install_cuda8centos;
                     install_cudann5_ubuntu1604;
 		    postinstall_centos73nc24rgpu;
+		    install_saltsaltstack_centos
 		    ( sleep 15 ; reboot ) &
 		fi
                 		
