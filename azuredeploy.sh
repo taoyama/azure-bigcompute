@@ -1249,9 +1249,10 @@ else
         disable_kernel_update
 	sed -i "s/#master: salt/master: $MASTER_HOSTNAME/" /etc/salt/minion
 	su -c "sudo systemctl enable salt-minion.service" $HPC_USER
-	su -c "sudo systemctl start salt-minion.service" $HPC_USER	
+	su -c "sudo systemctl start salt-minion.service" $HPC_USER
+        su -c "sudo systemctl restart salt-minion.service" $HPC_USER
 	workerhostintip="$(hostname --fqdn)"
-	su -c "ssh $MASTER_HOSTNAME 'sudo salt-key -a $workerhostintip -y'" $HPC_USER
+	su -c "ssh $MASTER_HOSTNAME "sudo salt-key -a $workerhostintip -y"" $HPC_USER
 	su -c "sudo systemctl restart salt-minion.service" $HPC_USER
 fi
 }
