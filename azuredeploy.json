@@ -41,11 +41,11 @@
     },
     "imageSku": {
       "type": "string",
-      "defaultValue": "16.04.0-LTS",
+      "defaultValue": "16.04-LTS",
       "allowedValues": [
         "6.5",
         "7.1",
-        "16.04.0-LTS",
+        "16.04-LTS",
         "7.2",
         "7.3"
       ],
