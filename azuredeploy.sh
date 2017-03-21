@@ -126,7 +126,7 @@ EOF
         mdadm --create /dev/md10 --level 0 --raid-devices $devices $createdPartitions
         
         mkfs -t ext4 /dev/md10
-        if [ "$skuName" == "16.04.0-LTS" ] ; then
+        if [ "$skuName" == "16.04-LTS" ] ; then
         echo "/dev/md127 $mountPoint ext4 defaults,nofail 0 2" >> /etc/fstab
         else
         echo "/dev/md10 $mountPoint ext4 defaults,nofail 0 2" >> /etc/fstab
@@ -491,7 +491,7 @@ setup_shares()
         #setup_data_disks $SHARE_DATA
         echo "$SHARE_HOME    *(rw,async)" >> /etc/exports
         echo "$SHARE_DATA    *(rw,async)" >> /etc/exports
-	if [ "$skuName" == "16.04.0-LTS" ] ; then
+	if [ "$skuName" == "16.04-LTS" ] ; then
 	         DEBIAN_FRONTEND=noninteractive apt-get -y \
 		  -o DPkg::Options::=--force-confdef \
 		 -o DPkg::Options::=--force-confold \
@@ -539,7 +539,7 @@ setup_shares()
 setup_hpc_user()
 {
 
-	if [ "$skuName" == "16.04.0-LTS" ] ; then
+	if [ "$skuName" == "16.04-LTS" ] ; then
 		/etc/init.d/apparmor stop 
 		/etc/init.d/apparmor teardown 
 		update-rc.d -f apparmor remove
@@ -1287,7 +1287,7 @@ fi
 }
 
 #########################
-	if [ "$skuName" == "16.04.0-LTS" ] ; then
+	if [ "$skuName" == "16.04-LTS" ] ; then
 		install_packages_ubuntu
 		DEBIAN_FRONTEND=noninteractive apt-get install -y nfs-common
 		setup_shares
