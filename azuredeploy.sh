@@ -1186,6 +1186,9 @@ echo "sleep 240" >> /etc/rc.d/rc.local && echo "systemctl enable waagent" >> /et
 
 ubuntunvidiadesktop()
 {
+apt-get update -y
+apt-get install -y ubuntu-desktop
+DEBIAN_FRONTEND=noninteractive update-initramfs -u
 echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
 echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
 
@@ -1201,15 +1204,16 @@ echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 service lightdm stop 
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
-wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
-chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
+#wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.92-grid.run
+chmod +x NVIDIA-Linux-x86_64-367.92-grid.run
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r`
-DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.64-grid.run  --dkms -s
+DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.92-grid.run  --dkms -s
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
-apt-get update -y
-apt-get install -y ubuntu-desktop
+systemctl start nvdia-gridd 
+systemctl enable nvdia-gridd 
 }
 
 
