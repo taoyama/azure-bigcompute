@@ -1216,6 +1216,7 @@ echo 'IgnoreSP=TRUE' | tee -a /etc/nvidia/gridd.conf
 echo 'FeatureType=2' | tee -a /etc/nvidia/gridd.conf
 systemctl start nvidia-gridd
 systemctl enable nvidia-gridd
+reboot
 }
 
 
