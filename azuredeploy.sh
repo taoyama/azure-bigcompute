@@ -1214,8 +1214,9 @@ DEBIAN_FRONTEND=noninteractive apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r`
 DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.92-grid.run  --dkms -s
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
-systemctl start nvdia-gridd 
-systemctl enable nvdia-gridd 
+systemctl enable nvdia-gridd
+echo ‘IgnoreSP=TRUE’ | sudo tee -a /etc/nvidia/gridd.conf
+systemctl start nvdia-gridd
 }
 
 
