@@ -1184,6 +1184,7 @@ echo "sleep 240" >> /etc/rc.d/rc.local && echo "systemctl enable waagent" >> /et
  #reboot
 }
 
+
 ubuntunvidiadesktop()
 {
 apt-get update -y
@@ -1193,11 +1194,9 @@ grub-mkconfig -o /boot/grub/grub.cfg
 cd /etc/default && sed -i.bak -e '11d' grub
 cd /etc/default && sed -i '11iGRUB_CMDLINE_LINUX_DEFAULT="console=tty1 console=ttyS0 earlyprintk=ttyS0 rootdelay=300 rdblacklist=nouveau nouveau.modeset=0"' grub
 update-grub
-echo "blacklist nouveau" | tee /etc/modprobe.d/blacklist.conf
-echo "blacklist lbm-nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
-echo "options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
-echo "alias nouveau off" >> /etc/modprobe.d/blacklist-nouveau.conf
-echo "alias lbm-nouveau o" >> /etc/modprobe.d/blacklist-nouveau.conf
+echo 'blacklist nouveau' | tee -a /etc/modprobe.d/blacklist.conf
+echo 'options nouveau modeset=0' | tee -a  /etc/modprobe.d/blacklist-nouveau.conf
+echo 'alias nouveau off' | tee -a  /etc/modprobe.d/blacklist-nouveau.conf
 service lightdm stop 
 #service lightdm disable placeholder
 echo options nouveau modeset=0 | tee -a /etc/modprobe.d/nouveau-kms.conf
@@ -1213,6 +1212,7 @@ DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.92-grid.run  --silent -
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 systemctl enable nvidia-gridd
 echo 'IgnoreSP=TRUE' | tee -a /etc/nvidia/gridd.conf
+
 echo 'FeatureType=2' | tee -a /etc/nvidia/gridd.conf
 systemctl start nvidia-gridd
 systemctl enable nvidia-gridd
