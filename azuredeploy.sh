@@ -1201,8 +1201,10 @@ update-grub
 
 echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist.conf
 
-DEBIAN_FRONTEND=noninteractive update-initramfs -u
 service lightdm stop 
+#service lightdm disable
+DEBIAN_FRONTEND=noninteractive update-initramfs -u
+
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
 #wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.92-grid.run
