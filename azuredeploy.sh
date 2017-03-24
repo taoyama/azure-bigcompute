@@ -1188,7 +1188,7 @@ echo "sleep 240" >> /etc/rc.d/rc.local && echo "systemctl enable waagent" >> /et
 ubuntunvidiadesktop()
 {
 apt-get update -y
-apt-get install -y ubuntu-desktop
+apt-get install -y --no-install-recommends  ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 grub-mkconfig -o /boot/grub/grub.cfg
 cd /etc/default && sed -i.bak -e '11d' grub
