@@ -1218,9 +1218,10 @@ systemctl start nvidia-gridd
 systemctl enable nvidia-gridd
 apt-key adv --keyserver pool.sks-keyservers.net --recv-key 67D7ADA8
 wget -O /etc/apt/sources.list.d/pcoip.list https://downloads.teradici.com/ubuntu/pcoip-beta.repo
-apt update -y
-apt install -y pcoip-agent-graphics
+apt-get update -y
+apt-get install -y pcoip-agent-graphics
 pcoip-register-host --registration-code=ECAUYB969PWS@DE86-369B-88A7-4940
+systemctl enable pcoip
 reboot
 }
 
