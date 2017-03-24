@@ -1222,7 +1222,6 @@ apt-get update -y
 apt-get install -y pcoip-agent-graphics
 pcoip-register-host --registration-code=ECAUYB969PWS@DE86-369B-88A7-4940
 systemctl enable pcoip
-reboot
 }
 
 
@@ -1339,7 +1338,8 @@ fi
 		    sleep 30;
 		    installomsagent;
 		    fi
-                ubuntunvidiadesktop		        
+		 ubuntunvidiadesktop
+		 ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
 		        echo "this is a NC"
 		    if [ ! -z "$omsworkspaceid" ]; then
