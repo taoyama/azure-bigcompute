@@ -442,10 +442,10 @@
   "variables": {
     "templatelink": "[concat('https://raw.githubusercontent.com/azure/azure-bigcompute-hpcscripts/master/',parameters('singleOrCluster'),'azuredeploy.json')]"
   },
-  "outputs": {
+ "outputs": {
     "result": {
-      "type": "object",
-      "value": "[reference('singleorclusterlinkedtemplate').outputs.result]"
+        "value": "Welcome to Azure Bigcompute!!",
+        "type" : "string"
     }
   }
 }
