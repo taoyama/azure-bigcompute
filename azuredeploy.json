@@ -3,14 +3,355 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "singleOrCluster": {
-      "type": "String"
-    },
-    "singleOrCluster": {
       "type": "String",
       "allowedValues": [
         "single",
         "cluster"
-      ]
+      ],
+      "defaultValue": "cluster"
+    },
+    "dnsLabelPrefix": {
+      "type": "string",
+      "defaultValue": "shellazure",
+      "metadata": {
+        "description": "Unique public dns prefix where the  node will be exposed"
+      }
+    },
+    "adminUserName": {
+      "type": "string",
+      "defaultValue": "azureuser",
+      "metadata": {
+        "description": "User name for the Virtual Machine. Pick a valid username otherwise there will be a BadRequest error."
+      }
+    },
+    "imagePublisher": {
+      "type": "string",
+      "defaultValue": "Canonical",
+      "allowedValues": [
+        "Canonical",
+        "openlogic"
+      ],
+      "metadata": {
+        "description": "openlogic/Canonical is the CentOS/Ubuntu Distributor in Azure Market Place"
+      }
+    },
+    "imageOffer": {
+      "type": "string",
+      "defaultValue": "UbuntuServer",
+      "allowedValues": [
+        "CentOS-HPC",
+        "UbuntuServer",
+        "CentOS"
+      ],
+      "metadata": {
+        "description": "New CentOS-HPC (A8/A9) with pre-installed Intel MPI and mlx4 drivers on Infiniband Available, UbuntuServer for GPU and CentOS for the new H-Series"
+      }
+    },
+    "imageSku": {
+      "type": "string",
+      "defaultValue": "16.04-LTS",
+      "allowedValues": [
+        "6.5",
+        "7.1",
+        "16.04-LTS",
+        "7.2",
+        "7.3"
+      ],
+      "metadata": {
+        "description": "OpenLogic CentOS-HPC Sku to use"
+      }
+    },
+    "sshPublicKey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "This field must be a valid SSH public key. ssh with this RSA public key"
+      }
+    },
+    "mountFolder": {
+      "type": "string",
+      "defaultValue": "/data",
+      "metadata": {
+        "description": "The Folder system to be auto-mounted."
+      }
+    },
+    "hpcUserName": {
+      "type": "string",
+      "defaultValue": "hpc",
+      "metadata": {
+        "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
+      }
+    },
+    "schedulerpbsORTorque": {
+      "type": "string",
+      "allowedValues": [
+        "None",
+        "pbspro",
+        "Torque"
+      ],
+      "defaultValue": "None",
+      "metadata": {
+        "description": "**Only for CentOS-HPC 7.1 Skus H-Series or A9s**"
+      }
+    },
+    "saltStackInstall": {
+      "type": "string",
+      "allowedValues": [
+        "No",
+        "Yes"
+      ],
+      "defaultValue": "No",
+      "metadata": {
+        "description": "**Install SaltStack master on head and minions on computes**"
+      }
+    },
+    "headandWorkerNodeSize": {
+      "type": "string",
+      "defaultValue": "Standard_NC24",
+      "allowedValues": [
+        "Basic_A0",
+        "Basic_A1",
+        "Basic_A2",
+        "Basic_A3",
+        "Basic_A4",
+        "Standard_A0",
+        "Standard_A1",
+        "Standard_A1_v2",
+        "Standard_A2",
+        "Standard_A2_v2",
+        "Standard_A2m_v2",
+        "Standard_A3",
+        "Standard_A5",
+        "Standard_A4",
+        "Standard_A4_v2",
+        "Standard_A4m_v2",
+        "Standard_A6",
+        "Standard_A7",
+        "Standard_A8",
+        "Standard_A8_v2",
+        "Standard_A8m_v2",
+        "Standard_A9",
+        "Standard_A10",
+        "Standard_A11",
+        "Standard_D1",
+        "Standard_DS1",
+        "Standard_D1_v2",
+        "Standard_DS1_v2",
+        "Standard_D2",
+        "Standard_DS2",
+        "Standard_D2_v2",
+        "Standard_DS2_v2",
+        "Standard_D3",
+        "Standard_DS3",
+        "Standard_D3_v2",
+        "Standard_DS3_v2",
+        "Standard_D4",
+        "Standard_DS4",
+        "Standard_D4_v2",
+        "Standard_DS4_v2",
+        "Standard_D5_v2",
+        "Standard_DS5_v2",
+        "Standard_D11",
+        "Standard_DS11",
+        "Standard_D11_v2",
+        "Standard_DS11_v2",
+        "Standard_D12",
+        "Standard_DS12",
+        "Standard_D12_v2",
+        "Standard_DS12_v2",
+        "Standard_D13",
+        "Standard_DS13",
+        "Standard_D13_v2",
+        "Standard_DS13_v2",
+        "Standard_D14",
+        "Standard_DS14",
+        "Standard_D14_v2",
+        "Standard_DS14_v2",
+        "Standard_D15_v2",
+        "Standard_DS15_v2",
+        "Standard_F1",
+        "Standard_F1s",
+        "Standard_F2",
+        "Standard_F2s",
+        "Standard_F4",
+        "Standard_F4s",
+        "Standard_F8",
+        "Standard_F8s",
+        "Standard_F16",
+        "Standard_F16s",
+        "Standard_G1",
+        "Standard_G2",
+        "Standard_G3",
+        "Standard_G4",
+        "Standard_G5",
+        "Standard_GS1",
+        "Standard_GS2",
+        "Standard_GS3",
+        "Standard_GS4",
+        "Standard_GS5",
+        "Standard_H8",
+        "Standard_H16",
+        "Standard_H8m",
+        "Standard_H16m",
+        "Standard_H16R",
+        "Standard_H16mR",
+        "Standard_NC6",
+        "Standard_NC12",
+        "Standard_NC24",
+        "Standard_NC24R",
+        "Standard_NV6",
+        "Standard_NV12",
+        "Standard_NV24"
+      ],
+      "metadata": {
+        "description": "Size of the head and the worker nodes."
+      }
+    },
+    "workerNodeCount": {
+      "type": "int",
+      "defaultValue": 1,
+      "metadata": {
+        "description": "This template creates N worker node. Use workerNodeCount to specify that N."
+      }
+    },
+    "storageType": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_LRS",
+        "Premium_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Standard_ZRS"
+      ],
+      "defaultValue": "Standard_LRS",
+      "metadata": {
+        "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS - Striping rules Apply"
+      }
+    },
+    "dockerVer": {
+      "type": "string",
+      "defaultValue": "docker-ce",
+      "allowedValues": [
+        "docker-ce"
+      ],
+      "metadata": {
+        "description": "The docker version **Only for CentOS 7.3, CentOS-HPC 7.1 - kernels 3.10 and above **"
+      }
+    },
+    "dockerComposeVer": {
+      "type": "string",
+      "defaultValue": "1.11.2",
+      "metadata": {
+        "description": "The Docker Compose Version **Only for CentOS-HPC 7.1-  kernels 3.10 and above **"
+      }
+    },
+    "dockerMachineVer": {
+      "type": "string",
+      "defaultValue": "0.10.0",
+      "metadata": {
+        "description": "The docker-machine version **Only for CentOS-HPC 7.1- kernels 3.10 and above **"
+      }
+    },
+    "dataDiskSize": {
+      "type": "int",
+      "defaultValue": 1022,
+      "metadata": {
+        "description": "The size in GB of each data disk that is attached to the VM.  A MDADM RAID0  is created with all data disks auto-mounted,  that is dataDiskSize * dataDiskCount in size n the Storage."
+      }
+    },
+    "masterVMName": {
+      "type": "string",
+      "defaultValue": "headN",
+      "metadata": {
+        "description": "The Name of the VM."
+      }
+    },
+    "workerVMNamePrefix": {
+      "type": "string",
+      "defaultValue": "compN",
+      "metadata": {
+        "description": "The Name Prefix of the worker(s) VM Nodes which whould be suffixed by the worker number."
+      }
+    },
+    "numDataDisks": {
+      "type": "string",
+      "defaultValue": "32",
+      "allowedValues": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50",
+        "51",
+        "52"
+      ],
+      "metadata": {
+        "description": "This parameter allows the user to select the number of disks wanted"
+      }
+    },
+    "OMSWorkSpaceId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "(Optional- Keep Blank if not used)The Workspace ID for the OMS Portal Workspace."
+      }
+    },
+    "OMSWorkSpaceKey": {
+      "type": "securestring",
+      "defaultValue": "",
+      "metadata": {
+        "description": "(Optional- Keep Blank if not used) The OMS Portal Workspace key"
+      }
+    },
+    "OMSLinuxAgentFullVersion": {
+      "type": "string",
+      "defaultValue": "1.2.0-148",
+      "metadata": {
+        "description": "The OMS Agent 64 bit version will update and register with OMS Workspace for DDC"
+      }
     }
   },
   "resources": [
