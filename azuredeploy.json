@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "singleOrCluster": {
+      "type": "String"
+    },
+    "singleOrCluster": {
+      "type": "String",
+      "allowedValues": [
+        "single",
+        "cluster"
+      ]
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2015-01-01",
+      "name": "linkedTemplate",
+      "type": "Microsoft.Resources/deployments",
+      "properties": {
+        "mode": "incremental",
+        "templateLink": {
+          "uri": "[variables('templatelink')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "SingleOrCluster": {
+            "value": "[parameters('singleOrCluster')]"
+          }
+        }
+      }
+    }
+  ],
+  "variables": {
+    "templatelink": "[concat('https://raw.githubusercontent.com/azure/azure-bigcompute-hpcscripts/master/',parameters('singleOrCluster'),'azuredeploy.json')]"
+  },
+  "outputs": {
+    "result": {
+      "type": "object",
+      "value": "[reference('linkedTemplate').outputs.result]"
+    }
+  }
+}
