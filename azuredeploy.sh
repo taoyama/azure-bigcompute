@@ -1204,7 +1204,8 @@ rmmod nouveau
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
 #wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
-wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.92-grid.run
+#wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.92-grid.run
+https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/azurenvidia42/NVIDIA-Linux-x86_64-367.92-grid.run
 chmod +x NVIDIA-Linux-x86_64-367.92-grid.run
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
@@ -1213,7 +1214,7 @@ DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.92-grid.run  --silent -
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 systemctl enable nvidia-gridd
 echo 'IgnoreSP=TRUE' | tee -a /etc/nvidia/gridd.conf
-echo 'FeatureType=2' | tee -a /etc/nvidia/gridd.conf
+#echo 'FeatureType=2' | tee -a /etc/nvidia/gridd.conf
 systemctl start nvidia-gridd
 systemctl enable nvidia-gridd
 apt-key adv --keyserver pool.sks-keyservers.net --recv-key 67D7ADA8
@@ -1222,7 +1223,7 @@ apt-get update -y
 apt-get install -y pcoip-agent-graphics
 #manual registration
 #pcoip-register-host --registration-code=xx
-systemctl enable pcoip
+#systemctl enable pcoip
 }
 
 
