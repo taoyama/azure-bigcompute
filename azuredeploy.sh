@@ -359,6 +359,7 @@ install_docker_ubuntu()
          #apt-cache policy docker-engine
 	 groupadd docker
 	 usermod -aG docker $userName
+	 usermod -aG docker $HPC_USER
 	 
          #apt-get install -y docker-engine
 	 apt-get -y install $dockerVer
