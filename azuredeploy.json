@@ -10,21 +10,21 @@
       ],
       "defaultValue": "cluster"
     },
-    "dnsLabelPrefix": {
+    "DnsLabelPrefix": {
       "type": "string",
       "defaultValue": "shellazure",
       "metadata": {
         "description": "Unique public dns prefix where the  node will be exposed"
       }
     },
-    "adminUserName": {
+    "AdminUserName": {
       "type": "string",
       "defaultValue": "azureuser",
       "metadata": {
         "description": "User name for the Virtual Machine. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
-    "imagePublisher": {
+    "ImagePublisher": {
       "type": "string",
       "defaultValue": "Canonical",
       "allowedValues": [
@@ -35,7 +35,7 @@
         "description": "openlogic/Canonical is the CentOS/Ubuntu Distributor in Azure Market Place"
       }
     },
-    "imageOffer": {
+    "ImageOffer": {
       "type": "string",
       "defaultValue": "UbuntuServer",
       "allowedValues": [
@@ -47,7 +47,7 @@
         "description": "New CentOS-HPC (A8/A9) with pre-installed Intel MPI and mlx4 drivers on Infiniband Available, UbuntuServer for GPU and CentOS for the new H-Series"
       }
     },
-    "imageSku": {
+    "ImageSku": {
       "type": "string",
       "defaultValue": "16.04-LTS",
       "allowedValues": [
@@ -61,27 +61,27 @@
         "description": "OpenLogic CentOS-HPC Sku to use"
       }
     },
-    "sshPublicKey": {
+    "SshPublicKey": {
       "type": "securestring",
       "metadata": {
         "description": "This field must be a valid SSH public key. ssh with this RSA public key"
       }
     },
-    "mountFolder": {
+    "MountFolder": {
       "type": "string",
       "defaultValue": "/data",
       "metadata": {
         "description": "The Folder system to be auto-mounted."
       }
     },
-    "hpcUserName": {
+    "GpuHpcUserName": {
       "type": "string",
       "defaultValue": "hpc",
       "metadata": {
         "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
-    "schedulerpbsORTorque": {
+    "SchedulerpbsORTorque": {
       "type": "string",
       "allowedValues": [
         "None",
@@ -93,7 +93,7 @@
         "description": "**Only for CentOS-HPC 7.1 Skus H-Series or A9s**"
       }
     },
-    "saltStackInstall": {
+    "SaltStackInstall": {
       "type": "string",
       "allowedValues": [
         "No",
@@ -104,7 +104,7 @@
         "description": "**Install SaltStack master on head and minions on computes**"
       }
     },
-    "headandWorkerNodeSize": {
+    "HeadandWorkerNodeSize": {
       "type": "string",
       "defaultValue": "Standard_NC24",
       "allowedValues": [
@@ -206,14 +206,14 @@
         "description": "Size of the head and the worker nodes."
       }
     },
-    "workerNodeCount": {
+    "WorkerNodeCount": {
       "type": "int",
       "defaultValue": 1,
       "metadata": {
         "description": "This template creates N worker node. Use workerNodeCount to specify that N."
       }
     },
-    "storageType": {
+    "StorageType": {
       "type": "string",
       "allowedValues": [
         "Standard_LRS",
@@ -227,7 +227,7 @@
         "description": "Storage Account Type : Standard-LRS, Standard-GRS, Standard-RAGRS, Standard-ZRS, Premium_LRS - Striping rules Apply"
       }
     },
-    "dockerVer": {
+    "DockerVer": {
       "type": "string",
       "defaultValue": "docker-ce",
       "allowedValues": [
@@ -237,42 +237,42 @@
         "description": "The docker version **Only for CentOS 7.3, CentOS-HPC 7.1 - kernels 3.10 and above **"
       }
     },
-    "dockerComposeVer": {
+    "DockerComposeVer": {
       "type": "string",
       "defaultValue": "1.11.2",
       "metadata": {
         "description": "The Docker Compose Version **Only for CentOS-HPC 7.1-  kernels 3.10 and above **"
       }
     },
-    "dockerMachineVer": {
+    "DockerMachineVer": {
       "type": "string",
       "defaultValue": "0.10.0",
       "metadata": {
         "description": "The docker-machine version **Only for CentOS-HPC 7.1- kernels 3.10 and above **"
       }
     },
-    "dataDiskSize": {
+    "DataDiskSize": {
       "type": "int",
       "defaultValue": 1022,
       "metadata": {
         "description": "The size in GB of each data disk that is attached to the VM.  A MDADM RAID0  is created with all data disks auto-mounted,  that is dataDiskSize * dataDiskCount in size n the Storage."
       }
     },
-    "masterVMName": {
+    "MasterVMName": {
       "type": "string",
       "defaultValue": "headN",
       "metadata": {
         "description": "The Name of the VM."
       }
     },
-    "workerVMNamePrefix": {
+    "WorkerVMNamePrefix": {
       "type": "string",
       "defaultValue": "compN",
       "metadata": {
         "description": "The Name Prefix of the worker(s) VM Nodes which whould be suffixed by the worker number."
       }
     },
-    "numDataDisks": {
+    "NumDataDisks": {
       "type": "string",
       "defaultValue": "32",
       "allowedValues": [
@@ -332,21 +332,21 @@
         "description": "This parameter allows the user to select the number of disks wanted"
       }
     },
-    "OMSWorkSpaceId": {
+    "oMSWorkSpaceId": {
       "type": "string",
       "defaultValue": "",
       "metadata": {
         "description": "(Optional- Keep Blank if not used)The Workspace ID for the OMS Portal Workspace."
       }
     },
-    "OMSWorkSpaceKey": {
+    "oMSWorkSpaceKey": {
       "type": "securestring",
       "defaultValue": "",
       "metadata": {
         "description": "(Optional- Keep Blank if not used) The OMS Portal Workspace key"
       }
     },
-    "OMSLinuxAgentFullVersion": {
+    "oMSLinuxAgentFullVersion": {
       "type": "string",
       "defaultValue": "1.2.0-148",
       "metadata": {
@@ -366,8 +366,74 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "SingleOrCluster": {
-            "value": "[parameters('singleOrCluster')]"
+          "dnsLabelPrefix": {
+            "value": "[parameters('DnsLabelPrefix')]"
+          },
+          "adminUserName": {
+            "value": "[parameters('AdminUserName')]"
+          },
+          "imagePublisher": {
+            "value": "[parameters('ImagePublisher')]"
+          },
+          "imageOffer": {
+            "value": "[parameters('ImageOffer')]"
+          },
+          "imageSku": {
+            "value": "[parameters('ImageSku')]"
+          },
+          "sshPublicKey": {
+            "value": "[parameters('SshPublicKey')]"
+          },
+          "mountFolder": {
+            "value": "[parameters('MountFolder')]"
+          },
+          "hpcUserName": {
+            "value": "[parameters('GpuHpcUserName')]"
+          },
+          "schedulerpbsORTorque": {
+            "value": "[parameters('SchedulerpbsORTorque')]"
+          },
+          "saltStackInstall": {
+            "value": "[parameters('SaltStackInstall')]"
+          },
+          "headandWorkerNodeSize": {
+            "value": "[parameters('HeadandWorkerNodeSize')]"
+          },
+          "workerNodeCount": {
+            "value": "[parameters('WorkerNodeCount')]"
+          },
+          "storageType": {
+            "value": "[parameters('StorageType')]"
+          },
+          "dockerVer": {
+            "value": "[parameters('DockerVer')]"
+          },
+          "dockerComposeVer": {
+            "value": "[parameters('DockerComposeVer')]"
+          },
+          "dockerMachineVer": {
+            "value": "[parameters('DockerMachineVer')]"
+          },
+          "dataDiskSize": {
+            "value": "[parameters('DataDiskSize')]"
+          },
+          "masterVMName": {
+            "value": "[parameters('MasterVMName')]"
+          },
+          "workerVMNamePrefix": {
+            "value": "[parameters('WorkerVMNamePrefix')]"
+          },
+          "numDataDisks": {
+            "value": "[parameters('NumDataDisks')]"
+          },
+          "OMSWorkSpaceId": {
+            "value": "[parameters('oMSWorkSpaceId')]"
+          },
+          "OMSWorkSpaceKey": {
+            "value": "[parameters('oMSWorkSpaceKey')]"
+          },
+          "OMSLinuxAgentFullVersion": {
+            "value": "[parameters('oMSLinuxAgentFullVersion')]"
           }
         }
       }
