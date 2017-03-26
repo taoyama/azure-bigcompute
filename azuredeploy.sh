@@ -783,6 +783,17 @@ install_go()
     tar -C /usr/local -xzf go1.6.2.linux-amd64.tar.gz
     export PATH=$PATH:/usr/local/go/bin
 }
+postinstall_centos73ncrgpu()
+{
+enable_kernel_update
+yum clean all
+yum update -y  dkms
+yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+chmod +x NVIDIA-Linux-x86_64-375.39.run
+./NVIDIA-Linux-x86_64-375.39.run --silent --dkms
+disable_kernel_update
+}
 
 install_torque()
 {
