@@ -1446,8 +1446,8 @@ fi
 		    sleep 30;
 		    installomsagent;
 		    fi
-                    postinstall_centos73nc24rgpu;
-                    postinstall_centos73kde;
+                    postinstall_centos73nvgpu;
+                    #postinstall_centos73kde;
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
 		        echo "this is a NC"
