@@ -1166,10 +1166,11 @@ yum install -y  xorg-x11-drv*
 yum erase -y xorg-x11-drv-nouveau
 echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
 echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
+rmmod nouveau
 dracut --force
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/lis-rpms-4.1.3.tar.gz
 #tar -zxvf lis-rpms-4.1.3.tar.gz
-wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
+wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
 ./NVIDIA-Linux-x86_64-367.64-grid.run --silent --dkms --install-libglvnd
 dracut --force
