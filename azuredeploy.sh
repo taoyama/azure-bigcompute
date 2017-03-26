@@ -1145,41 +1145,44 @@ postinstall_centos73kde()
 #echo "startkde &">>~/.vnc/xstartup
 
 #Install KDE and make graphical default target
+
+}
+
+postinstall_centos73nvgpu()
+{ 
 yum groupinstall -y 'KDE' 'X Window System' 'Fonts'
 #yum install -y xinetd vnc-ltsp-config kde-workspace gdm
 yum install -y vnc-ltsp-config kde-workspace gdm
 ln -sf /lib/systemd/system/graphical.target /etc/systemd/system/default.target
 systemctl isolate graphical.target
-}
-
-postinstall_centos73nc24rgpu()
-{ 
 yum clean all
 #yum update -y kernel\* selinux-policy\* dkms
 yum update -y  dkms
 yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers
+
 grub2-mkconfig -o /boot/grub2/grub.cfg
 cd /etc/default && sed -i.bak -e '6d' grub
 cd /etc/default && sed -i '6iGRUB_CMDLINE_LINUX="console=tty1 console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300 net.ifnames=0 rdblacklist=nouveau nouveau.modeset=0"' grub
-echo "blacklist nouveau" | tee /etc/modprobe.d/blacklist.conf
 yum install -y  xorg-x11-drv*
 yum erase -y xorg-x11-drv-nouveau
-echo "blacklist nouveau" > /etc/modprobe.d/blacklist-nouveau.conf
-echo "    options nouveau modeset=0" >> /etc/modprobe.d/blacklist-nouveau.conf
+echo 'blacklist nouveau' | tee -a /etc/modprobe.d/blacklist.conf
+echo 'options nouveau modeset=0' | tee -a  /etc/modprobe.d/blacklist-nouveau.conf
+echo 'alias nouveau off' | tee -a  /etc/modprobe.d/blacklist-nouveau.conf
+echo options nouveau modeset=0 | tee -a /etc/modprobe.d/nouveau-kms.conf
 rmmod nouveau
 dracut --force
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/lis-rpms-4.1.3.tar.gz
 #tar -zxvf lis-rpms-4.1.3.tar.gz
-wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
-chmod +x NVIDIA-Linux-x86_64-367.64-grid.run
-./NVIDIA-Linux-x86_64-367.64-grid.run --silent --dkms --install-libglvnd
+wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/azurenvidia42/NVIDIA-Linux-x86_64-367.92-grid.run
+chmod +x NVIDIA-Linux-x86_64-367.92-grid.run
+./NVIDIA-Linux-x86_64-367.92-grid.run --silent --dkms --install-libglvnd
 dracut --force
-git clone https://github.com/LIS/lis-next.git && cd lis-next/hv-rhel7.x/hv/
-./rhel7-hv-driver-install
-systemctl stop waagent
-systemctl disable waagent
-chmod +x /etc/rc.d/rc.local
-echo "sleep 240" >> /etc/rc.d/rc.local && echo "systemctl enable waagent" >> /etc/rc.d/rc.local && echo "systemctl start waagent" >> /etc/rc.d/rc.local
+#git clone https://github.com/LIS/lis-next.git && cd lis-next/hv-rhel7.x/hv/
+#./rhel7-hv-driver-install
+#systemctl stop waagent
+#systemctl disable waagent
+#chmod +x /etc/rc.d/rc.local
+#echo "sleep 240" >> /etc/rc.d/rc.local && echo "systemctl enable waagent" >> /etc/rc.d/rc.local && echo "systemctl start waagent" >> /etc/rc.d/rc.local
  # mv /usr/lib64/xorg/modules/extensions/libglx.so /usr/lib64/xorg/modules/extensions/libglx.so.xorg
  #ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so
  # ln -s /usr/lib64/xorg/modules/extensions/libglx.so.367.64 /usr/lib64/xorg/modules/extensions/libglx.so.xorg
