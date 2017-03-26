@@ -1131,31 +1131,6 @@ yum install -y cuda
 disable_kernel_update
 }
 
-postinstall_centos73kde()
-{
-#Keep VNC Off for now
-#yum install -y vnc*
-#systemctl enable vncserver@:1.service
-#cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@.service
-#systemctl daemon-reload
-
-# Switch off service
-#echo "[Service]">/etc/systemd/system/vncserver@:1.service
-#echo "Type=forking">>/etc/systemd/system/vncserver@:1.service
-#echo "ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
-#echo "ExecStart=/sbin/runuser -l root -c "/usr/bin/vncserver %i"">>/etc/systemd/system/vncserver@:1.service
-#echo "PIDFile=/root/.vnc/%H%i.pid">>/etc/systemd/system/vncserver@:1.service
-#echo "ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'">>/etc/systemd/system/vncserver@:1.service
-
-# Quit playing with xstartup
-#echo "#!/bin/sh">~/.vnc/xstartup
-#echo "unset SESSION_MANAGER">>~/.vnc/xstartup
-#echo "unset DBUS_SESSION_BUS_ADDRESS">>~/.vnc/xstartup
-#echo "startkde &">>~/.vnc/xstartup
-
-#Install KDE and make graphical default target
-
-}
 
 postinstall_centos73nvgpu()
 { 
@@ -1456,8 +1431,7 @@ fi
 		    installomsagent;
 		    fi
                     postinstall_centos73nvgpu;
-                    #postinstall_centos73kde;
-		    ( sleep 15 ; reboot ) &
+                    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "NC" ]] && [[ "${WORKERNODE_SIZE}" =~ "NC" ]];then
 		        echo "this is a NC"
 		    if [ ! -z "$omsworkspaceid" ]; then
