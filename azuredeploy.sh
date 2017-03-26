@@ -783,16 +783,14 @@ install_go()
     tar -C /usr/local -xzf go1.6.2.linux-amd64.tar.gz
     export PATH=$PATH:/usr/local/go/bin
 }
-postinstall_centos73ncrgpu()
+postinstall_centos73ncgpu()
 {
-enable_kernel_update
 yum clean all
 yum update -y  dkms
 yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers
 wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 chmod +x NVIDIA-Linux-x86_64-375.39.run
 ./NVIDIA-Linux-x86_64-375.39.run --silent --dkms
-disable_kernel_update
 }
 
 install_torque()
@@ -1394,9 +1392,9 @@ fi
 		    installomsagent;
 		    fi
 		    enable_kernel_update
+		    postinstall_centos73ncgpu
 		    install_cuda8centos
 		    install_cudann5_ubuntu1604
-		    postinstall_centos73nc24rgpu
 		    disable_kernel_update
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
@@ -1465,10 +1463,10 @@ fi
 		    if [ ! -z "$omsworkspaceid" ]; then
 		    sleep 30;
 		    installomsagent;
-		    fi	
+		    fi
+		    postinstall_centos73ncgpu;
 		    install_cuda8centos;
                     install_cudann5_ubuntu1604;
-		    postinstall_centos73nc24rgpu;
 		    ( sleep 15 ; reboot ) &
 		fi
                 		
