@@ -1384,10 +1384,13 @@ fi
 		    install_pbspro
 		    disable_kernel_update
 		    fi
-		    
-		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    if [ "$skuName" == "7.1" ] ; then		    
+                    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
-
+		    elif [ "$skuName" == "7.3" ] ; then
+                    echo 'export PATH=/opt/intel/compilers_and_libraries_2017/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2017/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		    fi 
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]];then
 		        echo "this is a H"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1402,9 +1405,13 @@ fi
 		    install_pbspro
 		    disable_kernel_update
 		    fi
-		    
-		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    if [ "$skuName" == "7.1" ] ; then		    
+                    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
 		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		    elif [ "$skuName" == "7.3" ] ; then
+                    echo 'export PATH=/opt/intel/compilers_and_libraries_2017/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2017/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		    fi 
 		elif [[ "${HEADNODE_SIZE}" =~ "A" ]] && [[ "${WORKERNODE_SIZE}" =~ "A" ]] && [[ "${HEADNODE_SIZE}" =~ "9" ]] && [[ "${WORKERNODE_SIZE}" =~ "9" ]];then
 		    echo "this is a A9 with RDMA"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1419,9 +1426,14 @@ fi
 		    install_pbspro
 		    disable_kernel_update
 		    fi
-		    
-		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
-		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile    
+		    if [ "$skuName" == "7.1" ] ; then		    
+                    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		    elif [ "$skuName" == "7.3" ] ; then
+                    echo 'export PATH=/opt/intel/compilers_and_libraries_2017/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
+		    echo 'export PATH=/opt/intel/compilers_and_libraries_2017/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/root/.bash_profile
+		    fi 
+		   
 		elif [[ "${HEADNODE_SIZE}" =~ "NV" ]] && [[ "${WORKERNODE_SIZE}" =~ "NV" ]];then
 		        echo "this is a NV"
 		    if [ ! -z "$omsworkspaceid" ]; then
