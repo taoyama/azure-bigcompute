@@ -91,7 +91,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 * For more information on Azure subscription and service limits, quota, and constraints, please see [here](https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/).
 
 
-## Topology Examples with Azure CLI
+## Single/Cluster Topology Examples with Azure CLI
 
 
 ### New Azure CLI
@@ -106,27 +106,52 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 <code>bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"adminUserName\":{\"value\":\"azuregpuuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"Canonical\"},\"imageOffer\":{\"value\":\"UbuntuServer\"},\"imageSku\":{\"value\":\"16.04-LTS\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"32\"}}"</code>
 
+* Single NC24 with no scheduler and no OMS- [provided sshpublickey value is supplied below]:
+
+<code>bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"dnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"adminUserName\":{\"value\":\"azuregpuuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"Canonical\"},\"imageOffer\":{\"value\":\"UbuntuServer\"},\"imageSku\":{\"value\":\"16.04-LTS\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"workerNodeCount\":{\"value\": 0},\"numDataDisks\":{\"value\":\"32\"}}"</code>
+
 
 * GPU Cluster (each NC24) with no scheduler with OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below along with OMSWorkSpaceId and OMSWorkSpaceKey]:
 
 <code> bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"adminUserName\":{\"value\":\"azuregpuuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"Canonical\"},\"imageOffer\":{\"value\":\"UbuntuServer\"},\"imageSku\":{\"value\":\"16.04-LTS\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"32\"},\"OMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"OMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}"</code>
 
+* Single NC24 with no scheduler with OMS- [provided sshpublickey value is supplied below along with OMSWorkSpaceId and OMSWorkSpaceKey]:
+
+<code> bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"dnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"adminUserName\":{\"value\":\"azuregpuuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"Canonical\"},\"imageOffer\":{\"value\":\"UbuntuServer\"},\"imageSku\":{\"value\":\"16.04-LTS\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"workerNodeCount\":{\"value\": 0},\"numDataDisks\":{\"value\":\"32\"},\"OMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"OMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}"</code>
+
 * HPC Cluster (each H16R) with PBSPro and no OMS - minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
 <code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"pbspro\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"32\"}}"</code>
+
+* HPC Single H16R with PBSPro and no OMS- [provided sshpublickey value is supplied below]:
+
+<code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"singleOrCluster\":{\"value\":\"single\"},\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"pbspro\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 0},\"numDataDisks\":{\"value\":\"32\"}}"</code>
 
 * HPC Cluster (each H16R) with PBSPro with OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below along with OMSWorkSpaceId and OMSWorkSpaceKey]:
 
 <code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"pbspro\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"32\"},\"OMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"OMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}"</code>
 
+* HPC Single H16R with PBSPro with OMS-  [provided sshpublickey value is supplied below along with OMSWorkSpaceId and OMSWorkSpaceKey]:
+
+<code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"pbspro\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 0},\"numDataDisks\":{\"value\":\"32\"},\"OMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"OMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}"</code>
+
 * HPC (each H16R) Cluster with Torque and no OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
 <code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"Torque\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"32\"}}"</code>
+
+* HPC Single H16R  with Torque and no OMS-  [provided sshpublickey value is supplied below]:
+
+<code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"Torque\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 0},\"numDataDisks\":{\"value\":\"32\"}}"</code>
 
 
 * HPC (each H16R) Cluster with Torque with OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below along with OMSWorkSpaceId and OMSWorkSpaceKey]:
 
 <code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"Torque\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 1},\"numDataDisks\":{\"value\":\"32\"},\"OMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"OMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}"</code>
+
+
+* HPC single H16R  with Torque with OMS- [provided sshpublickey value is supplied below along with OMSWorkSpaceId and OMSWorkSpaceKey]:
+
+<code>bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"dnsLabelPrefix\":{\"value\":\"tsthpc\"},\"adminUserName\":{\"value\":\"azurehpcuser\"},\"sshPublicKey\":{\"value\":\"\"},\"imagePublisher\":{\"value\":\"openlogic\"},\"imageOffer\":{\"value\":\"CentOS-HPC\"},\"imageSku\":{\"value\":\"7.1\"},\"schedulerpbsORTorque\":{\"value\":\"Torque\"},\"headandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"workerNodeCount\":{\"value\": 0},\"numDataDisks\":{\"value\":\"32\"},\"OMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"OMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}"</code>
 
 
 ### Old Azure CLI
