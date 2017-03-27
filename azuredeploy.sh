@@ -1188,7 +1188,7 @@ service lightdm stop
 #service lightdm disable placeholder
 echo options nouveau modeset=0 | tee -a /etc/modprobe.d/nouveau-kms.conf
 rmmod nouveau
-DEBIAN_FRONTEND=noninteractive update-initramfs -u
+#DEBIAN_FRONTEND=noninteractive update-initramfs -u
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
 #wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.92-grid.run
