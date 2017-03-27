@@ -94,10 +94,8 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 ### New Azure CLI
 
-	 ```sh 
-	 docker run -dti --restart=always --name=azure-cli-python azuresdk/azure-cli-python && docker exec -ti azure-cli-python bash -c "az login && bash"
-	 To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate. 
-	 ``` 
+	 <code> docker run -dti --restart=always --name=azure-cli-python azuresdk/azure-cli-python && docker exec -ti azure-cli-python bash -c "az login && bash"
+	 To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate. </code> 
 
 * GPU Cluster (each NC24) with no scheduler and no OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
@@ -166,10 +164,9 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 	 ``` 
 ### Old Azure CLI
 
-	 ```sh 
-	 docker run -dti --restart=always --name=azure-cli microsoft/azure-cli && docker exec -ti azure-cli bash -c "azure login && bash" 
-	 To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.
-	 ``` 
+	 <code>docker run -dti --restart=always --name=azure-cli microsoft/azure-cli && docker exec -ti azure-cli bash -c "azure login && bash"</code>
+	 <code>To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.</code>
+	  
 * GPU Cluster (each NC24) with no scheduler and no OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
 	 ```sh 
