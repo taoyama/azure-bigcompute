@@ -13,7 +13,7 @@ Table of Contents
       * [Reporting bugs](#reporting-bugs)
       * [Patches and pull requests](#patches-and-pull-requests)
       * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-skus)
-   * [Topology Examples with Azure CLI](#topology-examples-with-azure-cli)
+   * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
       * [Old Azure CLI](#old-azure-cli)
    * [GPUs for Compute](#gpus-for-compute)
@@ -90,15 +90,12 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 * Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase.
 * For more information on Azure subscription and service limits, quota, and constraints, please see [here](https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/).
 
-## Single/Cluster Topology Examples with Azure CLI
+## Single or Cluster Topology Examples with Azure CLI
 
 ### New Azure CLI
 
 	 ```sh 
 	 docker run -dti --restart=always --name=azure-cli-python azuresdk/azure-cli-python && docker exec -ti azure-cli-python bash -c "az login && bash"
-	 ``` 
-
-	 ```sh 
 	 To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate. 
 	 ``` 
 
@@ -171,9 +168,6 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 	 ```sh 
 	 docker run -dti --restart=always --name=azure-cli microsoft/azure-cli && docker exec -ti azure-cli bash -c "azure login && bash" 
-	 ``` 
-
-	 ```sh
 	 To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code XXXXXXXXX to authenticate.
 	 ``` 
 * GPU Cluster (each NC24) with no scheduler and no OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
