@@ -378,7 +378,7 @@ install_docker_ubuntu()
 }
 install_nvdia_ubuntu()
 {
-	#DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-361
+#DEBIAN_FRONTEND=noninteractive apt-get install -y nvidia-361
 service lightdm stop 
 #wget https://azuregpu.blob.core.windows.net/nv-drivers/NVIDIA-Linux-x86_64-361.45.09-grid.run
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-367.64-grid.run
