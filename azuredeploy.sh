@@ -1175,6 +1175,10 @@ dracut --force
 ubuntunvidiadesktop()
 {
 apt-get update -y
+apt-get install -y linux-image-virtual
+apt-get install -y linux-virtual-lts-xenial
+apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
+apt-get install -y linux-tools-virtual linux-cloud-tools-virtual
 apt-get install -y --no-install-recommends  ubuntu-desktop gnome-panel gnome-settings-daemon metacity nautilus gnome-terminal
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -1202,8 +1206,6 @@ DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.92-grid.run  --silent -
 ##Options for PCOIP- commented now##
 #echo 'IgnoreSP=TRUE' | tee -a /etc/nvidia/gridd.conf
 #echo 'FeatureType=2' | tee -a /etc/nvidia/gridd.conf
-apt-get install -y linux-virtual-lts-xenial
-apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
 systemctl enable nvidia-gridd
 systemctl restart nvidia-gridd
 
