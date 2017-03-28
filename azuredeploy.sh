@@ -1202,6 +1202,8 @@ DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.92-grid.run  --silent -
 ##Options for PCOIP- commented now##
 #echo 'IgnoreSP=TRUE' | tee -a /etc/nvidia/gridd.conf
 #echo 'FeatureType=2' | tee -a /etc/nvidia/gridd.conf
+apt-get install -y linux-virtual-lts-xenial
+apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
 systemctl enable nvidia-gridd
 systemctl restart nvidia-gridd
 
