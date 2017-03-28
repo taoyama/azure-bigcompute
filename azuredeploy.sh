@@ -1196,7 +1196,7 @@ wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls1
 chmod +x NVIDIA-Linux-x86_64-367.92-grid.run
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
-DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r`
+DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
 DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-367.92-grid.run  --silent --dkms --run-nvidia-xconfig
 #DEBIAN_FRONTEND=noninteractive update-initramfs -u
 ##Options for PCOIP- commented now##
