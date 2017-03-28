@@ -1103,7 +1103,7 @@ install_cudann5_ubuntu1604()
     rm cudnn-8.0-linux-x64-v5.1.tgz && \
     ldconfig
 }
-installomsagent()
+installomsagent_old()
 {
 #wget https://github.com/Microsoft/OMS-Agent-for-Linux/releases/download/OMSAgent_Ignite2016_v$omslnxagentver/omsagent-${omslnxagentver}.universal.x64.sh
 #wget https://github.com/Microsoft/OMS-Agent-for-Linux/releases/download/OMSAgent-201610-v1.2.0-148/omsagent-1.2.0-148.universal.x64.sh
@@ -1112,6 +1112,11 @@ wget https://github.com/Microsoft/OMS-Agent-for-Linux/releases/download/OMSAgent
 chmod +x ./omsagent-${omslnxagentver}.universal.x64.sh
 md5sum ./omsagent-${omslnxagentver}.universal.x64.sh
 sudo sh ./omsagent-${omslnxagentver}.universal.x64.sh --upgrade -w $omsworkspaceid -s $omsworkspacekey
+}
+
+installomsagent()
+{
+docker run --privileged -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/log:/var/log -e WSID=$omsworkspaceid -e KEY=$omsworkspacekey -p 127.0.0.1:25225:25225 --name="omsagent" -h=`hostname` --restart=always microsoft/oms
 }
 
 instrumentfluentd_docker_centos72()
