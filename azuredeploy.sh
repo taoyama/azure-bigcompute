@@ -950,7 +950,7 @@ do
         (( c++ ))
 done
 # MASTER also has pbs_mom started
-echo "$MASTER_HOSTNAME np=1" >> /var/spool/torque/server_priv/nodes
+echo "$MASTER_HOSTNAME np=1" >> /var/spool/pbs/server_priv/nodes
 qmgr -c "create node $MASTER_HOSTNAME"
 su -c "cd /etc && sudo sed -i.bak -e '5d' pbs.conf" $HPC_USER
 su -c "cd /etc && sudo sed -i '5iPBS_START_MOM=1' pbs.conf" $HPC_USER
