@@ -385,7 +385,6 @@ service lightdm stop
 #wget https://tdcm16sg112leo8193ls102.blob.core.windows.net/tdcm16sg112leo8193ls102/NVIDIA-Linux-x86_64-375.39.run
 wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 #chmod +x NVIDIA-Linux-x86_64-361.45.09-grid.run
-chmod +x NVIDIA-Linux-x86_64-375.39.run
 apt-get install -y linux-image-virtual
 apt-get install -y linux-virtual-lts-xenial
 apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
@@ -394,6 +393,7 @@ DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
 #DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-361.45.09-grid.run  --silent
+chmod +x NVIDIA-Linux-x86_64-375.39.run
 ./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 }
