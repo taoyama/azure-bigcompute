@@ -1352,7 +1352,8 @@ fi
                 install_nvdia_ubuntu
                 install_cudann5_ubuntu1604
                 #install_cuda8_ubuntu1604
-		install_cuda8044_ubuntu1604	        
+		install_cuda8044_ubuntu1604
+		 ( sleep 15 ; reboot ) &
 		fi
                 
 	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] ; then
