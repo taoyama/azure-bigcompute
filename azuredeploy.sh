@@ -322,6 +322,7 @@ then
     systemctl disable firewalld
     #service docker start
     gpasswd -a $userName docker
+    gpasswd -a $HPC_USER docker 
     systemctl start docker
     systemctl enable docker
     #curl -L https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
