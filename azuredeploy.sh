@@ -394,7 +394,7 @@ DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
 #DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-361.45.09-grid.run  --silent
-DEBIAN_FRONTEND=noninteractive ./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
+./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 }
 install_azure_cli()
