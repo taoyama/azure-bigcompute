@@ -16,7 +16,7 @@ Table of Contents
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
    * [GPUs for Compute](#gpus-for-compute)
-      * [NVIDIA Tesla Driver Silent Install without further reboot](#nvidi-tesla-driver-silent-install-without-further-reboot)
+      * [NVIDIA Tesla Driver Silent Install without further reboot](#nvidia-tesla-driver-silent-install-without-further-reboot)
       * [Silent and Secure installation of NVIDIA CUDA Toolkit](#silent-and-secure-installation-of-nvidia-cuda-toolkit)
       * [Silent installation of CUDNN](#silent-installation-of-cudnn)
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
