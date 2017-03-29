@@ -348,7 +348,7 @@
     },
     "oMSLinuxAgentFullVersion": {
       "type": "string",
-      "defaultValue": "https://hub.docker.com/r/microsoft/oms/~/dockerfile/",
+      "defaultValue": "hub.docker.com/r/microsoft/oms/~/dockerfile/",
       "metadata": {
         "description": "The OMS Agent 64 bit version dockerized will update and register with OMS Workspace"
       }
