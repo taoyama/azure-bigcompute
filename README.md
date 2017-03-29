@@ -16,6 +16,9 @@ Table of Contents
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
    * [GPUs for Compute](#gpus-for-compute)
+      * NVIDIA Tesla Driver Silent Install without further reboot(#nvidi-tesla-driver-silent-install-without-further-reboot)
+      * Silent and Secure installation of NVIDIA CUDA Toolkit(#silent-and-secure-installation-of-nvidia-cuda-toolkit)
+      * Silent installation of CUDNN(#silent-installation-of-cudnn)
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
       * [IB](#ib)
@@ -163,7 +166,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 	 bash-4.3# az group create -l southcentralus -n tsthpc && az group deployment create -g tsthpc -n tsthpc --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"tsthpc\"},\"AdminUserName\":{\"value\":\"azurehpcuser\"},\"SshPublicKey\":{\"value\":\"\"},\"ImagePublisher\":{\"value\":\"openlogic\"},\"ImageOffer\":{\"value\":\"CentOS-HPC\"},\"ImageSku\":{\"value\":\"7.1\"},\"SchedulerpbsORTorque\":{\"value\":\"Torque\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_H16R\"},\"WorkerNodeCount\":{\"value\": 0},\"NumDataDisks\":{\"value\":\"32\"},\"oMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"oMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}" --debug
 	 ``` 
  
-
+ 
 ## GPUs for Compute
 
 [Azure GPUs](http://gpu.azure.com/)
@@ -184,6 +187,67 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 * Head and comp nodes work via <code>sudo su - --hpc user-- </code> and then direct ssh.
 * Internal firewall is off.
 * For M60 usage for visualizations, please visit [aka.ms/accessgpu](https://aka.ms/accessgpu)
+
+### NVIDIA Tesla Driver Silent Install without further reboot
+  NVIDIA Tesla Driver Silent Install without further reboot installed via <code>azuredeploy.sh</code> in this repository for cluster or single node as follows:
+ > [!IMPORTANT]
+ > Currently, this need not be required when using secure cuda-repo-ubuntu1604_8.0.61-1_amd64.deb for Azure NC VMs running Ubuntu Server 16.04 LTS. **This is required  for NVIDIA Driver with DKMS (Dynamic Kernel Module Support) for driver load surviving kernel updates.**
+
+```bash 
+    service lightdm stop 
+    wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+    DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
+    DEBIAN_FRONTEND=noninteractive apt-get update -y
+    apt-get install -y linux-image-virtual linux-tools-virtual linux-cloud-tools-virtual linux-virtual-lts-xenial linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial 
+    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
+    chmod +x NVIDIA-Linux-x86_64-375.39.run
+    ./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
+    DEBIAN_FRONTEND=noninteractive update-initramfs -u
+```
+
+ ### Silent and Secure installation of NVIDIA CUDA Toolkit
+ 
+ Silent and Secure installation of NVIDIA CUDA Toolkit on Ubuntu 16.04 LTS via <code>azuredeploy.sh</code> in this repository for cluster or single node.
+ 
+ 
+ ```bash
+ CUDA_REPO_PKG=cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+ DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
+ export CUDA_DOWNLOAD_SUM=1f4dffe1f79061827c807e0266568731 && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/${CUDA_REPO_PKG} && \
+     echo "$CUDA_DOWNLOAD_SUM  cuda-repo.deb" | md5sum -c --strict - && \
+     dpkg -i cuda-repo.deb && \
+     rm cuda-repo.deb && \
+     apt-get update -y && apt-get install -y cuda && \
+     apt-get install -y nvidia-cuda-toolkit && \
+ export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/:${LIBRARY_PATH}  && export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/stubs:${LIBRARY_PATH} && \
+ export PATH=/usr/local/cuda-8.0/bin:${PATH}
+ ```
+
+##### CUDA Samples Install
+ 
+ [CUDA Samples](http://docs.nvidia.com/cuda/cuda-samples/#new-features-in-cuda-toolkit-8-0)  installed via <code>azuredeploy.sh</code> in this repository cluster or single node in parameterized RAID0 location as follows
+ 
+ ```bash
+ export SHARE_DATA="/data/data"
+ export SAMPLES_USER="gpuuser"
+ su -c "/usr/local/cuda-8.0/bin/./cuda-install-samples-8.0.sh $SHARE_DATA" $SAMPLES_USER
+
+ ```
+
+#### Silent installation of CUDNN
+
+The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
+cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers.
+cuDNN is part of the NVIDIA Deep Learning SDK and is installed silently as follows via <code>azuredeploy.sh</code> in this repository cluster or single node.
+
+ ```bash
+    export CUDNN_DOWNLOAD_SUM=a87cb2df2e5e7cc0a05e266734e679ee1a2fadad6f06af82a76ed81a23b102c8 && curl -fsSL http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/cudnn-8.0-linux-x64-v5.1.tgz -O && \
+    echo "$CUDNN_DOWNLOAD_SUM  cudnn-8.0-linux-x64-v5.1.tgz" | sha256sum -c --strict - && \
+    tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local && \
+    rm cudnn-8.0-linux-x64-v5.1.tgz && \
+    ldconfig
+  ```
+
 
 
 ## H-Series and A9 with schedulers 
