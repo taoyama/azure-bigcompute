@@ -1,7 +1,7 @@
+[![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
+
 ![Azure icon](https://www.microsoft.com/favicon.ico) ![Intel icon](https://yepo.com.au/media/catalog/product/cache/1/thumbnail/128x128/9df78eab33525d08d6e5fb8d27136e95/a/h/ahr0cdovl2ltywdlcy5py2vjyxquyml6l2ltzy9nywxszxj5lzi2mje1njq5xzg2mdguanbn.jpg)           ![nvidia icon](http://img.informer.com/icons/png/128/3096/3096710.png) ![mellanoxicon](https://az846835.vo.msecnd.net/company/logos/MellanoxTechnologies.png)  ![Ubuntu Icon](https://static.start.me/favicons/wczxq9siw9fnsc7hvy1a) ![Centos icon](https://copr.fedorainfracloud.org/static/chroot_logodir/epel.png) ![infinibandicon](https://pbs.twimg.com/profile_images/566244657/InfiniBandLG_reasonably_small.jpg)
 
-
-[![Build Status](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts.png?branch=master)](https://travis-ci.org/Azure/azure-bigcompute-hpcscripts)
 
 
 Table of Contents
