@@ -75,7 +75,9 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 * Logon to the OMS Workspace and Go to -> Settings -> 'Connected Sources'  -> 'Linux Servers' -> Obtain the Workspace ID like <code>ba1e3f33-648d-40a1-9c70-3d8920834669</code> and the 'Primary and/or Secondary Key' like <code>xkifyDr2s4L964a/Skq58ItA/M1aMnmumxmgdYliYcC2IPHBPphJgmPQrKsukSXGWtbrgkV2j1nHmU0j8I8vVQ==</code>
 * Add The solutions 'Agent Health', 'Activity Log Analytics' and 'Container' Solutions from the 'Solutions Gallery' of the OMS Portal of the workspace.
 * While Deploying the Template just the WorkspaceID and the Key are to be mentioned and all will be registered including all containers in any nodes of the cluster(s).
-* Then one can login to https://OMSWorkspaceName.portal.mms.microsoft.com and check all containers running for Docker DataCenter and use Log Analytics and if Required perform automated backups using the corresponding Solutions for OMS.
+* Then one can login to https://OMSWorkspaceName.portal.mms.microsoft.com and check all containers running for single or cluster topologies and use Log Analytics and if Required perform automated backups using the corresponding Solutions for OMS.
+* Further Solutions can be added like Backup from OMS Workspace.
+* OMS usage is Sku/provider/imageoffer agnostic since Dockerized OMS agent would be present in all on latest tag post deployment via this repository.
  * Or if the OMS Workspace and the Machines are in the same subscription, one can just connect the Linux Node sources manually to the OMS Workspace as Data Sources.
  
 ## Reporting bugs
