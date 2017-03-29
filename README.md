@@ -192,8 +192,11 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 ### NVIDIA Tesla Driver Silent Install without further reboot
   NVIDIA Tesla Driver Silent Install without further reboot installed via <code>azuredeploy.sh</code> in this repository for cluster or single node as follows:
+  
  > :grey_exclamation:
+ 
  > Currently, this need not be required when using secure cuda-repo-ubuntu1604_8.0.61-1_amd64.deb for Azure NC VMs running Ubuntu Server 16.04 LTS.
+ 
  > **This is required  for NVIDIA Driver with DKMS (Dynamic Kernel Module Support) for driver load surviving kernel updates.**
 
 ```bash 
