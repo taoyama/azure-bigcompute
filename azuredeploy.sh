@@ -320,8 +320,7 @@ then
   yum -y install docker-ce
     systemctl stop firewalld
     systemctl disable firewalld
-    gpasswd -a $userName docker
-    gpasswd -a $HPC_USER docker 
+    gpasswd -a $userName docker 
     systemctl start docker
     systemctl enable docker
      curl -L "https://github.com/docker/compose/releases/download/$dockerComposeVer/docker-compose-$(uname -s)-$(uname -m)" > /usr/local/bin/docker-compose
@@ -350,7 +349,6 @@ install_docker_ubuntu()
        DEBIAN_FRONTEND=noninteractive apt-get -y update
 	 groupadd docker
 	 usermod -aG docker $userName
-	 usermod -aG docker $HPC_USER
 	 apt-get -y install $dockerVer
 	 /etc/init.d/apparmor stop 
 	 /etc/init.d/apparmor teardown 
@@ -985,6 +983,7 @@ fi
 		setup_hpc_user
                 install_docker_ubuntu
                 install_docker_apps
+		usermod -aG docker $HPC_USER
 		 if [ "$SALTSTACKBOOLEAN" == "Yes" ] ; then
 		    install_saltsaltstack_ubuntu
 		 fi
@@ -1033,6 +1032,7 @@ fi
 		install_pkgs_all
 		setup_shares
 		setup_hpc_user
+		gpasswd -a $HPC_USER docker
 		setup_env
 
 		    if [ "$SALTSTACKBOOLEAN" == "Yes" ] ; then
