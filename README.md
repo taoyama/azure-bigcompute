@@ -8,6 +8,9 @@ Table of Contents
 =================
 
    * [Azure Big Compute](#azure-big-compute)
+      * [License](#license)
+      * [MSFT OSCC](#msft-oscc)
+      * [Influence accreditation](#influence-accreditation)
    * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
@@ -34,12 +37,15 @@ Table of Contents
 **[Azure Big Compute](https://azure.microsoft.com/en-us/solutions/big-compute/)**
 
 
-Please see the [LICENSE file](https://github.com/Azure/azure-bigcompute-hpcscripts/blob/master/LICENSE) for licensing information.
+## License
+  * Please see the [LICENSE file](https://github.com/Azure/azure-bigcompute-hpcscripts/blob/master/LICENSE) for licensing information.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information
+## MSFT OSCC
+  * This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information
 see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional
 questions or comments.
 
+## Influence accreditation 
 **This repo is inspired by [Christian Smith](https://github.com/smith1511)'s repo https://github.com/smith1511/hpc**
 
 # Deploy from Portal and visualize
