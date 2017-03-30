@@ -14,7 +14,7 @@ Table of Contents
       	* [GPU Computes](#gpu-computes)
           * [Ubuntu 16.04-LTS](#ubuntu-1604-lts)
           * [CentOS 7.3](#centos-73)
-      * [HPC](#hpc)
+      * [HPC with RDMA over IB](#hpc-with-rdma-over-ib)
    * [GPUs for Compute](#gpus-for-compute)
       * [NVIDIA Tesla Driver Silent Install without further reboot](#nvidia-tesla-driver-silent-install-without-further-reboot)
       * [Silent and Secure installation of NVIDIA CUDA Toolkit](#silent-and-secure-installation-of-nvidia-cuda-toolkit)
@@ -128,7 +128,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	 ```sh  
 	 bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"AdminUserName\":{\"value\":\"azuregpuuser\"},\"SshPublicKey\":{\"value\":\"\"},\"ImagePublisher\":{\"value\":\"openlogic\"},\"ImageOffer\":{\"value\":\"CentOS\"},\"ImageSku\":{\"value\":\"7.3\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"gpuuser\"},\"NumDataDisks\":{\"value\":\"32\"},\"oMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"oMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}" --debug
 	 ``` 
-#### HPC
+#### HPC with RDMA over IB
 	 
 * HPC Cluster (each H16R) with PBSPro and no OMS - minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
