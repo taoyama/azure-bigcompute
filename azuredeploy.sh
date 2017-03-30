@@ -791,12 +791,24 @@ install_go()
 }
 postinstall_centos73ncgpu()
 {
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 yum clean all
 yum update -y  dkms
-yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers
-wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers --disableexcludes=all
+yum -y upgrade kernel kernel-devel
 chmod +x NVIDIA-Linux-x86_64-375.39.run
-./NVIDIA-Linux-x86_64-375.39.run --silent --dkms
+
+cat >>~/install_nvidiarun.sh <<EOF
+cd /var/lib/waagent/custom-script/download/0 && \
+./NVIDIA-Linux-x86_64-375.39.run --silent --dkms --install-libglvnd && \
+sed -i '$ d' /etc/rc.d/rc.local && \
+chmod -x /etc/rc.d/rc.local
+rm -rf ~/install_nvidiarun.sh
+EOF
+
+chmod +x install_nvidiarun.sh
+echo -ne "/root/install_nvidiarun.sh" >> /etc/rc.d/rc.local
+chmod +x /etc/rc.d/rc.local
 }
 
 install_torque()
