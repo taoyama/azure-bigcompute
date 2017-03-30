@@ -175,7 +175,7 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 * Entry point is valid for the stated sku presently only for  specific regions of "East-US" or "Southcentral-US". Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
 * gpu enablement is possible only on approval of quota for sku usage in the stated subscription. Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase. 
-* NVDIA drivers are auto-loaded for Ubuntu 16.04-LTS.
+* NVIDIA drivers are OK for Ubuntu 16.04-LTS as well as for CentOS 7.3, both being unattended cluster as well as single install.
 * Latest Secure Install of CUDA available and on RAID0 (/data/data default).
 * One can run all [CUDA Samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) across the cluster and test with latest CUDA and CUDAnn.
 * Latest Docker CE both for Ubuntu and CentOS configurable each Head and all compute Nodes. - default is 17.03 CE.
