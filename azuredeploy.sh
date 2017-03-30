@@ -1479,7 +1479,7 @@ fi
 		    postinstall_centos73ncgpu;
 		    install_cuda8centos;
                     install_cudann5_ubuntu1604;
-		    ( sleep 15 ; reboot ) &
+		    ( sleep 30 ; reboot ) &
 		fi
                 		
                 #if [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] ; then
