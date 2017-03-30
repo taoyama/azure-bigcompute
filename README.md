@@ -9,10 +9,6 @@ Table of Contents
 
    * [Azure Big Compute](#azure-big-compute)
    * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)
-      * [Optional usage with OMS](#optional-usage-with-oms)
-      * [Reporting bugs](#reporting-bugs)
-      * [Patches and pull requests](#patches-and-pull-requests)
-      * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-skus)
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
       	* [GPU Computes](#gpu-computes)
@@ -27,6 +23,10 @@ Table of Contents
       * [mpirun](#mpirun)
       * [IB](#ib)
       * [Torque and pbspro for CentOS-HPC Skus](#torque-and-pbspro-for-centos-hpc-skus)
+   * [Optional usage with OMS](#optional-usage-with-oms)
+   * [Reporting bugs](#reporting-bugs)
+   * [Patches and pull requests](#patches-and-pull-requests)
+   * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-skus)
 
 
 # Azure Big Compute
@@ -68,35 +68,6 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 ```
 
 
-## Optional usage with OMS
-
-**OMS Setup is optional and the OMS Workspace Id and OMS Workspace Key can either be kept blank or populated post the steps below.**
-
-[Create a free account for MS Azure Operational Management Suite with workspaceName](https://login.mms.microsoft.com/signin.aspx?signUp=on&ref=ms_mms)
-* Provide a Name for the OMS Workspace.
-* Link your Subscription to the OMS Portal.
-* Depending upon the region, a Resource Group would be created in the Subscription like 'mms-weu' for 'West Europe' and the named OMS Workspace with portal details etc. would be created in the Resource Group.
-* Logon to the OMS Workspace and Go to -> Settings -> 'Connected Sources'  -> 'Linux Servers' -> Obtain the Workspace ID like <code>ba1e3f33-648d-40a1-9c70-3d8920834669</code> and the 'Primary and/or Secondary Key' like <code>xkifyDr2s4L964a/Skq58ItA/M1aMnmumxmgdYliYcC2IPHBPphJgmPQrKsukSXGWtbrgkV2j1nHmU0j8I8vVQ==</code>
-* Add The solutions 'Agent Health', 'Activity Log Analytics' and 'Container' Solutions from the 'Solutions Gallery' of the OMS Portal of the workspace.
-* While Deploying the Template just the WorkspaceID and the Key are to be mentioned and all will be registered including all containers in any nodes of the cluster(s).
-* Then one can login to https://OMSWorkspaceName.portal.mms.microsoft.com and check all containers running for single or cluster topologies and use Log Analytics and if Required perform automated backups using the corresponding Solutions for OMS.
-* Further Solutions can be added like Backup from OMS Workspace.
-* OMS usage is Sku/provider/imageoffer agnostic since Dockerized OMS agent would be present in all on latest tag post deployment via this repository.
- * Or if the OMS Workspace and the Machines are in the same subscription, one can just connect the Linux Node sources manually to the OMS Workspace as Data Sources.
- 
-## Reporting bugs
-
-Please report bugs  by opening an issue in the [GitHub Issue Tracker](https://github.com/Azure/azure-bigcompute-hpcscripts/issues)
-
-## Patches and pull requests
-
-Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the `git rebase` command to update your branch to the current master if necessary.
-
-## Region availability and Quotas for MS Azure Skus
-
-* Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
-* Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase.
-* For more information on Azure subscription and service limits, quota, and constraints, please see [here](https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/).
 
 ## Single or Cluster Topology Examples with Azure CLI
 
@@ -108,7 +79,9 @@ Patches can be submitted as GitHub pull requests. If using GitHub please make su
 
 #### GPU Computes
 
+
 ##### Ubuntu 16.04-LTS
+
 * Ubuntu GPU Cluster (each NC24) with no scheduler and no OMS- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below]:
 
 	 ```sh 
@@ -358,3 +331,33 @@ check for Torque or PBSPro via
 All path are set automatically for key 'default' users like azureuser/hpc/root
 for root specific <code>su - root</code> is required.
 
+
+## Optional usage with OMS
+
+**OMS Setup is optional and the OMS Workspace Id and OMS Workspace Key can either be kept blank or populated post the steps below.**
+
+[Create a free account for MS Azure Operational Management Suite with workspaceName](https://login.mms.microsoft.com/signin.aspx?signUp=on&ref=ms_mms)
+* Provide a Name for the OMS Workspace.
+* Link your Subscription to the OMS Portal.
+* Depending upon the region, a Resource Group would be created in the Subscription like 'mms-weu' for 'West Europe' and the named OMS Workspace with portal details etc. would be created in the Resource Group.
+* Logon to the OMS Workspace and Go to -> Settings -> 'Connected Sources'  -> 'Linux Servers' -> Obtain the Workspace ID like <code>ba1e3f33-648d-40a1-9c70-3d8920834669</code> and the 'Primary and/or Secondary Key' like <code>xkifyDr2s4L964a/Skq58ItA/M1aMnmumxmgdYliYcC2IPHBPphJgmPQrKsukSXGWtbrgkV2j1nHmU0j8I8vVQ==</code>
+* Add The solutions 'Agent Health', 'Activity Log Analytics' and 'Container' Solutions from the 'Solutions Gallery' of the OMS Portal of the workspace.
+* While Deploying the Template just the WorkspaceID and the Key are to be mentioned and all will be registered including all containers in any nodes of the cluster(s).
+* Then one can login to https://OMSWorkspaceName.portal.mms.microsoft.com and check all containers running for single or cluster topologies and use Log Analytics and if Required perform automated backups using the corresponding Solutions for OMS.
+* Further Solutions can be added like Backup from OMS Workspace.
+* OMS usage is Sku/provider/imageoffer agnostic since Dockerized OMS agent would be present in all on latest tag post deployment via this repository.
+ * Or if the OMS Workspace and the Machines are in the same subscription, one can just connect the Linux Node sources manually to the OMS Workspace as Data Sources.
+ 
+## Reporting bugs
+
+Please report bugs  by opening an issue in the [GitHub Issue Tracker](https://github.com/Azure/azure-bigcompute-hpcscripts/issues)
+
+## Patches and pull requests
+
+Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the `git rebase` command to update your branch to the current master if necessary.
+
+## Region availability and Quotas for MS Azure Skus
+
+* Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
+* Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase.
+* For more information on Azure subscription and service limits, quota, and constraints, please see [here](https://azure.microsoft.com/en-us/documentation/articles/azure-subscription-service-limits/).
