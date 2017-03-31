@@ -21,8 +21,8 @@ Table of Contents
    * [GPUs for Compute](#gpus-for-compute)
       * [Try CUDA Samples and GROMACS](#try-cuda-samples-and-gromacs)
       * [Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo](#unattended-nvidia-tesla-driver-silent-install-without-further-reboot-during-provisioning-via-this-repo)
-      * [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
-      * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
+      	* [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
+     	* [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
       * [IB](#ib)
@@ -281,11 +281,11 @@ Post the above gmx would be available. For further reference please visit latest
 	chmod +x /etc/rc.d/rc.local
 ```
 
- ### Installation of NVIDIA CUDA Toolkit during provisioning via this repo
+### Installation of NVIDIA CUDA Toolkit during provisioning via this repo
  
  Silent and Secure installation of NVIDIA CUDA Toolkit via <code>azuredeploy.sh</code> in this repository for cluster or single node.
  
- #### Ubuntu 16.04-LTS
+#### Ubuntu 16.04-LTS
  
  ```sh
  CUDA_REPO_PKG=cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
@@ -300,7 +300,7 @@ Post the above gmx would be available. For further reference please visit latest
  export PATH=/usr/local/cuda-8.0/bin:${PATH}
  ```
  
- #### CentOS 7.3
+#### CentOS 7.3
  
   ```sh
 	wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-8.0.61-1.x86_64.rpm
