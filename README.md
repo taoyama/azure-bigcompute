@@ -16,14 +16,10 @@ Table of Contents
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
    
       * [New Azure CLI](#new-azure-cli)
-      
-      	* [GPU Computes](#gpu-computes)
-	
-          * [Ubuntu 16.04-LTS](#ubuntu-1604-lts)
-	  
-          * [CentOS 7.3](#centos-73)
-	  
-        * [HPC with RDMA over IB](#hpc-with-rdma-over-ib)
+         * [GPU Computes](#gpu-computes)
+	    * [Ubuntu 16.04-LTS](#ubuntu-1604-lts)
+	    * [CentOS 7.3](#centos-73)
+	 * [HPC with RDMA over IB](#hpc-with-rdma-over-ib)
 	
    * [GPUs for Compute](#gpus-for-compute)
       * [NVIDIA Tesla Driver Silent Install without further reboot](#nvidia-tesla-driver-silent-install-without-further-reboot)
