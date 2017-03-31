@@ -254,24 +254,30 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 ```
 #### CentOS 7.3
 ```bash 
-	service lightdm stop 
-	wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
-	apt-get install -y linux-image-virtual
-	apt-get install -y linux-virtual-lts-xenial
-	apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
-	apt-get install -y linux-tools-virtual linux-cloud-tools-virtual
-	DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
-	DEBIAN_FRONTEND=noninteractive apt-get update -y
-	DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
+	wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+	yum clean all
+	yum update -y  dkms
+	yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers --disableexcludes=all
+	yum -y upgrade kernel kernel-devel
 	chmod +x NVIDIA-Linux-x86_64-375.39.run
-	./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
-	DEBIAN_FRONTEND=noninteractive update-initramfs -u
+
+	cat >>~/install_nvidiarun.sh <<EOF
+	cd /var/lib/waagent/custom-script/download/0 && \
+	./NVIDIA-Linux-x86_64-375.39.run --silent --dkms --install-libglvnd && \
+	sed -i '$ d' /etc/rc.d/rc.local && \
+	chmod -x /etc/rc.d/rc.local
+	rm -rf ~/install_nvidiarun.sh
+	EOF
+
+	chmod +x install_nvidiarun.sh
+	echo -ne "/root/install_nvidiarun.sh" >> /etc/rc.d/rc.local
+	chmod +x /etc/rc.d/rc.local
 ```
  ### Installation of NVIDIA CUDA Toolkit during provisioning via this repo
  
  Silent and Secure installation of NVIDIA CUDA Toolkit on Ubuntu 16.04 LTS via <code>azuredeploy.sh</code> in this repository for cluster or single node.
  
- #### Ubuntu
+ #### Ubuntu 16.04-LTS
  ```bash
  CUDA_REPO_PKG=cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
  DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
@@ -284,7 +290,13 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
  export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/:${LIBRARY_PATH}  && export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/stubs:${LIBRARY_PATH} && \
  export PATH=/usr/local/cuda-8.0/bin:${PATH}
  ```
-
+ #### CentOS 7.3
+  ```bash
+	wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-8.0.61-1.x86_64.rpm
+	rpm -i cuda-repo-rhel7-8.0.61-1.x86_64.rpm
+	yum clean all
+	yum install -y cuda
+ ```
 ##### CUDA Samples Install
 
 ###### Ubuntu 16.04-LTS
@@ -298,13 +310,10 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 
  ```
 ###### Centos 7.3
+In /usr/local/cuda-8.0/samples for CentOS 7.3. 
 
-```bash
- export SHARE_DATA="/data/data"
- export SAMPLES_USER="gpuuser"
- su -c "/usr/local/cuda-8.0/bin/./cuda-install-samples-8.0.sh $SHARE_DATA" $SAMPLES_USER
+* Just a make within each would suffice post successful provisioning.
 
- ```
 #### Secure installation of CUDNN during provisioning via this repo
 ##### Both Ubuntu 16.04-LTS and CentOS 7.3
 The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
