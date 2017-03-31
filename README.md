@@ -209,15 +209,15 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 
 * Latest Secure Install of CUDA available and [samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice post successful provisioning.
 * Securely install [GROMACS](http://www.gromacs.org/About_Gromacs) via the following for GPU Usage. 
-*  For ** both GPU and MPI Usage ** please use the following extra **<code>-DGMX_MPI=on</code>** cmake option
+*  For **both GPU and MPI Usage** please use the following extra **<code>-DGMX_MPI=on</code>** cmake option
 
-	```
+	```sh
 	yum/apt-get install -y cmake
 
 	```
 Then,
 
-	```
+	```sh
 	cd /opt && \
 	export GROMACS_DOWNLOAD_SUM=e9e3a41bd123b52fbcc6b32d09f8202b && export GROMACS_PKG_VERSION=2016.3 && curl -o gromacs-$GROMACS_PKG_VERSION.tar.gz -fsSL http://ftp.gromacs.org/pub/gromacs/gromacs-$GROMACS_PKG_VERSION.tar.gz && \
 	echo "$GROMACS_DOWNLOAD_SUM  gromacs-$GROMACS_PKG_VERSION.tar.gz" | md5sum -c --strict - && \
@@ -245,7 +245,7 @@ Then,
  
 #### Ubuntu 16.04-LTS
 
-```bash 
+```sh 
 	service lightdm stop 
 	wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 	apt-get install -y linux-image-virtual
@@ -262,7 +262,7 @@ Then,
 
 #### CentOS 7.3
 
-```bash 
+```sh 
 	wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 	yum clean all
 	yum update -y  dkms
@@ -287,7 +287,7 @@ Then,
  
  #### Ubuntu 16.04-LTS
  
- ```bash
+ ```sh
  CUDA_REPO_PKG=cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
  DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
  export CUDA_DOWNLOAD_SUM=1f4dffe1f79061827c807e0266568731 && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/${CUDA_REPO_PKG} && \
@@ -302,7 +302,7 @@ Then,
  
  #### CentOS 7.3
  
-  ```bash
+  ```sh
 	wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-8.0.61-1.x86_64.rpm
 	rpm -i cuda-repo-rhel7-8.0.61-1.x86_64.rpm
 	yum clean all
@@ -315,7 +315,7 @@ Then,
  
  [CUDA Samples](http://docs.nvidia.com/cuda/cuda-samples/#new-features-in-cuda-toolkit-8-0)  installed via <code>azuredeploy.sh</code> in this repository cluster or single node in parameterized RAID0 location as follows for Ubuntu:
  
- ```bash
+ ```sh
  export SHARE_DATA="/data/data"
  export SAMPLES_USER="gpuuser"
  su -c "/usr/local/cuda-8.0/bin/./cuda-install-samples-8.0.sh $SHARE_DATA" $SAMPLES_USER
