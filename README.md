@@ -211,13 +211,13 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 * Securely install [GROMACS](http://www.gromacs.org/About_Gromacs) via the following for GPU Usage. 
 *  For **both GPU and MPI Usage** please use the following extra **<code>-DGMX_MPI=on</code>** cmake option
 
-	```sh
+```sh
 	yum/apt-get install -y cmake
 
-	```
-Then,
+```
+   Then,
 
-	```sh
+```sh
 	cd /opt && \
 	export GROMACS_DOWNLOAD_SUM=e9e3a41bd123b52fbcc6b32d09f8202b && export GROMACS_PKG_VERSION=2016.3 && curl -o gromacs-$GROMACS_PKG_VERSION.tar.gz -fsSL http://ftp.gromacs.org/pub/gromacs/gromacs-$GROMACS_PKG_VERSION.tar.gz && \
 	echo "$GROMACS_DOWNLOAD_SUM  gromacs-$GROMACS_PKG_VERSION.tar.gz" | md5sum -c --strict - && \
@@ -229,9 +229,9 @@ Then,
 	make && \
 	make install && \
 	export PATH=/usr/local/gromacs/bin:$PATH
-	```
+```
 	
-	Post the above gmx would be available. For further reference please visit latest [GROMACS manual](http://manual.gromacs.org/documentation/2016.3/)
+Post the above gmx would be available. For further reference please visit latest [GROMACS manual](http://manual.gromacs.org/documentation/2016.3/)
 
 ### Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo
 
