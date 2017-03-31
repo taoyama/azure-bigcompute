@@ -19,6 +19,7 @@ Table of Contents
            * [Ubuntu 16.04-LTS](#ubuntu-1604-lts)
 	       * [CentOS 7.3](#centos-73)
    * [GPUs for Compute](#gpus-for-compute)
+      * [Try CUDA Samples and GROMACS](#try-cuda-samples-and-gromacs)
       * [NVIDIA Tesla Driver Silent Install without further reboot](#nvidia-tesla-driver-silent-install-without-further-reboot)
       * [Silent and Secure installation of NVIDIA CUDA Toolkit](#silent-and-secure-installation-of-nvidia-cuda-toolkit)
       * [Silent installation of CUDNN](#silent-installation-of-cudnn)
@@ -206,8 +207,8 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 
 ###  Try CUDA Samples and GROMACS
 
-* Latest Secure Install of CUDA available and samples on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice.
-* Securely install GROMACS via the following for GPU Usage. For both GPU and MPI Usage please use the **extra** <code>-DGMX_MPI=on</code> cmake option
+* Latest Secure Install of CUDA available and samples on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice post successful provisioning.
+* Securely install GROMACS via the following for GPU Usage. For both GPU and MPI Usage please use the following **extra** <code>-DGMX_MPI=on</code> cmake option
 	```
 	yum/apt-get install -y cmake
 
