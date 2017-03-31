@@ -22,7 +22,7 @@ Table of Contents
       * [Try CUDA Samples and GROMACS](#try-cuda-samples-and-gromacs)
       * [Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo](#unattended-nvidia-tesla-driver-silent-install-without-further-reboot-during-provisioning-via-this-repo)
       * [Unattended Silent Secure installation of NVIDIA CUDA Toolkit during provisioning via this repo](#unattended-silent-secure-installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
-      * [Unattended Silent installation of CUDNN during provisioning via this repo](#unattended-silent-installation-of-cudnn-during-provisioning-via-this-repo)
+      * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
       * [IB](#ib)
@@ -229,7 +229,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	```
 	Post the above gmx would be available. For further reference please visit latest [GROMACS manual](http://manual.gromacs.org/documentation/2016.3/)
 
-### NVIDIA Tesla Driver Silent Install without further reboot
+### Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo
   NVIDIA Tesla Driver Silent Install without further reboot installed via <code>azuredeploy.sh</code> in this repository for cluster or single node as follows:
   
  > :grey_exclamation:
@@ -279,7 +279,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 
  ```
 
-#### Silent installation of CUDNN
+#### Secure installation of CUDNN during provisioning via this repo
 
 The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
 cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers.
