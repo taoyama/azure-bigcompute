@@ -215,7 +215,8 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	yum/apt-get install -y cmake
 
 	```
-Then
+Then,
+
 	```
 	cd /opt && \
 	export GROMACS_DOWNLOAD_SUM=e9e3a41bd123b52fbcc6b32d09f8202b && export GROMACS_PKG_VERSION=2016.3 && curl -o gromacs-$GROMACS_PKG_VERSION.tar.gz -fsSL http://ftp.gromacs.org/pub/gromacs/gromacs-$GROMACS_PKG_VERSION.tar.gz && \
@@ -229,6 +230,7 @@ Then
 	make install && \
 	export PATH=/usr/local/gromacs/bin:$PATH
 	```
+	
 	Post the above gmx would be available. For further reference please visit latest [GROMACS manual](http://manual.gromacs.org/documentation/2016.3/)
 
 ### Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo
@@ -242,6 +244,7 @@ Then
  > **This is required  for NVIDIA Driver with DKMS (Dynamic Kernel Module Support) for driver load surviving kernel updates.**
  
 #### Ubuntu 16.04-LTS
+
 ```bash 
 	service lightdm stop 
 	wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
@@ -305,6 +308,7 @@ Then
 	yum clean all
 	yum install -y cuda
  ```
+ 
 ##### CUDA Samples Install
 
 ###### Ubuntu 16.04-LTS
@@ -319,6 +323,7 @@ Then
  ```
 
 ###### Centos 7.3
+
 In /usr/local/cuda-8.0/samples for CentOS 7.3. 
 
 * Just a make within each would suffice post successful provisioning.
