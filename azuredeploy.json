@@ -239,7 +239,7 @@
     },
     "DockerComposeVer": {
       "type": "string",
-      "defaultValue": "1.11.2",
+      "defaultValue": "1.12.0-rc2",
       "metadata": {
         "description": "The Docker Compose Version **Only for CentOS-HPC 7.1-  kernels 3.10 and above **"
       }
