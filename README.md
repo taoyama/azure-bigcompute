@@ -208,7 +208,8 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 ###  Try CUDA Samples and GROMACS
 
 * Latest Secure Install of CUDA available and [samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice post successful provisioning.
-* Securely install [GROMACS](http://www.gromacs.org/About_Gromacs) via the following for GPU Usage. For both GPU and MPI Usage please use the following **extra** <code>-DGMX_MPI=on</code> cmake option
+* Securely install [GROMACS](http://www.gromacs.org/About_Gromacs) via the following for GPU Usage. 
+* ** For both GPU and MPI Usage please use the following extra <code>-DGMX_MPI=on</code> cmake option **
 	```
 	yum/apt-get install -y cmake
 
@@ -275,7 +276,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 ```
  ### Installation of NVIDIA CUDA Toolkit during provisioning via this repo
  
- Silent and Secure installation of NVIDIA CUDA Toolkit on Ubuntu 16.04 LTS via <code>azuredeploy.sh</code> in this repository for cluster or single node.
+ Silent and Secure installation of NVIDIA CUDA Toolkit via <code>azuredeploy.sh</code> in this repository for cluster or single node.
  
  #### Ubuntu 16.04-LTS
  ```bash
