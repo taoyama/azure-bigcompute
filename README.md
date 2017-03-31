@@ -191,7 +191,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 * Entry point is valid for the stated sku presently only for  specific regions of "East-US" or "Southcentral-US". Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
 * gpu enablement is possible only on approval of quota for sku usage in the stated subscription. Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase. 
 * NVIDIA drivers are OK for Ubuntu 16.04-LTS as well as for CentOS 7.3, both being unattended cluster as well as single install.
-* Latest Secure Install of CUDA available and samples on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3.
+* Latest Secure Install of CUDA available and [samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3.
 * One can run all [CUDA Samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) across the cluster and test with latest CUDA and CUDAnn.
 * Latest Docker CE both for Ubuntu and CentOS configurable each Head and all compute Nodes. - default is 17.03 CE.
 * Latest docker-compose configurable each Head and compute Nodes. 
@@ -207,7 +207,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 
 ###  Try CUDA Samples and GROMACS
 
-* Latest Secure Install of CUDA available and samples on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice post successful provisioning.
+* Latest Secure Install of CUDA available and [samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice post successful provisioning.
 * Securely install [GROMACS](http://www.gromacs.org/About_Gromacs) via the following for GPU Usage. For both GPU and MPI Usage please use the following **extra** <code>-DGMX_MPI=on</code> cmake option
 	```
 	yum/apt-get install -y cmake
