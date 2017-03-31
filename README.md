@@ -209,12 +209,13 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 
 * Latest Secure Install of CUDA available and [samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice post successful provisioning.
 * Securely install [GROMACS](http://www.gromacs.org/About_Gromacs) via the following for GPU Usage. 
-* ** For both GPU and MPI Usage please use the following extra <code>-DGMX_MPI=on</code> cmake option **
+*  For ** both GPU and MPI Usage ** please use the following extra **<code>-DGMX_MPI=on</code>** cmake option
+
 	```
 	yum/apt-get install -y cmake
 
 	```
-
+Then
 	```
 	cd /opt && \
 	export GROMACS_DOWNLOAD_SUM=e9e3a41bd123b52fbcc6b32d09f8202b && export GROMACS_PKG_VERSION=2016.3 && curl -o gromacs-$GROMACS_PKG_VERSION.tar.gz -fsSL http://ftp.gromacs.org/pub/gromacs/gromacs-$GROMACS_PKG_VERSION.tar.gz && \
@@ -231,6 +232,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	Post the above gmx would be available. For further reference please visit latest [GROMACS manual](http://manual.gromacs.org/documentation/2016.3/)
 
 ### Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo
+
   NVIDIA Tesla Driver Silent Install without further reboot installed via <code>azuredeploy.sh</code> in this repository for cluster or single node as follows:
   
  > :grey_exclamation:
@@ -238,6 +240,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
  > Currently, this need not be required when using secure cuda-repo-ubuntu1604_8.0.61-1_amd64.deb for Azure NC VMs running Ubuntu Server 16.04 LTS.
  
  > **This is required  for NVIDIA Driver with DKMS (Dynamic Kernel Module Support) for driver load surviving kernel updates.**
+ 
 #### Ubuntu 16.04-LTS
 ```bash 
 	service lightdm stop 
@@ -253,7 +256,9 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
 	DEBIAN_FRONTEND=noninteractive update-initramfs -u
 ```
+
 #### CentOS 7.3
+
 ```bash 
 	wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
 	yum clean all
@@ -261,7 +266,6 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers --disableexcludes=all
 	yum -y upgrade kernel kernel-devel
 	chmod +x NVIDIA-Linux-x86_64-375.39.run
-
 	cat >>~/install_nvidiarun.sh <<EOF
 	cd /var/lib/waagent/custom-script/download/0 && \
 	./NVIDIA-Linux-x86_64-375.39.run --silent --dkms --install-libglvnd && \
@@ -269,16 +273,17 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	chmod -x /etc/rc.d/rc.local
 	rm -rf ~/install_nvidiarun.sh
 	EOF
-
 	chmod +x install_nvidiarun.sh
 	echo -ne "~/install_nvidiarun.sh" >> /etc/rc.d/rc.local
 	chmod +x /etc/rc.d/rc.local
 ```
+
  ### Installation of NVIDIA CUDA Toolkit during provisioning via this repo
  
  Silent and Secure installation of NVIDIA CUDA Toolkit via <code>azuredeploy.sh</code> in this repository for cluster or single node.
  
  #### Ubuntu 16.04-LTS
+ 
  ```bash
  CUDA_REPO_PKG=cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
  DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
@@ -291,7 +296,9 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
  export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/:${LIBRARY_PATH}  && export LIBRARY_PATH=/usr/local/cuda-8.0/lib64/stubs:${LIBRARY_PATH} && \
  export PATH=/usr/local/cuda-8.0/bin:${PATH}
  ```
+ 
  #### CentOS 7.3
+ 
   ```bash
 	wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-8.0.61-1.x86_64.rpm
 	rpm -i cuda-repo-rhel7-8.0.61-1.x86_64.rpm
@@ -310,12 +317,14 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
  su -c "/usr/local/cuda-8.0/bin/./cuda-install-samples-8.0.sh $SHARE_DATA" $SAMPLES_USER
 
  ```
+
 ###### Centos 7.3
 In /usr/local/cuda-8.0/samples for CentOS 7.3. 
 
 * Just a make within each would suffice post successful provisioning.
 
 #### Secure installation of CUDNN during provisioning via this repo
+
 ##### Both Ubuntu 16.04-LTS and CentOS 7.3
 The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
 cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers.
