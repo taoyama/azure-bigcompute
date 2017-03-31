@@ -17,7 +17,7 @@ Table of Contents
         * [HPC with RDMA over IB](#hpc-with-rdma-over-ib)
         * [GPU Computes](#gpu-computes)
            * [Ubuntu 16.04-LTS](#ubuntu-1604-lts)
-	     * [CentOS 7.3](#centos-73)
+	       * [CentOS 7.3](#centos-73)
 ----------------	  
    * [GPUs for Compute](#gpus-for-compute)
       * [NVIDIA Tesla Driver Silent Install without further reboot](#nvidia-tesla-driver-silent-install-without-further-reboot)
