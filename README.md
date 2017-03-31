@@ -10,10 +10,11 @@ Table of Contents
    * [Azure Big Compute](#azure-big-compute)
       * [License](#license)
       * [MSFT OSCC](#msft-oscc)
-      * [Influence accreditation](#influence-accreditation)
+      * [Credits](#credits)
    * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
+      
       	* [GPU Computes](#gpu-computes)
           * [Ubuntu 16.04-LTS](#ubuntu-1604-lts)
           * [CentOS 7.3](#centos-73)
@@ -45,7 +46,8 @@ Table of Contents
 see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional
 questions or comments.
 
-## Influence accreditation 
+## Credits
+
 **This repo is inspired by [Christian Smith](https://github.com/smith1511)'s repo https://github.com/smith1511/hpc**
 
 # Deploy from Portal and visualize
