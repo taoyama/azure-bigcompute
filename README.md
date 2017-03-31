@@ -270,7 +270,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	EOF
 
 	chmod +x install_nvidiarun.sh
-	echo -ne "/root/install_nvidiarun.sh" >> /etc/rc.d/rc.local
+	echo -ne "~/install_nvidiarun.sh" >> /etc/rc.d/rc.local
 	chmod +x /etc/rc.d/rc.local
 ```
  ### Installation of NVIDIA CUDA Toolkit during provisioning via this repo
