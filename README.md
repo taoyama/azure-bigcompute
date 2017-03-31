@@ -21,8 +21,8 @@ Table of Contents
    * [GPUs for Compute](#gpus-for-compute)
       * [Try CUDA Samples and GROMACS](#try-cuda-samples-and-gromacs)
       * [NVIDIA Tesla Driver Silent Install without further reboot](#nvidia-tesla-driver-silent-install-without-further-reboot)
-      * [Silent and Secure installation of NVIDIA CUDA Toolkit](#silent-and-secure-installation-of-nvidia-cuda-toolkit)
-      * [Silent installation of CUDNN](#silent-installation-of-cudnn)
+      * [Unattended Silent Secure installation of NVIDIA CUDA Toolkit during provisioning via this repo.](#unattended-silent-and-secure-installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo.)
+      * [Unattended Silent installation of CUDNN during provisioning via this repo.](#unattended-silent-installation-of-cudnn-during-provisioning-via-this-repo)
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
       * [IB](#ib)
@@ -250,7 +250,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
     DEBIAN_FRONTEND=noninteractive update-initramfs -u
 ```
 
- ### Silent and Secure installation of NVIDIA CUDA Toolkit
+ ### Unattended Silent Secure installation of NVIDIA CUDA Toolkit during provisioning via this repo.
  
  Silent and Secure installation of NVIDIA CUDA Toolkit on Ubuntu 16.04 LTS via <code>azuredeploy.sh</code> in this repository for cluster or single node.
  
