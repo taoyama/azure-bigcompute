@@ -190,7 +190,7 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 * Entry point is valid for the stated sku presently only for  specific regions of "East-US" or "Southcentral-US". Sku availability per region is [here](https://azure.microsoft.com/en-us/regions/services/#).
 * gpu enablement is possible only on approval of quota for sku usage in the stated subscription. Please see this [link](https://blogs.msdn.microsoft.com/girishp/2015/09/20/increasing-core-quota-limits-in-azure/) for instructions on requesting a core quota increase. 
 * NVIDIA drivers are OK for Ubuntu 16.04-LTS as well as for CentOS 7.3, both being unattended cluster as well as single install.
-* Latest Secure Install of CUDA available and on RAID0 (/data/data default).
+* Latest Secure Install of CUDA available and samples on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3.
 * One can run all [CUDA Samples](http://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/samples.html) across the cluster and test with latest CUDA and CUDAnn.
 * Latest Docker CE both for Ubuntu and CentOS configurable each Head and all compute Nodes. - default is 17.03 CE.
 * Latest docker-compose configurable each Head and compute Nodes. 
@@ -203,6 +203,28 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 * Head and comp nodes work via <code>sudo su - --gpuclususer-- </code> and then direct ssh.
 * Internal firewall is off.
 * For M60 usage for visualizations using NVIDIA GRID 4.2 for Windows Server 2016, please visit [aka.ms/accessgpu](https://aka.ms/accessgpu)
+
+###  Try CUDA Samples and GROMACS
+
+* Latest Secure Install of CUDA available and samples on RAID0 (/data/data default) @ NVIDIA_CUDA-8.0_Samples for Ubuntu and in /usr/local/cuda-8.0/samples for CentOS 7.3. just a make within each would suffice.
+* Securely install GROMACS via the following for GPU Usage. For both GPU and MPI Usage please use the **extra** <code>-DGMX_MPI=on</code> cmake option
+	```
+	yum/apt-get install -y cmake
+
+	```
+
+	```
+	cd /opt && \
+	export GROMACS_DOWNLOAD_SUM=e9e3a41bd123b52fbcc6b32d09f8202b && export GROMACS_PKG_VERSION=2016.3 && curl -o gromacs-$GROMACS_PKG_VERSION.tar.gz -fsSL http://ftp.gromacs.org/pub/gromacs/gromacs-$GROMACS_PKG_VERSION.tar.gz && \
+	echo "$GROMACS_DOWNLOAD_SUM  gromacs-$GROMACS_PKG_VERSION.tar.gz" | md5sum -c --strict - && \
+	tar xfz gromacs-$GROMACS_PKG_VERSION.tar.gz && \
+	cd gromacs-$GROMACS_PKG_VERSION && \
+	mkdir build-gromacs && \
+	cd build-gromacs && \
+	cmake .. -DGMX_BUILD_OWN_FFTW=ON -DGMX_GPU=ON -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 && \
+	make && \
+	make install
+	```
 
 ### NVIDIA Tesla Driver Silent Install without further reboot
   NVIDIA Tesla Driver Silent Install without further reboot installed via <code>azuredeploy.sh</code> in this repository for cluster or single node as follows:
