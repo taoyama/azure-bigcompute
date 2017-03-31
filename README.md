@@ -224,8 +224,10 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 	cd build-gromacs && \
 	cmake .. -DGMX_BUILD_OWN_FFTW=ON -DGMX_GPU=ON -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-8.0 && \
 	make && \
-	make install
+	make install && \
+	export PATH=/usr/local/gromacs/bin:$PATH
 	```
+	Post the above gmx would be available. For further reference please visit latest [GROMACS manual](http://manual.gromacs.org/documentation/2016.3/)
 
 ### NVIDIA Tesla Driver Silent Install without further reboot
   NVIDIA Tesla Driver Silent Install without further reboot installed via <code>azuredeploy.sh</code> in this repository for cluster or single node as follows:
