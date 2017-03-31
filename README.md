@@ -199,10 +199,10 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
 * Disk auto mounting is at /'parameter'/data.
 * NFS4 is on.
 * Strict ssh public key enabled.
-* Nodes that share public RSA key shared can be used as direct jump boxes as <code>azureuser@DNS</code>.
-* Head and comp nodes work via <code>sudo su - --hpc user-- </code> and then direct ssh.
+* Nodes that share public RSA key shared can be used as direct jump boxes as <code>azuregpuuser@DNS</code>.
+* Head and comp nodes work via <code>sudo su - --gpuclususer-- </code> and then direct ssh.
 * Internal firewall is off.
-* For M60 usage for visualizations, please visit [aka.ms/accessgpu](https://aka.ms/accessgpu)
+* For M60 usage for visualizations using NVIDIA GRID 4.2 for Windows Server 2016, please visit [aka.ms/accessgpu](https://aka.ms/accessgpu)
 
 ### NVIDIA Tesla Driver Silent Install without further reboot
   NVIDIA Tesla Driver Silent Install without further reboot installed via <code>azuredeploy.sh</code> in this repository for cluster or single node as follows:
@@ -267,9 +267,6 @@ cuDNN is part of the NVIDIA Deep Learning SDK and is installed silently as follo
     rm cudnn-8.0-linux-x64-v5.1.tgz && \
     ldconfig
   ```
-
-
-
 ## H-Series and A9 with schedulers 
  
 * [Simulations with Azure Big Compute](https://simulation.azure.com/)
@@ -292,7 +289,7 @@ Creates a Cluster with configurable number of worker nodes each with prebuilt In
    * Disk auto mounting is at /'parameter'/data.
    * NFS4 is on.
    * Strict ssh public key enabled.
-   * Nodes that share public RSA key shared can be used as direct jump boxes as <code>azureuser@DNS</code>.
+   * Nodes that share public id_rsa.pub key for admin user shared can be used as direct jump boxes as <code>azurehpcuser@DNS</code>.
    * Head and comp nodes work via <code>sudo su - --hpc user--</code> and then direct ssh.
    * msft drivers check via rpm -qa msft* or rpm -qa microsoft*
    * Internal firewalld is off.
@@ -311,8 +308,6 @@ for root specific <code>su - root</code> is required.
 <code>mpirun -hosts headN,compn0 -ppn --processes per node in number-- -n --number of consequtive processes-- -env I_MPI_FABRICS=dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 IMB-MPI1 pingpong</code>
 (Base Pingpong stats)
 
-
-
 ### IB
 
 <code>ls /sys/class/infiniband</code>
@@ -322,8 +317,6 @@ for root specific <code>su - root</code> is required.
 <code>/etc/init.d/opensmd start</code> (if required)
 
 <code>cat /sys/class/infiniband/mlx4_0/ports/1/rate</code>
-
-
 
 ### Torque and pbspro for CentOS-HPC Skus
 
@@ -338,7 +331,6 @@ check for Torque or PBSPro via
 
 All path are set automatically for key 'default' users like azureuser/hpc/root
 for root specific <code>su - root</code> is required.
-
 
 ## Optional usage with OMS
 
