@@ -21,7 +21,7 @@ Table of Contents
    * [GPUs for Compute](#gpus-for-compute)
       * [Try CUDA Samples and GROMACS](#try-cuda-samples-and-gromacs)
       * [Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo](#unattended-nvidia-tesla-driver-silent-install-without-further-reboot-during-provisioning-via-this-repo)
-      * [Unattended Silent Secure installation of NVIDIA CUDA Toolkit during provisioning via this repo](#unattended-silent-secure-installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
+      * [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
       * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
@@ -237,24 +237,41 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
  > Currently, this need not be required when using secure cuda-repo-ubuntu1604_8.0.61-1_amd64.deb for Azure NC VMs running Ubuntu Server 16.04 LTS.
  
  > **This is required  for NVIDIA Driver with DKMS (Dynamic Kernel Module Support) for driver load surviving kernel updates.**
-
+#### Ubuntu 16.04-LTS
 ```bash 
-    service lightdm stop 
-    wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
-    DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
-    DEBIAN_FRONTEND=noninteractive apt-get update -y
-    apt-get install -y linux-image-virtual linux-tools-virtual linux-cloud-tools-virtual linux-virtual-lts-xenial linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial 
-    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
-    chmod +x NVIDIA-Linux-x86_64-375.39.run
-    ./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
-    DEBIAN_FRONTEND=noninteractive update-initramfs -u
+	service lightdm stop 
+	wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+	apt-get install -y linux-image-virtual
+	apt-get install -y linux-virtual-lts-xenial
+	apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
+	apt-get install -y linux-tools-virtual linux-cloud-tools-virtual
+	DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
+	DEBIAN_FRONTEND=noninteractive apt-get update -y
+	DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
+	chmod +x NVIDIA-Linux-x86_64-375.39.run
+	./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
+	DEBIAN_FRONTEND=noninteractive update-initramfs -u
 ```
-
- ### Unattended Silent Secure installation of NVIDIA CUDA Toolkit during provisioning via this repo
+#### CentOS 7.3
+```bash 
+	service lightdm stop 
+	wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+	apt-get install -y linux-image-virtual
+	apt-get install -y linux-virtual-lts-xenial
+	apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
+	apt-get install -y linux-tools-virtual linux-cloud-tools-virtual
+	DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
+	DEBIAN_FRONTEND=noninteractive apt-get update -y
+	DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
+	chmod +x NVIDIA-Linux-x86_64-375.39.run
+	./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
+	DEBIAN_FRONTEND=noninteractive update-initramfs -u
+```
+ ### Installation of NVIDIA CUDA Toolkit during provisioning via this repo
  
  Silent and Secure installation of NVIDIA CUDA Toolkit on Ubuntu 16.04 LTS via <code>azuredeploy.sh</code> in this repository for cluster or single node.
  
- 
+ #### Ubuntu
  ```bash
  CUDA_REPO_PKG=cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
  DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
@@ -269,8 +286,10 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
  ```
 
 ##### CUDA Samples Install
+
+###### Ubuntu 16.04-LTS
  
- [CUDA Samples](http://docs.nvidia.com/cuda/cuda-samples/#new-features-in-cuda-toolkit-8-0)  installed via <code>azuredeploy.sh</code> in this repository cluster or single node in parameterized RAID0 location as follows
+ [CUDA Samples](http://docs.nvidia.com/cuda/cuda-samples/#new-features-in-cuda-toolkit-8-0)  installed via <code>azuredeploy.sh</code> in this repository cluster or single node in parameterized RAID0 location as follows for Ubuntu:
  
  ```bash
  export SHARE_DATA="/data/data"
@@ -278,9 +297,16 @@ git clone git://github.com/Azure/azure-bigcompute-hpcscripts.git
  su -c "/usr/local/cuda-8.0/bin/./cuda-install-samples-8.0.sh $SHARE_DATA" $SAMPLES_USER
 
  ```
+###### Centos 7.3
 
+```bash
+ export SHARE_DATA="/data/data"
+ export SAMPLES_USER="gpuuser"
+ su -c "/usr/local/cuda-8.0/bin/./cuda-install-samples-8.0.sh $SHARE_DATA" $SAMPLES_USER
+
+ ```
 #### Secure installation of CUDNN during provisioning via this repo
-
+##### Both Ubuntu 16.04-LTS and CentOS 7.3
 The NVIDIA CUDA® Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
 cuDNN provides highly tuned implementations for standard routines such as forward and backward convolution, pooling, normalization, and activation layers.
 cuDNN is part of the NVIDIA Deep Learning SDK and is installed silently as follows via <code>azuredeploy.sh</code> in this repository cluster or single node.
