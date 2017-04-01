@@ -76,9 +76,9 @@
     },
     "GpuHpcUserName": {
       "type": "string",
-      "defaultValue": "hpc",
+      "defaultValue": "hpcgpu",
       "metadata": {
-        "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
+        "description": "User for running HPC/GPU applications with shared home directory and SSH public key authentication setup within the cluster.   This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
     "SchedulerpbsORTorque": {
