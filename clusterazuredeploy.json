@@ -658,7 +658,7 @@
   ],
   "variables": {
     "armApiVersion": "2015-06-15",
-    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute-hpcscripts/master/",
+    "artifactsLocation": "https://raw.githubusercontent.com/Azure/azure-bigcompute/master/",
     "avSetName": "avSet",
     "diskCaching": "ReadWrite",
     "MUNGE_VER": "0.5.11",
