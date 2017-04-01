@@ -338,11 +338,11 @@
         "description": "(Optional- Keep Blank if not used) The OMS Portal Workspace key"
       }
     },
-    "OMSLinuxAgentFullVersion": {
+    "nvidiadockerBinaryVersion": {
       "type": "string",
-      "defaultValue": "hub.docker.com/r/microsoft/oms/~/dockerfile/",
+      "defaultValue": "1.0.1",
       "metadata": {
-        "description": "The OMS Agent 64 bit version dockerized will update and register with OMS Workspace"
+        "description": "The Latest nvidia-docker binary version from https://github.com/NVIDIA/nvidia-docker/releases"
       }
     }
   },
