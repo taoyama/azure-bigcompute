@@ -671,7 +671,7 @@
     "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
     "headNodeSize": "[parameters('headandWorkerNodeSize')]",
     "workerNodeSize": "[parameters('headandWorkerNodeSize')]",
-    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'), ':', parameters('OMSWorkSpaceId'), ':', parameters('OMSWorkSpaceKey'), ':', parameters('OMSLinuxAgentFullVersion'), ':', variables('headNodeSize'), ':', variables('workerNodeSize'))]",
+    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'), ':', parameters('OMSWorkSpaceId'), ':', parameters('OMSWorkSpaceKey'), ':', parameters('nvidiadockerBinaryVersion'), ':', variables('headNodeSize'), ':', variables('workerNodeSize'))]",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
     "networkSettings": {
       "virtualNetworkName": "virtualnetwork",
