@@ -1,5 +1,5 @@
 {
-  "name": "azure-bigcompute-hpcscripts",
+  "name": "azure-bigcompute",
   "version": "1.0.0",
   "description": "A package file for developer depenedencies when testing templates",
   "scripts": {
@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/azure-bigcompute-hpcscripts.git"
+    "url": "git+https://github.com/Azure/azure-bigcompute.git"
   },
   "author": "dwaiba",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/azure-bigcompute-hpcscripts/issues"
+    "url": "https://github.com/Azure/azure-bigcompute/issues"
   },
-  "homepage": "https://github.com/Azure/azure-bigcompute-hpcscripts#readme",
+  "homepage": "https://github.com/Azure/azure-bigcompute#readme",
   "devDependencies": {
     "debug": "^2.2.0",
     "grunt": "^0.4.5",
