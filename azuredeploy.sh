@@ -975,6 +975,23 @@ else
 fi
 }
 
+
+ubuntu_nvidia-docker()
+{
+wget -P https://github.com/NVIDIA/nvidia-docker/releases/download/v$nvidiadockerbinver/nvidia-docker_$nvidiadockerbinver-1_amd64.deb
+dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
+systemctl enable nvidia-docker
+systemctl start nvidia-docker
+}
+
+centos_nvidia-docker()
+{
+wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v$nvidiadockerbinver/nvidia-docker-$nvidiadockerbinver-1.x86_64.rpm
+rpm -ivh /tmp/nvidia-docker*.rpm && rm /tmp/nvidia-docker*.rpm
+systemctl enable nvidia-docker
+systemctl start nvidia-docker
+}
+
 #########################
 	if [ "$skuName" == "16.04-LTS" ] ; then
 		install_packages_ubuntu
@@ -996,6 +1013,7 @@ fi
                 install_nvdia_ubuntu
                 install_cudann5
                 install_cuda8061_ubuntu1604
+		ubuntu_nvidia-docker
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a H with RDMA"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1025,6 +1043,7 @@ fi
                 install_nvdia_ubuntu
                 install_cudann5
                 install_cuda8061_ubuntu1604
+		ubuntu_nvidia-docker
 		 ( sleep 15 ; reboot ) &
 		fi
                 
@@ -1048,6 +1067,7 @@ fi
 		    postinstall_centos73ncgpu
 		    install_cuda8centos
 		    install_cudann5
+		    centos_nvidia-docker
 		    disable_kernel_update
 		    ( sleep 15 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
@@ -1131,6 +1151,7 @@ fi
 		    postinstall_centos73ncgpu;
 		    install_cuda8centos;
                     install_cudann5;
+		    centos_nvidia-docker;
 		    ( sleep 30 ; reboot ) &
 		fi
                 		
