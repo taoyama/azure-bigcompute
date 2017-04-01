@@ -338,11 +338,11 @@
         "description": "(Optional- Keep Blank if not used) The OMS Portal Workspace key"
       }
     },
-    "OMSLinuxAgentFullVersion": {
+    "nvidiadockerBinaryVersion": {
       "type": "string",
-      "defaultValue": "hub.docker.com/r/microsoft/oms/~/dockerfile/",
+      "defaultValue": "1.0.1",
       "metadata": {
-        "description": "The OMS Agent 64 bit version dockerized will update and register with OMS Workspace"
+        "description": "The Latest nvidia-docker binary version from https://github.com/NVIDIA/nvidia-docker/releases"
       }
     }
   },
@@ -554,7 +554,7 @@
     "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
     "headNodeSize": "[parameters('headandWorkerNodeSize')]",
     "workerNodeSize": "[parameters('headandWorkerNodeSize')]",
-    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'), ':', parameters('OMSWorkSpaceId'), ':', parameters('OMSWorkSpaceKey'), ':', parameters('OMSLinuxAgentFullVersion'), ':', variables('headNodeSize'), ':', variables('workerNodeSize'))]",
+    "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'), ':', parameters('OMSWorkSpaceId'), ':', parameters('OMSWorkSpaceKey'), ':', parameters('nvidiadockerBinaryVersion'), ':', variables('headNodeSize'), ':', variables('workerNodeSize'))]",
     "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
     "networkSettings": {
       "virtualNetworkName": "virtualnetwork",
