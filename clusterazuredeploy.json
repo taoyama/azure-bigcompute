@@ -36,7 +36,7 @@
         "CentOS"
       ],
       "metadata": {
-        "description": "New CentOS-HPC (A8/A9) with pre-installed Intel MPI and mlx4 drivers on Infiniband Available, UbuntuServer for GPU and CentOS for the new H-Series"
+        "description": "CentOS-HPC (H16R/H16MR/A9) with pre-installed Intel MPI and mlx4 drivers on Infiniband Available, UbuntuServer 16.04-LTS/CentOS 7.3  for GPU and CentOS-HPC for the new H-Series"
       }
     },
     "imageSku": {
@@ -50,7 +50,7 @@
         "7.3"
       ],
       "metadata": {
-        "description": "OpenLogic CentOS-HPC Sku to use"
+        "description": "OpenLogic CentOS-HPC 7.1/ CentOS 7.3 or Canonical 16.04-LTS Sku to use"
       }
     },
     "sshPublicKey": {
@@ -68,9 +68,9 @@
     },
     "hpcUserName": {
       "type": "string",
-      "defaultValue": "hpc",
+      "defaultValue": "hpcgpu",
       "metadata": {
-        "description": "User for running HPC applications with shared home directory and SSH public key authentication setup.  This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
+        "description": "User for running HPC/GPU applications with shared home directory and SSH public key authentication setup within the cluster.   This user cannot login from outside the cluster. Pick a valid username otherwise there will be a BadRequest error."
       }
     },
     "schedulerpbsORTorque": {
@@ -82,7 +82,7 @@
       ],
       "defaultValue": "None",
       "metadata": {
-        "description": "**Only for CentOS-HPC 7.1 Skus H-Series or A9s**"
+        "description": "**Preferred Only for CentOS-HPC 7.1 Skus H-Series or A9s**"
       }
     },
     "saltStackInstall": {
@@ -202,7 +202,7 @@
       "type": "int",
       "defaultValue": 1,
       "metadata": {
-        "description": "This template creates N worker node. Use workerNodeCount to specify that N."
+        "description": "If not zero (single VM), this template creates N worker node. Use workerNodeCount to specify that N."
       }
     },
     "storageType": {
@@ -226,21 +226,21 @@
         "docker-ce"
       ],
       "metadata": {
-        "description": "The docker version **Only for CentOS 7.3, CentOS-HPC 7.1 - kernels 3.10 and above **"
+        "description": "The docker version now docker-ce both for Ubuntu and CentOS with standard 17.03.x engine"
       }
     },
     "dockerComposeVer": {
       "type": "string",
-      "defaultValue": "1.11.2",
+      "defaultValue": "1.12.0-rc2",
       "metadata": {
-        "description": "The Docker Compose Version **Only for CentOS-HPC 7.1-  kernels 3.10 and above **"
+        "description": "The Docker Compose Version"
       }
     },
     "dockerMachineVer": {
       "type": "string",
       "defaultValue": "0.10.0",
       "metadata": {
-        "description": "The docker-machine version **Only for CentOS-HPC 7.1- kernels 3.10 and above **"
+        "description": "The docker-machine version"
       }
     },
     "dataDiskSize": {
@@ -321,7 +321,7 @@
         "52"
       ],
       "metadata": {
-        "description": "This parameter allows the user to select the number of disks wanted"
+        "description": "This parameter allows the user to select the number of disks wanted - number of max disks for VM size apply"
       }
     },
     "OMSWorkSpaceId": {
