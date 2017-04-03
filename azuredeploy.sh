@@ -31,11 +31,10 @@ SHARE_HOME=$MNT_POINT/home
 SHARE_DATA=$MNT_POINT/data
 
 # Munged
-MUNGE_VERSION=$( echo "$4" |cut -d\: -f1 )
-MUNGE_USER=$( echo "$4" |cut -d\: -f2 )
+CUDA_VER=$( echo "$4" |cut -d\: -f1 )
+TESLA_DRIVER_LINUX=$( echo "$4" |cut -d\: -f2 )
 TORQUEORPBS=$( echo "$4" |cut -d\: -f3 )
 SALTSTACKBOOLEAN=$( echo "$4" |cut -d\: -f4 )
-MUNGE_GROUP=$MUNGE_USER
 
 
 # SLURM
@@ -364,7 +363,7 @@ install_docker_ubuntu()
 install_nvdia_ubuntu()
 {
 service lightdm stop 
-wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/$TESLA_DRIVER_LINUX/NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run&lang=us&type=Tesla
 apt-get install -y linux-image-virtual
 apt-get install -y linux-virtual-lts-xenial
 apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
@@ -372,8 +371,8 @@ apt-get install -y linux-tools-virtual linux-cloud-tools-virtual
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
 DEBIAN_FRONTEND=noninteractive apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential gcc gcc-multilib dkms g++ make binutils linux-headers-`uname -r` linux-headers-4.4.0-70-generic
-chmod +x NVIDIA-Linux-x86_64-375.39.run
-./NVIDIA-Linux-x86_64-375.39.run  --silent --dkms
+chmod +x NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run
+./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run  --silent --dkms
 DEBIAN_FRONTEND=noninteractive update-initramfs -u
 }
 install_azure_cli()
@@ -583,16 +582,16 @@ setup_env()
 
 postinstall_centos73ncgpu()
 {
-wget http://us.download.nvidia.com/XFree86/Linux-x86_64/375.39/NVIDIA-Linux-x86_64-375.39.run&lang=us&type=Tesla
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/$TESLA_DRIVER_LINUX/NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run&lang=us&type=Tesla
 yum clean all
 yum update -y  dkms
 yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers --disableexcludes=all
 yum -y upgrade kernel kernel-devel
-chmod +x NVIDIA-Linux-x86_64-375.39.run
+chmod +x NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run
 
 cat >>~/install_nvidiarun.sh <<EOF
 cd /var/lib/waagent/custom-script/download/0 && \
-./NVIDIA-Linux-x86_64-375.39.run --silent --dkms --install-libglvnd && \
+./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run --silent --dkms --install-libglvnd && \
 sed -i '$ d' /etc/rc.d/rc.local && \
 chmod -x /etc/rc.d/rc.local
 rm -rf ~/install_nvidiarun.sh
@@ -773,7 +772,7 @@ fi
 install_cuda8061_ubuntu1604()
 {
 DEBIAN_FRONTEND=noninteractive apt-mark hold walinuxagent
-export CUDA_DOWNLOAD_SUM=1f4dffe1f79061827c807e0266568731 && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb && \
+export CUDA_DOWNLOAD_SUM=1f4dffe1f79061827c807e0266568731 && export CUDA_PKG_VERSION=8-0 && curl -o cuda-repo.deb -fsSL http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_$CUDA_VER-1_amd64.deb && \
     echo "$CUDA_DOWNLOAD_SUM  cuda-repo.deb" | md5sum -c --strict - && \
     dpkg -i cuda-repo.deb && \
     rm cuda-repo.deb && \
@@ -805,8 +804,8 @@ docker run --privileged -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/
 
 install_cuda8centos()
 {
-wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-8.0.61-1.x86_64.rpm
-rpm -i cuda-repo-rhel7-8.0.61-1.x86_64.rpm
+wget http://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-repo-rhel7-$CUDA_VER-1.x86_64.rpm
+rpm -i cuda-repo-rhel7-$CUDA_VER-1.x86_64.rpm
 yum clean all
 yum install -y cuda
 }
