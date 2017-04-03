@@ -35,7 +35,6 @@ MUNGE_VER=$( echo "$4" |cut -d\: -f1 )
 MUNGE_GROUP=$( echo "$4" |cut -d\: -f2 )
 TORQUEORPBS=$( echo "$4" |cut -d\: -f3 )
 SALTSTACKBOOLEAN=$( echo "$4" |cut -d\: -f4 )
-CUDA_VERSION=$CUDA_VER
 
 
 # CUDA and Tesla
