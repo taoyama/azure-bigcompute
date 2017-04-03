@@ -344,6 +344,20 @@
       "metadata": {
         "description": "The Latest nvidia-docker binary version from https://github.com/NVIDIA/nvidia-docker/releases"
       }
+    },
+    "cudaVersion": {
+      "type": "string",
+      "defaultValue": "1.0.1",
+      "metadata": {
+        "description": "The Latest NVIDIA CUDA Toolkit Version"
+      }
+    },
+    "teslaDriverVersion": {
+      "type": "string",
+      "defaultValue": "375.39",
+      "metadata": {
+        "description": "The Latest TESLA DRIVER RUNFILE version for LINUX X64"
+      }
     }
   },
   "resources": [
@@ -547,15 +561,15 @@
     "MUNGE_VER": "0.5.11",
     "MUNGE_USER_GROUP": "munge",
     "mungedet": "[concat(variables('MUNGE_VER'), ':', variables('MUNGE_USER_GROUP'), ':', parameters('schedulerpbsORTorque'), ':', parameters('saltStackInstall'))]",
-    "SLURM_VER": "15-08-10-1",
-    "SLURM_USER_GROUP": "slurm",
-    "slurmdet": "[concat(variables('SLURM_VER'), ':', variables('SLURM_USER_GROUP'))]",
+    "CUDA_VER": "[parameters('cudaVersion')]",
+    "TESLA_DRIVER_LINUX": "[parameters('teslaDriverVersion')]",
+    "nvidiadet": "[concat(variables('CUDA_VER'), ':', variables('TESLA_DRIVER_LINUX'))]",
     "dockerdet": "[concat(parameters('dockerVer'), ':', parameters('dockerComposeVer'), ':', parameters('dockerMachineVer'))]",
     "imagedet": "[concat(parameters('imageSku'), ':', parameters('adminUserName'))]",
     "headNodeSize": "[parameters('headandWorkerNodeSize')]",
     "workerNodeSize": "[parameters('headandWorkerNodeSize')]",
     "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'), ':', parameters('OMSWorkSpaceId'), ':', parameters('OMSWorkSpaceKey'), ':', parameters('nvidiadockerBinaryVersion'), ':', variables('headNodeSize'), ':', variables('workerNodeSize'))]",
-    "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('slurmdet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
+    "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('nvidiadet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
     "networkSettings": {
       "virtualNetworkName": "virtualnetwork",
       "addressPrefix": "10.0.0.0/16",
