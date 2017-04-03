@@ -1103,8 +1103,8 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		    fi
                 install_nvdia_ubuntu
                 #install_cudann5
-                #install_cuda8061_ubuntu1604
-		install_cudalatest_ubuntu
+                install_cuda8061_ubuntu1604
+		#install_cudalatest_ubuntu
 		ubuntu_nvidia-docker
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a H with RDMA"
@@ -1134,8 +1134,8 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		    fi	
                 install_nvdia_ubuntu
                 #install_cudann5
-                #install_cuda8061_ubuntu1604
-		install_cudalatest_ubuntu
+                install_cuda8061_ubuntu1604
+		#install_cudalatest_ubuntu
 		ubuntu_nvidia-docker
 		 ( sleep 15 ; reboot ) &
 		fi
@@ -1158,9 +1158,9 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		    fi
 		    enable_kernel_update
 		    postinstall_centos73ncgpu
-		    #install_cuda8centos
+		    install_cuda8centos
 		    #install_cudann5
-		    install_cudalatest_centos
+		    #install_cudalatest_centos
 		    centos_nvidia-docker
 		    disable_kernel_update
 		    ( sleep 15 ; reboot ) &
@@ -1243,9 +1243,9 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		    installomsagent;
 		    fi
 		    postinstall_centos73ncgpu;
-		    #install_cuda8centos;
+		    install_cuda8centos;
                     #install_cudann5;
-		    install_cudalatest_centos;
+		    #install_cudalatest_centos;
 		    centos_nvidia-docker;
 		    ( sleep 30 ; reboot ) &
 		fi
