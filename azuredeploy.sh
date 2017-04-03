@@ -9,7 +9,7 @@ if [[ $(id -u) -ne 0 ]] ; then
 fi
 
 if [ $# != 9 ]; then
-    echo "Usage: $0 <clusterdet> <HPCUserName> <mountFolder> <mungedet> <slurmdet> <numDataDisks> <dockerdet> <imagedet> <artifactsLocation>"
+    echo "Usage: $0 <clusterdet> <HPCUserName> <mountFolder> <mungedet> <nvidiadet> <numDataDisks> <dockerdet> <imagedet> <artifactsLocation>"
     exit 1
 fi
 
