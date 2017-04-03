@@ -347,7 +347,7 @@
     },
     "cudaVersion": {
       "type": "string",
-      "defaultValue": "1.0.1",
+      "defaultValue": "8.0.61",
       "metadata": {
         "description": "The Latest NVIDIA CUDA Toolkit Version"
       }
