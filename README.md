@@ -11,7 +11,7 @@ Table of Contents
       * [License](#license)
       * [MSFT OSCC](#msft-oscc)
       * [Credits](#credits)
-   * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)
+   * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)*
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
         * [HPC with RDMA over IB](#hpc-with-rdma-over-ib)
@@ -24,6 +24,8 @@ Table of Contents
           * [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
 	     * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
       * [License Agreements](#license-agreements)
+      *[nvidia-docker usage](#nvidia-docker-usage)
+      
       
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
