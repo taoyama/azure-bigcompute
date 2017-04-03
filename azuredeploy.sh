@@ -975,7 +975,7 @@ fi
 
 ubuntu_nvidia-docker()
 {
-wget -P https://github.com/NVIDIA/nvidia-docker/releases/download/v$nvidiadockerbinver/nvidia-docker_$nvidiadockerbinver-1_amd64.deb
+wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v$nvidiadockerbinver/nvidia-docker_$nvidiadockerbinver-1_amd64.deb
 dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
 systemctl enable nvidia-docker
 systemctl start nvidia-docker
