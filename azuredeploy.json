@@ -352,6 +352,20 @@
       "metadata": {
         "description": "The Latest nvidia-docker binary version from https://github.com/NVIDIA/nvidia-docker/releases"
       }
+    },
+    "CudaVersion": {
+      "type": "string",
+      "defaultValue": "1.0.1",
+      "metadata": {
+        "description": "The Latest NVIDIA CUDA Toolkit Version"
+      }
+    },
+    "TeslaDriverVersion": {
+      "type": "string",
+      "defaultValue": "375.39",
+      "metadata": {
+        "description": "The Latest TESLA DRIVER RUNFILE version for LINUX X64"
+      }
     }
   },
   "resources": [
@@ -431,6 +445,12 @@
           },
           "OMSWorkSpaceKey": {
             "value": "[parameters('oMSWorkSpaceKey')]"
+          },
+          "cudaVersion": {
+            "value": "[parameters('CudaVersion')]"
+          },
+          "teslaDriverVersion": {
+            "value": "[parameters('TeslaDriverVersion')]"
           },
           "nvidiadockerBinaryVersion": {
             "value": "[parameters('NVIDIADockerBinaryVersion')]"
