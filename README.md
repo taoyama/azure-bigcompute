@@ -24,7 +24,7 @@ Table of Contents
           * [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
 	     * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
       * [License Agreements](#license-agreements)
-      *[nvidia-docker usage](#nvidia-docker-usage)
+      * [nvidia-docker usage](#nvidia-docker-usage)
       
       
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
@@ -349,6 +349,19 @@ cuDNN is part of the NVIDIA Deep Learning SDK and is installed silently as follo
   
 #### License Agreements
 By provisioning via this repository, you agree to the terms of the license agreements for NVIDIA software installed silently.
+
+#### nvidia-docker usage
+
+nvidia-docker version parameterized binary installation is automated for both Ubuntu 16.04-LTS and CentOS 7.3
+
+Besides, Latest CUDA Toolkit usage on the computes installed:
+nvidia-docker can be leveraged for usage of dockerized CUDA Toolkit Usage as per the test and picture below. This opens up possibilities of using "py" and "gpu" tagged images of cntk, tensorflow, thaeno and more available as nightly builds from docker hub with jupyter notebooks. This also helps in using latest gitlab.com/nvidia cudnn RCs testing.
+
+<code>nvidia-docker run --rm nvidia/cuda nvidia-smi</code>
+
+![nvidiadocker](https://cloud.githubusercontent.com/assets/3028125/12213714/5b208976-b632-11e5-8406-38d379ec46aa.png)
+
+** More Information available @ https://github.com/NVIDIA/nvidia-docker/wiki **
 
 ##### CUDA Toolkit
 To view the license for the CUDA Toolkit , [click here](http://docs.nvidia.com/cuda/eula/index.html)
