@@ -347,9 +347,6 @@ cuDNN is part of the NVIDIA Deep Learning SDK and is installed silently as follo
     ldconfig
   ```
   
-#### License Agreements
-By provisioning via this repository, you agree to the terms of the license agreements for NVIDIA software installed silently.
-
 #### nvidia-docker usage
 
 nvidia-docker version parameterized binary installation is automated for both Ubuntu 16.04-LTS and CentOS 7.3
@@ -364,6 +361,9 @@ nvidia-docker can be leveraged for usage of dockerized CUDA Toolkit Usage as per
 ![nvidiadocker](https://cloud.githubusercontent.com/assets/3028125/12213714/5b208976-b632-11e5-8406-38d379ec46aa.png)
 
 **More Information available @ https://github.com/NVIDIA/nvidia-docker/wiki**
+
+#### License Agreements
+By provisioning via this repository, you agree to the terms of the license agreements for NVIDIA software installed silently.
 
 ##### CUDA Toolkit
 To view the license for the CUDA Toolkit , [click here](http://docs.nvidia.com/cuda/eula/index.html)
