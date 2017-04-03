@@ -23,6 +23,8 @@ Table of Contents
       * [Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo](#unattended-nvidia-tesla-driver-silent-install-without-further-reboot-during-provisioning-via-this-repo)
           * [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
 	     * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
+      * [License Agreements](#license-agreements)
+      
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
       * [IB](#ib)
@@ -342,6 +344,16 @@ cuDNN is part of the NVIDIA Deep Learning SDK and is installed silently as follo
     rm cudnn-8.0-linux-x64-v5.1.tgz && \
     ldconfig
   ```
+  
+#### License Agreements
+By provisioning via this repository, you agree to the terms of the license agreements for NVIDIA software installed silently.
+
+##### CUDA Toolkit
+To view the license for the CUDA Toolkit , [click here](http://docs.nvidia.com/cuda/eula/index.html)
+
+##### CUDA Deep Neural Network library (cuDNN)
+To view the license for cuDNN  [click here](https://developer.nvidia.com/cudnn/license_agreement)
+ 
 ## H-Series and A9 with schedulers 
  
 * [Simulations with Azure Big Compute](https://simulation.azure.com/)
