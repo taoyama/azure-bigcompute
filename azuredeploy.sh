@@ -31,20 +31,17 @@ SHARE_HOME=$MNT_POINT/home
 SHARE_DATA=$MNT_POINT/data
 
 # Munged
-CUDA_VER=$( echo "$4" |cut -d\: -f1 )
-TESLA_DRIVER_LINUX=$( echo "$4" |cut -d\: -f2 )
+MUNGE_VER=$( echo "$4" |cut -d\: -f1 )
+MUNGE_GROUP=$( echo "$4" |cut -d\: -f2 )
 TORQUEORPBS=$( echo "$4" |cut -d\: -f3 )
 SALTSTACKBOOLEAN=$( echo "$4" |cut -d\: -f4 )
 CUDA_VERSION=$CUDA_VER
 
 
-# SLURM
-SLURM_USER=$( echo "$5" |cut -d\: -f2 )
-SLURM_UID=6006
-SLURM_GROUP=$SLURM_USER
-SLURM_GID=6006
-SLURM_VERSION=$( echo "$5" |cut -d\: -f1 )
-SLURM_CONF_DIR=$SHARE_DATA/conf
+# CUDA and Tesla
+TESLA_DRIVER_LINUX=$( echo "$5" |cut -d\: -f2 )
+CUDA_VER=$( echo "$5" |cut -d\: -f1 )
+CUDA_VERSION=$CUDA_VER
 
 # Hpc User
 HPC_USER="$2"
