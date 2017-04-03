@@ -23,8 +23,8 @@ Table of Contents
       * [Unattended NVIDIA Tesla Driver Silent Install without further reboot during provisioning via this repo](#unattended-nvidia-tesla-driver-silent-install-without-further-reboot-during-provisioning-via-this-repo)
           * [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
 	     * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
-      * [License Agreements](#license-agreements)
       * [nvidia-docker usage](#nvidia-docker-usage)
+      * [License Agreements](#license-agreements)
       
       
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
