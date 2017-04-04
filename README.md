@@ -25,7 +25,7 @@ Table of Contents
 	     * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
       * [nvidia-docker usage](#nvidia-docker-usage)
       * [License Agreements](#license-agreements)   
-   * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
+   * [H-Series and A9 with schedulers](#h-series-and-a9-with-schedulers)
       * [mpirun](#mpirun)
       * [IB](#ib)
       * [Torque and pbspro for CentOS-HPC Skus](#torque-and-pbspro-for-centos-hpc-skus)
