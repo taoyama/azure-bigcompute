@@ -9,6 +9,7 @@ Table of Contents
 
    * [Azure Big Compute](#azure-big-compute)
       * [License](#license)
+        * [NVIDIA EULA for vompute silent installs via this repo](#license-agreements)
       * [MSFT OSCC](#msft-oscc)
       * [Credits](#credits)
    * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)*
