@@ -24,9 +24,7 @@ Table of Contents
           * [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo)
 	     * [Secure installation of CUDNN during provisioning via this repo](#secure-installation-of-cudnn-during-provisioning-via-this-repo)
       * [nvidia-docker usage](#nvidia-docker-usage)
-      * [License Agreements](#license-agreements)
-      
-      
+      * [License Agreements](#license-agreements)   
    * [H-Series and A9 with schedulers](#h-series-and-A9-with-schedulers)
       * [mpirun](#mpirun)
       * [IB](#ib)
@@ -35,27 +33,18 @@ Table of Contents
    * [Reporting bugs](#reporting-bugs)
    * [Patches and pull requests](#patches-and-pull-requests)
    * [Region availability and Quotas for MS Azure Skus](#region-availability-and-quotas-for-ms-azure-skus)
-
-
 # Azure Big Compute
-
 **[Azure Big Compute](https://azure.microsoft.com/en-us/solutions/big-compute/)**
-
-
 ## License
   * Please see the [LICENSE file](https://github.com/Azure/azure-bigcompute/blob/master/LICENSE) for licensing information.
-
 ## MSFT OSCC
   * This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information
 see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional
 questions or comments.
-
 ## Credits
-
 **This repo is inspired by [Christian Smith](https://github.com/smith1511)'s repo https://github.com/smith1511/hpc**
 
 # Deploy from Portal and visualize
-
 <a href="https://preview.portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute%2Fmaster%2Fazuredeploy.json" target="_blank">
    <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
 </a>
