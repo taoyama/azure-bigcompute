@@ -9,8 +9,8 @@ Table of Contents
 
    * [Azure Big Compute](#azure-big-compute)
       * [License](#license)
+        * [PBS Pro Master 4.0.1 AGPL-3.0 usage section for HPC](#torque-and-pbspro-for-centos-hpc-skus)
         * [NVIDIA EULA for compute silent installs via this repo](#license-agreements)
-	  * [PBS Pro Master 4.0.1 AGPL-3.0 usage section for HPC](#torque-and-pbspro-for-centos-hpc-skus)
       * [MSFT OSCC](#msft-oscc)
       * [Credits](#credits)
    * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)*
