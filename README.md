@@ -13,7 +13,7 @@ Table of Contents
         * [NVIDIA EULA for compute silent installs via this repo](#license-agreements)
       * [MSFT OSCC](#msft-oscc)
       * [Credits](#credits)
-   * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)*
+   * [Deploy from Portal and visualize](#deploy-from-portal-and-visualize)
    * [Single or Cluster Topology Examples with Azure CLI](#single-or-cluster-topology-examples-with-azure-cli)
       * [New Azure CLI](#new-azure-cli)
         * [HPC with RDMA over IB](#hpc-with-rdma-over-ib)
