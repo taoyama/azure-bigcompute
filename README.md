@@ -344,9 +344,10 @@ nvidia-docker version parameterized binary installation is automated for both Ub
 
 Besides, Latest [Installation of NVIDIA CUDA Toolkit during provisioning via this repo](#installation-of-nvidia-cuda-toolkit-during-provisioning-via-this-repo):
 
-nvidia-docker can be leveraged for usage of dockerized CUDA Toolkit Usage as per the test and picture below. This opens up possibilities of using "py" and "gpu" tagged images of cntk, tensorflow, thaeno and more available as nightly builds from docker hub with jupyter notebooks. This also helps in using latest gitlab.com/nvidia cudnn RCs testing.
+nvidia-docker can be leveraged for usage of dockerized CUDA Toolkit Usage as per the test and picture below. This opens up possibilities of using "py" and "gpu" tagged images of [cntk](https://hub.docker.com/r/microsoft/cntk/tags/), [tensorflow](https://hub.docker.com/r/tensorflow/tensorflow/tags/), [theano](https://github.com/Kaixhin/dockerfiles) and [more](https://developer.nvidia.com/deep-learning-frameworks) available as nightly builds from docker hub with jupyter notebooks. Latest gitlab.com/nvidia cudnn RCs can be used for testing.
 
 <code>sudo systemctl start nvidia-docker</code>
+
 <code>nvidia-docker run --rm nvidia/cuda nvidia-smi</code>
 
 ![nvidiadocker](https://cloud.githubusercontent.com/assets/3028125/12213714/5b208976-b632-11e5-8406-38d379ec46aa.png)
