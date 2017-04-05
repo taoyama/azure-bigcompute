@@ -201,6 +201,8 @@ az group create -l westeurope -n centospublicwe && az group deployment create -g
 
 ```sh
 az group create -l westeurope -n ubuntupublicwe && az group deployment create -g ubuntupublicwe -n ubuntupublicwe --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"ubuntupublic\"},\"AdminUserName\":{\"value\":\"azureuser\"},\"SshPublicKey\":{\"value\":\"XXXXX\"},\"ImagePublisher\":{\"value\":\"Canonical\"},\"ImageOffer\":{\"value\":\"UbuntuServer\"},\"ImageSku\":{\"value\":\"16.04-LTS\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_F2s\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"azure\"},\"MasterVMName\":{\"value\":\"ubuntu1604\"},\"NumDataDisks\":{\"value\":\"2\"}}" --debug
+```
+
  
 ## GPUs for Compute
 
