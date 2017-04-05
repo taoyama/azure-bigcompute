@@ -421,6 +421,9 @@ check for Torque or PBSPro via
 <code>pbsnodes -a</code>
 * [Torque 6.1.0](http://www.adaptivecomputing.com/support/download-center/torque-download/)
 * [PBS Pro Master 4.0.1](https://github.com/PBSPro/pbspro/)
+
+### PBS Pro License
+
   * [PBS Pro Open Source License Information](https://github.com/PBSPro/pbspro/blob/6733daa7c24ca65c2975908d930d43b18f21caec/src/cmds/scripts/pbs_server#L8-L35)
   * [AGPL](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
