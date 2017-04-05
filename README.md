@@ -178,7 +178,29 @@ git clone git://github.com/Azure/azure-bigcompute.git
 	 ```sh  
 	 bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"AdminUserName\":{\"value\":\"azuregpuuser\"},\"SshPublicKey\":{\"value\":\"XXXXXX\"},\"ImagePublisher\":{\"value\":\"openlogic\"},\"ImageOffer\":{\"value\":\"CentOS\"},\"ImageSku\":{\"value\":\"7.3\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"gpuuser\"},\"NumDataDisks\":{\"value\":\"32\"},\"oMSWorkSpaceId\":{\"value\": \"xxxxxxxxxx\"},\"oMSWorkSpaceKey\":{\"value\": \"xxxxxxxxx\"}}" --debug
 	 ``` 
- 
+#### Jumpboxes
+
+It is always great to build a Linux secure shell (SSH) jumpbox.
+Having a centralized location that you can use to quickly “jump” to any box saves a whole bunch of time. Not only that, it opens opportunities for speeding up repetitive chores during testing, deployment especially in a cloud-only environment.
+
+This repository can be used for creating a single jumpbox preferably Ubuntu-16.04-LTS or CentOS 7.3 as per the distro of choice.
+
+For jumpboxes, it is always a good idea to visit [Azure virtual machines you can use to run your Linux apps and workloads](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes).
+
+One can also create clusters by replacing **single** with **cluster**
+
+* The following CLI example creates a CentOS 7.3 with dns name centospublic in West Europe Region of size: Standard F2s (2 cores, 4 GB memory) with local SSD and 2TB available on /data. azureuser is the admin login user with sudo privileges. the VM name is "centos73".
+"azure" is the internal user again with sudo privileges and access to /data . A SSH Key needs to be provided during deployment for "azureuser". Optionally, a OMS WSID and Key may be provided. This would have non-privileged usage of latest Docker CE for CentOS, latest release of docker-compose and latest release of docker-machine.
+
+```sh
+az group create -l westeurope -n centospublicwe && az group deployment create -g centospublicwe -n centospublicwe --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"centospublic\"},\"AdminUserName\":{\"value\":\"azureuser\"},\"SshPublicKey\":{\"value\":\"XXXXX\"},\"ImagePublisher\":{\"value\":\"openlogic\"},\"ImageOffer\":{\"value\":\"CentOS\"},\"ImageSku\":{\"value\":\"7.3\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_F2s\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"azure\"},\"MasterVMName\":{\"value\":\"centos73\"},\"NumDataDisks\":{\"value\":\"2\"}}" --debug
+```
+
+* The following CLI example creates a Ubuntu 16.04-LTS with dns name ubuntupublic in West Europe Region of size: Standard F2s (2 cores, 4 GB memory) with local SSD and 2TB available on /data. azureuser is the admin login user with sudo privileges. the VM name is "ubuntu1604".
+"azure" is the internal user again with sudo privileges and access to /data . A SSH Key needs to be provided during deployment for "azureuser". Optionally, a OMS WSID and Key may be provided. This would have non-privileged usage of latest Docker CE for Ubuntu 16.04-LTS, latest release of docker-compose and latest release of docker-machine.
+
+```sh
+az group create -l westeurope -n ubuntupublicwe && az group deployment create -g ubuntupublicwe -n ubuntupublicwe --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"ubuntupublic\"},\"AdminUserName\":{\"value\":\"azureuser\"},\"SshPublicKey\":{\"value\":\"XXXXX\"},\"ImagePublisher\":{\"value\":\"Canonical\"},\"ImageOffer\":{\"value\":\"UbuntuServer\"},\"ImageSku\":{\"value\":\"16.04-LTS\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_F2s\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"azure\"},\"MasterVMName\":{\"value\":\"ubuntu1604\"},\"NumDataDisks\":{\"value\":\"2\"}}" --debug
  
 ## GPUs for Compute
 
