@@ -1173,10 +1173,12 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		    
 	            if [ "$TORQUEORPBS" == "Torque" ] ; then
 		    install_torque
-		    else
+		    elif [ "$TORQUEORPBS" == "pbspro" ] ; then
 		    enable_kernel_update
 		    install_pbspro
 		    disable_kernel_update
+		    else
+		    echo "nothing to install"
 		    fi
 		    if [ "$skuName" == "7.1" ] ; then		    
                     echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
@@ -1194,10 +1196,12 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		    
 	            if [ "$TORQUEORPBS" == "Torque" ] ; then
 		    install_torque
-		    else
+		    elif [ "$TORQUEORPBS" == "pbspro" ] ; then
 		    enable_kernel_update
 		    install_pbspro
 		    disable_kernel_update
+		    else
+		    echo "nothing to install"
 		    fi
 		    if [ "$skuName" == "7.1" ] ; then		    
                     echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
@@ -1215,10 +1219,12 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		    
 	            if [ "$TORQUEORPBS" == "Torque" ] ; then
 		    install_torque
-		    else
+		    elif [ "$TORQUEORPBS" == "pbspro" ] ; then
 		    enable_kernel_update
 		    install_pbspro
 		    disable_kernel_update
+		    else
+		    echo "nothing to install"
 		    fi
 		    if [ "$skuName" == "7.1" ] ; then		    
                     echo 'export PATH=/opt/intel/compilers_and_libraries_2016/linux/mpi/bin64:/usr/local/bin:/usr/local/sbin:$PATH' >>/etc/profile
