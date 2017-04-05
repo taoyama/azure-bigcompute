@@ -181,7 +181,7 @@ git clone git://github.com/Azure/azure-bigcompute.git
 #### Jumpboxes
 
 It is always great to build a Linux secure shell (SSH) jumpbox.
-Having a centralized location can be used to quickly “jump” to any cluster saves a whole bunch of time. Not only that, it opens opportunities for speeding up repetitive chores during testing, deployment especially in a cloud-only environment.
+Having a centralized location which can be used to quickly “jump” to any cluster saves a whole bunch of time. Not only that, it opens opportunities for speeding up repetitive chores during testing, deployment especially in a cloud-only environment.
 
 This repository can be used for creating linux jumpboxes preferably Ubuntu-16.04-LTS or CentOS 7.3 as per the distro of choice.
 
