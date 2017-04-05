@@ -181,13 +181,13 @@ git clone git://github.com/Azure/azure-bigcompute.git
 #### Jumpboxes
 
 It is always great to build a Linux secure shell (SSH) jumpbox.
-Having a centralized location that you can use to quickly “jump” to any box saves a whole bunch of time. Not only that, it opens opportunities for speeding up repetitive chores during testing, deployment especially in a cloud-only environment.
+Having a centralized location can be used to quickly “jump” to any cluster saves a whole bunch of time. Not only that, it opens opportunities for speeding up repetitive chores during testing, deployment especially in a cloud-only environment.
 
-This repository can be used for creating a single jumpbox preferably Ubuntu-16.04-LTS or CentOS 7.3 as per the distro of choice.
+This repository can be used for creating linux jumpboxes preferably Ubuntu-16.04-LTS or CentOS 7.3 as per the distro of choice.
 
-For jumpboxes, it is always a good idea to visit [Azure virtual machines you can use to run your Linux apps and workloads](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes).
+For Linux, it is always a good idea to visit [Azure virtual machines you can use to run your Linux apps and workloads](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes).
 
-One can also create clusters by replacing **single** with **cluster**
+One can also create excellent grade clusters by replacing **single** with **cluster** in the template parameters.
 
 * The following CLI example creates a CentOS 7.3 with dns name centospublic in West Europe Region of size: Standard F2s (2 cores, 4 GB memory) with local SSD and 2TB available on /data. azureuser is the admin login user with sudo privileges. the VM name is "centos73".
 "azure" is the internal user again with sudo privileges and access to /data . A SSH Key needs to be provided during deployment for "azureuser". Optionally, a OMS WSID and Key may be provided. This would have non-privileged usage of latest Docker CE for CentOS, latest release of docker-compose and latest release of docker-machine.
