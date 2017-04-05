@@ -9,7 +9,7 @@ Table of Contents
 
    * [Azure Big Compute](#azure-big-compute)
       * [License for this repository](#license)
-        * [PBS Pro Master 4.0.1 AGPL-3.0 usage section for HPC](#pbs-pro-icense)
+        * [PBS Pro Master 4.0.1 AGPL-3.0 usage section for HPC](#pbs-pro-license)
         * [NVIDIA EULA for compute silent installs via this repo](#license-agreements)
       * [MSFT OSCC](#msft-oscc)
       * [Credits](#credits)
