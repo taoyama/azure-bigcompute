@@ -143,7 +143,12 @@ git clone git://github.com/Azure/azure-bigcompute.git
 	 ```sh 
 	 bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"AdminUserName\":{\"value\":\"azuregpuuser\"},\"SshPublicKey\":{\"value\":\"XXXXXX\"},\"ImagePublisher\":{\"value\":\"Canonical\"},\"ImageOffer\":{\"value\":\"UbuntuServer\"},\"ImageSku\":{\"value\":\"16.04-LTS\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"gpuuser\"},\"NumDataDisks\":{\"value\":\"32\"}}" --debug
 	 ``` 
+* Ubuntu Single NC6 with no scheduler and no OMS  with head login user "azuregpuuser" and intern user "gpuuser"- [provided sshpublickey value is supplied below]:
 
+	 ```sh 
+	 bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"AdminUserName\":{\"value\":\"azuregpuuser\"},\"SshPublicKey\":{\"value\":\"XXXXXX\"},\"ImagePublisher\":{\"value\":\"Canonical\"},\"ImageOffer\":{\"value\":\"UbuntuServer\"},\"ImageSku\":{\"value\":\"16.04-LTS\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_NC6\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"gpuuser\"},\"NumDataDisks\":{\"value\":\"32\"}}" --debug
+	 ``` 
+	 
 * Ubuntu GPU Cluster (each NC24) with no scheduler with OMS  with head login user "azuregpuuser" and intern user "gpuclususer"- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below along with oMSWorkSpaceId and oMSWorkSpaceKey]:
 
 	 ```sh  
@@ -166,6 +171,12 @@ git clone git://github.com/Azure/azure-bigcompute.git
 
 	 ```sh 
 	 bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"AdminUserName\":{\"value\":\"azuregpuuser\"},\"SshPublicKey\":{\"value\":\"XXXXXX\"},\"ImagePublisher\":{\"value\":\"openlogic\"},\"ImageOffer\":{\"value\":\"CentOS\"},\"ImageSku\":{\"value\":\"7.3\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_NC24\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"gpuuser\"},\"NumDataDisks\":{\"value\":\"32\"}}" --debug
+	 ``` 
+
+* CentOS Single NC6 with no scheduler and no OMS with head login user "azuregpuuser" and intern user "gpuuser"- [provided sshpublickey value is supplied below]:
+
+	 ```sh 
+	 bash-4.3# az group create -l eastus -n tstgpu4computes && az group deployment create -g tstgpu4computes -n tstgpu4computes --template-uri https://raw.githubusercontent.com/Azure/azure-bigcompute/master/azuredeploy.json --parameters "{\"singleOrCluster\":{\"value\":\"single\"},\"DnsLabelPrefix\":{\"value\":\"tstgpu4computes\"},\"AdminUserName\":{\"value\":\"azuregpuuser\"},\"SshPublicKey\":{\"value\":\"XXXXXX\"},\"ImagePublisher\":{\"value\":\"openlogic\"},\"ImageOffer\":{\"value\":\"CentOS\"},\"ImageSku\":{\"value\":\"7.3\"},\"HeadandWorkerNodeSize\":{\"value\":\"Standard_NC6\"},\"WorkerNodeCount\":{\"value\": 0},\"GpuHpcUserName\":{\"value\":\"gpuuser\"},\"NumDataDisks\":{\"value\":\"32\"}}" --debug
 	 ``` 
 
 * CentOS GPU Cluster (each NC24) with no scheduler with OMS with head login user "azuregpuuser" and intern user "gpuclususer"- minimum 1 head and minimum 1 worker [provided sshpublickey value is supplied below along with oMSWorkSpaceId and oMSWorkSpaceKey]:
