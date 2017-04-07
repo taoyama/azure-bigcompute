@@ -1155,7 +1155,7 @@ export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 		 ( sleep 15 ; reboot ) &
 		fi
                 
-	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] ; then
+	elif [ "$skuName" == "6.5" ] || [ "$skuName" == "6.6" ] || [ "$skuName" == "7.2" ] || [ "$skuName" == "7.1" ] || [ "$skuName" == "7.3" ] || [ "$skuName" == "42.2" ] || [ "$skuName" == "12-SP2" ] ; then
 		install_pkgs_all
 		setup_shares
 		setup_hpc_user
