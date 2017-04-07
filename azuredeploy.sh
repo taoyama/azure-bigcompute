@@ -92,7 +92,7 @@ disable_kernel_update()
 
 }
 
-waagent_clean_master()
+waagent_cleanrpm_master()
 {
 rpm -q WALinuxAgent | awk '{print $1}'|xargs yum erase -y && \
 curl https://bootstrap.pypa.io/ez_setup.py -o - | python && \
