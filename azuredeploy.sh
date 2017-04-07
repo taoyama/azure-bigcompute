@@ -360,7 +360,7 @@ install_docker_ubuntu()
 install_nvdia_ubuntu()
 {
 service lightdm stop 
-wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/$TESLA_DRIVER_LINUX/NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run&lang=us&type=Tesla
+wget  http://us.download.nvidia.com/XFree86/Linux-x86_64/$TESLA_DRIVER_LINUX/NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run
 apt-get install -y linux-image-virtual
 apt-get install -y linux-virtual-lts-xenial
 apt-get install -y linux-tools-virtual-lts-xenial linux-cloud-tools-virtual-lts-xenial
@@ -580,7 +580,7 @@ setup_env()
 
 postinstall_centos73ncgpu()
 {
-wget http://us.download.nvidia.com/XFree86/Linux-x86_64/$TESLA_DRIVER_LINUX/NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run&lang=us&type=Tesla
+wget http://us.download.nvidia.com/XFree86/Linux-x86_64/$TESLA_DRIVER_LINUX/NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run
 yum clean all
 yum update -y  dkms
 yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers --disableexcludes=all
