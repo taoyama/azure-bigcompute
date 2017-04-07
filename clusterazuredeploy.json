@@ -678,7 +678,7 @@
         "clusterdet": "[concat(parameters('MasterVMName'), ':', parameters('workerVMNamePrefix'), ':', parameters('WorkerNodeCount'), ':', parameters('OMSWorkSpaceId'), ':', parameters('OMSWorkSpaceKey'), ':', parameters('nvidiadockerBinaryVersion'), ':', variables('headNodeSize'), ':', variables('workerNodeSize'))]",
         "installationCLI": "[concat('bash azuredeploy.sh ', variables('clusterdet'), ' ', parameters('HPCUserName'), ' ', parameters('mountFolder'), ' ', variables('mungedet'), ' ', variables('nvidiadet'), ' ', parameters('numDataDisks'), ' ', variables('dockerdet'), ' ', variables('imagedet'), ' ', variables('artifactsLocation'))]",
         "networkSettings": {
-            js "virtualNetworkName": "virtualnetwork",
+            "virtualNetworkName": "virtualnetwork",
             "addressPrefix": "10.0.0.0/16",
             "subnet": {
                 "dse": {
