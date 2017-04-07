@@ -92,6 +92,21 @@ disable_kernel_update()
 
 }
 
+waagent_clean_master()
+{
+rpm -q WALinuxAgent | awk '{print $1}'|xargs yum erase -y && \
+curl https://bootstrap.pypa.io/ez_setup.py -o - | python && \
+git clone https://github.com/Azure/WALinuxAgent.git && \
+cd WALinuxAgent && \
+python setup.py bdist_rpm && \
+cd dist && \
+rpm -ivh WALinuxAgent-*.noarch.rpm && \
+cd ../ && \
+python setup.py install --register-service && \
+systemctl start waagent.service && \
+systemctl enable waagent.service
+}
+
 # Partitions all data disks attached to the VM and creates
 # a RAID-0 volume with them.
 #
