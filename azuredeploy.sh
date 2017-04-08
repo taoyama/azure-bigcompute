@@ -1098,6 +1098,7 @@ export PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
 export LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 }
 
+
 postinstall_centos73nc24Rgpu()
 {
 # Download latest NVIDIA TESLA Driver
@@ -1105,19 +1106,6 @@ wget http://us.download.nvidia.com/XFree86/Linux-x86_64/$TESLA_DRIVER_LINUX/NVID
 yum clean all
 yum update -y  dkms
 yum install -y gcc make binutils gcc-c++ kernel-devel kernel-headers --disableexcludes=all
-
-# RPM Build latest WALA from master
-rpm -q WALinuxAgent | awk '{print $1}'|xargs yum erase -y && \
-curl https://bootstrap.pypa.io/ez_setup.py -o - | python && \
-git clone https://github.com/Azure/WALinuxAgent.git && \
-cd WALinuxAgent && \
-python setup.py bdist_rpm && \
-cd dist && \
-rpm -ivh WALinuxAgent-*.noarch.rpm && \
-cd ../ && \
-python setup.py install --register-service && \
-systemctl start waagent.service && \
-systemctl enable waagent.service
 
 # Update kernel and kernel-devel
 yum -y upgrade kernel kernel-devel
@@ -1127,25 +1115,35 @@ chmod +x NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run
 cat >>~/install_nvidiarun.sh <<EOF
 cd /var/lib/waagent/custom-script/download/0 && \
 ./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run --silent --dkms --install-libglvnd && \
-yum install -y kmod-microsoft-hyper-v microsoft-hyper-v microsoft-hyper-v-debuginfo msft-rdma-drivers && \
 git clone https://github.com/LIS/lis-next.git && \
  cd lis-next/hv-rhel7.x/hv/ && \
 ./rhel7-hv-driver-uninstall && \
 ./rhel7-hv-driver-install && \
-sed -i 's/^\#\s*OS.EnableRDMA=.*/OS.EnableRDMA=y/' /etc/waagent.conf
-  && \
-systemctl enable hv_kvp_daemon.service
- && \
+cd /var/lib/waagent/custom-script/download/0 && \
+rpm -q WALinuxAgent | awk '{print $1}'|xargs yum erase -y && \
+curl https://bootstrap.pypa.io/ez_setup.py -o - | python && \
+git clone https://github.com/Azure/WALinuxAgent.git && \
+cd WALinuxAgent && \
+python setup.py bdist_rpm && \
+cd dist && \
+rpm -ivh WALinuxAgent-*.noarch.rpm && \
+cd ../ && \
+python setup.py install --register-service && \
+sed -i 's/^\#\s*OS.EnableRDMA=.*/OS.EnableRDMA=y/' /etc/waagent.conf  && \
+systemctl enable hv_kvp_daemon.service && \
+systemctl start waagent.service && \
+systemctl enable waagent.service && \
 sed -i '$ d' /etc/rc.d/rc.local && \
-chmod -x /etc/rc.d/rc.local
-rm -rf ~/install_nvidiarun.sh
-reboot
+chmod -x /etc/rc.d/rc.local && \
+rm -rf ~/install_nvidiarun.sh && \
+( sleep 15 ; reboot ) &
 EOF
 
 chmod +x install_nvidiarun.sh
 echo -ne "/root/install_nvidiarun.sh" >> /etc/rc.d/rc.local
 chmod +x /etc/rc.d/rc.local
 }
+
 
 #########################
 	if [ "$skuName" == "16.04-LTS" ] ; then
