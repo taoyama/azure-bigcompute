@@ -1129,6 +1129,7 @@ cd dist && \
 rpm -ivh WALinuxAgent-*.noarch.rpm && \
 cd ../ && \
 python setup.py install --register-service && \
+yum install -y kmod-microsoft-hyper-v microsoft-hyper-v microsoft-hyper-v-debuginfo msft-rdma-drivers && \
 sed -i 's/^\#\s*OS.EnableRDMA=.*/OS.EnableRDMA=y/' /etc/waagent.conf  && \
 systemctl enable hv_kvp_daemon.service && \
 systemctl start waagent.service && \
