@@ -992,16 +992,16 @@ ubuntu_nvidia-docker()
 {
 wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v$nvidiadockerbinver/nvidia-docker_$nvidiadockerbinver-1_amd64.deb
 dpkg -i /tmp/nvidia-docker*.deb && rm /tmp/nvidia-docker*.deb
-systemctl enable nvidia-docker
-systemctl start nvidia-docker
+#systemctl enable nvidia-docker
+#systemctl start nvidia-docker
 }
 
 centos_nvidia-docker()
 {
 wget -P /tmp https://github.com/NVIDIA/nvidia-docker/releases/download/v$nvidiadockerbinver/nvidia-docker-$nvidiadockerbinver-1.x86_64.rpm
 rpm -ivh /tmp/nvidia-docker*.rpm && rm /tmp/nvidia-docker*.rpm
-systemctl enable nvidia-docker
-systemctl start nvidia-docker
+#systemctl enable nvidia-docker
+#systemctl start nvidia-docker
 }
 
 install_cudalatest_centos()
