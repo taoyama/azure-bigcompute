@@ -1132,12 +1132,14 @@ python setup.py install --register-service && \
 yum install -y kmod-microsoft-hyper-v microsoft-hyper-v microsoft-hyper-v-debuginfo msft-rdma-drivers && \
 sed -i 's/^\#\s*OS.EnableRDMA=.*/OS.EnableRDMA=y/' /etc/waagent.conf  && \
 systemctl enable hv_kvp_daemon.service && \
+waagent -register-service && \
 systemctl start waagent.service && \
 systemctl enable waagent.service && \
+
 sed -i '$ d' /etc/rc.d/rc.local && \
 chmod -x /etc/rc.d/rc.local && \
 rm -rf ~/install_nvidiarun.sh && \
-( sleep 15 ; reboot ) &
+( sleep 60 ; reboot ) &
 EOF
 
 chmod +x ~/install_nvidiarun.sh
@@ -1227,7 +1229,7 @@ chmod +x /etc/rc.d/rc.local
 		    #install_cudalatest_centos
 		    centos_nvidia-docker
 		    disable_kernel_update
-		    ( sleep 30 ; reboot ) &
+		    ( sleep 45 ; reboot ) &
 		elif [[ "${HEADNODE_SIZE}" =~ "H" ]] && [[ "${WORKERNODE_SIZE}" =~ "H" ]] && [[ "${HEADNODE_SIZE}" =~ "R" ]] && [[ "${WORKERNODE_SIZE}" =~ "R" ]];then
 		    echo "this is a H with RDMA"
 		    if [ ! -z "$omsworkspaceid" ]; then
@@ -1317,7 +1319,7 @@ chmod +x /etc/rc.d/rc.local
                     #install_cudann5;
 		    #install_cudalatest_centos;
 		    centos_nvidia-docker;
-		    ( sleep 30 ; reboot ) &
+		    ( sleep 45 ; reboot ) &
 		fi
                 		
 	fi
