@@ -604,7 +604,7 @@ chmod +x NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run
 
 cat >>~/install_nvidiarun.sh <<EOF
 cd /var/lib/waagent/custom-script/download/0 && \
-./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run --silent --dkms --install-libglvnd && \
+./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run --silent --dkms --install-libglvnd || true && \
 sed -i '$ d' /etc/rc.d/rc.local && \
 chmod -x /etc/rc.d/rc.local && \
 rm -rf ~/install_nvidiarun.sh
@@ -1114,7 +1114,7 @@ chmod +x NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run
 # Create Script for rc.local to be invoked on reboot
 cat >>~/install_nvidiarun.sh <<EOF
 cd /var/lib/waagent/custom-script/download/0 && \
-./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run --silent --dkms --install-libglvnd && \
+./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run --silent --dkms --install-libglvnd || true && \
 git clone https://github.com/LIS/lis-next.git && \
  cd lis-next/hv-rhel7.x/hv/ && \
 ./rhel7-hv-driver-uninstall && \
