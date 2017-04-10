@@ -610,7 +610,7 @@ chmod -x /etc/rc.d/rc.local
 rm -rf ~/install_nvidiarun.sh
 EOF
 
-chmod +x install_nvidiarun.sh
+chmod +x ~/install_nvidiarun.sh
 echo -ne "/root/install_nvidiarun.sh" >> /etc/rc.d/rc.local
 chmod +x /etc/rc.d/rc.local
 }
@@ -1140,7 +1140,7 @@ rm -rf ~/install_nvidiarun.sh && \
 ( sleep 15 ; reboot ) &
 EOF
 
-chmod +x install_nvidiarun.sh
+chmod +x ~/install_nvidiarun.sh
 echo -ne "/root/install_nvidiarun.sh" >> /etc/rc.d/rc.local
 chmod +x /etc/rc.d/rc.local
 }
