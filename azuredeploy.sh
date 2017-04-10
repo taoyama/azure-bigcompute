@@ -606,7 +606,7 @@ cat >>~/install_nvidiarun.sh <<EOF
 cd /var/lib/waagent/custom-script/download/0 && \
 ./NVIDIA-Linux-x86_64-$TESLA_DRIVER_LINUX.run --silent --dkms --install-libglvnd && \
 sed -i '$ d' /etc/rc.d/rc.local && \
-chmod -x /etc/rc.d/rc.local
+chmod -x /etc/rc.d/rc.local && \
 rm -rf ~/install_nvidiarun.sh
 EOF
 
