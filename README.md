@@ -48,11 +48,11 @@ questions or comments.
 **This repo is inspired by [Christian Smith](https://github.com/smith1511)'s repo https://github.com/smith1511/hpc**
 
 # Deploy from Portal and visualize
-<a href="https://preview.portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute%2Fmaster%2Fazuredeploy.json" target="_blank">
+<a href="https://preview.portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Ftaoyama%2Fazure-bigcompute%2Ftaoyama-deploy%2Fazuredeploy.json" target="_blank">
    <img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-bigcompute%2Fmaster%2Fazuredeploy.json" target="_blank">  
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Ftaoyama%2Fazure-bigcompute%2Ftaoyama-deploy%2Fazuredeploy.json" target="_blank">
 <img src="http://armviz.io/visualizebutton.png"/> </a> 
 
 For portal Deployment, the following pic might assist.

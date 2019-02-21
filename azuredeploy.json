@@ -463,7 +463,7 @@
         }
     }],
     "variables": {
-        "templatelink": "[concat('https://raw.githubusercontent.com/azure/azure-bigcompute/master/',parameters('singleOrCluster'),'azuredeploy.json')]"
+        "templatelink": "[concat('https://raw.githubusercontent.com/taoyama/azure-bigcompute/taoyama-deploy/',parameters('singleOrCluster'),'azuredeploy.json')]"
     },
     "outputs": {
         "result": {
